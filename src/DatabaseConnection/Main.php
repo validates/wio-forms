@@ -65,7 +65,7 @@ class Main extends AbstractDatabaseConnection
             $this->Connect();
         }
 
-        if( $queryTable['table'] == 'WioForms_formStruct' )
+        if ( $queryTable['table'] == 'WioForms_formStruct' )
         {
             $e = file_get_contents('exampleFormStruct.json');
             return ['dataStruct'=> $e];

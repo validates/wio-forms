@@ -3,9 +3,11 @@ namespace WioForms\FieldRenderer;
 
 abstract class AbstractFieldRenderer
 {
-    /*
-    functions are other with every Field Type
-    */
+    private $WioForms;
+    private $FieldName;
+    private $FieldInfo;
+
+    abstract function __construct( $FieldName, $WioFormsObject );
 
     abstract function ShowToEdit();
 

@@ -20,7 +20,7 @@ class WioForms{
     private $DatabaseConnections;
 
     # Holds all informations about form structure and logic
-    private $formStruct;
+    public $formStruct;
 
     # Lists of information what Field and Container lays where
     private $ContainersContains;
@@ -60,13 +60,13 @@ class WioForms{
     */
     public function showForm( $formDataStructId = false, $permissionsArray = false, $partialEntryData = false ){
 
-        if( $formDataStructId === false )
+        if ( $formDataStructId === false )
         {
             $this->ErrorLog->ErrorLog('No DataStructId to search for.');
             return false;
         }
 
-        if( $this->getFormDataStruct( $formDataStructId ) === false )
+        if ( $this->getFormDataStruct( $formDataStructId ) === false )
         {
             $this->ErrorLog->ErrorLog('Problem with getFormDataStructs().');
             return false;
@@ -153,7 +153,7 @@ class WioForms{
         }
 
         $this->formStruct = json_decode( $queryResult['dataStruct'], true );
-        if( json_last_error()!= JSON_ERROR_NONE )
+        if ( json_last_error()!= JSON_ERROR_NONE )
         {
             $this->ErrorLog->ErrorLog('Problem with JSON validation of formStruct file.');
             return false;
@@ -165,9 +165,9 @@ class WioForms{
     private function getFieldsContainerLists(){  # Done
         $this->ContainersContains = [];
 
-        foreach(['Fields','Containers'] as $ElemType)
+        foreach (['Fields','Containers'] as $ElemType)
         {
-            foreach($this->formStruct[$ElemType]  as $ElemName => $Elem )
+            foreach ($this->formStruct[$ElemType]  as $ElemName => $Elem )
             {
                 $cont = $Elem['container'];
                 $pos = $Elem['position'];
@@ -188,7 +188,7 @@ class WioForms{
                 }
             }
         }
-        foreach($this->ContainersContains as $Key => $Array)
+        foreach ($this->ContainersContains as $Key => $Array)
         {
             ksort($this->ContainersContains[ $Key ]);
         }
@@ -233,12 +233,12 @@ class WioForms{
         }
      }
 
-    private function renderField( $FieldName ){
+    private function renderField( $FieldName ){ # Done
       $Field = $this->formStruct['Fields'][ $FieldName ];
 
       $className = '\WioForms\FieldRenderer\\'.$Field['type'];
       if ( class_exists($className) ) {
-          $FieldClass = new $className( );
+          $FieldClass = new $className( $FieldName, $this );
       }
       else
       {
@@ -254,7 +254,7 @@ class WioForms{
 
         $className = '\WioForms\ContainerRenderer\\'.$Cont['displayType'];
         if ( class_exists($className) ) {
-            $ContainerClass = new $className( );
+            $ContainerClass = new $className( $ContainerName, $this );
         }
         else
         {

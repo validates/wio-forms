@@ -39,7 +39,8 @@
             "site": 0,
             "container": "main",
             "position": 1,
-            "displayType": "FullDisplay"
+            "displayType": "FullDisplay",
+            "title": "Podstawowe dane"
         }
     }
 }

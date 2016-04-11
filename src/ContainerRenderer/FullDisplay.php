@@ -4,14 +4,25 @@ namespace WioForms\ContainerRenderer;
 class FullDisplay extends AbstractContainerRenderer
 {
 
+    function __construct( $ContainerName, $WioFormsObject ){
+        $this->ContainerName = $ContainerName;
+        $this->WioForms = $WioFormsObject;
+        $this->ContainerInfo = $this->WioForms->formStruct['Containers'][ $this->ContainerName ];
+    }
+
     function ShowHead(){
-        $html = 'Container begin: <br/>';
+        $html = '<div style="margin: 40px 20px; padding: 20px;border: 2px dashed black; position: relative;">';
+        if ( isset( $this->ContainerInfo['title'] ) and !empty( $this->ContainerInfo['title'] ) )
+        {
+            $html .= '<div style="border: 2px dashed black; background-color: white; position: absolute; top: -17px; left: 20px; padding: 5px 10px; display: inline-block;">'.$this->ContainerInfo['title'].'</div>';
+
+        }
 
         return $html;
     }
 
     function ShowTail(){
-        $html = 'Container end: <br/>';
+        $html = '</div>';
 
         return $html;
     }
