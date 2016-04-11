@@ -1,5 +1,5 @@
 <?php
-namespace WioForms;
+namespace WioForms\FieldValidator;
 
 
 abstract class AbstractFieldValidator

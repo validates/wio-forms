@@ -1,7 +1,7 @@
 <?php
-namespace WioForms;
+namespace WioForms\FieldRenderer;
 
-abstract class FieldRenderer_textField
+class TextField extends FieldRenderer
 {
 
     function ShowToEdit(){
