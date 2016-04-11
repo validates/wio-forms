@@ -2,7 +2,11 @@
 namespace WioForms;
 
 use WioForms\ErrorLog\ErrorLog;
+use WioForms\ContainerRenderer;
 use WioForms\DatabaseConnection;
+use WioForms\DataRepository;
+use WioForms\FieldRenderer;
+use WioForms\FieldValidator;
 
 class WioForms{
 
@@ -70,11 +74,13 @@ class WioForms{
 
         $this->outputHtml = '';
 
-
+        // somehow magically we know it:
         $siteNumber = 0;
 
-        $this->outputHtml = $this->renderFormSite( $siteNumber );
+        $this->renderFormSite( $siteNumber );
 
+
+        echo $this->outputHtml;
     }
 
 
@@ -210,16 +216,70 @@ class WioForms{
 
     ### Render Views:
 
-    private function renderFormSite( $siteNumber ){
-        // var_dump($this->ContainersContains);
+    private function renderFormSite( $siteNumber ){  # Done
 
-        foreach($this->ContainersContains['main'] as $d ){}
+        foreach ($this->ContainersContains['main'] as $ElemData)
+        {
+            if ($ElemData['type'] == 'Fields'){
+                $this->ErrorLog->ErrorLog('We have Field directly in "main" container.');
+                continue;
+            }
+            $Container = $this->formStruct['Containers'][ $ElemData['name'] ];
+            if ( $Container['site'] == $siteNumber )
+            {
+                $this->renderContainer( $ElemData['name'] );
 
+            }
+        }
      }
 
-    private function renderField( $fieldName ){    }
+    private function renderField( $FieldName ){
+      $Field = $this->formStruct['Fields'][ $FieldName ];
 
-    private function renderContainer( $containerName ){  }
+      $className = '\WioForms\FieldRenderer\\'.$Field['type'];
+      if ( class_exists($className) ) {
+          $FieldClass = new $className( );
+      }
+      else
+      {
+          $this->ErrorLog->ErrorLog('Class '.$className.' not found.');
+          return false;
+      }
+
+      $this->outputHtml .= $FieldClass->ShowToEdit();
+    }
+
+    private function renderContainer( $ContainerName ){  # Done
+        $Cont = $this->formStruct['Containers'][ $ContainerName ];
+
+        $className = '\WioForms\ContainerRenderer\\'.$Cont['displayType'];
+        if ( class_exists($className) ) {
+            $ContainerClass = new $className( );
+        }
+        else
+        {
+            $this->ErrorLog->ErrorLog('Class '.$className.' not found.');
+            return false;
+        }
+
+        $this->outputHtml .= $ContainerClass->ShowHead();
+
+        if ( isset($this->ContainersContains[ $ContainerName ]) ){
+            foreach ($this->ContainersContains[ $ContainerName ] as $ElemData)
+            {
+                if ( $ElemData['type'] == 'Containers' )
+                {
+                    $this->renderContainer( $ElemData['name'] );
+                }
+                if ( $ElemData['type'] == 'Fields' )
+                {
+                    $this->renderField( $ElemData['name'] );
+                }
+            }
+        }
+
+        $this->outputHtml .= $ContainerClass->ShowTail();
+    }
 
     private function addFunctionsToJavaScript( ){}
 
