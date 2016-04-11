@@ -1,0 +1,45 @@
+{
+    "FormName": "Form1",
+    "Version": "2016",
+    "Subversion": 11,
+    "VersionId": "2016.11",
+    "FormId": "Form1.2016.11",
+
+    "DataRepositories": {},
+
+    "ValidatorsPHP": {},
+    "ValidatorsJS": {},
+
+    "Fields":
+    {
+        "field1":
+        {
+            "type": "textInput",
+            "container": "Site1",
+            "position": 1,
+            "title": "Imie",
+            "state": 0,
+            "save": true
+        },
+        "field2":
+        {
+            "type": "textInput",
+            "container": "Site1",
+            "position": 2,
+            "title": "Nazwisko",
+            "state": 0,
+            "save": true
+        }
+    },
+
+    "Containers":
+    {
+        "Site1":
+        {
+            "site": 0,
+            "container": "main",
+            "position": 1,
+            "displayType": "full"
+        }
+    }
+}

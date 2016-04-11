@@ -1,0 +1,55 @@
+containers:
+    mysql:
+        image: wiosna/mariadb
+        dockerfile: ../docker-images/mysql
+        run:
+            volume: ["/data/wiosna/wio-forms/dev/mysql:/var/lib/mysql"]
+            net: host
+            detach: true
+    web:
+        image: wiosna/web-dev
+        dockerfile: ../docker-images/web
+        run:
+            volume: [".:/var/www"]
+            net: host
+            workdir: /var/www
+            detach: true
+    web_it:
+        image: wiosna/web-dev
+        dockerfile: ../docker-images/web
+        run:
+            volume: [".:/var/www", "/data/composer:/root/.composer"]
+            net: host
+            workdir: /var/www
+            interactive: true
+            tty: true
+            rm: true
+            cmd: ["-c", "bash"]
+    mysql_it:
+        image: wiosna/mariadb
+        dockerfile: ../docker-images/mysql
+        run:
+            net: host
+            volume: [".:/wio-forms"]
+            interactive: true
+            tty: true
+            rm: true
+            entrypoint: bash
+            cmd: ["-c", "bash"]
+            workdir: /wio-forms
+    mailcatcher:
+        image: zolweb/docker-mailcatcher
+        run:
+          net: host
+          detach: true
+    logviewer:
+        image: wiosna/log-viewer
+        dockerfile: ../docker-images/log-viewer
+        run:
+            net: host
+            workdir: /var/www
+            volume: [".:/app"]
+            detach: true
+
+groups:
+    default: ["web", "mysql", "mailcatcher"]

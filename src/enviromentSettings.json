@@ -1,0 +1,10 @@
+{
+	"DatabaseConnections": {
+		"Main": {
+			"host": "localhost",
+			"dbName": "System1",
+			"usrName": "Janusz",
+			"password": "admin1234"
+		}
+	}
+}
