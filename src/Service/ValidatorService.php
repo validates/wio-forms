@@ -21,11 +21,11 @@ class ValidatorService
         $this->formStruct = $this->WioForms->formStruct;
         $this->entryData = $entryData;
 
-        // echo 'validateForm()<br/>';
-        // var_dump($entryData);
-
         foreach($this->formStruct['Fields'] as $fieldName => $field)
-          $this->validateField( $fieldName );
+            $this->validateField( $fieldName );
+
+        foreach($this->formStruct['Containers'] as $containerName => $container)
+            $this->validateContainer( $containerName );
     }
 
 
@@ -37,9 +37,6 @@ class ValidatorService
     private function validateField( $fieldName ){
         $Value = $this->entryData[ $fieldName ];
         $Field = $this->formStruct['Fields'][ $fieldName ];
-
-        // var_dump($Value);
-        // var_dump($Field);
 
 
     }
@@ -56,7 +53,12 @@ class ValidatorService
     can use Foreign Functions
     can use solveLogicEquations( )
     */
-    private function validateContainer( $containerName ){}
+    private function validateContainer( $containerName ){
+        $Container = $this->formStruct['Containers'][ $containerName ];
+
+
+
+    }
 
     /*
     function solving logic equasion in validateContainer
