@@ -17,16 +17,16 @@
             "type": "TextInput",
             "container": "Site1",
             "position": 1,
-            "title": "Imie",
+            "title": "Email",
             "state": 0,
             "save": true
         },
         "field2":
         {
-            "type": "TextInput",
+            "type": "PasswordInput",
             "container": "Site1",
             "position": 2,
-            "title": "Nazwisko",
+            "title": "Hasło",
             "state": 0,
             "save": true
         }
@@ -34,13 +34,53 @@
 
     "Containers":
     {
-        "Site1":
+        "TopPoints1":
         {
             "site": 0,
             "container": "main",
             "position": 1,
+            "displayType": "FullDisplay"
+        },
+        "Site1":
+        {
+            "site": 0,
+            "container": "main",
+            "position": 2,
             "displayType": "FullDisplay",
             "title": "Podstawowe dane"
+        },
+        "SubmitButton1":
+        {
+            "site": 0,
+            "container": "Site1",
+            "position": 3,
+            "displayType": "Button1",
+            "title": "Dalej"
+
+        },
+        "TopPoints2":
+        {
+            "site": 1,
+            "container": "main",
+            "position": 1,
+            "displayType": "FullDisplay"
+        },
+        "Site2":
+        {
+            "site": 1,
+            "container": "main",
+            "position": 2,
+            "displayType": "FullDisplay",
+            "title": "Podstawowe dane"
+        },
+        "SubmitButton2":
+        {
+            "site": 1,
+            "container": "Site2",
+            "position": 3,
+            "displayType": "Button1",
+            "title": "Dalej"
+
         }
     }
 }

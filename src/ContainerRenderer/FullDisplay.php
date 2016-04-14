@@ -4,13 +4,8 @@ namespace WioForms\ContainerRenderer;
 class FullDisplay extends AbstractContainerRenderer
 {
 
-    function __construct( $ContainerName, $WioFormsObject ){
-        $this->ContainerName = $ContainerName;
-        $this->WioForms = $WioFormsObject;
-        $this->ContainerInfo = $this->WioForms->formStruct['Containers'][ $this->ContainerName ];
-    }
-
     function ShowHead(){
+
         $html = '<div style="margin: 40px 20px; padding: 20px;border: 2px dashed black; position: relative;">';
         if ( isset( $this->ContainerInfo['title'] ) and !empty( $this->ContainerInfo['title'] ) )
         {

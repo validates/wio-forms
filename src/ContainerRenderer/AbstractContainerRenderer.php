@@ -4,11 +4,15 @@ namespace WioForms\ContainerRenderer;
 
 abstract class AbstractContainerRenderer
 {
-    private $WioForms;
-    private $ContainerName;
-    private $ContainerInfo;
+    protected $WioForms;
+    protected $ContainerName;
+    protected $ContainerInfo;
 
-    abstract function __construct( $ContainerName, $WioFormsObject );
+    function __construct( $ContainerName, $WioFormsObject ){
+        $this->ContainerName = $ContainerName;
+        $this->WioForms = $WioFormsObject;
+        $this->ContainerInfo = $this->WioForms->formStruct['Containers'][ $this->ContainerName ];
+    }
 
     abstract function ShowHead();
     abstract function ShowTail();

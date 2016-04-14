@@ -12,6 +12,13 @@ $localSettings = [
 ];
 
 $WioForm = new WioForms( $localSettings );
-$WioForm->showForm( 'Form1' );
-
 ?>
+<!doctype HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <?php $WioForm->showForm( 'Form1' ); ?>
+</body>
+</html>
