@@ -1,8 +1,6 @@
 <?php
 namespace WioForms\DatabaseConnection;
 
-use WioForms\DatabaseConnection\AbstractDatabaseConnection;
-
 class Main extends AbstractDatabaseConnection
 {
     private $isConnected;

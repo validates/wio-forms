@@ -3,12 +3,15 @@ namespace WioForms\FieldRenderer;
 
 abstract class AbstractFieldRenderer
 {
-    private $WioForms;
-    private $FieldName;
-    private $FieldInfo;
+    protected $WioForms;
+    protected $FieldName;
+    protected $FieldInfo;
 
-    abstract function __construct( $FieldName, $WioFormsObject );
-
+    function __construct( $FieldName, $WioFormsObject ){
+        $this->FieldName = $FieldName;
+        $this->WioForms = $WioFormsObject;
+        $this->FieldInfo = &$this->WioForms->formStruct['Fields'][ $this->FieldName ];
+    }
     abstract function ShowToEdit();
 
     abstract function ShowToView();

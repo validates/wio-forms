@@ -24,7 +24,6 @@ class RendererService
         # Gets FormRenderer
         $this->FormRenderer = new FormRenderer( $this->WioForms );
 
-
         $this->outputHtml = '';
     }
 
@@ -78,7 +77,7 @@ class RendererService
         }
         else
         {
-            $this->ErrorLog->ErrorLog('Class '.$className.' not found.');
+            $this->WioForms->ErrorLog->ErrorLog('Class '.$className.' not found.');
             return false;
         }
 

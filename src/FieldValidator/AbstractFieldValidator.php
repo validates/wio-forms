@@ -1,15 +1,39 @@
 <?php
 namespace WioForms\FieldValidator;
 
-
 abstract class AbstractFieldValidator
 {
-    /*
-    functions used to validate, other for each validator type
-    */
-    abstract function validatorPHP( );
-    abstract function validatorJS( );
+    protected $valid;
+    protected $state;
+    protected $message;
 
+    function __construct(){
+        $this->valid = false;
+        $this->state = 0;
+        $this->message = '';
+    }
+
+
+    abstract function validatePHP( $value, $settings );
+
+
+    protected function getReturn(){
+        $array = [
+            'valid'   => $this->valid,
+            'state'   => $this->state,
+            'message' => $this->message
+        ];
+        return $array;
+    }
+
+
+    public function print_validateJS(){
+        $javascript = '';
+
+        $javascript .= 'function( $value, $settings ){';
+        $javascript .= '}';
+
+        return $javascript;
+    }
 }
-
 ?>

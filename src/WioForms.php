@@ -16,7 +16,7 @@ use WioForms\Service\ValidatorService;
 class WioForms{
 
     # Holds ErrorLog object
-    private $ErrorLog;
+    public $ErrorLog;
 
     # Holds table of enviroment and local settings
     public $settings;
@@ -79,11 +79,9 @@ class WioForms{
             return false;
         }
 
-
         if ( !empty($_POST['wio_forms']) ){
             $entryData = $_POST;
             $this->ValidatorService->validateForm( $entryData );
-
         }
 
         // somehow magically we know it:
