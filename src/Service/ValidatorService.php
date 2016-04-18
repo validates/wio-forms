@@ -27,11 +27,25 @@ class ValidatorService
         $this->formStruct = &$this->wioForms->formStruct;
         $this->entryData = $entryData;
 
-        foreach($this->formStruct['Fields'] as $fieldName => $field)
-            $this->validateField( $fieldName );
+        $formValidity = true;
 
+        foreach($this->formStruct['Fields'] as $fieldName => $field)
+        {
+            $validity = $this->validateField( $fieldName );
+            if ( !$validity )
+            {
+                $formValidity = false;
+            }
+        }
         foreach($this->formStruct['Containers'] as $containerName => $container)
-            $this->validateContainer( $containerName );
+        {
+            $validity = $this->validateContainer( $containerName );
+            if ( !$validity )
+            {
+                $formValidity = false;
+            }
+        }
+        return $formValidity;
     }
 
 
@@ -86,6 +100,8 @@ class ValidatorService
 
             }
         }
+
+        return $field['valid'];
     }
 
 
@@ -142,6 +158,8 @@ class ValidatorService
                     // ... $this->solveLogicEquation( $containerName );
                 }
             }
+
+            return $container['valid'];
         }
         else
         {
@@ -213,7 +231,6 @@ class ValidatorService
 
     private function containerMakeAction( $containerName, $action )
     {
-//        echo 'action: '.$containerName.': '.$action.'<br/>';
         $container = &$this->formStruct['Containers'][ $containerName ];
 
         if ( $action == 'hide' )

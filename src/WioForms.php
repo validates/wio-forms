@@ -7,6 +7,7 @@ use WioForms\DatabaseConnection;
 use WioForms\DataRepository;
 use WioForms\FieldRenderer;
 use WioForms\FieldValidator;
+use WioForms\TemporarySave;
 
 use WioForms\Service\DatabaseService;
 use WioForms\Service\DataRepositoryService;
@@ -17,6 +18,9 @@ class WioForms{
 
     # Holds ErrorLog object
     public $errorLog;
+
+    # Holds TemporarySave object
+    public $temporarySave;
 
     # Holds table of enviroment and local settings
     public $settings;
@@ -47,7 +51,6 @@ class WioForms{
             $enviromentSettings = array_replace_recursive($enviromentSettings,$localSettings);
         $this->settings = $enviromentSettings;
 
-
         $this->rendererService       = new RendererService( $this );
         $this->dataRepositoryService = new DataRepositoryService( $this );
         $this->validatorService      = new ValidatorService( $this );
@@ -59,6 +62,11 @@ class WioForms{
             $this->errorLog->errorLog('Problem with: setDatabaseConnections();');
             die(' Problem with set Database Connections ');
         }
+
+        // later on we should get that from config file or formStruct:
+        $temporarySaveClass = '\WioForms\TemporarySave\Cookie';
+        $this->temporarySave = new $temporarySaveClass( $this );
+
     }
 
 
@@ -90,14 +98,27 @@ class WioForms{
         {
             $entryData = $_POST;
         }
+        if ( !empty( $tempSave = $this->temporarySave->getFormData() ) )
+        {
+            $entryData = array_merge( $tempSave, $entryData );
+        }
         $this->validatorService->validateForm( $entryData );
 
-        $lastEditedSite = $this->validatorService->getLastEditedSite();
 
+        if ( false ) // We wanna save this form now
+        {
+            $this->temporarySave->clearFormData();
+            //...
+        }
+        else
+        {
+            $this->temporarySave->saveFormData();
+        }
+
+        $lastEditedSite = $this->validatorService->getLastEditedSite();
         $this->rendererService->dontShowErrorsOnSite( $lastEditedSite );
 
         $siteNumber = $this->validatorService->getAvaliableSiteNumber();
-
         $formHtml = $this->rendererService->renderFormSite( $siteNumber );
 
         return $formHtml;
