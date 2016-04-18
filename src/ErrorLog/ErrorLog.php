@@ -10,7 +10,7 @@ class ErrorLog extends AbstractErrorLog
         $this->messages = [];
     }
 
-    function ErrorLog( $message ){
+    function errorLog( $message ){
         $this->messages[] = $message;
     }
 

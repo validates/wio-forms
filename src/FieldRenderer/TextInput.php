@@ -4,20 +4,20 @@ namespace WioForms\FieldRenderer;
 class TextInput extends AbstractFieldRenderer
 {
 
-    function ShowToEdit(){
+    function showToEdit(){
         $value = '';
-        if ( !empty($this->FieldInfo['value']) )
+        if ( !empty($this->fieldInfo['value']) )
         {
-            $value = $this->FieldInfo['value'];
+            $value = $this->fieldInfo['value'];
         }
 
         $message = false;
-        if( isset($this->FieldInfo['valid']) and !$this->FieldInfo['valid'] )
+        if( isset($this->fieldInfo['valid']) and !$this->fieldInfo['valid'] )
         {
-            $message = $this->FieldInfo['message'];
+            $message = $this->fieldInfo['message'];
         }
 
-        $html = $this->FieldInfo['title']. ': <input type="text" name="'.$this->FieldName.'" value="'.$value.'" />';
+        $html = $this->fieldInfo['title']. ': <input type="text" name="'.$this->fieldName.'" value="'.$value.'" />';
         if ($message !== false)
             $html .= '<b style="color: red;"> &nbsp; '.$message.'</b>';
         $html .= '<br/>';
@@ -26,7 +26,7 @@ class TextInput extends AbstractFieldRenderer
         return $html;
     }
 
-    function ShowToView(){
+    function showToView(){
         $html = 'TextInput: '.'abc'.'<br/>';
 
         return $html;

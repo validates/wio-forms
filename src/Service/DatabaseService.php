@@ -3,16 +3,16 @@ namespace WioForms\Service;
 
 class DatabaseService
 {
-    public $WioForms;
+    public $wioForms;
     public $settings;
     public $formStruct;
 
-    private $Connections;
+    private $connections;
 
-    function __construct( $WioFormsObiect ){
-        $this->WioForms = $WioFormsObiect;
+    function __construct( $wioFormsObiect ){
+        $this->wioForms = $wioFormsObiect;
 
-        $this->Connections = [];
+        $this->connections = [];
     }
 
 
@@ -32,18 +32,18 @@ class DatabaseService
             'where' => 'formStructId == "'.$formDataStructId.'"',
         ];
 
-        $queryResult = $this->Connections['Main']->SelectOne( $databaseQuery );
+        $queryResult = $this->connections['Main']->SelectOne( $databaseQuery );
 
         if ( $queryResult == 'false' )
         {
-            $this->ErrorLog->ErrorLog('Cannot get DataStruct from Database.');
+            $this->wioForms->errorLog->errorLog('Cannot get DataStruct from Database.');
             return false;
         }
 
-        $this->WioForms->formStruct = json_decode( $queryResult['dataStruct'], true );
+        $this->wioForms->formStruct = json_decode( $queryResult['dataStruct'], true );
         if ( json_last_error()!= JSON_ERROR_NONE )
         {
-            $this->ErrorLog->ErrorLog('Problem with JSON validation of formStruct file.');
+            $this->wioForms->errorLog->errorLog('Problem with JSON validation of formStruct file.');
             return false;
         }
         return true;
@@ -51,14 +51,14 @@ class DatabaseService
 
 
     public function setConnections(){
-        foreach ($this->WioForms->settings['DatabaseConnections'] as $DBconn_Name => $DBconn_Data)
+        foreach ($this->wioForms->settings['DatabaseConnections'] as $DBconn_Name => $DBconn_Data)
         {
             $className = '\WioForms\DatabaseConnection\\'.$DBconn_Name;
             if ( class_exists($className) ) {
-                $this->Connections[ $DBconn_Name ] = new $className( $DBconn_Data );
+                $this->connections[ $DBconn_Name ] = new $className( $DBconn_Data );
             }
             else {
-                $this->ErrorLog->ErrorLog('There is no '.$className.' class');
+                $this->wioForms->errorLog->errorLog('There is no '.$className.' class');
                 return false;
             }
         }

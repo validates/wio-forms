@@ -10,11 +10,11 @@ abstract class AbstractDatabaseConnection
     */
     abstract function __construct( $connectionData );
 
-    abstract function Connect();
-    abstract function Save( $queryTable );
-    abstract function Update( $queryTable );
-    abstract function Select( $queryTable );
-    abstract function SelectOne( $queryTable );
+    abstract function connect();
+    abstract function save( $queryTable );
+    abstract function update( $queryTable );
+    abstract function select( $queryTable );
+    abstract function selectOne( $queryTable );
 
 
 }

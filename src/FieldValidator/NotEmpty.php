@@ -6,8 +6,7 @@ class NotEmpty extends AbstractFieldValidator
 
     public function validatePHP( $value, $settings ){
 
-
-        if( !empty( $value ) )
+        if ( !empty( $value ) )
         {
             $this->state = 1;
             $this->valid = true;

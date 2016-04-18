@@ -6,7 +6,7 @@ class Email extends AbstractFieldValidator
 
     public function validatePHP( $value, $settings ){
 
-        if(  filter_var( $value, FILTER_VALIDATE_EMAIL ))
+        if ( filter_var( $value, FILTER_VALIDATE_EMAIL ))
         {
             $this->state = 1;
             $this->valid = true;

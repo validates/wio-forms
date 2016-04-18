@@ -6,8 +6,7 @@ class Password_v1 extends AbstractFieldValidator
 
     public function validatePHP( $value, $settings ){
 
-
-        if(  strlen( $value ) >= 8 )
+        if (  strlen( $value ) >= 8 )
         {
             $this->state = 1;
             $this->valid = true;

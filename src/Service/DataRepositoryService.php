@@ -3,12 +3,12 @@ namespace WioForms\Service;
 
 class DataRepositoryService
 {
-    public $WioForms;
+    public $wioForms;
     public $formStruct;
 
 
-    function __construct( $WioFormsObiect ){
-        $this->WioForms = $WioFormsObiect;
+    function __construct( $wioFormsObiect ){
+        $this->wioForms = $wioFormsObiect;
     }
 
 

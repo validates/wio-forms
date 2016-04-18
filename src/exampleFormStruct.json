@@ -7,7 +7,7 @@
 
     "DataRepositories": {},
 
-    "ValidatorsPHP":
+    "FieldValidatorsPHP":
     {
         "NotEmpty":
         {
@@ -22,7 +22,17 @@
             "class": "Password_v1"
         }
     },
-    "ValidatorsJS": {},
+    "FieldValidatorsJS": {},
+
+    "ContainerValidatorsPHP":
+    {
+        "AllFieldsOk":
+        {
+            "class": "AllFieldsOk"
+        }
+    },
+    "ContainerValidatorsJS": {},
+
 
     "Fields":
     {
@@ -30,7 +40,7 @@
         {
             "type": "TextInput",
             "container": "Site1",
-            "position": 1,
+            "position": 2,
             "title": "Email",
             "state": 0,
             "save": true,
@@ -48,71 +58,94 @@
         {
             "type": "PasswordInput",
             "container": "Site1",
-            "position": 2,
+            "position": 3,
             "title": "Hasło",
             "state": 0,
             "save": true,
             "validationPHP":
             [
-              {
-                  "method": "NotEmpty"
-              },
-              {
-                  "method": "Password"
-              }
+                {
+                    "method": "NotEmpty"
+                },
+                {
+                    "method": "Password"
+                }
             ]
         }
     },
 
     "Containers":
     {
-        "TopPoints1":
-        {
-            "site": 0,
-            "container": "main",
-            "position": 1,
-            "displayType": "FullDisplay"
-        },
         "Site1":
         {
             "site": 0,
-            "container": "main",
+            "container": "_site",
             "position": 2,
             "displayType": "FullDisplay",
-            "title": "Podstawowe dane"
+            "title": "Podstawowe dane - main:0"
+        },
+        "TopPoints1":
+        {
+            "site": 0,
+            "container": "Site1",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "TopPoints1 - main:0"
         },
         "SubmitButton1":
         {
             "site": 0,
             "container": "Site1",
-            "position": 3,
+            "position": 4,
             "displayType": "Button1",
-            "title": "Dalej"
+            "title": "Dalej - Site1:0"
 
-        },
-        "TopPoints2":
-        {
-            "site": 1,
-            "container": "main",
-            "position": 1,
-            "displayType": "FullDisplay"
         },
         "Site2":
         {
             "site": 1,
-            "container": "main",
+            "container": "_site",
             "position": 2,
             "displayType": "FullDisplay",
-            "title": "Podstawowe dane"
+            "title": "Podstawowe dane - main:1",
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "AllFieldsOk",
+                    "settings":
+                    {
+                        "containerToCheck": "_site_0"
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "TopPoints2":
+        {
+            "site": 1,
+            "container": "Site2",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "TopPoints2 - main:1"
         },
         "SubmitButton2":
         {
             "site": 1,
             "container": "Site2",
-            "position": 3,
+            "position": 4,
             "displayType": "Button1",
-            "title": "Dalej"
-
+            "title": "Dalej - Site2:1"
         }
     }
 }

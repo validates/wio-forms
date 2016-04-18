@@ -16,57 +16,57 @@ class Main extends AbstractDatabaseConnection
     function __desctruct(  ){
         if ($this->isConnected)
         {
-            $this->Disconnect();
+            $this->disconnect();
         }
     }
 
-    function Connect(){
+    function connect(){
 
         $this->isConnected = true;
     }
 
-    function Disconnect(){
+    function disconnect(){
 
     }
 
-    function Save( $queryTable )
+    function save( $queryTable )
     {
         if ( !$this->isConnected)
         {
-            $this->Connect();
+            $this->connect();
         }
     }
 
-    function Update( $queryTable )
+    function update( $queryTable )
     {
         if ( !$this->isConnected)
         {
-            $this->Connect();
+            $this->connect();
         }
 
     }
 
-    function Select( $queryTable )
+    function select( $queryTable )
     {
         if ( !$this->isConnected)
         {
-            $this->Connect();
+            $this->connect();
         }
 
 
     }
 
-    function SelectOne( $queryTable )
+    function selectOne( $queryTable )
     {
         if ( !$this->isConnected)
         {
-            $this->Connect();
+            $this->connect();
         }
 
         if ( $queryTable['table'] == 'WioForms_formStruct' )
         {
-            $e = file_get_contents('exampleFormStruct.json');
-            return ['dataStruct'=> $e];
+            $example_file = file_get_contents('exampleFormStruct.json');
+            return ['dataStruct'=> $example_file];
         }
 
     }

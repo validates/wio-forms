@@ -30,7 +30,7 @@ abstract class AbstractFieldValidator
     public function print_validateJS(){
         $javascript = '';
 
-        $javascript .= 'function( $value, $settings ){';
+        $javascript .= 'function( value, settings ){';
         $javascript .= '}';
 
         return $javascript;

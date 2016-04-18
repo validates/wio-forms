@@ -5,7 +5,7 @@ namespace WioForms\DataRepository;
 abstract class AbstractDataRepository
 {
 
-    abstract function GetData();
+    abstract function getData();
 
 }
 

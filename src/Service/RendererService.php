@@ -6,98 +6,98 @@ use WioForms\FormRenderer\FormRenderer;
 class RendererService
 {
     # Holds FormRenderer object
-    private $FormRenderer;
+    private $formRenderer;
 
     # Holds html to display
     private $outputHtml;
 
-    # Lists of information what Field and Container lays where
-    private $ContainersContains;
-
-    public $WioForms;
+    public $wioForms;
     public $formStruct;
 
 
-    function __construct( $WioFormsObiect ){
-        $this->WioForms = $WioFormsObiect;
+    function __construct( $wioFormsObiect ){
+        $this->wioForms = $wioFormsObiect;
+        $this->formStruct = &$this->wioForms->formStruct;
 
         # Gets FormRenderer
-        $this->FormRenderer = new FormRenderer( $this->WioForms );
+        $this->formRenderer = new FormRenderer( $this->wioForms );
 
         $this->outputHtml = '';
     }
 
     public function renderFormSite( $siteNumber ){
-        $this->formStruct = $this->WioForms->formStruct;
 
-        $this->createContainersContains();
+        $this->outputHtml .= $this->formRenderer->showHead();
 
-        $this->outputHtml .= $this->FormRenderer->showHead();
-
-        foreach ($this->ContainersContains['main_'.$siteNumber] as $ElemData)
+        foreach ($this->wioForms->containersContains['_site_'.$siteNumber] as $elemData)
         {
-            if ($ElemData['type'] == 'Fields'){
-                $this->ErrorLog->ErrorLog('We have Field directly in "main_'.$siteNumber.'" container.');
+            if ($elemData['type'] == 'Fields'){
+                $this->wioForms->errorLog->errorLog('We have Field directly in "_site_'.$siteNumber.'" container.');
                 continue;
             }
-            $Container = $this->formStruct['Containers'][ $ElemData['name'] ];
-            if ( $Container['site'] == $siteNumber )
+            $container = $this->formStruct['Containers'][ $elemData['name'] ];
+            if ( $container['site'] == $siteNumber )
             {
-                $this->renderContainer( $ElemData['name'] );
+                $this->renderContainer( $elemData['name'] );
             }
         }
 
-        $this->outputHtml .= $this->FormRenderer->showTail();
+        $this->outputHtml .= $this->formRenderer->showTail();
 
         echo $this->outputHtml;
     }
 
-    private function renderField( $FieldName ){
-      $Field = $this->formStruct['Fields'][ $FieldName ];
+    private function renderField( $fieldName ){
+      $field = $this->formStruct['Fields'][ $fieldName ];
 
-      $className = '\WioForms\FieldRenderer\\'.$Field['type'];
+      $className = '\WioForms\FieldRenderer\\'.$field['type'];
       if ( class_exists($className) ) {
-          $FieldClass = new $className( $FieldName, $this );
+          $rendererObject = new $className( $fieldName, $this );
       }
       else
       {
-          $this->ErrorLog->ErrorLog('Class '.$className.' not found.');
+          $this->wioForms->errorLog->errorLog('Class '.$className.' not found.');
           return false;
       }
 
-      $this->outputHtml .= $FieldClass->ShowToEdit();
+      $this->outputHtml .= $rendererObject->showToEdit();
     }
 
-    private function renderContainer( $ContainerName ){
-        $Cont = $this->formStruct['Containers'][ $ContainerName ];
+    private function renderContainer( $containerName ){
+        $container = $this->formStruct['Containers'][ $containerName ];
 
-        $className = '\WioForms\ContainerRenderer\\'.$Cont['displayType'];
+        if( isset( $container['hidden'] ) and $container['hidden'] == true )
+        {
+            return true;
+        }
+
+        $className = '\WioForms\ContainerRenderer\\'.$container['displayType'];
         if ( class_exists($className) ) {
-            $ContainerClass = new $className( $ContainerName, $this );
+            $rendererObiect = new $className( $containerName, $this );
         }
         else
         {
-            $this->WioForms->ErrorLog->ErrorLog('Class '.$className.' not found.');
+            $this->wioForms->errorLog->errorLog('Class '.$className.' not found.');
             return false;
         }
 
-        $this->outputHtml .= $ContainerClass->ShowHead();
+        $this->outputHtml .= $rendererObiect->showHead();
 
-        if ( isset($this->ContainersContains[ $ContainerName ]) ){
-            foreach ($this->ContainersContains[ $ContainerName ] as $ElemData)
+        if ( isset($this->wioForms->containersContains[ $containerName ]) ){
+            foreach ($this->wioForms->containersContains[ $containerName ] as $elemData)
             {
-                if ( $ElemData['type'] == 'Containers' )
+                if ( $elemData['type'] == 'Containers' )
                 {
-                    $this->renderContainer( $ElemData['name'] );
+                    $this->renderContainer( $elemData['name'] );
                 }
-                if ( $ElemData['type'] == 'Fields' )
+                if ( $elemData['type'] == 'Fields' )
                 {
-                    $this->renderField( $ElemData['name'] );
+                    $this->renderField( $elemData['name'] );
                 }
             }
         }
 
-        $this->outputHtml .= $ContainerClass->ShowTail();
+        $this->outputHtml .= $rendererObiect->showTail();
     }
 
     private function addFunctionsToJavaScript( ){}
@@ -110,39 +110,39 @@ class RendererService
 
 
 
-    private function createContainersContains(){
-        $this->ContainersContains = [];
+    public function createContainersContains(){
+        $this->wioForms->containersContains = [];
 
-        foreach (['Fields','Containers'] as $ElemType)
+        foreach (['Fields','Containers'] as $elemType)
         {
-            foreach ($this->formStruct[$ElemType]  as $ElemName => $Elem )
+            foreach ($this->formStruct[$elemType]  as $elemName => $elem )
             {
-                $cont = $Elem['container'];
-                $pos = $Elem['position'];
-                if( $cont == 'main')
+                $cont = $elem['container'];
+                $pos = $elem['position'];
+                if( $cont == '_site')
                 {
-                    $cont = 'main_'.$Elem['site'];
+                    $cont = '_site_'.$elem['site'];
                 }
-                if ( !isset( $this->ContainersContains[$cont] ))
+                if ( !isset( $this->wioForms->containersContains[$cont] ))
                 {
-                    $this->ContainersContains[$cont] = [];
+                    $this->wioForms->containersContains[$cont] = [];
                 }
-                if ( isset( $this->ContainersContains[$cont][$pos] ))
+                if ( isset( $this->wioForms->containersContains[$cont][$pos] ))
                 {
-                    $this->ErrorLog->ErrorLog('Doubled position for '.$ElemType.'::'.$ElemName.' in container '.$cont.'.');
+                    $this->wioForms->errorLog->errorLog('Doubled position for '.$elemType.'::'.$elemName.' in container '.$cont.'.');
                 }
                 else
                 {
-                    $this->ContainersContains[$cont][$pos] = [
-                        "name" => $ElemName,
-                        "type" => $ElemType
+                    $this->wioForms->containersContains[$cont][$pos] = [
+                        "name" => $elemName,
+                        "type" => $elemType
                     ];
                 }
             }
         }
-        foreach ($this->ContainersContains as $Key => $Array)
+        foreach ($this->wioForms->containersContains as $key => $array)
         {
-            ksort($this->ContainersContains[ $Key ]);
+            ksort($this->wioForms->containersContains[ $key ]);
         }
     }
 

@@ -4,14 +4,14 @@ namespace WioForms\FormRenderer;
 
 abstract class AbstractFormRenderer
 {
-    protected $WioForms;
+    protected $wioForms;
 
-    function __construct( $WioFormObject ){
-        $this->WioForms = $WioFormObject;
+    function __construct( $wioFormObject ){
+        $this->wioForms = $wioFormObject;
     }
 
-    abstract function ShowHead();
-    abstract function ShowTail();
+    abstract function showHead();
+    abstract function showTail();
 
 }
 

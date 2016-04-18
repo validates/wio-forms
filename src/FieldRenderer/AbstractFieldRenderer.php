@@ -3,18 +3,18 @@ namespace WioForms\FieldRenderer;
 
 abstract class AbstractFieldRenderer
 {
-    protected $WioForms;
-    protected $FieldName;
-    protected $FieldInfo;
+    protected $wioForms;
+    protected $fieldName;
+    protected $fieldInfo;
 
-    function __construct( $FieldName, $WioFormsObject ){
-        $this->FieldName = $FieldName;
-        $this->WioForms = $WioFormsObject;
-        $this->FieldInfo = &$this->WioForms->formStruct['Fields'][ $this->FieldName ];
+    function __construct( $fieldName, $wioFormsObject ){
+        $this->fieldName = $fieldName;
+        $this->wioForms = $wioFormsObject;
+        $this->fieldInfo = &$this->wioForms->formStruct['Fields'][ $this->fieldName ];
     }
-    abstract function ShowToEdit();
+    abstract function showToEdit();
 
-    abstract function ShowToView();
+    abstract function showToView();
 }
 
 ?>

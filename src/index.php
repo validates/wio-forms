@@ -11,7 +11,7 @@ $localSettings = [
     ]
 ];
 
-$WioForm = new WioForms( $localSettings );
+$wioForm = new WioForms( $localSettings );
 ?>
 <!doctype HTML>
 <html>
@@ -19,6 +19,6 @@ $WioForm = new WioForms( $localSettings );
   <meta charset="utf-8">
 </head>
 <body>
-  <?php $WioForm->showForm( 'Form1' ); ?>
+  <?php $wioForm->showForm( 'Form1' ); ?>
 </body>
 </html>

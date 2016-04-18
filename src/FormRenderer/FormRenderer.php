@@ -4,7 +4,7 @@ namespace WioForms\FormRenderer;
 class FormRenderer extends AbstractFormRenderer
 {
 
-    function ShowHead(){
+    function showHead(){
         $html = '';
 
         $html .= '<form method="post" action="">';
@@ -12,7 +12,7 @@ class FormRenderer extends AbstractFormRenderer
         return $html;
     }
 
-    function ShowTail(){
+    function showTail(){
         $html = '';
 
         $html .= '<input type="hidden" name="wio_forms" value="yes" />';

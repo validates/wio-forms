@@ -4,7 +4,7 @@ namespace WioForms\Service;
 
 class ValidatorService
 {
-    public $WioForms;
+    public $wioForms;
     public $formStruct;
 
     # Holds data to Validate
@@ -13,8 +13,8 @@ class ValidatorService
     # Holds PHP Validators
     private $PHPvalidators;
 
-    function __construct( $WioFormsObiect ){
-        $this->WioForms = $WioFormsObiect;
+    function __construct( $wioFormsObiect ){
+        $this->wioForms = $wioFormsObiect;
 
         $this->PHPvalidators = [];
     }
@@ -24,7 +24,7 @@ class ValidatorService
     checks all fields and all containers for validation errors
     */
     public function validateForm( $entryData ){
-        $this->formStruct = &$this->WioForms->formStruct;
+        $this->formStruct = &$this->wioForms->formStruct;
         $this->entryData = $entryData;
 
         foreach($this->formStruct['Fields'] as $fieldName => $field)
@@ -42,43 +42,47 @@ class ValidatorService
     */
     private function validateField( $fieldName ){
 
-        $Value = '';
+        $value = '';
         if (isset( $this->entryData[ $fieldName ] )){
-            $Value = $this->entryData[ $fieldName ];
+            $value = $this->entryData[ $fieldName ];
         }
-        $Field = &$this->formStruct['Fields'][ $fieldName ];
+        $field = &$this->formStruct['Fields'][ $fieldName ];
 
-        $Field['value'] = $Value;
+        $field['valid'] = true;
+        $field['state'] = 1;
+        $field['message'] = false;
 
-        if ( isset($Field['validationPHP']) and is_array($Field['validationPHP']) )
+        $field['value'] = $value;
+
+        if ( isset($field['validationPHP']) and is_array($field['validationPHP']) )
         {
-            foreach ($Field['validationPHP'] as $validatorInfo)
+            foreach ($field['validationPHP'] as $validatorInfo)
             {
-                if ( isset( $this->formStruct['ValidatorsPHP'][ $validatorInfo['method'] ]['class'] ))
+                if ( isset( $this->formStruct['FieldValidatorsPHP'][ $validatorInfo['method'] ]['class'] ))
                 {
-                      $className = $this->formStruct['ValidatorsPHP'][ $validatorInfo['method'] ]['class'];
+                      $className = $this->formStruct['FieldValidatorsPHP'][ $validatorInfo['method'] ]['class'];
                 }
                 else {
-                    $this->WioForms->ErrorLog->ErrorLog('ValidatorsPHP class name for '.$validatorInfo['method'].'  not found. ');
+                    $this->wioForms->errorLog->errorLog('FieldValidatorsPHP class name for '.$validatorInfo['method'].'  not found. ');
                     continue;
                 }
 
-                if ( !( $ValidatorClass = $this->getPHPvalidator( $className ) ))
+                if ( !( $validatorClass = $this->getPHPfieldValidator( $className ) ))
                 {
                     continue;
                 }
 
-                $Settings = [];
+                $settings = [];
                 if (isset( $validatorInfo['settings'] ))
                 {
-                    $Settings = $validatorInfo['settings'];
+                    $settings = $validatorInfo['settings'];
                 }
 
-                $ValidationResult = $ValidatorClass->validatePHP( $Value, $Settings );
+                $validationResult = $validatorClass->validatePHP( $value, $settings );
 
-                $Field['state'] = $ValidationResult['state'];
-                $Field['valid'] = $ValidationResult['valid'];
-                $Field['message'] = $ValidationResult['message'];
+                $field['state'] = $validationResult['state'];
+                $field['valid'] = $validationResult['valid'];
+                $field['message'] = $validationResult['message'];
 
             }
         }
@@ -97,9 +101,55 @@ class ValidatorService
     can use solveLogicEquations( )
     */
     private function validateContainer( $containerName ){
-        $Container = $this->formStruct['Containers'][ $containerName ];
+        $container = &$this->formStruct['Containers'][ $containerName ];
 
+        if ( isset($container['validationPHP']) and is_array($container['validationPHP']) )
+        {
+            foreach ($container['validationPHP'] as $validatorInfo)
+            {
+                if ($validatorInfo['type'] == 'method' )
+                {
+                    if ( isset( $this->formStruct['ContainerValidatorsPHP'][ $validatorInfo['method'] ]['class'] ))
+                    {
+                          $className = $this->formStruct['ContainerValidatorsPHP'][ $validatorInfo['method'] ]['class'];
+                    }
+                    else
+                    {
+                        $this->wioForms->errorLog->errorLog('ContainerValidatorsPHP class name for '.$validatorInfo['method'].'  not found. ');
+                        continue;
+                    }
 
+                    if ( !( $ValidatorClass = $this->getPHPcontainerValidator( $className ) ))
+                    {
+                        continue;
+                    }
+
+                    $settings = [];
+                    if (isset( $validatorInfo['settings'] ))
+                    {
+                        $settings = $validatorInfo['settings'];
+                    }
+
+                    $validationResult = $ValidatorClass->validatePHP( $containerName, $settings );
+
+                    $this->containerChangeState( $containerName, $validationResult['state'] );
+                    $container['valid'] = $validationResult['valid'];
+                    $container['message'] = $validationResult['message'];
+                }
+                elseif ( $validatorInfo['type'] == 'logic' )
+                {
+                    // ...
+                    // ... $this->solveLogicEquation( $containerName );
+                }
+            }
+        }
+        else
+        {
+            # Container with no validation rules is valid with state = 1
+            $container['valid'] = true;
+            $this->containerChangeState( $containerName, 1 );
+            $container['message'] = false;
+        }
 
     }
 
@@ -111,18 +161,126 @@ class ValidatorService
     private function getDataStruct( $formDataStructId ){}
 
 
-    private function getPHPvalidator( $validatorName ){
+    private function containerChangeState( $containerName, $newState  )
+    {
+        $container = &$this->formStruct['Containers'][ $containerName ];
+
+        if ( isset($container['state']) )
+        {
+            $oldState = $container['state'];
+        }
+        else
+        {
+            $oldState = 0;
+        }
+
+        $contaienr['state'] = $newState;
+
+        if ( !isset($container['stateActions']) )
+        {
+            return true;
+        }
+
+        foreach ( $container['stateActions'] as $action )
+        {
+            if ( $action['state'] == $newState )
+            {
+                $doIt = true;
+                if ( isset($action['previousAllowedStates']) )
+                {
+                    $doIt = false;
+                    foreach ($action['previousAllowedStates'] as $wantedState)
+                    {
+                        if ( $wantedState == $oldState )
+                        {
+                            $doIt = true;
+                            break;
+                        }
+                    }
+                }
+
+                if ($doIt)
+                {
+                    foreach ($action['actions'] as $action)
+                    {
+                        $this->containerMakeAction( $containerName, $action );
+                    }
+
+                }
+            }
+        }
+    }
+
+    private function containerMakeAction( $containerName, $action )
+    {
+//        echo 'action: '.$containerName.': '.$action.'<br/>';
+        $container = &$this->formStruct['Containers'][ $containerName ];
+
+        if ( $action == 'hide' )
+        {
+            $container['hidden'] = true;
+        }
+        elseif ( $action == 'show' )
+        {
+            unset( $container['hidden'] );
+        }
+        else
+        {
+            if( !isset($container['styleOptions']) )
+            {
+                $container['styleOptions'] = [];
+            }
+            $container['styleOptions'][ $action ] = true;
+        }
+    }
+
+    private function getPHPfieldValidator( $validatorName )
+    {
         $className = '\WioForms\FieldValidator\\'.$validatorName;
-        if ( class_exists($className) ) {
+        if ( class_exists($className) )
+        {
             return new $className();
         }
         else
         {
-            $this->WioForms->ErrorLog->ErrorLog('Class '.$className.' not found.');
+            $this->wioForms->errorLog->errorLog('Class '.$className.' not found.');
             return false;
         }
     }
 
+    private function getPHPcontainerValidator( $validatorName ){
+        $className = '\WioForms\ContainerValidator\\'.$validatorName;
+        if ( class_exists($className) )
+        {
+            return new $className( $this->wioForms );
+        }
+        else
+        {
+            $this->wioForms->errorLog->errorLog('Class '.$className.' not found.');
+            return false;
+        }
+    }
+
+    /*
+    Function search for highest "site" number in any container that is not set on "hide"
+
+    */
+    public function getAvaliableSiteNumber()
+    {
+        $maxSite = 0;
+
+        foreach ($this->formStruct['Containers'] as $container)
+        {
+            if ( $container['container'] == '_site'
+              and !( isset($container['hidden']) and $container['hidden'] )
+              and $container['site'] > $maxSite )
+            {
+                $maxSite = $container['site'];
+            }
+        }
+
+        return $maxSite;
+    }
 
 }
 

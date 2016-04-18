@@ -16,7 +16,7 @@ use WioForms\Service\ValidatorService;
 class WioForms{
 
     # Holds ErrorLog object
-    public $ErrorLog;
+    public $errorLog;
 
     # Holds table of enviroment and local settings
     public $settings;
@@ -24,36 +24,39 @@ class WioForms{
     # Holds all informations about form structure and logic
     public $formStruct;
 
+    # Lists of information what Field and Container lays where
+    public $containersContains;
+
     # WioForms Service Obiects
-    private $RendererService;
-    private $DataRepositoryService;
-    private $ValidatorService;
-    private $DatabaseService;
+    private $rendererService;
+    private $dataRepositoryService;
+    private $validatorService;
+    private $databaseService;
 
 
     function __construct( $localSettings = false ){
 
         # Gets ErrorLog
-        $this->ErrorLog = new ErrorLog();
+        $this->errorLog = new ErrorLog();
 
         #Gets settings
-        $SettingsFile = file_get_contents(__DIR__.'/enviromentSettings.json');
-        $enviromentSettings = json_decode($SettingsFile, TRUE);
+        $settingsFile = file_get_contents(__DIR__.'/enviromentSettings.json');
+        $enviromentSettings = json_decode($settingsFile, TRUE);
 
         if($localSettings !== false)
             $enviromentSettings = array_replace_recursive($enviromentSettings,$localSettings);
         $this->settings = $enviromentSettings;
 
 
-        $this->RendererService       = new RendererService( $this );
-        $this->DataRepositoryService = new DataRepositoryService( $this );
-        $this->ValidatorService      = new ValidatorService( $this );
-        $this->DatabaseService       = new DatabaseService( $this );
+        $this->rendererService       = new RendererService( $this );
+        $this->dataRepositoryService = new DataRepositoryService( $this );
+        $this->validatorService      = new ValidatorService( $this );
+        $this->databaseService       = new DatabaseService( $this );
 
 
-        if ($this->DatabaseService->setConnections() === false)
+        if ($this->databaseService->setConnections() === false)
         {
-            $this->ErrorLog->ErrorLog('Problem with: setDatabaseConnections();');
+            $this->errorLog->errorLog('Problem with: setDatabaseConnections();');
             die(' Problem with set Database Connections ');
         }
     }
@@ -69,25 +72,30 @@ class WioForms{
 
         if ( $formDataStructId === false )
         {
-            $this->ErrorLog->ErrorLog('No DataStructId to search for.');
+            $this->errorLog->errorLog('No DataStructId to search for.');
             return false;
         }
 
-        if ( $this->DatabaseService->getFormDataStruct( $formDataStructId ) === false )
+        if ( $this->databaseService->getFormDataStruct( $formDataStructId ) === false )
         {
-            $this->ErrorLog->ErrorLog('Problem with getFormDataStructs().');
+            $this->errorLog->errorLog('Problem with getFormDataStructs().');
             return false;
         }
 
-        if ( !empty($_POST['wio_forms']) ){
+        $this->rendererService->createContainersContains();
+
+
+        $entryData = [];
+        if ( !empty($_POST['wio_forms']) )
+        {
             $entryData = $_POST;
-            $this->ValidatorService->validateForm( $entryData );
         }
+        $this->validatorService->validateForm( $entryData );
 
         // somehow magically we know it:
-        $siteNumber = 0;
+        $siteNumber = $this->validatorService->getAvaliableSiteNumber();
 
-        $this->RendererService->renderFormSite( $siteNumber );
+        $this->rendererService->renderFormSite( $siteNumber );
 
     }
 
