@@ -248,7 +248,8 @@ class ValidatorService
         }
     }
 
-    private function getPHPcontainerValidator( $validatorName ){
+    private function getPHPcontainerValidator( $validatorName )
+    {
         $className = '\WioForms\ContainerValidator\\'.$validatorName;
         if ( class_exists($className) )
         {
@@ -282,6 +283,14 @@ class ValidatorService
         return $maxSite;
     }
 
-}
+    public function getLastEditedSite()
+    {
+        if ( isset($_POST['_wioFormsSite']) )
+        {
+            return (Int)($_POST['_wioFormsSite'])+1;
+        }
+        return 0;
+    }
 
+}
 ?>

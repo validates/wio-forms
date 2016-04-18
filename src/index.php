@@ -19,6 +19,6 @@ $wioForm = new WioForms( $localSettings );
   <meta charset="utf-8">
 </head>
 <body>
-  <?php $wioForm->showForm( 'Form1' ); ?>
+  <?= $wioForm->showForm( 'Form1' ); ?>
 </body>
 </html>

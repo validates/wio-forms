@@ -14,29 +14,34 @@ class RendererService
     public $wioForms;
     public $formStruct;
 
+    public $siteNumber;
 
-    function __construct( $wioFormsObiect ){
-        $this->wioForms = $wioFormsObiect;
+    function __construct( $wioFormsObiect )
+    {
+        $this->wioForms = &$wioFormsObiect;
         $this->formStruct = &$this->wioForms->formStruct;
 
         # Gets FormRenderer
         $this->formRenderer = new FormRenderer( $this->wioForms );
 
         $this->outputHtml = '';
+
     }
 
-    public function renderFormSite( $siteNumber ){
+    public function renderFormSite( $siteNumber )
+    {
+        $this->siteNumber = $siteNumber;
 
         $this->outputHtml .= $this->formRenderer->showHead();
 
-        foreach ($this->wioForms->containersContains['_site_'.$siteNumber] as $elemData)
+        foreach ($this->wioForms->containersContains['_site_'.$this->siteNumber] as $elemData)
         {
             if ($elemData['type'] == 'Fields'){
-                $this->wioForms->errorLog->errorLog('We have Field directly in "_site_'.$siteNumber.'" container.');
+                $this->wioForms->errorLog->errorLog('We have Field directly in "_site_'.$this->siteNumber.'" container.');
                 continue;
             }
             $container = $this->formStruct['Containers'][ $elemData['name'] ];
-            if ( $container['site'] == $siteNumber )
+            if ( $container['site'] == $this->siteNumber )
             {
                 $this->renderContainer( $elemData['name'] );
             }
@@ -44,26 +49,11 @@ class RendererService
 
         $this->outputHtml .= $this->formRenderer->showTail();
 
-        echo $this->outputHtml;
+        return $this->outputHtml;
     }
 
-    private function renderField( $fieldName ){
-      $field = $this->formStruct['Fields'][ $fieldName ];
-
-      $className = '\WioForms\FieldRenderer\\'.$field['type'];
-      if ( class_exists($className) ) {
-          $rendererObject = new $className( $fieldName, $this );
-      }
-      else
-      {
-          $this->wioForms->errorLog->errorLog('Class '.$className.' not found.');
-          return false;
-      }
-
-      $this->outputHtml .= $rendererObject->showToEdit();
-    }
-
-    private function renderContainer( $containerName ){
+    private function renderContainer( $containerName )
+    {
         $container = $this->formStruct['Containers'][ $containerName ];
 
         if( isset( $container['hidden'] ) and $container['hidden'] == true )
@@ -80,6 +70,8 @@ class RendererService
             $this->wioForms->errorLog->errorLog('Class '.$className.' not found.');
             return false;
         }
+
+        $this->getContainerParentStyles( $containerName );
 
         $this->outputHtml .= $rendererObiect->showHead();
 
@@ -100,6 +92,24 @@ class RendererService
         $this->outputHtml .= $rendererObiect->showTail();
     }
 
+    private function renderField( $fieldName )
+    {
+        $field = $this->formStruct['Fields'][ $fieldName ];
+
+        $className = '\WioForms\FieldRenderer\\'.$field['type'];
+        if ( class_exists($className) ) {
+            $rendererObject = new $className( $fieldName, $this );
+        }
+        else
+        {
+            $this->wioForms->errorLog->errorLog('Class '.$className.' not found.');
+            return false;
+        }
+        $this->getFieldParentStyles( $fieldName );
+
+        $this->outputHtml .= $rendererObject->showToEdit();
+    }
+
     private function addFunctionsToJavaScript( ){}
 
     /*
@@ -110,7 +120,8 @@ class RendererService
 
 
 
-    public function createContainersContains(){
+    public function createContainersContains()
+    {
         $this->wioForms->containersContains = [];
 
         foreach (['Fields','Containers'] as $elemType)
@@ -146,11 +157,83 @@ class RendererService
         }
     }
 
+    public function dontShowErrorsOnSite( $siteNumber )
+    {
+        if ( isset($this->wioForms->containersContains['_site_'.$siteNumber]) )
+        {
+            foreach ($this->wioForms->containersContains['_site_'.$siteNumber] as $elem)
+            {
+                if ( $elem['type'] == 'Fields' )
+                {
+                    $this->addStyleToField( $elem['name'], 'dont_display_errors', true);
+
+                }
+                if ( $elem['type'] == 'Containers' )
+                {
+                    $this->addStyleToContainer( $elem['name'], 'dont_display_errors', true);
+                }
+            }
+        }
+    }
+
+    private function addStyleToField( $fieldName, $style , $force = false)
+    {
+        $field = &$this->formStruct['Fields'][ $fieldName ];
+
+        if ( !isset($field['styleOptions']) )
+        {
+            $field['styleOptions'] = [];
+        }
+        if ( $force or !isset( $field['styleOptions'][$style] ) )
+        {
+            $field['styleOptions'][ $style ] = true;
+        }
+    }
+
+    private function addStyleToContainer( $containerName, $style, $force = false )
+    {
+        $container = &$this->formStruct['Containers'][ $containerName ];
+
+        if ( !isset($container['styleOptions']) )
+        {
+            $container['styleOptions'] = [];
+        }
+        if ( $force or !isset( $container['styleOptions'][$style] ) )
+        $container['styleOptions'][ $style ] = true;
+    }
+
+    private function getContainerParentStyles( $containerName )
+    {
+        $container = &$this->formStruct['Containers'][ $containerName ];
+        if ( $container['container'] == '_site' )
+        {
+            return true;
+        }
+        $parentContainer = &$this->formStruct['Containers'][ $container['container'] ];
+
+        if ( isset($parentContainer['styleOptions']) )
+        {
+            foreach ($parentContainer['styleOptions'] as $style => $styleState)
+            {
+                $this->addStyleToContainer( $containerName, $style );
+            }
+        }
+    }
+
+    private function getFieldParentStyles( $fieldName )
+    {
+        $field = &$this->formStruct['Fields'][ $fieldName ];
+
+        $parentContainer = &$this->formStruct['Containers'][ $field['container'] ];
+
+        if ( isset($parentContainer['styleOptions']) )
+        {
+            foreach ($parentContainer['styleOptions'] as $style => $styleState)
+            {
+                $this->addStyleToField( $fieldName, $style );
+            }
+        }
+    }
 
 }
-
-
-
-
-
 ?>

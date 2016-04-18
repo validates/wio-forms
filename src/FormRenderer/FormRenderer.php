@@ -15,7 +15,8 @@ class FormRenderer extends AbstractFormRenderer
     function showTail(){
         $html = '';
 
-        $html .= '<input type="hidden" name="wio_forms" value="yes" />';
+        $html .= '<input type="hidden" name="_wioForms" value="yes" />';
+        $html .= '<input type="hidden" name="_wioFormsSite" value="'.$this->wioForms->rendererService->siteNumber.'" />';
         $html .= '</form>';
 
         return $html;

@@ -28,10 +28,10 @@ class WioForms{
     public $containersContains;
 
     # WioForms Service Obiects
-    private $rendererService;
-    private $dataRepositoryService;
-    private $validatorService;
-    private $databaseService;
+    public $rendererService;
+    public $dataRepositoryService;
+    public $validatorService;
+    public $databaseService;
 
 
     function __construct( $localSettings = false ){
@@ -86,17 +86,21 @@ class WioForms{
 
 
         $entryData = [];
-        if ( !empty($_POST['wio_forms']) )
+        if ( !empty($_POST['_wioForms']) )
         {
             $entryData = $_POST;
         }
         $this->validatorService->validateForm( $entryData );
 
-        // somehow magically we know it:
+        $lastEditedSite = $this->validatorService->getLastEditedSite();
+
+        $this->rendererService->dontShowErrorsOnSite( $lastEditedSite );
+
         $siteNumber = $this->validatorService->getAvaliableSiteNumber();
 
-        $this->rendererService->renderFormSite( $siteNumber );
+        $formHtml = $this->rendererService->renderFormSite( $siteNumber );
 
+        return $formHtml;
     }
 
 

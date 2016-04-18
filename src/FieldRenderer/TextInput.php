@@ -11,10 +11,20 @@ class TextInput extends AbstractFieldRenderer
             $value = $this->fieldInfo['value'];
         }
 
+        $styleOptions = [];
+        if ( isset($this->fieldInfo['styleOptions']) )
+        {
+            $styleOptions = $this->fieldInfo['styleOptions'];
+        }
+
         $message = false;
         if( isset($this->fieldInfo['valid']) and !$this->fieldInfo['valid'] )
         {
             $message = $this->fieldInfo['message'];
+        }
+        if ( isset($styleOptions['dont_display_errors']) and $styleOptions['dont_display_errors'] )
+        {
+            $message = false;
         }
 
         $html = $this->fieldInfo['title']. ': <input type="text" name="'.$this->fieldName.'" value="'.$value.'" />';
