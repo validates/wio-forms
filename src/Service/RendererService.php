@@ -63,7 +63,7 @@ class RendererService
 
         $className = '\WioForms\ContainerRenderer\\'.$container['displayType'];
         if ( class_exists($className) ) {
-            $rendererObiect = new $className( $containerName, $this );
+            $rendererObiect = new $className( $containerName, $this->wioForms );
         }
         else
         {
@@ -98,7 +98,7 @@ class RendererService
 
         $className = '\WioForms\FieldRenderer\\'.$field['type'];
         if ( class_exists($className) ) {
-            $rendererObject = new $className( $fieldName, $this );
+            $rendererObject = new $className( $fieldName, $this->wioForms );
         }
         else
         {

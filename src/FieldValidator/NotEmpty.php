@@ -15,7 +15,7 @@ class NotEmpty extends AbstractFieldValidator
         {
             $this->state = -1;
             $this->valid = false;
-            $this->message = 'email_invalid';
+            $this->message = 'field_required';
         }
 
         return $this->getReturn();

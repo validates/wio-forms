@@ -1,7 +1,7 @@
 <?php
 namespace WioForms\FieldRenderer;
 
-class TextInput extends AbstractFieldRenderer
+class DayOfBirth extends AbstractFieldRenderer
 {
 
     function showToEdit(){
@@ -27,13 +27,18 @@ class TextInput extends AbstractFieldRenderer
             $message = false;
         }
 
-        $html = $this->fieldInfo['title']. ': <input type="text" name="'.$this->fieldName.'" value="'.$value.'" />';
+        $html = '';
+        $html .= $this->fieldInfo['title'].': ';
+
+
+        $html .= '<input type="text" name="'.$this->fieldName.'" value="'.$value.'"/>';
+
+
         if ($message !== false)
         {
             $html .= '<b style="color: red;"> &nbsp; '.$message.'</b>';
         }
         $html .= '<br/>';
-
 
         return $html;
     }

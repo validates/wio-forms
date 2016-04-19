@@ -5,7 +5,45 @@
     "VersionId": "2016.11",
     "FormId": "Form1.2016.11",
 
-    "DataRepositories": {},
+    "DataRepositories":
+    {
+        "stanowiska":
+        {
+            "type": "local",
+            "data":
+            {
+                "rada": "Członek rady",
+                "lider": "Lider"
+            }
+        },
+        "akcje":
+        {
+            "type": "local",
+            "data":
+            {
+                "SZP": "Szlachetna Paczka",
+                "AP": "Akademia Przyszłości"
+            }
+        },
+        "login_register_switch":
+        {
+            "type": "local",
+            "data":
+            {
+                "have_account": "Mam konto",
+                "new_account": "Zakładam nowe konto"
+            }
+        },
+        "gender":
+        {
+          "type": "local",
+          "data":
+          {
+              "female": "Kobieta",
+              "male": "Mężczyzna"
+          }
+        }
+    },
 
     "FieldValidatorsPHP":
     {
@@ -36,12 +74,121 @@
 
     "Fields":
     {
-        "field1":
+        "akcja":
         {
-            "type": "TextInput",
+            "type": "Select",
+            "container": "Site1",
+            "position": 1,
+            "title": "Akcja",
+            "state": 0,
+            "save": true,
+            "dataSet":
+            {
+                "repositoryName": "akcje"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "stanowisko":
+        {
+            "type": "Select",
             "container": "Site1",
             "position": 2,
-            "title": "Email",
+            "title": "Stanowisko",
+            "state": 0,
+            "save": true,
+            "dataSet":
+            {
+                "repositoryName": "stanowiska"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "miejsce_na_mapie":
+        {
+            "type": "GoogleMap",
+            "container": "Site2",
+            "position": 1,
+            "title": "Miejsce",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "login_switch":
+        {
+            "type": "ChooseOneButton",
+            "container": "Site3",
+            "position": 1,
+            "title": "Wybierz opcję",
+            "state": 0,
+            "save": true,
+            "dataSet":
+            {
+                "repositoryName": "login_register_switch"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+
+        },
+        "login_email":
+        {
+          "type": "TextInput",
+          "container": "Site1",
+          "position": 2,
+          "title": "Email",
+          "state": 0,
+          "save": true,
+          "validationPHP":
+          [
+              {
+                  "method": "NotEmpty"
+              },
+              {
+                  "method": "Email"
+              }
+          ]
+        },
+        "login_email":
+        {
+          "type": "TextInput",
+          "container": "LoginForm",
+          "position": 1,
+          "title": "Email",
+          "state": 0,
+          "save": true,
+          "validationPHP":
+          [
+              {
+                  "method": "NotEmpty"
+              },
+              {
+                  "method": "Email"
+              }
+          ]
+        },
+        "login_password":
+        {
+            "type": "PasswordInput",
+            "container": "LoginForm",
+            "position": 2,
+            "title": "Hasło",
             "state": 0,
             "save": true,
             "validationPHP":
@@ -50,14 +197,50 @@
                     "method": "NotEmpty"
                 },
                 {
-                    "method": "Email"
+                    "method": "Password"
                 }
             ]
         },
-        "field2":
+        "register_login":
+        {
+          "type": "TextInput",
+          "container": "RegisterForm",
+          "position": 1,
+          "title": "Email",
+          "state": 0,
+          "save": true,
+          "validationPHP":
+          [
+              {
+                  "method": "NotEmpty"
+              },
+              {
+                  "method": "Email"
+              }
+          ]
+        },
+        "register_login2":
+        {
+          "type": "TextInput",
+          "container": "RegisterForm",
+          "position": 2,
+          "title": "Powtórz E-mail",
+          "state": 0,
+          "save": true,
+          "validationPHP":
+          [
+              {
+                  "method": "NotEmpty"
+              },
+              {
+                  "method": "Email"
+              }
+          ]
+        },
+        "register_password":
         {
             "type": "PasswordInput",
-            "container": "Site1",
+            "container": "RegisterForm",
             "position": 3,
             "title": "Hasło",
             "state": 0,
@@ -71,6 +254,88 @@
                     "method": "Password"
                 }
             ]
+        },
+        "register_password4":
+        {
+            "type": "PasswordInput",
+            "container": "RegisterForm",
+            "position": 4,
+            "title": "Powtórz Hasło",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                },
+                {
+                    "method": "Password"
+                }
+            ]
+        },
+        "register_name":
+        {
+            "type": "TextInput",
+            "container": "RegisterData",
+            "position": 1,
+            "title": "Imię",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "register_surname":
+        {
+            "type": "TextInput",
+            "container": "RegisterData",
+            "position": 2,
+            "title": "Nazwisko",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "register_date":
+        {
+            "type": "DayOfBirth",
+            "container": "RegisterData",
+            "position": 3,
+            "title": "Wiek",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "register_gender":
+        {
+            "type": "Select",
+            "container": "RegisterData",
+            "position": 4,
+            "title": "Płeć",
+            "state": 0,
+            "save": true,
+            "dataSet":
+            {
+                "repositoryName": "gender"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
         }
     },
 
@@ -80,34 +345,47 @@
         {
             "site": 0,
             "container": "_site",
-            "position": 2,
-            "displayType": "FullDisplay",
-            "title": "Podstawowe dane - main:0"
-        },
-        "TopPoints1":
-        {
-            "site": 0,
-            "container": "Site1",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "TopPoints1 - main:0"
-        },
-        "SubmitButton1":
-        {
-            "site": 0,
-            "container": "Site1",
-            "position": 4,
-            "displayType": "Button1",
-            "title": "Dalej - Site1:0"
-
+            "title": "Podstawowe dane - site:0"
         },
         "Site2":
         {
-            "site": 1,
+          "site": 1,
+          "container": "_site",
+          "position": 1,
+          "displayType": "FullDisplay",
+          "title": "Podstawowe dane - main:1",
+          "validationPHP":
+          [
+              {
+                  "type": "method",
+                  "method": "AllFieldsOk",
+                  "settings":
+                  {
+                      "containerToCheck": "_site_0"
+                  }
+              }
+          ],
+          "stateActions":
+          [
+              {
+                  "state": -1,
+                  "actions": ["hide"]
+              },
+              {
+                  "state": 1,
+                  "actions": ["show"]
+              }
+          ]
+        },
+        "Site3":
+        {
+            "site": 2,
             "container": "_site",
-            "position": 2,
+            "position": 1,
             "displayType": "FullDisplay",
-            "title": "Podstawowe dane - main:1",
+            "title": "Wybór - logowanie vs. rejestracja",
             "validationPHP":
             [
                 {
@@ -115,7 +393,7 @@
                     "method": "AllFieldsOk",
                     "settings":
                     {
-                        "containerToCheck": "_site_0"
+                        "containerToCheck": "_site_1"
                     }
                 }
             ],
@@ -131,11 +409,140 @@
                 }
             ]
         },
+        "Site4":
+        {
+            "site": 3,
+            "container": "_site",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "Mini Formularz",
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "AllFieldsOk",
+                    "settings":
+                    {
+                        "containerToCheck": "_site_2"
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "LoginForm":
+        {
+            "site": 3,
+            "container": "Site4",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "Logowanie",
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "AllFieldsOk",
+                    "settings":
+                    {
+                        "containerToCheck": "_site_2"
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "RegisterForm":
+        {
+          "site": 3,
+          "container": "Site4",
+          "position": 2,
+          "displayType": "FullDisplay",
+          "title": "Rejestracja",
+          "validationPHP":
+          [
+              {
+                  "type": "method",
+                  "method": "AllFieldsOk",
+                  "settings":
+                  {
+                      "containerToCheck": "_site_2"
+                  }
+              }
+          ],
+          "stateActions":
+          [
+              {
+                  "state": -1,
+                  "actions": ["hide"]
+              },
+              {
+                  "state": 1,
+                  "actions": ["show"]
+              }
+          ]
+        },
+        "RegisterData":
+        {
+          "site": 3,
+          "container": "Site4",
+          "position": 3,
+          "displayType": "FullDisplay",
+          "title": "Dane zgłoszenia",
+          "validationPHP":
+          [
+              {
+                  "type": "method",
+                  "method": "AllFieldsOk",
+                  "settings":
+                  {
+                      "containerToCheck": "_site_2"
+                  }
+              }
+          ],
+          "stateActions":
+          [
+              {
+                  "state": -1,
+                  "actions": ["hide"]
+              },
+              {
+                  "state": 1,
+                  "actions": ["show"]
+              }
+          ]
+        },
+        "SubmitButton1":
+        {
+            "site": 0,
+            "container": "Site1",
+            "position": 4,
+            "displayType": "Button1",
+            "title": "Dalej - site:0"
+
+        },
         "TopPoints2":
         {
             "site": 1,
             "container": "Site2",
-            "position": 1,
+            "position": 2,
             "displayType": "FullDisplay",
             "title": "TopPoints2 - main:1"
         },
@@ -145,7 +552,15 @@
             "container": "Site2",
             "position": 4,
             "displayType": "Button1",
-            "title": "Dalej - Site2:1"
+            "title": "Dalej - site:1"
+        },
+        "SubmitButton3":
+        {
+            "site": 3,
+            "container": "Site4",
+            "position": 4,
+            "displayType": "Button1",
+            "title": "Dalej - site:3"
         }
     }
 }

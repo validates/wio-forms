@@ -1,7 +1,7 @@
 <?php
 namespace WioForms\FieldRenderer;
 
-class TextInput extends AbstractFieldRenderer
+class ChooseOneButton extends AbstractFieldRenderer
 {
 
     function showToEdit(){
@@ -27,7 +27,30 @@ class TextInput extends AbstractFieldRenderer
             $message = false;
         }
 
-        $html = $this->fieldInfo['title']. ': <input type="text" name="'.$this->fieldName.'" value="'.$value.'" />';
+        $dataSet = [];
+        $dataSetName = $this->fieldInfo['dataSet']['repositoryName'];
+        if ( isset( $this->formStruct['DataRepositories'][$dataSetName] ) )
+        {
+            $dataSet = &$this->formStruct['DataRepositories'][$dataSetName]['data'];
+        }
+        else
+        {
+            $this->wioForms->errorLog->errorLog('DataRepository: '.$dataSetName.' not found.');
+        }
+
+        $html = '';
+        $html .= $this->fieldInfo['title'].': ';
+
+
+        foreach ( $dataSet as $option => $option_name)
+        {
+            $selected = '';
+            if ($option == $value)
+            {
+                $selected = ' selected="selected"';
+            }
+            $html .= '<button type="submit" name="'.$this->fieldName.'" value="'.$option.'">'.$option_name.'</button>';
+        }
         if ($message !== false)
         {
             $html .= '<b style="color: red;"> &nbsp; '.$message.'</b>';
