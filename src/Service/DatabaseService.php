@@ -53,12 +53,13 @@ class DatabaseService
     public function setConnections(){
         foreach ($this->wioForms->settings['DatabaseConnections'] as $DBconn_Name => $DBconn_Data)
         {
-            $className = '\WioForms\DatabaseConnection\\'.$DBconn_Name;
-            if ( class_exists($className) ) {
+            $className = $this->wioForms->classFinderService->checkName('DatabaseConnection',$DBconn_Name);
+            if( $className )
+            {
                 $this->connections[ $DBconn_Name ] = new $className( $DBconn_Data );
             }
-            else {
-                $this->wioForms->errorLog->errorLog('There is no '.$className.' class');
+            else
+            {
                 return false;
             }
         }

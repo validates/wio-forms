@@ -455,7 +455,7 @@
                 },
                 {
                     "type": "logic",
-                    "newState": 2,
+                    "newState": 1,
                     "newErrorState": -1,
                     "logicEquasion":
                     {
@@ -473,7 +473,7 @@
                             "1":
                             {
                                 "type": "const",
-                                "const": "new_account"
+                                "const": "have_account"
                             }
                         },
                         "1":
@@ -482,7 +482,6 @@
                             "field": "account_id"
                         }
                     }
-
                 }
             ],
             "stateActions":
@@ -512,6 +511,26 @@
                   "settings":
                   {
                       "containerToCheck": "_site_2"
+                  }
+              },
+              {
+                  "type": "logic",
+                  "newState": 2,
+                  "newErrorState": -1,
+                  "logicEquasion":
+                  {
+                      "type": "equal",
+                      "length": 2,
+                      "0":
+                      {
+                          "type": "fieldValue",
+                          "field": "login_switch"
+                      },
+                      "1":
+                      {
+                          "type": "const",
+                          "const": "new_account"
+                      }
                   }
               }
           ],

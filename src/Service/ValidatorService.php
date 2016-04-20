@@ -253,28 +253,26 @@ class ValidatorService
 
     private function getPHPfieldValidator( $validatorName )
     {
-        $className = '\WioForms\FieldValidator\\'.$validatorName;
-        if ( class_exists($className) )
+        $className = $this->wioForms->classFinderService->checkName( 'FieldValidator' , $validatorName );
+        if ( $className )
         {
             return new $className();
         }
         else
         {
-            $this->wioForms->errorLog->errorLog('Class '.$className.' not found.');
             return false;
         }
     }
 
     private function getPHPcontainerValidator( $validatorName )
     {
-        $className = '\WioForms\ContainerValidator\\'.$validatorName;
-        if ( class_exists($className) )
+        $className = $this->wioForms->classFinderService->checkName( 'ContainerValidator', $validatorName );
+        if ( $className )
         {
             return new $className( $this->wioForms );
         }
         else
         {
-            $this->wioForms->errorLog->errorLog('Class '.$className.' not found.');
             return false;
         }
     }

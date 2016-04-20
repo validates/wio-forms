@@ -13,6 +13,7 @@ use WioForms\Service\DatabaseService;
 use WioForms\Service\DataRepositoryService;
 use WioForms\Service\RendererService;
 use WioForms\Service\ValidatorService;
+use WioForms\Service\ClassFinderService;
 
 class WioForms{
 
@@ -36,6 +37,7 @@ class WioForms{
     public $dataRepositoryService;
     public $validatorService;
     public $databaseService;
+    public $classFinderService;
 
 
     function __construct( $localSettings = false ){
@@ -55,6 +57,7 @@ class WioForms{
         $this->dataRepositoryService = new DataRepositoryService( $this );
         $this->validatorService      = new ValidatorService( $this );
         $this->databaseService       = new DatabaseService( $this );
+        $this->classFinderService    = new ClassFinderService( $this->errorLog );
 
 
         if ($this->databaseService->setConnections() === false)

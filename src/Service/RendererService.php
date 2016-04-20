@@ -61,13 +61,12 @@ class RendererService
             return true;
         }
 
-        $className = '\WioForms\ContainerRenderer\\'.$container['displayType'];
-        if ( class_exists($className) ) {
+        $className = $this->wioForms->classFinderService->checkName( 'ContainerRenderer', $container['displayType'] );
+        if ( $className ) {
             $rendererObiect = new $className( $containerName, $this->wioForms );
         }
         else
         {
-            $this->wioForms->errorLog->errorLog('Class '.$className.' not found.');
             return false;
         }
 
@@ -96,13 +95,12 @@ class RendererService
     {
         $field = $this->formStruct['Fields'][ $fieldName ];
 
-        $className = '\WioForms\FieldRenderer\\'.$field['type'];
-        if ( class_exists($className) ) {
+        $className = $this->wioForms->classFinderService->checkName( 'FieldRenderer', $field['type'] );
+        if ( $className ) {
             $rendererObject = new $className( $fieldName, $this->wioForms );
         }
         else
         {
-            $this->wioForms->errorLog->errorLog('Class '.$className.' not found.');
             return false;
         }
         $this->getFieldParentStyles( $fieldName );
