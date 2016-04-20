@@ -158,7 +158,8 @@
             "validationPHP":
             [
                 {
-                    "method": "NotEmpty"
+                    "method": "NotEmpty",
+                    "newErrorMessage": "no_account"
                 }
             ]
         },
@@ -192,9 +193,6 @@
             [
                 {
                     "method": "NotEmpty"
-                },
-                {
-                    "method": "Password"
                 }
             ]
         },
@@ -515,7 +513,7 @@
               },
               {
                   "type": "logic",
-                  "newState": 2,
+                  "newState": 1,
                   "newErrorState": -1,
                   "logicEquasion":
                   {
@@ -548,33 +546,63 @@
         },
         "RegisterData":
         {
-          "site": 3,
-          "container": "Site4",
-          "position": 3,
-          "displayType": "FullDisplay",
-          "title": "Dane zgłoszenia",
-          "validationPHP":
-          [
-              {
-                  "type": "method",
-                  "method": "AllFieldsOk",
-                  "settings":
-                  {
-                      "containerToCheck": "_site_2"
-                  }
-              }
-          ],
-          "stateActions":
-          [
-              {
-                  "state": -1,
-                  "actions": ["hide"]
-              },
-              {
-                  "state": 1,
-                  "actions": ["show"]
-              }
-          ]
+            "site": 3,
+            "container": "Site4",
+            "position": 3,
+            "displayType": "FullDisplay",
+            "title": "Dane zgłoszenia",
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "AllFieldsOk",
+                    "settings":
+                    {
+                        "containerToCheck": "_site_2"
+                    }
+                },
+                {
+                    "type": "logic",
+                    "newState": 1,
+                    "newErrorState": -1,
+                    "logicEquasion":
+                    {
+                        "type": "or",
+                        "data":
+                        [
+                            {
+                                "type": "equal",
+                                "data":
+                                [
+                                    {
+                                        "type": "fieldValue",
+                                        "field": "login_switch"
+                                    },
+                                    {
+                                        "type": "const",
+                                        "const": "new_account"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "isValidField",
+                                "field": "account_id"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
         },
         "SubmitButton1":
         {

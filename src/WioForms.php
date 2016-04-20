@@ -51,7 +51,7 @@ class WioForms{
         $settingsFile = file_get_contents(__DIR__.'/enviromentSettings.json');
         $enviromentSettings = json_decode($settingsFile, TRUE);
 
-        if($localSettings !== false)
+        if ($localSettings !== false)
             $enviromentSettings = array_replace_recursive($enviromentSettings,$localSettings);
         $this->settings = $enviromentSettings;
 

@@ -54,7 +54,7 @@ class DatabaseService
         foreach ($this->wioForms->settings['DatabaseConnections'] as $DBconn_Name => $DBconn_Data)
         {
             $className = $this->wioForms->classFinderService->checkName('DatabaseConnection',$DBconn_Name);
-            if( $className )
+            if ( $className )
             {
                 $this->connections[ $DBconn_Name ] = new $className( $DBconn_Data );
             }

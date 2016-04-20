@@ -41,7 +41,7 @@ abstract class AbstractFieldRenderer
         }
 
         $this->message = false;
-        if( isset($this->fieldInfo['valid']) and !$this->fieldInfo['valid'] )
+        if ( isset($this->fieldInfo['valid']) and !$this->fieldInfo['valid'] )
         {
             $this->message = $this->fieldInfo['message'];
         }

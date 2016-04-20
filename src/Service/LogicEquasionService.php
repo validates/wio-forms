@@ -1,7 +1,7 @@
 <?php
 namespace WioForms\Service;
 
-class logicEquasionService
+class LogicEquasionService
 {
     private $wioForms;
     private $formStruct;
@@ -15,7 +15,6 @@ class logicEquasionService
     public function solveEquasion( $sentence )
     {
         $result = $this->solveSentence($sentence);
-        var_dump($result);
         return $result;
     }
 
@@ -24,7 +23,7 @@ class logicEquasionService
 
         if ( isset($sentence['data'] ) and is_array($sentence['data']) )
         {
-            foreach( $sentence['data'] as $i => $subSentence)
+            foreach ( $sentence['data'] as $i => $subSentence)
             {
                 $sentence['data'][$i] = $this->solveSentence($subSentence);
             }
@@ -41,6 +40,10 @@ class logicEquasionService
                 $result = $this->getEqual($sentence);  break;
             case 'and':
                 $result = $this->getAnd($sentence);  break;
+            case 'or':
+                $result = $this->getOr($sentence);  break;
+            case 'isValidField':
+                $result = $this->getIsValidField($sentence); break;
             case 'isNotValidField':
                 $result = $this->getIsNotValidField($sentence); break;
 
@@ -82,28 +85,51 @@ class logicEquasionService
         $result = true;
         foreach ( $sentence['data'] as $element )
         {
-            if( !($element) )
+            if ( !($element) )
             {
                 $result = false;
                 break;
             }
+        }
+        return $result;
+    }
 
+    private function getOr($sentence)
+    {
+        $result = false;
+        foreach ( $sentence['data'] as $element )
+        {
+            if ( $element )
+            {
+                $result = true;
+                break;
+            }
         }
         return $result;
     }
 
     private function getIsNotValidField($sentence)
     {
-        if ( isset($this->formStruct['Fields'][ $sentence['field'] ]['valid']) )
+        $result = false;
+        if ( isset($this->formStruct['Fields'][ $sentence['field'] ]['valid'])
+            and !$this->formStruct['Fields'][ $sentence['field'] ]['valid'] )
         {
-            $result = $this->formStruct['Fields'][ $sentence['field'] ]['valid'];
-        }
-        else
-        {
-            $result = false;
+            $result = true;
         }
         return $result;
     }
+
+    private function getIsValidField($sentence)
+    {
+        $result = false;
+        if ( isset($this->formStruct['Fields'][ $sentence['field'] ]['valid'])
+            and $this->formStruct['Fields'][ $sentence['field'] ]['valid'] )
+        {
+            $result = true;
+        }
+        return $result;
+    }
+
 
 }
 

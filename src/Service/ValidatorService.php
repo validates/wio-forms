@@ -29,7 +29,7 @@ class ValidatorService
 
         $formValidity = true;
 
-        foreach($this->formStruct['Fields'] as $fieldName => $field)
+        foreach ($this->formStruct['Fields'] as $fieldName => $field)
         {
             $validity = $this->validateField( $fieldName );
             if ( !$validity )
@@ -37,7 +37,7 @@ class ValidatorService
                 $formValidity = false;
             }
         }
-        foreach($this->formStruct['Containers'] as $containerName => $container)
+        foreach ($this->formStruct['Containers'] as $containerName => $container)
         {
             $validity = $this->validateContainer( $containerName );
             if ( !$validity )
@@ -96,8 +96,14 @@ class ValidatorService
 
                 $field['state'] = $validationResult['state'];
                 $field['valid'] = $validationResult['valid'];
-                $field['message'] = $validationResult['message'];
-
+                if ( $validationResult['valid']===false and isset( $validatorInfo['newErrorMessage'] ) )
+                {
+                    $field['message'] = $validatorInfo['newErrorMessage'];
+                }
+                else
+                {
+                    $field['message'] = $validationResult['message'];
+                }
             }
         }
 
@@ -155,8 +161,17 @@ class ValidatorService
                 elseif ( $validatorInfo['type'] == 'logic' )
                 {
                     $result = $this->wioForms->logicEquasionService->solveEquasion($validatorInfo['logicEquasion']);
-                    // ...
-                    // ... $this->solveLogicEquation( $containerName );
+
+                    if ( $result === true and isset($validatorInfo['newState']))
+                    {
+                        $this->containerChangeState( $containerName, $validatorInfo['newState'] );
+                    }
+                    if ( $result === false and isset($validatorInfo['newErrorState']))
+                    {
+                        $this->containerChangeState( $containerName, $validatorInfo['newErrorState'] );
+                    }
+
+                    $container['valid'] = $result;
                 }
             }
 
@@ -244,7 +259,7 @@ class ValidatorService
         }
         else
         {
-            if( !isset($container['styleOptions']) )
+            if ( !isset($container['styleOptions']) )
             {
                 $container['styleOptions'] = [];
             }
@@ -259,10 +274,7 @@ class ValidatorService
         {
             return new $className();
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     private function getPHPcontainerValidator( $validatorName )
@@ -272,10 +284,7 @@ class ValidatorService
         {
             return new $className( $this->wioForms );
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     /*

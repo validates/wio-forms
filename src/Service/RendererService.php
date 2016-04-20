@@ -56,7 +56,7 @@ class RendererService
     {
         $container = $this->formStruct['Containers'][ $containerName ];
 
-        if( isset( $container['hidden'] ) and $container['hidden'] == true )
+        if ( isset( $container['hidden'] ) and $container['hidden'] == true )
         {
             return true;
         }
@@ -128,7 +128,7 @@ class RendererService
             {
                 $cont = $elem['container'];
                 $pos = $elem['position'];
-                if( $cont == '_site')
+                if ( $cont == '_site')
                 {
                     $cont = '_site_'.$elem['site'];
                 }
