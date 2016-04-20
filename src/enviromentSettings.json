@@ -1,10 +1,16 @@
 {
-	"DatabaseConnections": {
-		"Main": {
-			"host": "localhost",
-			"dbName": "System1",
-			"usrName": "Janusz",
-			"password": "admin1234"
-		}
-	}
+    "DatabaseConnections":
+    {
+        "Main":
+        {
+            "pixieClass": "\\QB"
+        },
+        "OtherConnection":
+        {
+            "host": "localhost",
+            "dbName": "System1",
+            "usrName": "Janusz",
+            "password": "admin1234"
+        }
+    }
 }

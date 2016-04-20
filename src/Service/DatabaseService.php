@@ -28,7 +28,7 @@ class DatabaseService
 
         $databaseQuery =
         [
-            'table' => 'WioForms_formStruct',
+            'table' => 'wio_form_struct',
             'where' => 'formStructId == "'.$formDataStructId.'"',
         ];
 
@@ -103,12 +103,12 @@ class DatabaseService
 }
 
 /*
-CREATE TABLE `WioForms_formStruct` (
+CREATE TABLE `WioForms_struct` (
     `formStructId` VARCHAR(128) NOT NULL ,
     `name` VARCHAR(128) NOT NULL ,
     `used` TINYINT(4) NOT NULL ,
     `dataStruct` TEXT NOT NULL ,
-    PRIMARY KEY (`formId`)
+    PRIMARY KEY (`formStructId`)
 ) ENGINE = InnoDB;
 
 CREATE TABLE `WioForms_entries` (

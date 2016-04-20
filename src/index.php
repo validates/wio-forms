@@ -5,7 +5,7 @@ require_once('vendor/autoload.php');
 
 $localSettings = [
     'DatabaseConnections'=> [
-        'Main' => [
+        'OtherConnection' => [
             'dbName' => "System2"
         ]
     ]
