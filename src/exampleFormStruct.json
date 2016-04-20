@@ -147,23 +147,20 @@
             ]
 
         },
-        "login_email":
+        "account_id":
         {
-          "type": "TextInput",
-          "container": "Site1",
-          "position": 2,
-          "title": "Email",
-          "state": 0,
-          "save": true,
-          "validationPHP":
-          [
-              {
-                  "method": "NotEmpty"
-              },
-              {
-                  "method": "Email"
-              }
-          ]
+            "type": "Hidden",
+            "container": "LoginForm",
+            "position": 3,
+            "title": "AccountId",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
         },
         "login_email":
         {
@@ -455,6 +452,37 @@
                     {
                         "containerToCheck": "_site_2"
                     }
+                },
+                {
+                    "type": "logic",
+                    "newState": 2,
+                    "newErrorState": -1,
+                    "logicEquasion":
+                    {
+                        "type": "and",
+                        "length": 2,
+                        "0":
+                        {
+                            "type": "equal",
+                            "length": 2,
+                            "0":
+                            {
+                                "type": "fieldValue",
+                                "field": "login_switch"
+                            },
+                            "1":
+                            {
+                                "type": "const",
+                                "const": "new_account"
+                            }
+                        },
+                        "1":
+                        {
+                            "type": "isNotValidField",
+                            "field": "account_id"
+                        }
+                    }
+
                 }
             ],
             "stateActions":

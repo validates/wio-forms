@@ -8,6 +8,8 @@ class GoogleMap extends AbstractFieldRenderer
       $html = $this->fieldInfo['title']. ': <input type="input" name="'.$this->fieldName.'" value="abc" />';
       $html .= '<br/>';
 
+      $html .= $this->standardErrorDisplay();
+
       return $html;
 
     }
