@@ -460,27 +460,27 @@
                     "logicEquasion":
                     {
                         "type": "and",
-                        "length": 2,
-                        "0":
-                        {
-                            "type": "equal",
-                            "length": 2,
-                            "0":
+                        "data":
+                        [
                             {
-                                "type": "fieldValue",
-                                "field": "login_switch"
+                                "type": "equal",
+                                "data":
+                                [
+                                    {
+                                        "type": "fieldValue",
+                                        "field": "login_switch"
+                                    },
+                                    {
+                                        "type": "const",
+                                        "const": "have_account"
+                                    }
+                                ]
                             },
-                            "1":
                             {
-                                "type": "const",
-                                "const": "have_account"
+                                "type": "isNotValidField",
+                                "field": "account_id"
                             }
-                        },
-                        "1":
-                        {
-                            "type": "isNotValidField",
-                            "field": "account_id"
-                        }
+                        ]
                     }
                 }
             ],
@@ -520,17 +520,17 @@
                   "logicEquasion":
                   {
                       "type": "equal",
-                      "length": 2,
-                      "0":
-                      {
-                          "type": "fieldValue",
-                          "field": "login_switch"
-                      },
-                      "1":
-                      {
-                          "type": "const",
-                          "const": "new_account"
-                      }
+                      "data":
+                      [
+                          {
+                              "type": "fieldValue",
+                              "field": "login_switch"
+                          },
+                          {
+                              "type": "const",
+                              "const": "new_account"
+                          }
+                      ]
                   }
               }
           ],

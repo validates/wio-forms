@@ -14,6 +14,7 @@ use WioForms\Service\DataRepositoryService;
 use WioForms\Service\RendererService;
 use WioForms\Service\ValidatorService;
 use WioForms\Service\ClassFinderService;
+use WioForms\Service\LogicEquasionService;
 
 class WioForms{
 
@@ -38,6 +39,7 @@ class WioForms{
     public $validatorService;
     public $databaseService;
     public $classFinderService;
+    public $logicEquasionService;
 
 
     function __construct( $localSettings = false ){
@@ -58,6 +60,7 @@ class WioForms{
         $this->validatorService      = new ValidatorService( $this );
         $this->databaseService       = new DatabaseService( $this );
         $this->classFinderService    = new ClassFinderService( $this->errorLog );
+        $this->logicEquasionService  = new LogicEquasionService( $this );
 
 
         if ($this->databaseService->setConnections() === false)

@@ -154,6 +154,7 @@ class ValidatorService
                 }
                 elseif ( $validatorInfo['type'] == 'logic' )
                 {
+                    $result = $this->wioForms->logicEquasionService->solveEquasion($validatorInfo['logicEquasion']);
                     // ...
                     // ... $this->solveLogicEquation( $containerName );
                 }
