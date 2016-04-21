@@ -19,7 +19,7 @@ abstract class AbstractFieldRenderer
     function __construct( $fieldName, $wioFormsObject )
     {
         $this->fieldName = $fieldName;
-        $this->wioForms = $wioFormsObject;
+        $this->wioForms = &$wioFormsObject;
         $this->formStruct = &$this->wioForms->formStruct;
         $this->fieldInfo = &$this->wioForms->formStruct['Fields'][ $this->fieldName ];
 

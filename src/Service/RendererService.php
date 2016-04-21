@@ -54,12 +54,14 @@ class RendererService
 
     private function renderContainer( $containerName )
     {
-        $container = $this->formStruct['Containers'][ $containerName ];
+        $container = &$this->formStruct['Containers'][ $containerName ];
 
         if ( isset( $container['hidden'] ) and $container['hidden'] == true )
         {
             return true;
         }
+
+        $this->getContainerParentStyles( $containerName );
 
         $className = $this->wioForms->classFinderService->checkName( 'ContainerRenderer', $container['displayType'] );
         if ( $className ) {
@@ -69,8 +71,6 @@ class RendererService
         {
             return false;
         }
-
-        $this->getContainerParentStyles( $containerName );
 
         $this->outputHtml .= $rendererObiect->showHead();
 
@@ -93,7 +93,9 @@ class RendererService
 
     private function renderField( $fieldName )
     {
-        $field = $this->formStruct['Fields'][ $fieldName ];
+        $field = &$this->formStruct['Fields'][ $fieldName ];
+
+        $this->getFieldParentStyles( $fieldName );
 
         $className = $this->wioForms->classFinderService->checkName( 'FieldRenderer', $field['type'] );
         if ( $className ) {
@@ -103,7 +105,6 @@ class RendererService
         {
             return false;
         }
-        $this->getFieldParentStyles( $fieldName );
 
         $this->outputHtml .= $rendererObject->showToEdit();
     }
