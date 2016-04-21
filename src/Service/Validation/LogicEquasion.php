@@ -1,14 +1,14 @@
 <?php
-namespace WioForms\Service;
+namespace WioForms\Service\Validation;
 
-class LogicEquasionService
+class LogicEquasion
 {
-    private $wioForms;
-    private $formStruct;
+    public $wioForms;
+    public $formStruct;
 
     function __construct( $wioFormsObiect )
     {
-        $this->wioForms = $wioFormsObiect;
+        $this->wioForms = &$wioFormsObiect;
         $this->formStruct = &$this->wioForms->formStruct;
     }
 
@@ -18,7 +18,7 @@ class LogicEquasionService
         return $result;
     }
 
-    public function solveSentence($sentence)
+    private function solveSentence($sentence)
     {
 
         if ( isset($sentence['data'] ) and is_array($sentence['data']) )

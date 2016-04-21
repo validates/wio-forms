@@ -8,7 +8,7 @@ abstract class AbstractTemporarySave
 
     function __construct( $wioFormsObject )
     {
-        $this->wioForms = $wioFormsObject;
+        $this->wioForms = &$wioFormsObject;
         $this->formStruct = &$this->wioForms->formStruct;
 
     }

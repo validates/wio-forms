@@ -4,17 +4,12 @@ namespace WioForms\FieldRenderer;
 class Hidden extends AbstractFieldRenderer
 {
 
-    function showToEdit(){
-
+    function showToEdit()
+    {
         $html = '';
-
         $html .= '<input type ="hidden" name="'.$this->fieldName.'" value="'.$this->value.'"/>';
 
-        if ($this->message !== false)
-        {
-            $html .= '<b style="color: red;"> &nbsp; '.$this->message.'</b>';
-            $html .= '<br/>';
-        }
+        $this->standardErrorDisplay('<br/>');
 
         return $html;
     }

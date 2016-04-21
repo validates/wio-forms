@@ -8,7 +8,7 @@ class DataRepositoryService
 
 
     function __construct( $wioFormsObiect ){
-        $this->wioForms = $wioFormsObiect;
+        $this->wioForms = &$wioFormsObiect;
     }
 
 

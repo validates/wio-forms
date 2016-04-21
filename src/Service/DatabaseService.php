@@ -10,7 +10,7 @@ class DatabaseService
     private $connections;
 
     function __construct( $wioFormsObiect ){
-        $this->wioForms = $wioFormsObiect;
+        $this->wioForms = &$wioFormsObiect;
 
         $this->connections = [];
     }

@@ -7,7 +7,7 @@ abstract class AbstractFormRenderer
     protected $wioForms;
 
     function __construct( $wioFormObject ){
-        $this->wioForms = $wioFormObject;
+        $this->wioForms = &$wioFormObject;
     }
 
     abstract function showHead();

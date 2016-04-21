@@ -4,7 +4,7 @@ namespace WioForms\ContainerValidator;
 class AllFieldsOk extends AbstractContainerValidator
 {
 
-    public function validatePHP( $containerName, $settings ){
+    public function validatePHP( &$container, $settings ){
 
         $valid = true;
 

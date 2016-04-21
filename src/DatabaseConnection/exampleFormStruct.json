@@ -199,7 +199,7 @@
         "register_login":
         {
           "type": "TextInput",
-          "container": "RegisterForm",
+          "container": "RegisterEmail",
           "position": 1,
           "title": "Email",
           "state": 0,
@@ -207,17 +207,17 @@
           "validationPHP":
           [
               {
-                  "method": "NotEmpty"
+                  "method": "Email"
               },
               {
-                  "method": "Email"
+                  "method": "NotEmpty"
               }
           ]
         },
         "register_login2":
         {
           "type": "TextInput",
-          "container": "RegisterForm",
+          "container": "RegisterEmail",
           "position": 2,
           "title": "Powtórz E-mail",
           "state": 0,
@@ -225,46 +225,46 @@
           "validationPHP":
           [
               {
-                  "method": "NotEmpty"
+                  "method": "Email"
               },
               {
-                  "method": "Email"
+                  "method": "NotEmpty"
               }
           ]
         },
         "register_password":
         {
             "type": "PasswordInput",
-            "container": "RegisterForm",
-            "position": 3,
+            "container": "RegisterPassword",
+            "position": 1,
             "title": "Hasło",
             "state": 0,
             "save": true,
             "validationPHP":
             [
                 {
-                    "method": "NotEmpty"
+                    "method": "Password"
                 },
                 {
-                    "method": "Password"
+                    "method": "NotEmpty"
                 }
             ]
         },
-        "register_password4":
+        "register_password2":
         {
             "type": "PasswordInput",
-            "container": "RegisterForm",
-            "position": 4,
+            "container": "RegisterPassword",
+            "position": 2,
             "title": "Powtórz Hasło",
             "state": 0,
             "save": true,
             "validationPHP":
             [
                 {
-                    "method": "NotEmpty"
+                    "method": "Password"
                 },
                 {
-                    "method": "Password"
+                    "method": "NotEmpty"
                 }
             ]
         },
@@ -329,6 +329,40 @@
             [
                 {
                     "method": "NotEmpty"
+                }
+            ]
+        },
+        "agreement_1":
+        {
+            "type": "AgreementWithText",
+            "container": "RegisterData",
+            "position": 5,
+            "title": "Zgoda na przetwarzanie danych",
+            "state": 0,
+            "save": true,
+            "longer_text": "Bla Bla Bal Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla",
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty",
+                    "newErrorMessage": "agreement_reguired"
+                }
+            ]
+        },
+        "agreement_2":
+        {
+            "type": "AgreementWithText",
+            "container": "RegisterData",
+            "position": 6,
+            "title": "Zgoda na zakładanie kont",
+            "state": 0,
+            "save": true,
+            "longer_text": "Burk Burk Burk Bruk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk ",
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty",
+                    "newErrorMessage": "agreement_reguired"
                 }
             ]
         }
@@ -543,6 +577,70 @@
                   "actions": ["show"]
               }
           ]
+        },
+        "RegisterEmail":
+        {
+            "site": 3,
+            "container": "RegisterForm",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "Adres Email",
+            "validationPHP":
+            [
+                {
+                    "type": "logic",
+                    "newState": 1,
+                    "newErrorState": -1,
+                    "newErrorMessage": "emails_not_equal",
+                    "logicEquasion":
+                    {
+                        "type": "equal",
+                        "data":
+                        [
+                            {
+                                "type": "fieldValue",
+                                "field": "register_login"
+                            },
+                            {
+                                "type": "fieldValue",
+                                "field": "register_login2"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "RegisterPassword":
+        {
+            "site": 3,
+            "container": "RegisterForm",
+            "position": 2,
+            "displayType": "FullDisplay",
+            "title": "Haslo",
+            "validationPHP":
+            [
+                {
+                    "type": "logic",
+                    "newState": 1,
+                    "newErrorState": -1,
+                    "newErrorMessage": "passwords_not_equal",
+                    "logicEquasion":
+                    {
+                        "type": "equal",
+                        "data":
+                        [
+                            {
+                                "type": "fieldValue",
+                                "field": "register_password"
+                            },
+                            {
+                                "type": "fieldValue",
+                                "field": "register_password2"
+                            }
+                        ]
+                    }
+                }
+            ]
         },
         "RegisterData":
         {

@@ -9,19 +9,21 @@ abstract class AbstractContainerValidator
 
     protected $wioForms;
 
-    function __construct( $wioFormsObiect ){
+    function __construct( $wioFormsObiect )
+    {
         $this->valid = false;
         $this->state = 0;
         $this->message = '';
 
-        $this->wioForms = $wioFormsObiect;
+        $this->wioForms = &$wioFormsObiect;
     }
 
 
-    abstract function validatePHP( $containerName, $settings );
+    abstract function validatePHP( &$container, $settings );
 
 
-    protected function getReturn(){
+    protected function getReturn()
+    {
         $array = [
             'valid'   => $this->valid,
             'state'   => $this->state,
@@ -31,7 +33,8 @@ abstract class AbstractContainerValidator
     }
 
 
-    public function print_validateJS(){
+    public function print_validateJS()
+    {
         $javascript = '';
 
         $javascript .= 'function( containerName, settings ){';

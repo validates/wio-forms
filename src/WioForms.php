@@ -15,6 +15,10 @@ use WioForms\Service\RendererService;
 use WioForms\Service\ValidatorService;
 use WioForms\Service\ClassFinderService;
 use WioForms\Service\LogicEquasionService;
+use WioForms\Service\StyleManagementService;
+use WioForms\Service\ContainerValidationService;
+use WioForms\Service\FieldValidationService;
+
 
 class WioForms{
 
@@ -39,7 +43,7 @@ class WioForms{
     public $validatorService;
     public $databaseService;
     public $classFinderService;
-    public $logicEquasionService;
+    public $styleManagementService;
 
 
     function __construct( $localSettings = false ){
@@ -55,12 +59,12 @@ class WioForms{
             $enviromentSettings = array_replace_recursive($enviromentSettings,$localSettings);
         $this->settings = $enviromentSettings;
 
-        $this->rendererService       = new RendererService( $this );
-        $this->dataRepositoryService = new DataRepositoryService( $this );
-        $this->validatorService      = new ValidatorService( $this );
-        $this->databaseService       = new DatabaseService( $this );
-        $this->classFinderService    = new ClassFinderService( $this->errorLog );
-        $this->logicEquasionService  = new LogicEquasionService( $this );
+        $this->rendererService            = new RendererService( $this );
+        $this->dataRepositoryService      = new DataRepositoryService( $this );
+        $this->validatorService           = new ValidatorService( $this );
+        $this->databaseService            = new DatabaseService( $this );
+        $this->classFinderService         = new ClassFinderService( $this->errorLog );
+        $this->styleManagementService     = new StyleManagementService( $this );
 
 
         if ($this->databaseService->setConnections() === false)
@@ -108,6 +112,10 @@ class WioForms{
         {
             $entryData = array_merge( $tempSave, $entryData );
         }
+        if ( $partialEntryData and is_array($partialEntryData) )
+        {
+            $entryData = array_merge(  $entryData, $partialEntryData );
+        }
         $this->validatorService->validateForm( $entryData );
 
 
@@ -122,7 +130,7 @@ class WioForms{
         }
 
         $lastEditedSite = $this->validatorService->getLastEditedSite();
-        $this->rendererService->dontShowErrorsOnSite( $lastEditedSite );
+        $this->styleManagementService->dontShowErrorsOnSite( $lastEditedSite );
 
         $siteNumber = $this->validatorService->getAvaliableSiteNumber();
         $formHtml = $this->rendererService->renderFormSite( $siteNumber );

@@ -6,9 +6,10 @@ class Button1 extends AbstractContainerRenderer
 
     function showHead(){
         $title = 'Wyślij';
-        if (isset($this->containerInfo['title']))
+        if ( $this->title )
         {
-            $title = $this->containerInfo['title'];
+            $title = $this->title;
+
         }
         $html = '<input type="submit" value="'.$title.'" />';
 

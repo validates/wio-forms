@@ -67,12 +67,13 @@ abstract class AbstractFieldRenderer
         }
     }
 
-    protected function standardErrorDisplay()
+    protected function standardErrorDisplay( $html_after = '' )
     {
         $html ='';
         if ($this->message !== false)
         {
             $html .= '<b style="color: red;"> &nbsp; '.$this->message.'</b>';
+            $html .= $html_after;
         }
         return $html;
     }

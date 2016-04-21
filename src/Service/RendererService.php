@@ -40,11 +40,8 @@ class RendererService
                 $this->wioForms->errorLog->errorLog('We have Field directly in "_site_'.$this->siteNumber.'" container.');
                 continue;
             }
-            $container = $this->formStruct['Containers'][ $elemData['name'] ];
-            if ( $container['site'] == $this->siteNumber )
-            {
-                $this->renderContainer( $elemData['name'] );
-            }
+
+            $this->renderContainer( $elemData['name'] );
         }
 
         $this->outputHtml .= $this->formRenderer->showTail();
@@ -61,7 +58,7 @@ class RendererService
             return true;
         }
 
-        $this->getContainerParentStyles( $containerName );
+        $this->wioForms->styleManagementService->getContainerParentStyles( $containerName );
 
         $className = $this->wioForms->classFinderService->checkName( 'ContainerRenderer', $container['displayType'] );
         if ( $className ) {
@@ -95,7 +92,7 @@ class RendererService
     {
         $field = &$this->formStruct['Fields'][ $fieldName ];
 
-        $this->getFieldParentStyles( $fieldName );
+        $this->wioForms->styleManagementService->getFieldParentStyles( $fieldName );
 
         $className = $this->wioForms->classFinderService->checkName( 'FieldRenderer', $field['type'] );
         if ( $className ) {
@@ -153,84 +150,6 @@ class RendererService
         foreach ($this->wioForms->containersContains as $key => $array)
         {
             ksort($this->wioForms->containersContains[ $key ]);
-        }
-    }
-
-    public function dontShowErrorsOnSite( $siteNumber )
-    {
-        if ( isset($this->wioForms->containersContains['_site_'.$siteNumber]) )
-        {
-            foreach ($this->wioForms->containersContains['_site_'.$siteNumber] as $elem)
-            {
-                if ( $elem['type'] == 'Fields' )
-                {
-                    $this->addStyleToField( $elem['name'], 'dont_display_errors', true);
-
-                }
-                if ( $elem['type'] == 'Containers' )
-                {
-                    $this->addStyleToContainer( $elem['name'], 'dont_display_errors', true);
-                }
-            }
-        }
-    }
-
-    private function addStyleToField( $fieldName, $style , $force = false)
-    {
-        $field = &$this->formStruct['Fields'][ $fieldName ];
-
-        if ( !isset($field['styleOptions']) )
-        {
-            $field['styleOptions'] = [];
-        }
-        if ( $force or !isset( $field['styleOptions'][$style] ) )
-        {
-            $field['styleOptions'][ $style ] = true;
-        }
-    }
-
-    private function addStyleToContainer( $containerName, $style, $force = false )
-    {
-        $container = &$this->formStruct['Containers'][ $containerName ];
-
-        if ( !isset($container['styleOptions']) )
-        {
-            $container['styleOptions'] = [];
-        }
-        if ( $force or !isset( $container['styleOptions'][$style] ) )
-        $container['styleOptions'][ $style ] = true;
-    }
-
-    private function getContainerParentStyles( $containerName )
-    {
-        $container = &$this->formStruct['Containers'][ $containerName ];
-        if ( $container['container'] == '_site' )
-        {
-            return true;
-        }
-        $parentContainer = &$this->formStruct['Containers'][ $container['container'] ];
-
-        if ( isset($parentContainer['styleOptions']) )
-        {
-            foreach ($parentContainer['styleOptions'] as $style => $styleState)
-            {
-                $this->addStyleToContainer( $containerName, $style );
-            }
-        }
-    }
-
-    private function getFieldParentStyles( $fieldName )
-    {
-        $field = &$this->formStruct['Fields'][ $fieldName ];
-
-        $parentContainer = &$this->formStruct['Containers'][ $field['container'] ];
-
-        if ( isset($parentContainer['styleOptions']) )
-        {
-            foreach ($parentContainer['styleOptions'] as $style => $styleState)
-            {
-                $this->addStyleToField( $fieldName, $style );
-            }
         }
     }
 
