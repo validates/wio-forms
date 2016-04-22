@@ -35,7 +35,12 @@ class ValidatorService
 
         foreach ($this->formStruct['Fields'] as $fieldName => $field)
         {
-            $validity = $this->fieldValidationService->validate( $fieldName, $this->entryData[ $fieldName ] );
+            $fieldEntry = '';
+            if (isset($this->entryData[ $fieldName ]))
+            {
+                $fieldEntry = $this->entryData[ $fieldName ];
+            }
+            $validity = $this->fieldValidationService->validate( $fieldName, $fieldEntry );
             if ( !$validity )
             {
                 $formValidity = false;

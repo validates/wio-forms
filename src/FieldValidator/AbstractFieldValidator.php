@@ -31,6 +31,7 @@ abstract class AbstractFieldValidator
         $javascript = '';
 
         $javascript .= 'function( value, settings ){';
+        $javascript .= 'return {valid:valid, state:state, message:message};';
         $javascript .= '}';
 
         return $javascript;

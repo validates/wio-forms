@@ -107,8 +107,8 @@ class Container
         {
             $this->changeState( $container, $validationResult['state'] );
             $container['valid'] = $validationResult['valid'];
+            $container['message'] = $validationResult['message'];
         }
-        $container['message'] = $validationResult['message'];
     }
 
     private function getDataStruct( $formDataStructId ){}

@@ -55,20 +55,34 @@ class Field
                 $validator = new $validatorClass();
                 $validationResult = $validator->validatePHP( $value, $settings );
 
-                $field['state'] = $validationResult['state'];
-                $field['valid'] = $validationResult['valid'];
-                if ( $validationResult['valid']===false and isset( $validatorInfo['newErrorMessage'] ) )
-                {
-                    $field['message'] = $validatorInfo['newErrorMessage'];
-                }
-                else
-                {
-                    $field['message'] = $validationResult['message'];
-                }
+                $this->applyValidationResult( $field, $validationResult );
             }
         }
 
         return $field['valid'];
+    }
+
+
+    private function applyValidationResult( &$field, $validationResult)
+    {
+        if ( !( !$field['valid'] and $validationResult['valid'] ) )
+        {
+            $field['state'] = $validationResult['state'];
+            $field['valid'] = $validationResult['valid'];
+
+            if ( $validationResult['valid']===false and isset( $validatorInfo['newErrorMessage'] ) )
+            {
+                $field['message'] = $validatorInfo['newErrorMessage'];
+            }
+            else
+            {
+                $field['message'] = $validationResult['message'];
+            }
+
+        }
+
+
+
     }
 
 
