@@ -3,11 +3,15 @@ namespace WioForms\FieldValidator;
 
 abstract class AbstractFieldValidator
 {
+    protected $wioForms;
+
     protected $valid;
     protected $state;
     protected $message;
 
-    function __construct(){
+    function __construct( $wioFormsObiect ){
+        $this->wioForms = &$wioFormsObiect;
+        
         $this->valid = false;
         $this->state = 0;
         $this->message = '';

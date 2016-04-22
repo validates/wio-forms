@@ -58,6 +58,10 @@
         "Password":
         {
             "class": "Password_v1"
+        },
+        "ReCaptcha":
+        {
+            "class": "ReCaptcha"
         }
     },
     "FieldValidatorsJS": {},
@@ -265,6 +269,21 @@
                 },
                 {
                     "method": "NotEmpty"
+                }
+            ]
+        },
+        "register_captcha":
+        {
+            "type": "GoogleReCaptcha",
+            "container": "RegisterForm",
+            "position": 3,
+            "title": "Wypełnij Captche",
+            "state": 0,
+            "save": false,
+            "validationPHP":
+            [
+                {
+                    "method": "ReCaptcha"
                 }
             ]
         },

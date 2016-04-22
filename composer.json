@@ -14,7 +14,8 @@
     },
     "minimum-stability": "stable",
     "require": {
-       "usmanhalalit/pixie": "dev-master#9555c41"
+        "guzzlehttp/guzzle": "^6.1",
+        "usmanhalalit/pixie": "dev-master#9555c41"
     },
     "autoload": {
         "psr-4": {"WioForms\\": "src/"}

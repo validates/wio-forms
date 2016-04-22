@@ -12,5 +12,10 @@
             "usrName": "Janusz",
             "password": "admin1234"
         }
+    },
+    "ReCaptcha":
+    {
+        "SiteKey": "ABC",
+        "SecretKey": "CBA"
     }
 }

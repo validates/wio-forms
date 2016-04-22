@@ -52,7 +52,7 @@ class Field
                     $settings = $validatorInfo['settings'];
                 }
 
-                $validator = new $validatorClass();
+                $validator = new $validatorClass( $this->wioForms );
                 $validationResult = $validator->validatePHP( $value, $settings );
 
                 $this->applyValidationResult( $field, $validationResult );

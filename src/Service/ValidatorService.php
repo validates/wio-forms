@@ -10,7 +10,7 @@ class ValidatorService
     public $formStruct;
 
     # Holds data to Validate
-    private $entryData;
+    public $entryData;
 
     private $containerValidationService;
     private $fieldValidationService;

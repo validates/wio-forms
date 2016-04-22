@@ -14,10 +14,7 @@ use WioForms\Service\DataRepositoryService;
 use WioForms\Service\RendererService;
 use WioForms\Service\ValidatorService;
 use WioForms\Service\ClassFinderService;
-use WioForms\Service\LogicEquasionService;
 use WioForms\Service\StyleManagementService;
-use WioForms\Service\ContainerValidationService;
-use WioForms\Service\FieldValidationService;
 
 
 class WioForms{

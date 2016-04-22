@@ -3,11 +3,21 @@ namespace WioForms;
 
 require_once('vendor/autoload.php');
 
+$GoogleReCaptchaSiteKey = 'ABC';
+$GoogleReCaptchaSecretKey = 'CBA';
+
+include('../googleApi.keys');
+
+
 $localSettings = [
     'DatabaseConnections'=> [
         'OtherConnection' => [
             'dbName' => "System2"
         ]
+    ],
+    "ReCaptcha" => [
+        "SiteKey" => $GoogleReCaptchaSiteKey,
+        "SecretKey" => $GoogleReCaptchaSecretKey
     ]
 ];
 

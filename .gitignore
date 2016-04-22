@@ -1,2 +1,3 @@
 /src/vendor/
 composer.lock
+googleApi.keys
