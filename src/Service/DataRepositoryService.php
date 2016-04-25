@@ -7,25 +7,26 @@ class DataRepositoryService
     public $formStruct;
 
 
-    function __construct( $wioFormsObiect ){
-        $this->wioForms = &$wioFormsObiect;
+    function __construct($wioFormsObject)
+    {
+        $this->wioForms = $wioFormsObject;
     }
 
 
     /*
     this function collect methods of getting Foreign Data Repository
     */
-    private function prepareDataRepositories( ){}
+    private function prepareDataRepositories(){}
 
     /*
     this function runs mothod of getting Foreign Data Repository and fills "Data" field
     */
-    private function getForeignDataRepository( $dataRepositoryName ){}
+    private function getForeignDataRepository($dataRepositoryName){}
 
     /*
     this function collect Foreign Functions
     */
-    private function prepareFunctionRepositories( ){}
+    private function prepareFunctionRepositories(){}
 
 
 }

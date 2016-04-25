@@ -1,39 +1,40 @@
 <?php
 namespace WioForms\Service\Validation;
 
-use \WioForms\Service\Validation\LogicEquasion as LogicEquasionValidationService;
+use \WioForms\Service\Validation\LogicEquation as LogicEquationValidationService;
 
 class Container
 {
     private $wioForms;
     private $formStruct;
 
-    private $logicEquasionValidationService;
+    private $logicEquationValidationService;
 
-    function __construct( $wioFormsObiect )
+    function __construct($wioFormsObject)
     {
-        $this->wioForms = &$wioFormsObiect;
+        $this->wioForms = $wioFormsObject;
         $this->formStruct = &$this->wioForms->formStruct;
 
-        $this->logicEquasionValidationService = new LogicEquasionValidationService( $this->wioForms );
+        $this->logicEquationValidationService = new LogicEquationValidationService($this->wioForms);
     }
 
 
-    public function validate( &$container )
+    public function validate(&$container)
     {
         $container['valid'] = true;
         $container['state'] = 0;
         $container['message'] = false;
 
-        if ( isset($container['validationPHP']) and is_array($container['validationPHP']) )
+        if (isset($container['validationPHP'])
+            and is_array($container['validationPHP']))
         {
             foreach ($container['validationPHP'] as $validatorInfo)
             {
-                if ($validatorInfo['type'] == 'method' )
+                if ($validatorInfo['type'] == 'method')
                 {
-                    if ( isset( $this->formStruct['ContainerValidatorsPHP'][ $validatorInfo['method'] ]['class'] ))
+                    if (isset($this->formStruct['ContainerValidatorsPHP'][ $validatorInfo['method'] ]['class']))
                     {
-                          $className = $this->formStruct['ContainerValidatorsPHP'][ $validatorInfo['method'] ]['class'];
+                        $className = $this->formStruct['ContainerValidatorsPHP'][ $validatorInfo['method'] ]['class'];
                     }
                     else
                     {
@@ -41,29 +42,29 @@ class Container
                         continue;
                     }
 
-                    if ( !( $validatorClass = $this->wioForms->classFinderService->checkName( 'ContainerValidator', $className ) ))
+                    if (!($validatorClass = $this->wioForms->classFinderService->checkName('ContainerValidator', $className)))
                     {
                         continue;
                     }
 
                     $settings = [];
-                    if (isset( $validatorInfo['settings'] ))
+                    if (isset($validatorInfo['settings']))
                     {
                         $settings = $validatorInfo['settings'];
                     }
 
-                    $validator = new $validatorClass( $this->wioForms );
-                    $validationResult = $validator->validatePHP( $container, $settings );
+                    $validator = new $validatorClass($this->wioForms);
+                    $validationResult = $validator->validatePHP($container, $settings);
 
-                    $this->applyValidationResult( $container, $validationResult );
+                    $this->applyValidationResult($container, $validationResult);
                 }
-                elseif ( $validatorInfo['type'] == 'logic' )
+                elseif ($validatorInfo['type'] == 'logic')
                 {
-                    $result = $this->logicEquasionValidationService->solveEquasion($validatorInfo['logicEquasion']);
+                    $result = $this->logicEquationValidationService->solveEquation($validatorInfo['logicEquation']);
 
-                    $validationResult = $this->prepareLogicResult( $container, $validatorInfo, $result );
+                    $validationResult = $this->prepareLogicResult($container, $validatorInfo, $result);
 
-                    $this->applyValidationResult( $container, $validationResult );
+                    $this->applyValidationResult($container, $validationResult);
 
                 }
             }
@@ -72,21 +73,21 @@ class Container
     }
 
 
-    private function prepareLogicResult( &$container, &$validatorInfo, $result )
+    private function prepareLogicResult(&$container, $validatorInfo, $result)
     {
         $validationResult = [];
         $validationResult['valid'] = $result;
         $validationResult['state'] = $container['state'];
         $validationResult['message'] = false;
 
-        if ( $result === true )
+        if ($result === true)
         {
-            if ( isset($validatorInfo['newState']) )
+            if (isset($validatorInfo['newState']))
             {
                 $validationResult['state'] = $validatorInfo['newState'];
             }
         }
-        if ( $result === false )
+        if ($result === false)
         {
             if (isset($validatorInfo['newErrorState']))
             {
@@ -101,22 +102,22 @@ class Container
         return $validationResult;
     }
 
-    private function applyValidationResult( &$container, $validationResult)
+    private function applyValidationResult(&$container, $validationResult)
     {
-        if ( !( !$container['valid'] and $validationResult['valid'] ) )
+        if (!(!$container['valid'] and $validationResult['valid']))
         {
-            $this->changeState( $container, $validationResult['state'] );
+            $this->changeState($container, $validationResult['state']);
             $container['valid'] = $validationResult['valid'];
             $container['message'] = $validationResult['message'];
         }
     }
 
-    private function getDataStruct( $formDataStructId ){}
+    private function getDataStruct($formDataStructId){}
 
 
-    private function changeState( &$container, $newState  )
+    private function changeState(&$container, $newState)
     {
-        if ( isset($container['state']) )
+        if (isset($container['state']))
         {
             $oldState = $container['state'];
         }
@@ -127,22 +128,22 @@ class Container
 
         $container['state'] = $newState;
 
-        if ( !isset($container['stateActions']) )
+        if (!isset($container['stateActions']))
         {
             return true;
         }
 
-        foreach ( $container['stateActions'] as $action )
+        foreach ($container['stateActions'] as $action)
         {
-            if ( $action['state'] == $newState )
+            if ($action['state'] == $newState)
             {
                 $doIt = true;
-                if ( isset($action['previousAllowedStates']) )
+                if (isset($action['previousAllowedStates']))
                 {
                     $doIt = false;
                     foreach ($action['previousAllowedStates'] as $wantedState)
                     {
-                        if ( $wantedState == $oldState )
+                        if ($wantedState == $oldState)
                         {
                             $doIt = true;
                             break;
@@ -154,7 +155,7 @@ class Container
                 {
                     foreach ($action['actions'] as $action)
                     {
-                        $this->makeAction( $container, $action );
+                        $this->makeAction($container, $action);
                     }
 
                 }
@@ -162,19 +163,19 @@ class Container
         }
     }
 
-    private function makeAction( &$container, $action )
+    private function makeAction(&$container, $action)
     {
-        if ( $action == 'hide' )
+        if ($action == 'hide')
         {
             $container['hidden'] = true;
         }
-        elseif ( $action == 'show' )
+        elseif ($action == 'show')
         {
-            unset( $container['hidden'] );
+            unset($container['hidden']);
         }
         else
         {
-            if ( !isset($container['styleOptions']) )
+            if (!isset($container['styleOptions']))
             {
                 $container['styleOptions'] = [];
             }

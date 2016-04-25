@@ -16,19 +16,18 @@ class RendererService
 
     public $siteNumber;
 
-    function __construct( $wioFormsObiect )
+    function __construct($wioFormsObject)
     {
-        $this->wioForms = &$wioFormsObiect;
+        $this->wioForms = $wioFormsObject;
         $this->formStruct = &$this->wioForms->formStruct;
 
         # Gets FormRenderer
-        $this->formRenderer = new FormRenderer( $this->wioForms );
+        $this->formRenderer = new FormRenderer($this->wioForms);
 
         $this->outputHtml = '';
-
     }
 
-    public function renderFormSite( $siteNumber )
+    public function renderFormSite($siteNumber)
     {
         $this->siteNumber = $siteNumber;
 
@@ -40,8 +39,7 @@ class RendererService
                 $this->wioForms->errorLog->errorLog('We have Field directly in "_site_'.$this->siteNumber.'" container.');
                 continue;
             }
-
-            $this->renderContainer( $elemData['name'] );
+            $this->renderContainer($elemData['name']);
         }
 
         $this->outputHtml .= $this->formRenderer->showTail();
@@ -49,54 +47,58 @@ class RendererService
         return $this->outputHtml;
     }
 
-    private function renderContainer( $containerName )
+    private function renderContainer($containerName)
     {
         $container = &$this->formStruct['Containers'][ $containerName ];
 
-        if ( isset( $container['hidden'] ) and $container['hidden'] == true )
+        if (isset($container['hidden'])
+            and $container['hidden'] == true)
         {
             return true;
         }
 
-        $this->wioForms->styleManagementService->getContainerParentStyles( $containerName );
+        $this->wioForms->styleManagementService->getContainerParentStyles($containerName);
 
-        $className = $this->wioForms->classFinderService->checkName( 'ContainerRenderer', $container['displayType'] );
-        if ( $className ) {
-            $rendererObiect = new $className( $containerName, $this->wioForms );
+        $className = $this->wioForms->classFinderService->checkName('ContainerRenderer', $container['displayType']);
+        if ($className)
+        {
+            $rendererObject = new $className($containerName, $this->wioForms);
         }
         else
         {
             return false;
         }
 
-        $this->outputHtml .= $rendererObiect->showHead();
+        $this->outputHtml .= $rendererObject->showHead();
 
-        if ( isset($this->wioForms->containersContains[ $containerName ]) ){
+        if (isset($this->wioForms->containersContains[ $containerName ]))
+        {
             foreach ($this->wioForms->containersContains[ $containerName ] as $elemData)
             {
-                if ( $elemData['type'] == 'Containers' )
+                if ($elemData['type'] == 'Containers')
                 {
-                    $this->renderContainer( $elemData['name'] );
+                    $this->renderContainer($elemData['name']);
                 }
-                if ( $elemData['type'] == 'Fields' )
+                if ($elemData['type'] == 'Fields')
                 {
-                    $this->renderField( $elemData['name'] );
+                    $this->renderField($elemData['name']);
                 }
             }
         }
 
-        $this->outputHtml .= $rendererObiect->showTail();
+        $this->outputHtml .= $rendererObject->showTail();
     }
 
-    private function renderField( $fieldName )
+    private function renderField($fieldName)
     {
         $field = &$this->formStruct['Fields'][ $fieldName ];
 
-        $this->wioForms->styleManagementService->getFieldParentStyles( $fieldName );
+        $this->wioForms->styleManagementService->getFieldParentStyles($fieldName);
 
-        $className = $this->wioForms->classFinderService->checkName( 'FieldRenderer', $field['type'] );
-        if ( $className ) {
-            $rendererObject = new $className( $fieldName, $this->wioForms );
+        $className = $this->wioForms->classFinderService->checkName('FieldRenderer', $field['type']);
+        if ($className)
+        {
+            $rendererObject = new $className($fieldName, $this->wioForms);
         }
         else
         {
@@ -106,14 +108,13 @@ class RendererService
         $this->outputHtml .= $rendererObject->showToEdit();
     }
 
-    private function addFunctionsToJavaScript( ){}
+    private function addFunctionsToJavaScript(){}
 
     /*
     prints all javascript code needed to show the form
     adds all validation functions
     */
-    private function renderJavaScript( ){}
-
+    private function renderJavaScript(){}
 
 
     public function createContainersContains()
@@ -122,25 +123,25 @@ class RendererService
 
         foreach (['Fields','Containers'] as $elemType)
         {
-            foreach ($this->formStruct[$elemType]  as $elemName => $elem )
+            foreach ($this->formStruct[$elemType]  as $elemName => $elem)
             {
                 $cont = $elem['container'];
                 $pos = $elem['position'];
-                if ( $cont == '_site')
+                if ($cont == '_site')
                 {
                     $cont = '_site_'.$elem['site'];
                 }
-                if ( !isset( $this->wioForms->containersContains[$cont] ))
+                if (!isset($this->wioForms->containersContains[ $cont ]))
                 {
-                    $this->wioForms->containersContains[$cont] = [];
+                    $this->wioForms->containersContains[ $cont ] = [];
                 }
-                if ( isset( $this->wioForms->containersContains[$cont][$pos] ))
+                if (isset($this->wioForms->containersContains[ $cont ][ $pos ]))
                 {
                     $this->wioForms->errorLog->errorLog('Doubled position for '.$elemType.'::'.$elemName.' in container '.$cont.'.');
                 }
                 else
                 {
-                    $this->wioForms->containersContains[$cont][$pos] = [
+                    $this->wioForms->containersContains[ $cont ][ $pos ] = [
                         "name" => $elemName,
                         "type" => $elemType
                     ];

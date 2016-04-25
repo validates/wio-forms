@@ -16,10 +16,10 @@ abstract class AbstractFieldRenderer
     # data prepared by prepareDataSet method
     protected $dataSet;
 
-    function __construct( $fieldName, $wioFormsObject )
+    function __construct($fieldName, $wioFormsObject)
     {
         $this->fieldName = $fieldName;
-        $this->wioForms = &$wioFormsObject;
+        $this->wioForms = $wioFormsObject;
         $this->formStruct = &$this->wioForms->formStruct;
         $this->fieldInfo = &$this->wioForms->formStruct['Fields'][ $this->fieldName ];
 
@@ -29,24 +29,24 @@ abstract class AbstractFieldRenderer
     private function prepareDefaultData()
     {
         $this->value = '';
-        if ( !empty($this->fieldInfo['value']) )
+        if (!empty($this->fieldInfo['value']))
         {
             $this->value = $this->fieldInfo['value'];
         }
 
         $this->styleOptions = [];
-        if ( isset($this->fieldInfo['styleOptions']) )
+        if (isset($this->fieldInfo['styleOptions']))
         {
             $this->styleOptions = $this->fieldInfo['styleOptions'];
         }
 
         $this->message = false;
-        if ( isset($this->fieldInfo['valid']) and !$this->fieldInfo['valid'] )
+        if (isset($this->fieldInfo['valid']) and !$this->fieldInfo['valid'])
         {
             $this->message = $this->fieldInfo['message'];
         }
-        if ( isset($this->styleOptions['dont_display_errors'])
-            and $this->styleOptions['dont_display_errors'] )
+        if (isset($this->styleOptions['dont_display_errors'])
+            and $this->styleOptions['dont_display_errors'])
         {
             $this->message = false;
         }
@@ -54,12 +54,11 @@ abstract class AbstractFieldRenderer
 
     protected function prepareDataSet()
     {
-
         $this->dataSet = [];
         $dataSetName = $this->fieldInfo['dataSet']['repositoryName'];
-        if ( isset( $this->formStruct['DataRepositories'][$dataSetName] ) )
+        if (isset($this->formStruct['DataRepositories'][ $dataSetName ]))
         {
-            $this->dataSet = &$this->formStruct['DataRepositories'][$dataSetName]['data'];
+            $this->dataSet = &$this->formStruct['DataRepositories'][ $dataSetName ]['data'];
         }
         else
         {
@@ -67,7 +66,7 @@ abstract class AbstractFieldRenderer
         }
     }
 
-    protected function standardErrorDisplay( $html_after = '' )
+    protected function standardErrorDisplay($html_after = '')
     {
         $html ='';
         if ($this->message !== false)

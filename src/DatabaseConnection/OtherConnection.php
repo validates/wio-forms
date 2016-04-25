@@ -7,63 +7,47 @@ class OtherConnection extends AbstractDatabaseConnection
     private $connectionData;
 
 
-    function __construct( $connectionData ){
+    function __construct($connectionData)
+    {
         $this->isConnected = false;
         $this->connectionData = $connectionData;
-
     }
 
-    function __desctruct(  ){
-        if ($this->isConnected)
-        {
-            $this->disconnect();
-        }
-    }
-
-    function connect(){
-
+    function connect()
+    {
         $this->isConnected = true;
     }
 
-    function disconnect(){
-
-    }
-
-    function save( $queryTable )
+    function save($queryTable)
     {
-        if ( !$this->isConnected)
+        if (!$this->isConnected)
         {
             $this->connect();
         }
     }
 
-    function update( $queryTable )
+    function update($queryTable)
     {
-        if ( !$this->isConnected)
+        if (!$this->isConnected)
         {
             $this->connect();
         }
-
     }
 
-    function select( $queryTable )
+    function select($queryTable)
     {
-        if ( !$this->isConnected)
+        if (!$this->isConnected)
         {
             $this->connect();
         }
-
-
     }
 
-    function selectOne( $queryTable )
+    function selectOne($queryTable)
     {
-        if ( !$this->isConnected)
+        if (!$this->isConnected)
         {
             $this->connect();
         }
-
-        
     }
 
 

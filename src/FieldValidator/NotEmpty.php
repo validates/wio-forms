@@ -4,20 +4,16 @@ namespace WioForms\FieldValidator;
 class NotEmpty extends AbstractFieldValidator
 {
 
-    public function validatePHP( $value, $settings ){
+    public function validatePHP($value, $settings)
+    {
+        $this->invalidMessage = 'field_required';
 
-        if ( !empty( $value ) )
+        if (!empty($value))
         {
-            $this->state = 1;
             $this->valid = true;
         }
-        else
-        {
-            $this->state = -1;
-            $this->valid = false;
-            $this->message = 'field_required';
-        }
 
+        $this->setAnswer();
         return $this->getReturn();
     }
 }

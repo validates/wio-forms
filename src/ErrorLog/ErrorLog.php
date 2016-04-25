@@ -11,7 +11,7 @@ class ErrorLog extends AbstractErrorLog
         $this->messages = [];
     }
 
-    function errorLog( $message )
+    function errorLog($message)
     {
         $this->messages[] = $message;
     }
@@ -23,9 +23,11 @@ class ErrorLog extends AbstractErrorLog
 
     function showLog()
     {
-        if (count($this->messages)){
+        if (count($this->messages))
+        {
             echo '<br/><b> Error Log: </b><br/>';
-            foreach ($this->messages as $m){
+            foreach ($this->messages as $m)
+            {
                 echo $m.'<br/>';
             }
         }

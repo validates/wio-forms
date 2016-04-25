@@ -4,7 +4,8 @@ namespace WioForms\FieldRenderer;
 class Select extends AbstractFieldRenderer
 {
 
-    function showToEdit(){
+    function showToEdit()
+    {
         $this->prepareDataSet();
 
         $html = '';
@@ -13,7 +14,7 @@ class Select extends AbstractFieldRenderer
         $html .= '<select name="'.$this->fieldName.'">';
 
         $html .= '<option value="">wybierz</option>';
-        foreach ( $this->dataSet as $option => $option_name)
+        foreach ($this->dataSet as $option => $option_name)
         {
             $selected = '';
             if ($option == $this->value)
@@ -30,7 +31,8 @@ class Select extends AbstractFieldRenderer
         return $html;
     }
 
-    function showToView(){
+    function showToView()
+    {
         $html = 'TextInput: '.'abc'.'<br/>';
 
         return $html;

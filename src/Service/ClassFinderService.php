@@ -5,15 +5,17 @@ class ClassFinderService
 {
     private $errorLog;
 
-    function __construct($errorLog){
+    function __construct($errorLog)
+    {
         $this->errorLog = $errorLog;
 
     }
 
-    public function checkName( $folderName, $className ){
+    public function checkName($folderName, $className)
+    {
         $pathName = 'WioForms\\'.$folderName.'\\'.$className;
 
-        if ( class_exists($pathName) )
+        if (class_exists($pathName))
         {
             return $pathName;
         }

@@ -4,7 +4,8 @@ namespace WioForms\FieldRenderer;
 class AgreementWithText extends AbstractFieldRenderer
 {
 
-    function showToEdit(){
+    function showToEdit()
+    {
         $html = '';
 
         $html .= '<div style="width: 35%;">';
@@ -28,7 +29,8 @@ class AgreementWithText extends AbstractFieldRenderer
         return $html;
     }
 
-    function showToView(){
+    function showToView()
+      {
         $html = 'TextInput: '.'abc'.'<br/>';
 
         return $html;

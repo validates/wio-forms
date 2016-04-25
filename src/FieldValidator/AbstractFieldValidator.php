@@ -9,19 +9,26 @@ abstract class AbstractFieldValidator
     protected $state;
     protected $message;
 
-    function __construct( $wioFormsObiect ){
-        $this->wioForms = &$wioFormsObiect;
-        
+    protected $validState = 1;
+    protected $validMessage = '';
+    protected $invalidState = -1;
+    protected $invalidMessage = 'field_invalid';
+
+    function __construct($wioFormsObject)
+    {
+        $this->wioForms = $wioFormsObject;
+
         $this->valid = false;
         $this->state = 0;
         $this->message = '';
     }
 
 
-    abstract function validatePHP( $value, $settings );
+    abstract function validatePHP($value, $settings);
 
 
-    protected function getReturn(){
+    protected function getReturn()
+    {
         $array = [
             'valid'   => $this->valid,
             'state'   => $this->state,
@@ -30,8 +37,23 @@ abstract class AbstractFieldValidator
         return $array;
     }
 
+    protected function setAnswer()
+    {
+        if ($this->valid)
+        {
+            $this->state = $this->validState;
+            $this->message = $this->validMessage;
+        }
+        else
+        {
+            $this->state = $this->invalidState;
+            $this->message = $this->invalidMessage;
+        }
 
-    public function print_validateJS(){
+    }
+
+    public function print_validateJS()
+    {
         $javascript = '';
 
         $javascript .= 'function( value, settings ){';

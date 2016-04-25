@@ -6,42 +6,32 @@ use GuzzleHttp\Client;
 class ReCaptcha extends AbstractFieldValidator
 {
 
-    public function validatePHP( $value, $settings ){
-
+    public function validatePHP($value, $settings)
+    {
+        $this->invalidMessage = 'enter_captcha';
         $isValid = false;
 
-
-        if ( isset($this->wioForms->validatorService->entryData['g-recaptcha-response']) )
+        if (isset($this->wioForms->validatorService->entryData['g-recaptcha-response']))
         {
-            $value = $this->wioForms->validatorService->entryData['g-recaptcha-response'];
-
-            $POST = [
+            $client = new Client();
+            $requestData['form_params'] = [
                 'secret' => $this->wioForms->settings['ReCaptcha']['SecretKey'],
-                'response'=> $value
+                'response'=> $this->wioForms->validatorService->entryData['g-recaptcha-response']
             ];
 
-            $client = new Client();
-            $requestData['form_params'] = $POST;
-
             $responsePOST = $client->request('POST', 'https://www.google.com/recaptcha/api/siteverify', $requestData)->getBody()->getContents();
-            $responseJSON = json_decode( $responsePOST );
+            $responseJSON = json_decode($responsePOST);
 
             $isValid = $responseJSON->success;
         }
 
 
-        if ( $isValid )
+        if ($isValid)
         {
-            $this->state = 1;
             $this->valid = true;
         }
-        else
-        {
-            $this->state = -1;
-            $this->valid = false;
-            $this->message = 'enter_captcha';
-        }
 
+        $this->setAnswer();
         return $this->getReturn();
     }
 

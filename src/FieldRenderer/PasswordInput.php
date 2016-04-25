@@ -4,7 +4,8 @@ namespace WioForms\FieldRenderer;
 class PasswordInput extends AbstractFieldRenderer
 {
 
-    function showToEdit(){
+    function showToEdit()
+    {
 
         $html = $this->fieldInfo['title']. ': <input type="password" name="'.$this->fieldName.'" value="'.$this->value.'" />';
 
@@ -14,7 +15,8 @@ class PasswordInput extends AbstractFieldRenderer
         return $html;
     }
 
-    function showToView(){
+    function showToView()
+    {
         $html = 'PasswordInput: '.'********'.'<br/>';
 
         return $html;

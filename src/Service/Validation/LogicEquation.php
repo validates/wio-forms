@@ -1,18 +1,18 @@
 <?php
 namespace WioForms\Service\Validation;
 
-class LogicEquasion
+class LogicEquation
 {
     public $wioForms;
     public $formStruct;
 
-    function __construct( $wioFormsObiect )
+    function __construct($wioFormsObject)
     {
-        $this->wioForms = &$wioFormsObiect;
+        $this->wioForms = $wioFormsObject;
         $this->formStruct = &$this->wioForms->formStruct;
     }
 
-    public function solveEquasion( $sentence )
+    public function solveEquation($sentence)
     {
         $result = $this->solveSentence($sentence);
         return $result;
@@ -21,16 +21,17 @@ class LogicEquasion
     private function solveSentence($sentence)
     {
 
-        if ( isset($sentence['data'] ) and is_array($sentence['data']) )
+        if (isset($sentence['data'])
+            and is_array($sentence['data']))
         {
-            foreach ( $sentence['data'] as $i => $subSentence)
+            foreach ($sentence['data'] as $i => $subSentence)
             {
                 $sentence['data'][$i] = $this->solveSentence($subSentence);
             }
         }
 
         $result = true;
-        switch( $sentence['type'] )
+        switch($sentence['type'])
         {
             case 'fieldValue':
                 $result = $this->getFieldValue($sentence);  break;
@@ -48,7 +49,7 @@ class LogicEquasion
                 $result = $this->getIsNotValidField($sentence); break;
 
             default:
-                $this->wioForms->errorLog->errorLog('LogicEquasionError: No "'.$sentence['type'].'" sentence type.');
+                $this->wioForms->errorLog->errorLog('LogicEquationError: No "'.$sentence['type'].'" sentence type.');
         }
 
         return $result;
@@ -83,9 +84,9 @@ class LogicEquasion
     private function getAnd($sentence)
     {
         $result = true;
-        foreach ( $sentence['data'] as $element )
+        foreach ($sentence['data'] as $element)
         {
-            if ( !($element) )
+            if (!($element))
             {
                 $result = false;
                 break;
@@ -97,9 +98,9 @@ class LogicEquasion
     private function getOr($sentence)
     {
         $result = false;
-        foreach ( $sentence['data'] as $element )
+        foreach ($sentence['data'] as $element)
         {
-            if ( $element )
+            if ($element)
             {
                 $result = true;
                 break;
@@ -111,8 +112,8 @@ class LogicEquasion
     private function getIsNotValidField($sentence)
     {
         $result = false;
-        if ( isset($this->formStruct['Fields'][ $sentence['field'] ]['valid'])
-            and !$this->formStruct['Fields'][ $sentence['field'] ]['valid'] )
+        if (isset($this->formStruct['Fields'][ $sentence['field'] ]['valid'])
+            and !$this->formStruct['Fields'][ $sentence['field'] ]['valid'])
         {
             $result = true;
         }
@@ -122,8 +123,8 @@ class LogicEquasion
     private function getIsValidField($sentence)
     {
         $result = false;
-        if ( isset($this->formStruct['Fields'][ $sentence['field'] ]['valid'])
-            and $this->formStruct['Fields'][ $sentence['field'] ]['valid'] )
+        if (isset($this->formStruct['Fields'][ $sentence['field'] ]['valid'])
+            and $this->formStruct['Fields'][ $sentence['field'] ]['valid'])
         {
             $result = true;
         }

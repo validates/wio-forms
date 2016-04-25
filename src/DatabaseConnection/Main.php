@@ -7,38 +7,37 @@ class Main extends AbstractDatabaseConnection
     private $connectionData;
 
 
-    function __construct( $connectionData ){
-
+    function __construct($connectionData)
+    {
         $this->connectionData = $connectionData;
     }
 
     function connect(){}
 
 
-    function save( $queryTable )
+    function save($queryTable)
     {
     }
 
-    function update( $queryTable )
+    function update($queryTable)
     {
 
     }
 
-    function select( $queryTable )
+    function select($queryTable)
     {
 
 
     }
 
-    function selectOne( $queryTable )
+    function selectOne($queryTable)
     {
 
-        if ( $queryTable['table'] == 'wio_form_struct' )
+        if ($queryTable['table'] == 'wio_form_struct')
         {
             $example_file = file_get_contents(__DIR__.'/exampleFormStruct.json');
             return ['dataStruct'=> $example_file];
         }
-
     }
 
 

@@ -4,7 +4,8 @@ namespace WioForms\FieldRenderer;
 class DayOfBirth extends AbstractFieldRenderer
 {
 
-    function showToEdit(){
+    function showToEdit()
+    {
         $html = '';
         $html .= $this->fieldInfo['title'].': ';
 
@@ -16,7 +17,8 @@ class DayOfBirth extends AbstractFieldRenderer
         return $html;
     }
 
-    function showToView(){
+    function showToView()
+    {
         $html = 'TextInput: '.'abc'.'<br/>';
 
         return $html;

@@ -9,8 +9,9 @@ class DatabaseService
 
     private $connections;
 
-    function __construct( $wioFormsObiect ){
-        $this->wioForms = &$wioFormsObiect;
+    function __construct($wioFormsObject)
+    {
+        $this->wioForms = $wioFormsObject;
 
         $this->connections = [];
     }
@@ -18,13 +19,14 @@ class DatabaseService
 
 
     /*
-    this function get FormSettings and bind in to out obiect
+    this function get FormSettings and bind in to out object
     its used by all public method
     its used directly in showForm()
     in showEntry() and getEntryAsArray() we get $formDataStructID from database
     in preSubmit(), submit() and update() we get $formDataStuctID from POST
     */
-    public function getFormDataStruct( $formDataStructId ){
+    public function getFormDataStruct($formDataStructId)
+    {
 
         $databaseQuery =
         [
@@ -32,16 +34,16 @@ class DatabaseService
             'where' => 'formStructId == "'.$formDataStructId.'"',
         ];
 
-        $queryResult = $this->connections['Main']->SelectOne( $databaseQuery );
+        $queryResult = $this->connections['Main']->SelectOne($databaseQuery);
 
-        if ( $queryResult == 'false' )
+        if ($queryResult == 'false')
         {
             $this->wioForms->errorLog->errorLog('Cannot get DataStruct from Database.');
             return false;
         }
 
-        $this->wioForms->formStruct = json_decode( $queryResult['dataStruct'], true );
-        if ( json_last_error()!= JSON_ERROR_NONE )
+        $this->wioForms->formStruct = json_decode($queryResult['dataStruct'], true);
+        if (json_last_error()!= JSON_ERROR_NONE)
         {
             $this->wioForms->errorLog->errorLog('Problem with JSON validation of formStruct file.');
             return false;
@@ -50,13 +52,14 @@ class DatabaseService
     }
 
 
-    public function setConnections(){
+    public function setConnections()
+    {
         foreach ($this->wioForms->settings['DatabaseConnections'] as $DBconn_Name => $DBconn_Data)
         {
             $className = $this->wioForms->classFinderService->checkName('DatabaseConnection',$DBconn_Name);
-            if ( $className )
+            if ($className)
             {
-                $this->connections[ $DBconn_Name ] = new $className( $DBconn_Data );
+                $this->connections[ $DBconn_Name ] = new $className($DBconn_Data);
             }
             else
             {
@@ -71,34 +74,34 @@ class DatabaseService
     used for saveEntry() and updateEntry()
     produces FormEntry format from $postData
     */
-    private function getEntryFromPost( $postData ){}
+    private function getEntryFromPost($postData){}
 
 
     /*
     Used by submit()
     It uses main channel of DB communication and puts FormEntry there
     */
-    private function saveEntry( $formEntryFormat ){}
+    private function saveEntry($formEntryFormat){}
 
     /*
     Used by submit()
     It uses main channel of DB communication and puts FormEntry there
     */
-    private function updateEntry( $formEntryFormat ){}
+    private function updateEntry($formEntryFormat){}
 
 
     /*
     this function collects all DatabaseStore Input and Update queries
     it saves them to database by DatabaseStore connections
     */
-    private function advancedEntrySave( $postData ){}
+    private function advancedEntrySave($postData){}
 
 
     /*
     makes similar thing to DatabaseStore_save()
     changes Input queries for Update queries
     */
-    private function advancedEntryUpdate( $postData ){}
+    private function advancedEntryUpdate($postData){}
 
 }
 

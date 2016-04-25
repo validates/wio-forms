@@ -4,22 +4,17 @@ namespace WioForms\FieldValidator;
 class Password_v1 extends AbstractFieldValidator
 {
 
-    public function validatePHP( $value, $settings ){
+    public function validatePHP($value, $settings)
+    {
+        $this->invalidMessage = 'password_to_short';
 
-        if (  strlen( $value ) >= 8 )
+        if (strlen($value) >= 8)
         {
-            $this->state = 1;
             $this->valid = true;
         }
-        else
-        {
-            $this->state = -1;
-            $this->valid = false;
-            $this->message = 'password_to_short';
-        }
 
+        $this->setAnswer();
         return $this->getReturn();
     }
-
 }
 ?>

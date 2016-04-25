@@ -7,7 +7,7 @@ class Cookie extends AbstractTemporarySave
     public function saveFormData()
     {
         $toSave = [];
-        foreach ( $this->formStruct['Fields'] as $fieldName =>$field )
+        foreach ($this->formStruct['Fields'] as $fieldName => $field)
         {
             $toSave[ $fieldName ] = $field['value'];
         }
@@ -18,9 +18,9 @@ class Cookie extends AbstractTemporarySave
     {
         $savedData = false;
 
-        if ( isset($_COOKIE['_wioFormsTemporaryData']) )
+        if (isset($_COOKIE['_wioFormsTemporaryData']))
         {
-            $savedData = get_object_vars( json_decode( $_COOKIE['_wioFormsTemporaryData'] ) );
+            $savedData = get_object_vars(json_decode($_COOKIE['_wioFormsTemporaryData']));
         }
 
         return $savedData;

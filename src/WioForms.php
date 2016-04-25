@@ -34,7 +34,7 @@ class WioForms{
     # Lists of information what Field and Container lays where
     public $containersContains;
 
-    # WioForms Service Obiects
+    # WioForms Service Objects
     public $rendererService;
     public $dataRepositoryService;
     public $validatorService;
@@ -43,7 +43,7 @@ class WioForms{
     public $styleManagementService;
 
 
-    function __construct( $localSettings = false ){
+    function __construct($localSettings = false){
 
         # Gets ErrorLog
         $this->errorLog = new ErrorLog();
@@ -56,23 +56,23 @@ class WioForms{
             $enviromentSettings = array_replace_recursive($enviromentSettings,$localSettings);
         $this->settings = $enviromentSettings;
 
-        $this->rendererService            = new RendererService( $this );
-        $this->dataRepositoryService      = new DataRepositoryService( $this );
-        $this->validatorService           = new ValidatorService( $this );
-        $this->databaseService            = new DatabaseService( $this );
-        $this->classFinderService         = new ClassFinderService( $this->errorLog );
-        $this->styleManagementService     = new StyleManagementService( $this );
+        $this->rendererService            = new RendererService($this );
+        $this->dataRepositoryService      = new DataRepositoryService($this);
+        $this->validatorService           = new ValidatorService($this);
+        $this->databaseService            = new DatabaseService($this);
+        $this->classFinderService         = new ClassFinderService($this->errorLog);
+        $this->styleManagementService     = new StyleManagementService($this);
 
 
         if ($this->databaseService->setConnections() === false)
         {
             $this->errorLog->errorLog('Problem with: setDatabaseConnections();');
-            die(' Problem with set Database Connections ');
+            die('Problem with set Database Connections');
         }
 
         // later on we should get that from config file or formStruct:
         $temporarySaveClass = '\WioForms\TemporarySave\Cookie';
-        $this->temporarySave = new $temporarySaveClass( $this );
+        $this->temporarySave = new $temporarySaveClass($this);
 
     }
 
@@ -83,15 +83,16 @@ class WioForms{
     Also can render "thank you" view.
     Partial entry data can also by set by hand (for example going from some link will set some field)
     */
-    public function showForm( $formDataStructId = false, $permissionsArray = false, $partialEntryData = false ){
+    public function showForm($formDataStructId = false, $permissionsArray = false, $partialEntryData = false)
+    {
 
-        if ( $formDataStructId === false )
+        if ($formDataStructId === false)
         {
             $this->errorLog->errorLog('No DataStructId to search for.');
             return false;
         }
 
-        if ( $this->databaseService->getFormDataStruct( $formDataStructId ) === false )
+        if ($this->databaseService->getFormDataStruct($formDataStructId) === false)
         {
             $this->errorLog->errorLog('Problem with getFormDataStructs().');
             return false;
@@ -101,25 +102,25 @@ class WioForms{
 
 
         $entryData = [];
-        if ( !empty($_POST['_wioForms']) )
+        if (!empty($_POST['_wioForms']))
         {
             $entryData = $_POST;
         }
-        if ( !empty( $tempSave = $this->temporarySave->getFormData() ) )
+        if (!empty($tempSave = $this->temporarySave->getFormData()))
         {
-            $entryData = array_merge( $tempSave, $entryData );
+            $entryData = array_merge($tempSave, $entryData);
         }
-        if ( $partialEntryData and is_array($partialEntryData) )
+        if ($partialEntryData and is_array($partialEntryData))
         {
-            $entryData = array_merge(  $entryData, $partialEntryData );
+            $entryData = array_merge($entryData, $partialEntryData);
         }
-        $this->validatorService->validateForm( $entryData );
+        $this->validatorService->validateForm($entryData);
 
 
-        if ( false ) // We wanna save this form now
+        if (false) // We wanna save this form now
         {
             $this->temporarySave->clearFormData();
-            //...
+            // here we perform saving action
         }
         else
         {
@@ -127,10 +128,10 @@ class WioForms{
         }
 
         $lastEditedSite = $this->validatorService->getLastEditedSite();
-        $this->styleManagementService->dontShowErrorsOnSite( $lastEditedSite );
+        $this->styleManagementService->dontShowErrorsOnSite($lastEditedSite);
 
         $siteNumber = $this->validatorService->getAvaliableSiteNumber();
-        $formHtml = $this->rendererService->renderFormSite( $siteNumber );
+        $formHtml = $this->rendererService->renderFormSite($siteNumber);
 
         return $formHtml;
     }
@@ -142,7 +143,7 @@ class WioForms{
     Form entry can be shown in read only mode or edit mode
     It can depend on PermissionsArray or other data
     */
-    public function showEntry( $formEntryId, $permissionsArray ){}
+    public function showEntry($formEntryId, $permissionsArray){}
 
 
     /*
@@ -151,7 +152,7 @@ class WioForms{
     If form is valid then its submitted
     If form is not valid it will show validasu tion errors
     */
-    public function preSubmit( $postData ){}
+    public function preSubmit($postData){}
 
 
     /*
@@ -160,7 +161,7 @@ class WioForms{
     saves FromEntry
     use DatabaseStore to make additional data savings
     */
-    public function submit( $postData ){}
+    public function submit($postData){}
 
 
     /*
@@ -169,13 +170,13 @@ class WioForms{
     updates FormEntry
     updates all data set by DatabaseStore
     */
-    public function update( $postData ){}
+    public function update($postData){}
 
     /*
     prints FromEntry as PHP multilevel array
     can apply permissions of viewing fields
     */
-    public function getEntryAsArray( $formEntryId, $permissionsArray ){}
+    public function getEntryAsArray($formEntryId, $permissionsArray){}
 
 }
 

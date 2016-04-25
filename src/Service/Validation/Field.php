@@ -7,13 +7,13 @@ class Field
     private $formStruct;
 
 
-    function __construct( $wioFormsObiect )
+    function __construct($wioFormsObject)
     {
-        $this->wioForms = &$wioFormsObiect;
+        $this->wioForms = $wioFormsObject;
         $this->formStruct = &$this->wioForms->formStruct;
     }
 
-    public function validate( $fieldName , $entryData = false )
+    public function validate($fieldName , $entryData = false)
     {
         $value = '';
         if ($entryData)
@@ -28,34 +28,35 @@ class Field
 
         $field['value'] = $value;
 
-        if ( isset($field['validationPHP']) and is_array($field['validationPHP']) )
+        if (isset($field['validationPHP']) and is_array($field['validationPHP']))
         {
             foreach ($field['validationPHP'] as $validatorInfo)
             {
-                if ( isset( $this->formStruct['FieldValidatorsPHP'][ $validatorInfo['method'] ]['class'] ))
+                if (isset($this->formStruct['FieldValidatorsPHP'][ $validatorInfo['method'] ]['class']))
                 {
                     $className = $this->formStruct['FieldValidatorsPHP'][ $validatorInfo['method'] ]['class'];
                 }
-                else {
+                else
+                {
                     $this->wioForms->errorLog->errorLog('FieldValidatorsPHP class name for '.$validatorInfo['method'].' not found. ');
                     continue;
                 }
 
-                if ( !( $validatorClass = $this->wioForms->classFinderService->checkName( 'FieldValidator', $className ) ))
+                if (!($validatorClass = $this->wioForms->classFinderService->checkName('FieldValidator', $className)))
                 {
                     continue;
                 }
 
                 $settings = [];
-                if (isset( $validatorInfo['settings'] ))
+                if (isset($validatorInfo['settings']))
                 {
                     $settings = $validatorInfo['settings'];
                 }
 
-                $validator = new $validatorClass( $this->wioForms );
-                $validationResult = $validator->validatePHP( $value, $settings );
+                $validator = new $validatorClass($this->wioForms);
+                $validationResult = $validator->validatePHP($value, $settings);
 
-                $this->applyValidationResult( $field, $validationResult );
+                $this->applyValidationResult($field, $validationResult);
             }
         }
 
@@ -63,14 +64,15 @@ class Field
     }
 
 
-    private function applyValidationResult( &$field, $validationResult)
+    private function applyValidationResult(&$field, $validationResult)
     {
-        if ( !( !$field['valid'] and $validationResult['valid'] ) )
+        if (!(!$field['valid'] and $validationResult['valid']))
         {
             $field['state'] = $validationResult['state'];
             $field['valid'] = $validationResult['valid'];
 
-            if ( $validationResult['valid']===false and isset( $validatorInfo['newErrorMessage'] ) )
+            if ($validationResult['valid']===false
+                and isset( $validatorInfo['newErrorMessage']))
             {
                 $field['message'] = $validatorInfo['newErrorMessage'];
             }
@@ -78,13 +80,8 @@ class Field
             {
                 $field['message'] = $validationResult['message'];
             }
-
         }
-
-
-
     }
-
 
 }
 ?>

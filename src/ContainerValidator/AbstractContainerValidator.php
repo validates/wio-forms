@@ -9,17 +9,17 @@ abstract class AbstractContainerValidator
 
     protected $wioForms;
 
-    function __construct( $wioFormsObiect )
+    function __construct($wioFormsObject)
     {
         $this->valid = false;
         $this->state = 0;
         $this->message = '';
 
-        $this->wioForms = &$wioFormsObiect;
+        $this->wioForms = $wioFormsObject;
     }
 
 
-    abstract function validatePHP( &$container, $settings );
+    abstract function validatePHP(&$container, &$settings);
 
 
     protected function getReturn()

@@ -4,22 +4,17 @@ namespace WioForms\FieldValidator;
 class Email extends AbstractFieldValidator
 {
 
-    public function validatePHP( $value, $settings ){
+    public function validatePHP($value, $settings)
+    {
+        $this->invalidMessage = 'email_invalid';
 
-        if ( filter_var( $value, FILTER_VALIDATE_EMAIL ))
+        if (filter_var($value, FILTER_VALIDATE_EMAIL))
         {
-            $this->state = 1;
             $this->valid = true;
         }
-        else
-        {
-            $this->state = -1;
-            $this->valid = false;
-            $this->message = 'email_invalid';
-        }
 
+        $this->setAnswer();
         return $this->getReturn();
     }
-
 }
 ?>

@@ -4,8 +4,8 @@ namespace WioForms\FieldRenderer;
 class TextInput extends AbstractFieldRenderer
 {
 
-    function showToEdit(){
-
+    function showToEdit()
+    {
         $html = $this->fieldInfo['title']. ': <input type="text" name="'.$this->fieldName.'" value="'.$this->value.'" />';
 
         $html .= $this->standardErrorDisplay();
@@ -14,7 +14,8 @@ class TextInput extends AbstractFieldRenderer
         return $html;
     }
 
-    function showToView(){
+    function showToView()
+    {
         $html = 'TextInput: '.'abc'.'<br/>';
 
         return $html;

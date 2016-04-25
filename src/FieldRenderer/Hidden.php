@@ -14,7 +14,8 @@ class Hidden extends AbstractFieldRenderer
         return $html;
     }
 
-    function showToView(){
+    function showToView()
+    {
         $html = 'TextInput: '.'abc'.'<br/>';
 
         return $html;

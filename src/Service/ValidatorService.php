@@ -15,12 +15,13 @@ class ValidatorService
     private $containerValidationService;
     private $fieldValidationService;
 
-    function __construct( $wioFormsObiect ){
-        $this->wioForms = &$wioFormsObiect;
+    function __construct($wioFormsObject)
+    {
+        $this->wioForms = $wioFormsObject;
         $this->formStruct = &$this->wioForms->formStruct;
 
-        $this->containerValidationService = new ContainerValidationService( $this->wioForms );
-        $this->fieldValidationService     = new FieldValidationService( $this->wioForms );
+        $this->containerValidationService = new ContainerValidationService($this->wioForms);
+        $this->fieldValidationService     = new FieldValidationService($this->wioForms);
 
         $this->PHPvalidators = [];
     }
@@ -29,7 +30,8 @@ class ValidatorService
     runs by preSubmit(), submit(), update()
     checks all fields and all containers for validation errors
     */
-    public function validateForm( $entryData ){
+    public function validateForm($entryData)
+    {
         $this->entryData = $entryData;
         $formValidity = true;
 
@@ -41,7 +43,7 @@ class ValidatorService
                 $fieldEntry = $this->entryData[ $fieldName ];
             }
             $validity = $this->fieldValidationService->validate( $fieldName, $fieldEntry );
-            if ( !$validity )
+            if (!$validity)
             {
                 $formValidity = false;
             }
@@ -49,7 +51,7 @@ class ValidatorService
         foreach ($this->formStruct['Containers'] as $containerName => &$container)
         {
             $validity = $this->containerValidationService->validate( $container );
-            if ( !$validity )
+            if (!$validity)
             {
                 $formValidity = false;
             }
@@ -60,7 +62,7 @@ class ValidatorService
     /*
     checks if Data are maching Data Repository (We dont want people born 37th of September)
     */
-    private function checkIfDataInRepository( $fieldName ){    }
+    private function checkIfDataInRepository($fieldName){}
 
     /*
     Function search for highest "site" number in any container that is not set on "hide"
@@ -71,9 +73,9 @@ class ValidatorService
 
         foreach ($this->formStruct['Containers'] as $container)
         {
-            if ( $container['container'] == '_site'
-              and !( isset($container['hidden']) and $container['hidden'] )
-              and $container['site'] > $maxSite )
+            if ($container['container'] == '_site'
+              and !(isset($container['hidden']) and $container['hidden'])
+              and $container['site'] > $maxSite)
             {
                 $maxSite = $container['site'];
             }
@@ -84,7 +86,7 @@ class ValidatorService
 
     public function getLastEditedSite()
     {
-        if ( isset($this->entryData['_wioFormsSite']) )
+        if (isset($this->entryData['_wioFormsSite']))
         {
             return (Int)($this->entryData['_wioFormsSite'])+1;
         }
