@@ -11,7 +11,7 @@ class Button1 extends AbstractContainerRenderer
         {
             $title = $this->title;
         }
-        $html = '<input type="submit" value="'.$title.'" />';
+        $html = '<input type="submit" value="'.$title.'" />'."\n";
 
         return $html;
     }

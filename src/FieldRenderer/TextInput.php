@@ -9,7 +9,7 @@ class TextInput extends AbstractFieldRenderer
         $html = $this->fieldInfo['title']. ': <input type="text" name="'.$this->fieldName.'" value="'.$this->value.'" />';
 
         $html .= $this->standardErrorDisplay();
-        $html .= '<br/>';
+        $html .= '<br/>'."\n";
 
         return $html;
     }

@@ -319,7 +319,7 @@
         },
         "register_date":
         {
-            "type": "DayOfBirth",
+            "type": "DatePicker",
             "container": "RegisterData",
             "position": 3,
             "title": "Wiek",

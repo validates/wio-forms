@@ -26,7 +26,7 @@ class Select extends AbstractFieldRenderer
         $html .= '</select>';
 
         $html .= $this->standardErrorDisplay();
-        $html .= '<br/>';
+        $html .= '<br/>'."\n";
 
         return $html;
     }

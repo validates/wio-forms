@@ -24,7 +24,7 @@ class AgreementWithText extends AbstractFieldRenderer
         $html .= '<span style="font-size: 0.7em;">'.$this->fieldInfo['longer_text'].'</span>';
 
 
-        $html .= '</div>';
+        $html .= '</div>'."\n";
 
         return $html;
     }

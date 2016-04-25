@@ -7,7 +7,7 @@ class FormRenderer extends AbstractFormRenderer
     function showHead()
     {
         $html = '';
-        $html .= '<form method="post" action="">';
+        $html .= '<form method="post" action="" class="wioForms">'."\n";
 
         return $html;
     }
@@ -16,9 +16,9 @@ class FormRenderer extends AbstractFormRenderer
     {
         $html = '';
 
-        $html .= '<input type="hidden" name="_wioForms" value="yes" />';
-        $html .= '<input type="hidden" name="_wioFormsSite" value="'.$this->wioForms->rendererService->siteNumber.'" />';
-        $html .= '</form>';
+        $html .= '<input type="hidden" name="_wioForms" value="yes" />'."\n";
+        $html .= '<input type="hidden" name="_wioFormsSite" value="'.$this->wioForms->rendererService->siteNumber.'" />'."\n";
+        $html .= '</form>'."\n";
 
         return $html;
     }

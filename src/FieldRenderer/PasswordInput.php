@@ -17,7 +17,7 @@ class PasswordInput extends AbstractFieldRenderer
 
     function showToView()
     {
-        $html = 'PasswordInput: '.'********'.'<br/>';
+        $html = 'PasswordInput: '.'********'.'<br/>'."\n";
 
         return $html;
     }

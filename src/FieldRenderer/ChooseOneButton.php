@@ -17,7 +17,7 @@ class ChooseOneButton extends AbstractFieldRenderer
         }
 
         $html .= $this->standardErrorDisplay();
-        $html .= '<br/>';
+        $html .= '<br/>'."\n";
 
         return $html;
     }

@@ -14,8 +14,9 @@ class GoogleReCaptcha extends AbstractFieldRenderer
         }
 
         $html .= $this->standardErrorDisplay('<br/>');
-        $html .= "<script src='https://www.google.com/recaptcha/api.js?hl=pl'></script>";
-        $html .= '<div class="g-recaptcha" data-sitekey="'. $this->wioForms->settings['ReCaptcha']['SiteKey'] .'"></div>';
+        $this->wioForms->headerCollectorService->addJS('https://www.google.com/recaptcha/api.js?hl=pl');
+
+        $html .= '<div class="g-recaptcha" data-sitekey="'. $this->wioForms->settings['ReCaptcha']['SiteKey'] .'"></div>'."\n";
 
         return $html;
     }

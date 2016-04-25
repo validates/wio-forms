@@ -15,6 +15,7 @@ use WioForms\Service\RendererService;
 use WioForms\Service\ValidatorService;
 use WioForms\Service\ClassFinderService;
 use WioForms\Service\StyleManagementService;
+use WioForms\Service\HeaderCollectorService;
 
 
 class WioForms{
@@ -41,6 +42,7 @@ class WioForms{
     public $databaseService;
     public $classFinderService;
     public $styleManagementService;
+    public $headerCollectorService;
 
 
     function __construct($localSettings = false){
@@ -56,12 +58,13 @@ class WioForms{
             $enviromentSettings = array_replace_recursive($enviromentSettings,$localSettings);
         $this->settings = $enviromentSettings;
 
-        $this->rendererService            = new RendererService($this );
+        $this->rendererService            = new RendererService($this);
         $this->dataRepositoryService      = new DataRepositoryService($this);
         $this->validatorService           = new ValidatorService($this);
         $this->databaseService            = new DatabaseService($this);
         $this->classFinderService         = new ClassFinderService($this->errorLog);
         $this->styleManagementService     = new StyleManagementService($this);
+        $this->headerCollectorService     = new HeaderCollectorService($this);
 
 
         if ($this->databaseService->setConnections() === false)
@@ -136,6 +139,10 @@ class WioForms{
         return $formHtml;
     }
 
+    public function getHeaders($dir = '')
+    {
+        return $this->headerCollectorService->getHeaders($dir);
+    }
 
     /*
     Renders the filled form entry.
