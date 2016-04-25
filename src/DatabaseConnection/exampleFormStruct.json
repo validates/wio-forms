@@ -62,6 +62,10 @@
         "ReCaptcha":
         {
             "class": "ReCaptcha"
+        },
+        "Date":
+        {
+            "class": "Date"
         }
     },
     "FieldValidatorsJS": {},
@@ -329,6 +333,9 @@
             [
                 {
                     "method": "NotEmpty"
+                },
+                {
+                    "method": "Date"
                 }
             ]
         },
