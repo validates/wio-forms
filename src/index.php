@@ -22,9 +22,9 @@ $localSettings = [
     "SrcDir" => ''
 ];
 
-$wioForm = new WioForms($localSettings);
-$wioFormHtml = $wioForm->showForm('Form1');
-$wioHeaders = $wioForm->getHeaders();
+$wioForms = new WioForms($localSettings);
+$wioFormHtml = $wioForms->showForm('Form1');
+$wioHeaders = $wioForms->getHeaders();
 
 
 ?>

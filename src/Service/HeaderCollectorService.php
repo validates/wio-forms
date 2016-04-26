@@ -27,14 +27,14 @@ class HeaderCollectorService
     public function getHeaders($dir = '')
     {
         $this->dir = '';
-        if ($dir == false)
+        if ($dir !== false)
         {
             if (isset($this->wioForms->settings['SrcDir']))
             {
                 $this->dir = $this->wioForms->settings['SrcDir'];
             }
         }
-        if (!empty($dir))
+        if ($dir !== false)
         {
             $this->dir .= '/';
         }
