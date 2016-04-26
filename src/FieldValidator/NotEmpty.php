@@ -17,4 +17,3 @@ class NotEmpty extends AbstractFieldValidator
         return $this->getReturn();
     }
 }
-?>

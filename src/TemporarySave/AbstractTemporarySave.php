@@ -18,5 +18,3 @@ abstract class AbstractTemporarySave
 
     abstract function clearFormData();
 }
-
-?>

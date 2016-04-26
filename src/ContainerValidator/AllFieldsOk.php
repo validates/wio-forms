@@ -59,4 +59,3 @@ class AllFieldsOk extends AbstractContainerValidator
     }
 
 }
-?>

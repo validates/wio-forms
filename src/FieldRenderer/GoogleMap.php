@@ -22,5 +22,3 @@ class GoogleMap extends AbstractFieldRenderer
         return $html;
     }
 }
-
-?>

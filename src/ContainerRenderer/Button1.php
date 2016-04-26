@@ -23,5 +23,3 @@ class Button1 extends AbstractContainerRenderer
     }
 
 }
-
-?>

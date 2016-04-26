@@ -18,7 +18,8 @@ use WioForms\Service\StyleManagementService;
 use WioForms\Service\HeaderCollectorService;
 
 
-class WioForms{
+class WioForms
+{
 
     # Holds ErrorLog object
     public $errorLog;
@@ -186,5 +187,3 @@ class WioForms{
     public function getEntryAsArray($formEntryId, $permissionsArray){}
 
 }
-
-?>

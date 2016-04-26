@@ -32,4 +32,3 @@ class Cookie extends AbstractTemporarySave
     }
 
 }
-?>

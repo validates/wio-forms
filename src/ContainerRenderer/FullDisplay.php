@@ -27,5 +27,3 @@ class FullDisplay extends AbstractContainerRenderer
     }
 
 }
-
-?>

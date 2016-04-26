@@ -17,4 +17,3 @@ class Email extends AbstractFieldValidator
         return $this->getReturn();
     }
 }
-?>

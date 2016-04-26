@@ -125,5 +125,3 @@ CREATE TABLE `WioForms_entries` (
 ) ENGINE = InnoDB;
 
 */
-
-?>

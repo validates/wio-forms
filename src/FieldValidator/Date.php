@@ -24,4 +24,3 @@ class Date extends AbstractFieldValidator
         return $this->getReturn();
     }
 }
-?>

@@ -47,5 +47,3 @@ abstract class AbstractContainerRenderer
     abstract function showTail();
 
 }
-
-?>

@@ -8,5 +8,3 @@ abstract class AbstractDataRepository
     abstract function getData();
 
 }
-
-?>

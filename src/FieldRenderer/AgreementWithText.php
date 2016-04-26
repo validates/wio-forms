@@ -36,5 +36,3 @@ class AgreementWithText extends AbstractFieldRenderer
         return $html;
     }
 }
-
-?>

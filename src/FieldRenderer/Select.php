@@ -38,5 +38,3 @@ class Select extends AbstractFieldRenderer
         return $html;
     }
 }
-
-?>

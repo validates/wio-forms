@@ -28,5 +28,3 @@ class GoogleReCaptcha extends AbstractFieldRenderer
         return $html;
     }
 }
-
-?>

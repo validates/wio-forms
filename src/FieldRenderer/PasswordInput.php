@@ -22,5 +22,3 @@ class PasswordInput extends AbstractFieldRenderer
         return $html;
     }
 }
-
-?>

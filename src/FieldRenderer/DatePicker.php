@@ -34,5 +34,3 @@ class DatePicker extends AbstractFieldRenderer
         return $html;
     }
 }
-
-?>

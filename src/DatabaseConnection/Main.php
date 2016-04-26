@@ -42,5 +42,3 @@ class Main extends AbstractDatabaseConnection
 
 
 }
-
-?>

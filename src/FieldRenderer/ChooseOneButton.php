@@ -31,5 +31,3 @@ class ChooseOneButton extends AbstractFieldRenderer
         return $html;
     }
 }
-
-?>

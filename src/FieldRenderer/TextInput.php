@@ -21,5 +21,3 @@ class TextInput extends AbstractFieldRenderer
         return $html;
     }
 }
-
-?>

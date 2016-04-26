@@ -15,5 +15,3 @@ abstract class AbstractFormRenderer
     abstract function showTail();
 
 }
-
-?>

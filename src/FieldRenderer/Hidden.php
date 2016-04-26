@@ -21,5 +21,3 @@ class Hidden extends AbstractFieldRenderer
         return $html;
     }
 }
-
-?>

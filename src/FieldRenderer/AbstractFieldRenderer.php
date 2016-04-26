@@ -81,5 +81,3 @@ abstract class AbstractFieldRenderer
 
     abstract function showToView();
 }
-
-?>

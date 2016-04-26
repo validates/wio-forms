@@ -17,4 +17,3 @@ class Password_v1 extends AbstractFieldValidator
         return $this->getReturn();
     }
 }
-?>
