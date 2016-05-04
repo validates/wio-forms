@@ -13,20 +13,13 @@ class Field
         $this->formStruct = &$this->wioForms->formStruct;
     }
 
-    public function validate($fieldName , $entryData = false)
+    public function validate($fieldName)
     {
-        $value = '';
-        if ($entryData)
-        {
-            $value = $entryData;
-        }
         $field = &$this->formStruct['Fields'][ $fieldName ];
 
         $field['valid'] = true;
         $field['state'] = 1;
         $field['message'] = false;
-
-        $field['value'] = $value;
 
         if (isset($field['validationPHP']) and is_array($field['validationPHP']))
         {
@@ -54,7 +47,7 @@ class Field
                 }
 
                 $validator = new $validatorClass($this->wioForms);
-                $validationResult = $validator->validatePHP($value, $settings);
+                $validationResult = $validator->validatePHP($field['value'], $settings);
 
                 $this->applyValidationResult($field, $validationResult);
             }

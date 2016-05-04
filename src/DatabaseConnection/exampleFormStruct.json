@@ -36,12 +36,23 @@
         },
         "gender":
         {
-          "type": "local",
-          "data":
-          {
-              "female": "Kobieta",
-              "male": "Mężczyzna"
-          }
+            "type": "local",
+            "data":
+            {
+                "female": "Kobieta",
+                "male": "Mężczyzna"
+            }
+        },
+        "wioUsers":
+        {
+            "type": "foreign",
+            "data": false,
+            "class": "WioUsersData",
+            "requiredFields":
+            {
+                "email": "login_email",
+                "password": "login_password"
+            }
         }
     },
 
@@ -304,7 +315,12 @@
                 {
                     "method": "NotEmpty"
                 }
-            ]
+            ],
+            "defaultValue":
+            {
+                "repositoryName": "wioUsers",
+                "subset": ["imie"]
+            }
         },
         "register_surname":
         {
@@ -319,7 +335,12 @@
                 {
                     "method": "NotEmpty"
                 }
-            ]
+            ],
+            "defaultValue":
+            {
+                "repositoryName": "wioUsers",
+                "subset": ["nazwisko"]
+            }
         },
         "register_date":
         {
@@ -337,7 +358,13 @@
                 {
                     "method": "Date"
                 }
-            ]
+            ],
+            "defaultValue":
+            {
+                "repositoryName": "wioUsers",
+                "subset": ["pesel"],
+                "converter": "Pesel2Date"
+            }
         },
         "register_gender":
         {
@@ -356,7 +383,13 @@
                 {
                     "method": "NotEmpty"
                 }
-            ]
+            ],
+            "defaultValue":
+            {
+                "repositoryName": "wioUsers",
+                "subset": ["plec"],
+                "converter": "Plec2Gender"
+            }
         },
         "agreement_1":
         {
@@ -535,8 +568,8 @@
                                 ]
                             },
                             {
-                                "type": "isNotValidField",
-                                "field": "account_id"
+                                "type": "isNotSuccessRepository",
+                                "repository": "wioUsers"
                             }
                         ]
                     }
@@ -709,8 +742,8 @@
                                 ]
                             },
                             {
-                                "type": "isValidField",
-                                "field": "account_id"
+                                "type": "isSuccessRepository",
+                                "repository": "wioUsers"
                             }
                         ]
                     }

@@ -16,6 +16,7 @@ use WioForms\Service\ValidatorService;
 use WioForms\Service\ClassFinderService;
 use WioForms\Service\StyleManagementService;
 use WioForms\Service\HeaderCollectorService;
+use WioForms\Service\EntryCollectorService;
 
 
 class WioForms
@@ -44,6 +45,7 @@ class WioForms
     public $classFinderService;
     public $styleManagementService;
     public $headerCollectorService;
+    public $entryCollectorService;
 
 
     function __construct($localSettings = false){
@@ -66,6 +68,7 @@ class WioForms
         $this->classFinderService         = new ClassFinderService($this->errorLog);
         $this->styleManagementService     = new StyleManagementService($this);
         $this->headerCollectorService     = new HeaderCollectorService($this);
+        $this->entryCollectorService      = new EntryCollectorService($this);
 
 
         if ($this->databaseService->setConnections() === false)
@@ -104,21 +107,20 @@ class WioForms
 
         $this->rendererService->createContainersContains();
 
+        $this->entryCollectorService->collectEntries($partialEntryData);
 
-        $entryData = [];
-        if (!empty($_POST['_wioForms']))
-        {
-            $entryData = $_POST;
-        }
-        if (!empty($tempSave = $this->temporarySave->getFormData()))
-        {
-            $entryData = array_merge($tempSave, $entryData);
-        }
-        if ($partialEntryData and is_array($partialEntryData))
-        {
-            $entryData = array_merge($entryData, $partialEntryData);
-        }
-        $this->validatorService->validateForm($entryData);
+        $this->validatorService->validateFields();
+
+        $this->dataRepositoryService->getForeignDataRepositories();
+
+        $this->entryCollectorService->getDefaultValuesFromDataRepositories();
+
+        $this->validatorService->validateFields();
+
+        $this->validatorService->validateContainers();
+
+
+        $isFormValid = $this->validatorService->checkFormValidity();
 
 
         if (false) // We wanna save this form now

@@ -26,47 +26,50 @@ class ValidatorService
         $this->PHPvalidators = [];
     }
 
-    /*
-    runs by preSubmit(), submit(), update()
-    checks all fields and all containers for validation errors
-    */
-    public function validateForm($entryData)
+    public function checkFormValidity()
     {
-        $this->entryData = $entryData;
         $formValidity = true;
 
         foreach ($this->formStruct['Fields'] as $fieldName => $field)
         {
-            $fieldEntry = '';
-            if (isset($this->entryData[ $fieldName ]))
-            {
-                $fieldEntry = $this->entryData[ $fieldName ];
-            }
-            $validity = $this->fieldValidationService->validate( $fieldName, $fieldEntry );
-            if (!$validity)
+            if (!$field['valid'])
             {
                 $formValidity = false;
+                break;
             }
         }
-        foreach ($this->formStruct['Containers'] as $containerName => &$container)
+
+        foreach ($this->formStruct['Containers'] as $containerName => $container)
         {
-            $validity = $this->containerValidationService->validate( $container );
-            if (!$validity)
+            if (!$container['valid'])
             {
                 $formValidity = false;
+                break;
             }
         }
         return $formValidity;
     }
 
-    /*
-    checks if Data are maching Data Repository (We dont want people born 37th of September)
-    */
+    public function validateFields()
+    {
+        foreach ($this->formStruct['Fields'] as $fieldName => $field)
+        {
+            $this->fieldValidationService->validate($fieldName);
+        }
+    }
+
+    public function validateContainers()
+    {
+        foreach ($this->formStruct['Containers'] as $containerName => &$container)
+        {
+            $this->containerValidationService->validate($container);
+        }
+    }
+
+
     private function checkIfDataInRepository($fieldName){}
 
-    /*
-    Function search for highest "site" number in any container that is not set on "hide"
-    */
+
     public function getAvaliableSiteNumber()
     {
         $maxSite = 0;

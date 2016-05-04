@@ -47,6 +47,10 @@ class LogicEquation
                 $result = $this->getIsValidField($sentence); break;
             case 'isNotValidField':
                 $result = $this->getIsNotValidField($sentence); break;
+            case 'isSuccessRepository':
+                $result = $this->getIsSuccessRepository($sentence); break;
+            case 'isNotSuccessRepository':
+                $result = $this->getIsNotSuccessRepository($sentence); break;
 
             default:
                 $this->wioForms->errorLog->errorLog('LogicEquationError: No "'.$sentence['type'].'" sentence type.');
@@ -131,5 +135,25 @@ class LogicEquation
         return $result;
     }
 
+    private function getIsNotSuccessRepository($sentence)
+    {
+        $result = false;
+        if (isset($this->formStruct['DataRepositories'][ $sentence['repository'] ]['success'])
+            and !$this->formStruct['DataRepositories'][ $sentence['repository'] ]['success'])
+        {
+            $result = true;
+        }
+        return $result;
+    }
 
+    private function getIsSuccessRepository($sentence)
+    {
+        $result = false;
+        if (isset($this->formStruct['DataRepositories'][ $sentence['repository'] ]['success'])
+            and $this->formStruct['DataRepositories'][ $sentence['repository'] ]['success'])
+        {
+            $result = true;
+        }
+        return $result;
+    }
 }
