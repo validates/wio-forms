@@ -1,6 +1,8 @@
 <?php
 namespace WioForms\Service;
 
+use \WioForms\Service\Validation\Container as ContainerValidationService;
+
 class FormSaverService
 {
     private $wioForms;
@@ -12,6 +14,8 @@ class FormSaverService
     function __construct($wioFormsObject){
         $this->wioForms = $wioFormsObject;
         $this->formStruct = &$this->wioForms->formStruct;
+
+        $this->containerValidationService = new ContainerValidationService($wioFormsObject);
 
         $this->clearTemporarySave = false;
     }
@@ -27,15 +31,25 @@ class FormSaverService
 
         foreach ($FormSavers as $FormSaverName => &$FormSaver)
         {
-            $this->validateFormSaver($FormSaver);
+            $valid = $this->validateFormSaver($FormSaver);
+
+            if ($valid)
+            {
+                $this->saveForm($FormSaver);
+
+            }
         }
     }
 
-
     private function validateFormSaver(&$FormSaver)
+    {
+        return $this->containerValidationService->validate($FormSaver);
+    }
+
+
+    private function saveForm(&$FormSaver)
     {
 
 
     }
-
 }

@@ -633,6 +633,7 @@
               {
                   "type": "method",
                   "method": "AllFieldsOk",
+                  "newErrorState": -2,
                   "settings":
                   {
                       "containerToCheck": "_site_2"
@@ -641,7 +642,7 @@
               {
                   "type": "logic",
                   "newState": 1,
-                  "newErrorState": -1,
+                  "newErrorState": -2,
                   "logicEquation":
                   {
                       "type": "equal",
@@ -657,13 +658,25 @@
                           }
                       ]
                   }
+              },
+              {
+                  "type": "method",
+                  "method": "AllFieldsOk",
+                  "settings":
+                  {
+                      "containerToCheck": "RegisterForm"
+                  }
               }
           ],
           "stateActions":
           [
               {
-                  "state": -1,
+                  "state": -2,
                   "actions": ["hide"]
+              },
+              {
+                  "state": -1,
+                  "actions": ["show"]
               },
               {
                   "state": 1,
@@ -746,6 +759,7 @@
             [
                 {
                     "type": "method",
+                    "newErrorState": -2,
                     "method": "AllFieldsOk",
                     "settings":
                     {
@@ -755,7 +769,7 @@
                 {
                     "type": "logic",
                     "newState": 1,
-                    "newErrorState": -1,
+                    "newErrorState": -2,
                     "logicEquation":
                     {
                         "type": "or",
@@ -781,13 +795,25 @@
                             }
                         ]
                     }
+                },
+                {
+                    "type": "method",
+                    "method": "AllFieldsOk",
+                    "settings":
+                    {
+                        "containerToCheck": "RegisterData"
+                    }
                 }
             ],
             "stateActions":
             [
                 {
-                    "state": -1,
+                    "state": -2,
                     "actions": ["hide"]
+                },
+                {
+                    "state": -1,
+                    "actions": ["show"]
                 },
                 {
                     "state": 1,
@@ -830,7 +856,6 @@
         }
     },
 
-
     "FormSavers":
     {
         "finalSave":
@@ -838,36 +863,71 @@
 
             "clearTemporarySave": true,
             "validationPHP":
-            {
-                "type": "logic",
-                "newState": 1,
-                "newErrorState": -1,
-                "logicEquation":
+            [
                 {
-                    "type": "or",
-                    "data":
-                    [
-                        {
-                            "type": "equal",
-                            "data":
-                            [
-                                {
-                                    "type": "fieldValue",
-                                    "field": "login_switch"
-                                },
-                                {
-                                    "type": "const",
-                                    "const": "new_account"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "isSuccessRepository",
-                            "repository": "wioUsers"
-                        }
-                    ]
+                    "type": "logic",
+                    "newState": 1,
+                    "newErrorState": -1,
+                    "logicEquation":
+                    {
+                        "type": "and",
+                        "data":
+                        [
+                            {
+                                "type": "isValidContainer",
+                                "container": "Site2"
+                            },
+                            {
+                                "type": "isValidContainer",
+                                "container": "Site3"
+                            },
+                            {
+                                "type": "isValidContainer",
+                                "container": "Site4"
+                            },
+                            {
+                                "type": "or",
+                                "data":
+                                [
+                                    {
+                                        "type": "and",
+                                        "data":
+                                        [
+                                            {
+                                                "type": "equal",
+                                                "data":
+                                                [
+                                                    {
+                                                        "type": "fieldValue",
+                                                        "field": "login_switch"
+                                                    },
+                                                    {
+                                                        "type": "const",
+                                                        "const": "new_account"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "isValidContainer",
+                                                "container": "RegisterForm"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "isSuccessRepository",
+                                        "repository": "wioUsers"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "isValidContainer",
+                                "container": "RegisterData"
+
+                            }
+                        ]
+                    }
                 }
-            }
+            ]
         }
     }
 }

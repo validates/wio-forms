@@ -47,6 +47,10 @@ class LogicEquation
                 $result = $this->getIsValidField($sentence); break;
             case 'isNotValidField':
                 $result = $this->getIsNotValidField($sentence); break;
+            case 'isValidContainer':
+                $result = $this->getIsValidContainer($sentence); break;
+            case 'isNotValidContainer':
+                $result = $this->getIsNotValidContainer($sentence); break;
             case 'isSuccessRepository':
                 $result = $this->getIsSuccessRepository($sentence); break;
             case 'isNotSuccessRepository':
@@ -129,6 +133,28 @@ class LogicEquation
         $result = false;
         if (isset($this->formStruct['Fields'][ $sentence['field'] ]['valid'])
             and $this->formStruct['Fields'][ $sentence['field'] ]['valid'])
+        {
+            $result = true;
+        }
+        return $result;
+    }
+
+    private function getIsNotValidContainer($sentence)
+    {
+        $result = false;
+        if (isset($this->formStruct['Containers'][ $sentence['container'] ]['valid'])
+            and !$this->formStruct['Containers'][ $sentence['container'] ]['valid'])
+        {
+            $result = true;
+        }
+        return $result;
+    }
+
+    private function getIsValidContainer($sentence)
+    {
+        $result = false;
+        if (isset($this->formStruct['Containers'][ $sentence['container'] ]['valid'])
+            and $this->formStruct['Containers'][ $sentence['container'] ]['valid'])
         {
             $result = true;
         }
