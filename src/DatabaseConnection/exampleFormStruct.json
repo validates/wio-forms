@@ -86,6 +86,10 @@
         "AllFieldsOk":
         {
             "class": "AllFieldsOk"
+        },
+        "FormSaverOk":
+        {
+            "class": "FormSaverOk"
         }
     },
     "ContainerValidatorsJS": {},
@@ -527,6 +531,36 @@
                 }
             ]
         },
+        "Site5":
+        {
+            "site": 4,
+            "container": "_site",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "Dziękujemy za wypełnienie formularza",
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "FormSaverOk",
+                    "settings":
+                    {
+                        "formSaverToCheck": "finalSave"
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
         "LoginForm":
         {
             "site": 3,
@@ -792,7 +826,48 @@
             "container": "Site4",
             "position": 4,
             "displayType": "Button1",
-            "title": "Dalej - site:3"
+            "title": "Wyślij formularz"
+        }
+    },
+
+
+    "FormSavers":
+    {
+        "finalSave":
+        {
+
+            "clearTemporarySave": true,
+            "validationPHP":
+            {
+                "type": "logic",
+                "newState": 1,
+                "newErrorState": -1,
+                "logicEquation":
+                {
+                    "type": "or",
+                    "data":
+                    [
+                        {
+                            "type": "equal",
+                            "data":
+                            [
+                                {
+                                    "type": "fieldValue",
+                                    "field": "login_switch"
+                                },
+                                {
+                                    "type": "const",
+                                    "const": "new_account"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "isSuccessRepository",
+                            "repository": "wioUsers"
+                        }
+                    ]
+                }
+            }
         }
     }
 }

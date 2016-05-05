@@ -17,6 +17,7 @@ use WioForms\Service\ClassFinderService;
 use WioForms\Service\StyleManagementService;
 use WioForms\Service\HeaderCollectorService;
 use WioForms\Service\EntryCollectorService;
+use WioForms\Service\FormSaverService;
 
 
 class WioForms
@@ -46,6 +47,7 @@ class WioForms
     public $styleManagementService;
     public $headerCollectorService;
     public $entryCollectorService;
+    public $formSaverService;
 
 
     function __construct($localSettings = false){
@@ -69,7 +71,7 @@ class WioForms
         $this->styleManagementService     = new StyleManagementService($this);
         $this->headerCollectorService     = new HeaderCollectorService($this);
         $this->entryCollectorService      = new EntryCollectorService($this);
-
+        $this->formSaverService           = new FormSaverService($this);
 
         if ($this->databaseService->setConnections() === false)
         {
@@ -109,24 +111,21 @@ class WioForms
 
         $this->entryCollectorService->collectEntries($partialEntryData);
 
-        $this->validatorService->validateFields();
 
+        $this->validatorService->validateFields();
         $this->dataRepositoryService->getForeignDataRepositories();
-
         $this->entryCollectorService->getDefaultValuesFromDataRepositories();
-
         $this->validatorService->validateFields();
 
+
+        $this->validatorService->validateContainers();
+        $this->formSaverService->tryFormSavers();
         $this->validatorService->validateContainers();
 
 
-        $isFormValid = $this->validatorService->checkFormValidity();
-
-
-        if (false) // We wanna save this form now
+        if ($this->formSaverService->getClearTemporarySave())
         {
             $this->temporarySave->clearFormData();
-            // here we perform saving action
         }
         else
         {

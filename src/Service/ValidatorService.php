@@ -26,30 +26,6 @@ class ValidatorService
         $this->PHPvalidators = [];
     }
 
-    public function checkFormValidity()
-    {
-        $formValidity = true;
-
-        foreach ($this->formStruct['Fields'] as $fieldName => $field)
-        {
-            if (!$field['valid'])
-            {
-                $formValidity = false;
-                break;
-            }
-        }
-
-        foreach ($this->formStruct['Containers'] as $containerName => $container)
-        {
-            if (!$container['valid'])
-            {
-                $formValidity = false;
-                break;
-            }
-        }
-        return $formValidity;
-    }
-
     public function validateFields()
     {
         foreach ($this->formStruct['Fields'] as $fieldName => $field)

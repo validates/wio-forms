@@ -6,8 +6,8 @@ class AllFieldsOk extends AbstractContainerValidator
 
     public function validatePHP(&$container, &$settings)
     {
-
-        $valid = true;
+        $this->invalidMessage = 'fill_all_fields';
+        $this->valid = true;
 
         if (isset($settings['containerToCheck']))
         {
@@ -26,7 +26,7 @@ class AllFieldsOk extends AbstractContainerValidator
                         {
                             if ($this->wioForms->formStruct['Fields'][ $elem['name'] ]['state'] < 1)
                             {
-                                $valid = false;
+                                $this->valid = false;
                                 break;
                             }
                         }
@@ -36,25 +36,14 @@ class AllFieldsOk extends AbstractContainerValidator
                         }
                     }
                 }
-                if (!$valid)
+                if (!$this->valid)
                 {
                     break;
                 }
             }
         }
 
-        if ($valid)
-        {
-            $this->state = 1;
-            $this->valid = true;
-        }
-        else
-        {
-            $this->state = -1;
-            $this->valid = false;
-            $this->message = 'fill_all_fields';
-        }
-
+        $this->setAnswer();
         return $this->getReturn();
     }
 

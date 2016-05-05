@@ -27,16 +27,6 @@ abstract class AbstractFieldValidator
     abstract function validatePHP($value, $settings);
 
 
-    protected function getReturn()
-    {
-        $array = [
-            'valid'   => $this->valid,
-            'state'   => $this->state,
-            'message' => $this->message
-        ];
-        return $array;
-    }
-
     protected function setAnswer()
     {
         if ($this->valid)
@@ -50,6 +40,16 @@ abstract class AbstractFieldValidator
             $this->message = $this->invalidMessage;
         }
 
+    }
+
+    protected function getReturn()
+    {
+        $array = [
+            'valid'   => $this->valid,
+            'state'   => $this->state,
+            'message' => $this->message
+        ];
+        return $array;
     }
 
     public function print_validateJS()
