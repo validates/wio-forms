@@ -23,8 +23,6 @@ class DataRepositoryService
                 $this->getForeignDataRepository($dataRepositoryName);
             }
         }
-
-        var_dump($this->formStruct['DataRepositories']);
     }
 
     private function getForeignDataRepository($dataRepositoryName)

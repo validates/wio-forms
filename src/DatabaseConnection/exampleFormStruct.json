@@ -388,7 +388,7 @@
             {
                 "repositoryName": "wioUsers",
                 "subset": ["plec"],
-                "converter": "Plec2Gender"
+                "converter": "Sex2Gender"
             }
         },
         "agreement_1":

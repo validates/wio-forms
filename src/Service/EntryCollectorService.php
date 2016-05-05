@@ -68,7 +68,7 @@ class EntryCollectorService
         $repositoryName = $field['defaultValue']['repositoryName'];
         if (!$this->formStruct['DataRepositories'][$repositoryName]['success'])
         {
-            $this->wioForms->errorLog->errorLog('getDefaultValue: Repository '.$repositoryName.' not ended with success.');
+            $this->wioForms->errorLog->errorLog('getDefaultValue: Repository "'.$repositoryName.'" not ended with success.');
             return false;
         }
 

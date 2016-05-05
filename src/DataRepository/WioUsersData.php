@@ -8,7 +8,6 @@ class WioUsersData extends AbstractDataRepository
 
     function getData($requiredFields)
     {
-        var_dump($this->repositoryDefinition);
         $this->repositoryDefinition['tried'] = true;
 
         $data = [];
@@ -27,7 +26,6 @@ class WioUsersData extends AbstractDataRepository
             $this->repositoryDefinition['success'] = true;
         }
 
-        var_dump($this->repositoryDefinition);
         return $data;
     }
 
