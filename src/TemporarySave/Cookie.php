@@ -20,7 +20,11 @@ class Cookie extends AbstractTemporarySave
 
         if (isset($_COOKIE['_wioFormsTemporaryData']))
         {
-            $savedData = get_object_vars(json_decode($_COOKIE['_wioFormsTemporaryData']));
+            $decoded_cookie = json_decode($_COOKIE['_wioFormsTemporaryData']);
+            if(is_object($decoded_cookie))
+            {
+                $savedData = get_object_vars($decoded_cookie);
+            }
         }
 
         return $savedData;

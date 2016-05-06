@@ -18,7 +18,7 @@ class OtherConnection extends AbstractDatabaseConnection
         $this->isConnected = true;
     }
 
-    function save($queryTable)
+    function insert($queryData)
     {
         if (!$this->isConnected)
         {
@@ -26,7 +26,7 @@ class OtherConnection extends AbstractDatabaseConnection
         }
     }
 
-    function update($queryTable)
+    function update($queryData)
     {
         if (!$this->isConnected)
         {
@@ -34,7 +34,7 @@ class OtherConnection extends AbstractDatabaseConnection
         }
     }
 
-    function select($queryTable)
+    function select($queryData)
     {
         if (!$this->isConnected)
         {
@@ -42,7 +42,7 @@ class OtherConnection extends AbstractDatabaseConnection
         }
     }
 
-    function selectOne($queryTable)
+    function selectOne($queryData)
     {
         if (!$this->isConnected)
         {

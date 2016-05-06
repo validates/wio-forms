@@ -13,7 +13,7 @@ class Field
         $this->wioForms = $wioFormsObject;
         $this->formStruct = &$this->wioForms->formStruct;
 
-        $this->formSave = $formSaverServiceObject;
+        $this->formSaver = $formSaverServiceObject;
     }
 
 
@@ -50,6 +50,7 @@ class Field
         }
 
         $entries = $this->formSaver->databaseEntries[ $saveField['table'] ];
+
         return $entries[ count($entries)-1 ];
     }
 

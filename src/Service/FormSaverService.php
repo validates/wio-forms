@@ -12,11 +12,14 @@ class FormSaverService
 
     private $clearTemporarySave;
 
-    private $databaseEntries;
+    public $databaseEntries;
 
     private $fieldSaver;
 
-    function __construct($wioFormsObject){
+    private $databaseConneciton;
+
+    function __construct($wioFormsObject)
+    {
         $this->wioForms = $wioFormsObject;
         $this->formStruct = &$this->wioForms->formStruct;
 
@@ -27,6 +30,8 @@ class FormSaverService
         $this->databaseEntries = [];
 
         $this->fieldSaver = new FieldSaverService($wioFormsObject, $this);
+
+        $this->databaseConnection = false;
     }
 
     public function getClearTemporarySave()
@@ -58,6 +63,7 @@ class FormSaverService
 
     private function saveForm(&$FormSaver)
     {
+        $this->setDatabaseConnection($FormSaver);
         $this->saveEntry();
 
         foreach ($FormSaver['DatabaseSaves'] as &$databaseSave)
@@ -71,6 +77,16 @@ class FormSaverService
         }
 
         $this->updateDatabaseEntries();
+
+        if (isset($FormSaver['clearTemporarySave']))
+        {
+            $this->clearTemporarySave = $FormSaver['clearTemporarySave'];
+        }
+    }
+
+    private function setDatabaseConnection(&$FormSaver)
+    {
+        $this->databaseConnection = $this->wioForms->databaseService->connections[ $FormSaver['databaseConnection'] ];
     }
 
     private function validateDatabaseSave(&$databaseSave)
@@ -102,11 +118,9 @@ class FormSaverService
             ]
         ];
 
-        // ... DatabaseQuery?
-        $insertedId = 1337;
+        $insertedId = $this->databaseConnection->insert($query);
 
         $this->databaseEntries['wio_forms_entries'][0] = $insertedId;
-
     }
 
     private function updateDatabaseEntries()
@@ -133,7 +147,7 @@ class FormSaverService
                 ]
             ];
 
-            // ... DatabaseQuery?
+            $this->databaseConnection->update($query);
         }
     }
 
@@ -158,8 +172,8 @@ class FormSaverService
             }
         }
 
-        //... DatabaseQuery?
-        $insertedId = 1337;
+        $insertedId = $this->databaseConnection->insert($query);
+
         $this->databaseEntries[ $databaseSave['tableName'] ][] = $insertedId;
     }
 

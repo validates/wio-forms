@@ -862,6 +862,7 @@
         {
 
             "clearTemporarySave": true,
+            "databaseConnection": "Main",
             "validationPHP":
             [
                 {
@@ -930,7 +931,6 @@
             [
                 {
                     "type": "insert",
-                    "databaseConnection": "Main",
                     "tableName": "wio_users",
                     "validationPHP":
                     [
@@ -971,7 +971,6 @@
                 },
                 {
                     "type": "insert",
-                    "databaseConnection": "Main",
                     "tableName": "wio_users",
                     "validationPHP":
                     [
@@ -1011,7 +1010,6 @@
                 },
                 {
                     "type": "insert",
-                    "databaseConnection": "Main",
                     "tableName": "user_basic_data",
                     "fields":
                     {

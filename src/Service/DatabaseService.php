@@ -7,7 +7,7 @@ class DatabaseService
     public $settings;
     public $formStruct;
 
-    private $connections;
+    public $connections;
 
     function __construct($wioFormsObject)
     {
@@ -31,10 +31,10 @@ class DatabaseService
         $databaseQuery =
         [
             'table' => 'wio_form_struct',
-            'where' => 'formStructId == "'.$formDataStructId.'"',
+            'where' => ['formStructId' => $formDataStructId ]
         ];
 
-        $queryResult = $this->connections['Main']->SelectOne($databaseQuery);
+        $queryResult = $this->connections['Main']->selectOne($databaseQuery);
 
         if ($queryResult == 'false')
         {
@@ -68,39 +68,5 @@ class DatabaseService
         }
         return true;
     }
-
-
-    /*
-    used for saveEntry() and updateEntry()
-    produces FormEntry format from $postData
-    */
-    private function getEntryFromPost($postData){}
-
-
-    /*
-    Used by submit()
-    It uses main channel of DB communication and puts FormEntry there
-    */
-    private function saveEntry($formEntryFormat){}
-
-    /*
-    Used by submit()
-    It uses main channel of DB communication and puts FormEntry there
-    */
-    private function updateEntry($formEntryFormat){}
-
-
-    /*
-    this function collects all DatabaseStore Input and Update queries
-    it saves them to database by DatabaseStore connections
-    */
-    private function advancedEntrySave($postData){}
-
-
-    /*
-    makes similar thing to DatabaseStore_save()
-    changes Input queries for Update queries
-    */
-    private function advancedEntryUpdate($postData){}
 
 }
