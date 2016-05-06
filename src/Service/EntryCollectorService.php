@@ -58,6 +58,7 @@ class EntryCollectorService
             if (isset($field['defaultValue'])
               and empty($field['value']))
             {
+                $field['waitForDefaultValue'] = true;
                 $this->getDefaultValue($field);
             }
         }
@@ -105,6 +106,7 @@ class EntryCollectorService
 
 
         $field['value'] = $value;
+        unset($field['waitForDefaultValue']);
     }
 
 }

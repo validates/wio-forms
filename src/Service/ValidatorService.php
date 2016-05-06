@@ -9,9 +9,6 @@ class ValidatorService
     public $wioForms;
     public $formStruct;
 
-    # Holds data to Validate
-    public $entryData;
-
     private $containerValidationService;
     private $fieldValidationService;
 
@@ -28,9 +25,14 @@ class ValidatorService
 
     public function validateFields()
     {
-        foreach ($this->formStruct['Fields'] as $fieldName => $field)
+        foreach ($this->formStruct['Fields'] as $fieldName => &$field)
         {
-            $this->fieldValidationService->validate($fieldName);
+            if (!$field['waitForDefaultValue']
+                and !$field['validated'])
+            {
+                $this->fieldValidationService->validate($fieldName);
+                $field['validated'] = true;
+            }
         }
     }
 
@@ -65,9 +67,9 @@ class ValidatorService
 
     public function getLastEditedSite()
     {
-        if (isset($this->entryData['_wioFormsSite']))
+        if (isset($this->wioForms->entryData['_wioFormsSite']))
         {
-            return (Int)($this->entryData['_wioFormsSite'])+1;
+            return (Int)($this->wioForms->entryData['_wioFormsSite'])+1;
         }
         return 0;
     }

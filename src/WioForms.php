@@ -38,6 +38,10 @@ class WioForms
     # Lists of information what Field and Container lays where
     public $containersContains;
 
+    # Holds entryData
+    public $entryData;
+
+
     # WioForms Service Objects
     public $rendererService;
     public $dataRepositoryService;

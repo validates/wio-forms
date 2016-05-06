@@ -11,12 +11,12 @@ class ReCaptcha extends AbstractFieldValidator
         $this->invalidMessage = 'enter_captcha';
         $isValid = false;
 
-        if (isset($this->wioForms->validatorService->entryData['g-recaptcha-response']))
+        if (isset($this->wioForms->entryData['g-recaptcha-response']))
         {
             $client = new Client();
             $requestData['form_params'] = [
                 'secret' => $this->wioForms->settings['ReCaptcha']['SecretKey'],
-                'response'=> $this->wioForms->validatorService->entryData['g-recaptcha-response']
+                'response'=> $this->wioForms->entryData['g-recaptcha-response']
             ];
 
             $responsePOST = $client->request('POST', 'https://www.google.com/recaptcha/api/siteverify', $requestData)->getBody()->getContents();
@@ -34,5 +34,4 @@ class ReCaptcha extends AbstractFieldValidator
         $this->setAnswer();
         return $this->getReturn();
     }
-
 }
