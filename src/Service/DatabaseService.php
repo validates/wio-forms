@@ -104,24 +104,3 @@ class DatabaseService
     private function advancedEntryUpdate($postData){}
 
 }
-
-/*
-CREATE TABLE `WioForms_struct` (
-    `formStructId` VARCHAR(128) NOT NULL ,
-    `name` VARCHAR(128) NOT NULL ,
-    `used` TINYINT(4) NOT NULL ,
-    `dataStruct` TEXT NOT NULL ,
-    PRIMARY KEY (`formStructId`)
-) ENGINE = InnoDB;
-
-CREATE TABLE `WioForms_entries` (
-    `id` INT(11) NOT NULL AUTO_INCREMENT,
-    `formStructId` VARCHAR(128) NOT NULL ,
-    `dateAdded`
-    `previousVersion`
-    `isCurrentVersion`
-    `entryDatat` TEXT NOT NULL ,
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB;
-
-*/

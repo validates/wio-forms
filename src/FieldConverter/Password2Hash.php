@@ -1,5 +1,5 @@
 <?php
-namespace WioForms\FieldConverter
+namespace WioForms\FieldConverter;
 
 class Password2Hash extends AbstractFieldConverter
 {

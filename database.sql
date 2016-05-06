@@ -15,6 +15,7 @@ CREATE TABLE `wio_forms_entries` (
     `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ,
     `previous_version` INT(11) NOT NULL ,
     `is_current_version` INT(3) NOT NULL ,
+    `database_entries` TEXT NOT NULL ,
     `entry_data` TEXT NOT NULL ,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
