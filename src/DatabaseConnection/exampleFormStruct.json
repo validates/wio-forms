@@ -866,8 +866,6 @@
             [
                 {
                     "type": "logic",
-                    "newState": 1,
-                    "newErrorState": -1,
                     "logicEquation":
                     {
                         "type": "and",
@@ -925,6 +923,129 @@
 
                             }
                         ]
+                    }
+                }
+            ],
+            "DatabaseSaves":
+            [
+                {
+                    "type": "insert",
+                    "databaseConnection": "Main",
+                    "tableName": "wio_users",
+                    "validationPHP":
+                    [
+                        {
+                            "type": "logic",
+                            "logicEquation":
+                            {
+                                "type": "equal",
+                                "data":
+                                [
+                                    {
+                                        "type": "fieldValue",
+                                        "field": "login_switch"
+                                    },
+                                    {
+                                        "type": "const",
+                                        "const": "have_account"
+                                    }
+                                ]
+                            }
+                        }
+
+                    ],
+                    "fields":
+                    {
+                        "email":
+                        {
+                            "type": "field",
+                            "field": "login_email"
+                        },
+                        "password":
+                        {
+                            "type": "field",
+                            "field": "login_password",
+                            "converter": "Password2Hash"
+                        }
+                    }
+                },
+                {
+                    "type": "insert",
+                    "databaseConnection": "Main",
+                    "tableName": "wio_users",
+                    "validationPHP":
+                    [
+                        {
+                            "type": "logic",
+                            "logicEquation":
+                            {
+                                "type": "equal",
+                                "data":
+                                [
+                                    {
+                                        "type": "fieldValue",
+                                        "field": "login_switch"
+                                    },
+                                    {
+                                        "type": "const",
+                                        "const": "new_account"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "fields":
+                    {
+                        "email":
+                        {
+                            "type": "field",
+                            "field": "register_login"
+                        },
+                        "password":
+                        {
+                            "type": "field",
+                            "field": "register_password",
+                            "converter": "Password2Hash"
+                        }
+                    }
+                },
+                {
+                    "type": "insert",
+                    "databaseConnection": "Main",
+                    "tableName": "user_basic_data",
+                    "fields":
+                    {
+                        "wio_user_id":
+                        {
+                            "type": "insertedId",
+                            "table": "wio_users"
+                        },
+                        "wio_flow_id":
+                        {
+                            "type": "const",
+                            "const": "1"
+                        },
+                        "name":
+                        {
+                            "type": "field",
+                            "field": "register_name"
+                        },
+                        "surname":
+                        {
+                            "type": "field",
+                            "field": "register_surname"
+                        },
+                        "gender":
+                        {
+                            "type": "field",
+                            "field": "register_gender"
+                        },
+                        "birth_date":
+                        {
+                            "type": "field",
+                            "field": "register_date",
+                            "converter": "DatePicker2DateTime"
+                        }
                     }
                 }
             ]
