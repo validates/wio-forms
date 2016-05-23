@@ -19,6 +19,9 @@ $localSettings = [
         "SiteKey" => $GoogleReCaptchaSiteKey,
         "SecretKey" => $GoogleReCaptchaSecretKey
     ],
+    "GoogleMapsApi" => [
+        "Key" => $GoogleMapsApiKey
+    ],
     "SrcDir" => ''
 ];
 

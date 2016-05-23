@@ -6,13 +6,18 @@ class PasswordInput extends AbstractFieldRenderer
 
     function showToEdit()
     {
+        $this->html = '';
+        $this->inputContainerHead();
+        $this->standardErrorDisplay();
+        $this->inputTitleContainer();
+        $this->inputFieldContainerHead();
 
-        $html = $this->fieldInfo['title']. ': <input type="password" name="'.$this->fieldName.'" value="'.$this->value.'" />';
+        $this->html .= '<input type="password" name="'.$this->fieldName.'" value="'.$this->value.'" />';
 
-        $html .= $this->standardErrorDisplay();
-        $html .= '<br/>';
+        $this->inputFieldContainerTail();
+        $this->inputContainerTail();
 
-        return $html;
+        return $this->html;
     }
 
     function showToView()

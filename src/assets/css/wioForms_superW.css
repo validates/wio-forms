@@ -1,0 +1,116 @@
+form.wioForms_Form{
+    background-color: white;
+    margin: 0px 80px;
+}
+
+
+form.wioForms_Form div.wioForms_container{
+    position: relative;
+}
+
+.wioForms_Form div.wioForms_container .wioForms_ContainerTitle{
+    font-size: 32px;
+}
+
+
+.wioForms_Form div.wioForms_InputContainer{
+    position: relative;
+    margin: 10px 0px;
+}
+.wioForms_Form div.wioForms_InputTitleContainer{
+    color: black;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.wioForms_Form .wioForms_AgreementWithText div.wioForms_InputTitleContainer{
+
+}
+
+.wioForms_Form .wioForms_InputFieldContainer input{
+    border-radius: 0px;
+    border: 1px solid black;
+    font-size: 18px;
+    width: 300px;
+    padding: 4px 3px;
+    margin: 2px 0px;
+}
+
+.wioForms_Form .wioForms_InputFieldContainer input[type='checkbox']{
+    border-radius: 0px;
+    border: 1px solid black;
+    font-size: 18px;
+    width: 50px;
+    padding: 4px 3px;
+}
+
+.wioForms_Form .wioForms_AgreementWithText .wioForms_InputFieldContainer input[type='checkbox']{
+    float: left;
+}
+
+.wioForms_Form .wioForms_InputLongerText{
+    font-size: 70%;
+}
+
+.wioForms_Form .wioForms_InputContainer .wioForms_ErrorMessage{
+    color: red;
+    position: relative;
+    font-size: 13px;
+    padding: 11px 20px;
+    box-shadow: 3px 3px 10px #ddd, -3px 3px 10px #ddd, 3px -3px 10px #ddd, -3px -3px 10px #ddd;
+    border-radius: 8px;
+    margin: 5px 0px 10px;
+}
+.wioForms_Form .wioForms_InputContainer .wioForms_ErrorMessage:after{
+    position: absolute;
+    display: block;
+    content: ' ';
+    bottom: -10px;
+    left: 50%;
+    width: 0px;
+    height: 0px;
+    border-top: 10px solid white;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+}
+
+
+.wioForms_Form button.wioForms_Button{
+    background: #008800;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 16px 26px;
+    margin: 5px 20px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 6px;
+    border-bottom: 3px solid #004400;
+}
+.wioForms_Form button.wioForms_Button:hover{
+    background: #00aa00;
+}
+
+.wioForms_Form button.wioForms_Button.colorRed{
+    background: #ed5141;
+    border-bottom: 3px solid #db0812;
+}
+.wioForms_Form button.wioForms_Button.colorRed:hover{
+    background: #ea6b45;
+}
+
+.wioForms_Form button.wioForms_Button.width250{
+    min-width: 250px;
+}
+
+.wioForms_Form .wioForms_Container_ToCenter{
+
+    text-align: center;
+}
+
+.wioForms_Form .wioForms_Map{
+    width: 700px;
+    height: 600px;
+
+}

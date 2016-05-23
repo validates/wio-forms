@@ -13,9 +13,17 @@
         "preferred-install": "dist"
     },
     "minimum-stability": "stable",
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/wiosna-dev/wio-struct.git"
+        }
+    ],
     "require": {
         "guzzlehttp/guzzle": "^6.1",
-        "usmanhalalit/pixie": "dev-master#9555c41"
+        "usmanhalalit/pixie": "dev-master#9555c41",
+        "wiosna-dev/wio-struct": "dev-master#55ee57f"
+
     },
     "autoload": {
         "psr-4": {"WioForms\\": "src/"}

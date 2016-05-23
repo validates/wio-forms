@@ -6,12 +6,18 @@ class TextInput extends AbstractFieldRenderer
 
     function showToEdit()
     {
-        $html = $this->fieldInfo['title']. ': <input type="text" name="'.$this->fieldName.'" value="'.$this->value.'" />';
+        $this->html = '';
+        $this->inputContainerHead();
+        $this->standardErrorDisplay();
+        $this->inputTitleContainer();
+        $this->inputFieldContainerHead();
 
-        $html .= $this->standardErrorDisplay();
-        $html .= '<br/>'."\n";
+        $this->html .= '<input type="text" name="'.$this->fieldName.'" value="'.$this->value.'" />';
 
-        return $html;
+        $this->inputFieldContainerTail();
+        $this->inputContainerTail();
+
+        return $this->html;
     }
 
     function showToView()

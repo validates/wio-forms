@@ -6,14 +6,17 @@ class Select extends AbstractFieldRenderer
 
     function showToEdit()
     {
+        $this->html = '';
         $this->prepareDataSet();
+        $this->inputContainerHead();
+        $this->standardErrorDisplay();
+        $this->inputTitleContainer();
+        $this->inputFieldContainerHead();
 
-        $html = '';
-        $html .= $this->fieldInfo['title'].': ';
 
-        $html .= '<select name="'.$this->fieldName.'">';
+        $this->html .= '<select name="'.$this->fieldName.'">';
 
-        $html .= '<option value="">wybierz</option>';
+        $this->html .= '<option value="">wybierz</option>';
         foreach ($this->dataSet as $option => $option_name)
         {
             $selected = '';
@@ -21,12 +24,13 @@ class Select extends AbstractFieldRenderer
             {
                 $selected = ' selected="selected"';
             }
-            $html .= '<option value="'.$option.'"'.$selected.'>'.$option_name.'</option>';
+            $this->html .= '<option value="'.$option.'"'.$selected.'>'.$option_name.'</option>';
         }
-        $html .= '</select>';
+        $this->html .= '</select>';
 
-        $html .= $this->standardErrorDisplay();
-        $html .= '<br/>'."\n";
+
+        $this->inputFieldContainerTail();
+        $this->inputContainerTail();
 
         return $html;
     }

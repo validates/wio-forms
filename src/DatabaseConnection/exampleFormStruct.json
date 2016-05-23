@@ -155,7 +155,7 @@
             "type": "ChooseOneButton",
             "container": "Site3",
             "position": 1,
-            "title": "Wybierz opcję",
+            "title": "Czy masz już konto w systemie SZLACHETNEJ PACZKI lub AKADEMII PRZYSZŁOŚCI?",
             "state": 0,
             "save": true,
             "dataSet":

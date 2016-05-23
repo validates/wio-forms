@@ -16,6 +16,8 @@ abstract class AbstractFieldRenderer
     # data prepared by prepareDataSet method
     protected $dataSet;
 
+    protected $html;
+
     function __construct($fieldName, $wioFormsObject)
     {
         $this->fieldName = $fieldName;
@@ -66,15 +68,38 @@ abstract class AbstractFieldRenderer
         }
     }
 
-    protected function standardErrorDisplay($html_after = '')
+
+
+
+    protected function inputContainerHead($additional_class = '')
     {
-        $html ='';
+        $this->html .= '<div class="wioForms_InputContainer '.$additional_class.'">'."\n";
+    }
+    protected function inputContainerTail()
+    {
+        $this->html .= '</div>'."\n";
+    }
+    protected function inputFieldContainerHead()
+    {
+        $this->html .= '<div class="wioForms_InputFieldContainer">'."\n";
+    }
+    protected function inputFieldContainerTail()
+    {
+        $this->html .= '</div>'."\n";
+    }
+
+
+    protected function inputTitleContainer()
+    {
+        $this->html .= '<div class="wioForms_InputTitleContainer">'.$this->fieldInfo['title'].': </div>'."\n";
+    }
+
+    protected function standardErrorDisplay()
+    {
         if ($this->message !== false)
         {
-            $html .= '<b style="color: red;"> &nbsp; '.$this->message.'</b>';
-            $html .= $html_after;
+            $this->html .= '<div class="wioForms_ErrorMessage">'.$this->message.'</div>'."\n";
         }
-        return $html;
     }
 
     abstract function showToEdit();

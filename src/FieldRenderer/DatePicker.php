@@ -6,8 +6,7 @@ class DatePicker extends AbstractFieldRenderer
 
     function showToEdit()
     {
-        $html = '';
-
+        $this->html = '';
         $this->wioForms->headerCollectorService->addJS('assets/js/jquery-1.12.3.min.js');
         $this->wioForms->headerCollectorService->addJS('assets/js/jquery-ui.min.js');
         $this->wioForms->headerCollectorService->addJS('assets/js/jquery-ui.datepicker-pl.js');
@@ -15,16 +14,18 @@ class DatePicker extends AbstractFieldRenderer
         $this->wioForms->headerCollectorService->addCss('assets/jquery-ui.structure.min.css');
         $this->wioForms->headerCollectorService->addCss('assets/jquery-ui.theme.min.css');
 
-        $html .= '<script type="text/javascript">$(function(){ $(".datePicker_'.$this->fieldName.'").datepicker(); });</script>';
+        $this->inputContainerHead();
+        $this->standardErrorDisplay();
+        $this->inputTitleContainer();
+        $this->inputFieldContainerHead();
 
-        $html .= $this->fieldInfo['title'].': ';
+        $this->html .= '<script type="text/javascript">$(function(){ $(".datePicker_'.$this->fieldName.'").datepicker(); });</script>';
+        $this->html .= '<input type="input" name="'.$this->fieldName.'" class="datePicker_'.$this->fieldName.'" value="'.$this->value.'" />';
 
-        $html .= '<input type="input" name="'.$this->fieldName.'" class="datePicker_'.$this->fieldName.'" value="'.$this->value.'" />';
+        $this->inputFieldContainerTail();
+        $this->inputContainerTail();
 
-        $html .= $this->standardErrorDisplay();
-        $html .= '<br/>'."\n";
-
-        return $html;
+        return $this->html;
     }
 
     function showToView()

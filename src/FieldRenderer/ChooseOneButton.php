@@ -8,18 +8,27 @@ class ChooseOneButton extends AbstractFieldRenderer
     {
         $this->prepareDataSet();
 
-        $html = '';
-        $html .= $this->fieldInfo['title'].': ';
+        $this->html = '';
+        $this->inputContainerHead('wioForms_Container_ToCenter');
+        $this->standardErrorDisplay();
+        $this->inputTitleContainer();
+        $this->inputFieldContainerHead();
 
         foreach ($this->dataSet as $option => $option_name)
         {
-            $html .= '<button type="submit" name="'.$this->fieldName.'" value="'.$option.'">'.$option_name.'</button>';
+            $addClass = '';
+            if ($option=='new_account')
+            {
+                $addClass = ' colorRed';
+            }
+
+            $this->html .= '<button type="submit" class="wioForms_Button width250 '.$addClass.'" name="'.$this->fieldName.'" value="'.$option.'">'.$option_name.'</button>';
         }
 
-        $html .= $this->standardErrorDisplay();
-        $html .= '<br/>'."\n";
+        $this->inputFieldContainerTail();
+        $this->inputContainerTail();
 
-        return $html;
+        return $this->html;
     }
 
     function showToView()

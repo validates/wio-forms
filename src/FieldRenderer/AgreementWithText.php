@@ -6,27 +6,26 @@ class AgreementWithText extends AbstractFieldRenderer
 
     function showToEdit()
     {
-        $html = '';
-
-        $html .= '<div style="width: 35%;">';
-        $html .= $this->standardErrorDisplay('<br/>');
+        $this->html = '';
+        $this->inputContainerHead('wioForms_AgreementWithText');
+        $this->standardErrorDisplay();
+        $this->inputTitleContainer();
+        $this->inputFieldContainerHead();
 
         $checked = '';
         if ($this->value)
         {
             $checked = ' checked="checked"';
         }
-        $html .= '<input type="hidden" name="'.$this->fieldName.'" value="" />';
-        $html .= '<input type="checkbox" name="'.$this->fieldName.'"'.$checked.' value="jest" style="float: left;" /> ';
+        $this->html .= '<input type="hidden" name="'.$this->fieldName.'" value="" />';
+        $this->html .= '<input type="checkbox" name="'.$this->fieldName.'"'.$checked.' value="jest" style="float: left;" /> ';
 
+        $this->html .= '<span class="wioForms_InputLongerText">'.$this->fieldInfo['longer_text'].'</span>';
 
-        $html .= $this->fieldInfo['title'].'<br/>';
-        $html .= '<span style="font-size: 0.7em;">'.$this->fieldInfo['longer_text'].'</span>';
+        $this->inputFieldContainerTail();
+        $this->inputContainerTail();
 
-
-        $html .= '</div>'."\n";
-
-        return $html;
+        return $this->html;
     }
 
     function showToView()

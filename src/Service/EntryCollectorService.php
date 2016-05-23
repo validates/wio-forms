@@ -47,6 +47,9 @@ class EntryCollectorService
                 $fieldEntry = $entryData[ $fieldName ];
             }
             $field['value'] = $fieldEntry;
+
+            $field['waitForDefaultValue'] = false;
+            $field['validated'] = false;
         }
     }
 

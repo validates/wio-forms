@@ -6,12 +6,11 @@ class Hidden extends AbstractFieldRenderer
 
     function showToEdit()
     {
-        $html = '';
-        $html .= '<input type ="hidden" name="'.$this->fieldName.'" value="'.$this->value.'"/>';
+        $this->standardErrorDisplay();
 
-        $this->standardErrorDisplay('<br/>');
+        $this->html = '<input type ="hidden" name="'.$this->fieldName.'" value="'.$this->value.'"/>';
 
-        return $html;
+        return $this->html;
     }
 
     function showToView()
