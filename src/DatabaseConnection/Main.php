@@ -46,10 +46,9 @@ class Main extends AbstractDatabaseConnection
 
     function selectOne($queryData)
     {
-
         if ($queryData['table'] == 'wio_form_struct')
         {
-            $example_file = file_get_contents(__DIR__.'/exampleFormStruct.json');
+            $example_file = file_get_contents(__DIR__.'/example'.$queryData['where']['formStructId'].'.json');
             return ['dataStruct'=> $example_file];
         }
     }

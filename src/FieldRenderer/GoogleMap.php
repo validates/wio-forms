@@ -7,6 +7,7 @@ class GoogleMap extends AbstractFieldRenderer
     function showToEdit()
     {
       $this->html = '';
+      $this->prepareDataSet();
       $this->inputContainerHead();
       $this->standardErrorDisplay();
       $this->inputTitleContainer();
@@ -27,7 +28,7 @@ class GoogleMap extends AbstractFieldRenderer
       var styleArray = [{ featureType: "all", stylers: [{ saturation: -80 }]}];
       function initMap() {
           map = new google.maps.Map(document.getElementById(\'map\'), {
-              center: {lat: 51.5, lng: 19.5},
+              center: {lat: 52, lng: 19.5},
               zoom: 6,
               styles: styleArray,
               mapTypeControl: false,
@@ -38,6 +39,8 @@ class GoogleMap extends AbstractFieldRenderer
 
       $this->html .= '<div id="map" class="wioForms_Map"></div>';
       $this->html .= '<script src="https://maps.googleapis.com/maps/api/js?key='.$this->wioForms->settings['GoogleMapsApi']['Key'].'&callback=initMap" async defer></script>';
+
+
 
 
       $this->inputFieldContainerTail();

@@ -53,6 +53,12 @@
                 "email": "login_email",
                 "password": "login_password"
             }
+        },
+        "wioStruct":
+        {
+            "type": "foreign",
+            "data": false,
+            "class": "WioStructData"
         }
     },
 
@@ -139,10 +145,33 @@
         {
             "type": "GoogleMap",
             "container": "Site2",
-            "position": 1,
+            "position": 2,
             "title": "Miejsce",
             "state": 0,
             "save": true,
+            "dataSet":
+            {
+                "repositoryName": "wioStruct"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "wojewodztwo":
+        {
+            "type": "NodeSelect",
+            "container": "Site2",
+            "position": 3,
+            "title": "Wybierz Województwo",
+            "state": 0,
+            "save": true,
+            "dataSet":
+            {
+                "repositoryName": "wioStruct"
+            },
             "validationPHP":
             [
                 {
@@ -834,7 +863,7 @@
         {
             "site": 1,
             "container": "Site2",
-            "position": 2,
+            "position": 1,
             "displayType": "FullDisplay",
             "title": "TopPoints2 - main:1"
         },
@@ -842,7 +871,7 @@
         {
             "site": 1,
             "container": "Site2",
-            "position": 4,
+            "position": 9,
             "displayType": "Button1",
             "title": "Dalej - site:1"
         },

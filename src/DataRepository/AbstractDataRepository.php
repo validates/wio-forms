@@ -7,6 +7,8 @@ abstract class AbstractDataRepository
     protected $wioForms;
     protected $repositoryDefinition;
 
+    protected $data;
+
     function __construct($wioFormsObject, $repositoryName)
     {
         $this->wioForms = $wioFormsObject;

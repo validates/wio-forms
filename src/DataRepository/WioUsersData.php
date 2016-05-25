@@ -10,23 +10,23 @@ class WioUsersData extends AbstractDataRepository
     {
         $this->repositoryDefinition['tried'] = true;
 
-        $data = [];
+        $this->data = [];
 
         $apiService = new ApiService();
-        $data = $apiService->getData($requiredFields['email'], $requiredFields['password']);
+        $this->data = $apiService->getData($requiredFields['email'], $requiredFields['password']);
 
-        if (empty($data))
+        if (empty($this->data))
         {
             $this->repositoryDefinition['success'] = false;
             $this->repositoryDefinition['message'] = 'login_failed';
-            $data = false;
+            $this->data = false;
         }
         else
         {
             $this->repositoryDefinition['success'] = true;
         }
 
-        return $data;
+        return $this->data;
     }
 
 }

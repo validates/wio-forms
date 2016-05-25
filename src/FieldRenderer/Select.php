@@ -32,7 +32,7 @@ class Select extends AbstractFieldRenderer
         $this->inputFieldContainerTail();
         $this->inputContainerTail();
 
-        return $html;
+        return $this->html;
     }
 
     function showToView()
