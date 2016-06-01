@@ -112,9 +112,6 @@ class Container
         }
     }
 
-    private function getDataStruct($formDataStructId){}
-
-
     private function changeState(&$container, $newState)
     {
         if (isset($container['state']))

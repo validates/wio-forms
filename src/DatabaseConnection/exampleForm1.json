@@ -141,7 +141,7 @@
                 }
             ]
         },
-        "miejsce_na_mapie":
+        "node_id":
         {
             "type": "GoogleMap",
             "container": "Site2",
@@ -149,10 +149,6 @@
             "title": "Miejsce",
             "state": 0,
             "save": true,
-            "dataSet":
-            {
-                "repositoryName": "wioStruct"
-            },
             "validationPHP":
             [
                 {
@@ -171,13 +167,7 @@
             "dataSet":
             {
                 "repositoryName": "wioStruct"
-            },
-            "validationPHP":
-            [
-                {
-                    "method": "NotEmpty"
-                }
-            ]
+            }
         },
         "login_switch":
         {
@@ -669,6 +659,14 @@
                   }
               },
               {
+                  "type": "method",
+                  "method": "AllFieldsOk",
+                  "settings":
+                  {
+                      "containerToCheck": "RegisterForm"
+                  }
+              },
+              {
                   "type": "logic",
                   "newState": 1,
                   "newErrorState": -2,
@@ -686,14 +684,6 @@
                               "const": "new_account"
                           }
                       ]
-                  }
-              },
-              {
-                  "type": "method",
-                  "method": "AllFieldsOk",
-                  "settings":
-                  {
-                      "containerToCheck": "RegisterForm"
                   }
               }
           ],
@@ -796,6 +786,14 @@
                     }
                 },
                 {
+                    "type": "method",
+                    "method": "AllFieldsOk",
+                    "settings":
+                    {
+                        "containerToCheck": "RegisterData"
+                    }
+                },
+                {
                     "type": "logic",
                     "newState": 1,
                     "newErrorState": -2,
@@ -823,14 +821,6 @@
                                 "repository": "wioUsers"
                             }
                         ]
-                    }
-                },
-                {
-                    "type": "method",
-                    "method": "AllFieldsOk",
-                    "settings":
-                    {
-                        "containerToCheck": "RegisterData"
                     }
                 }
             ],

@@ -35,22 +35,61 @@ class NodeSelect extends AbstractFieldRenderer
         }
         $this->html .='</select>';
 
-        $this->html .= <<<EOT
-            <script type="text/javascript">
-            $('select[name="country_state"]').change(function(){
-                var node_id = $(this).val();
-                $('select[name="szp_regions"] option').hide();
-                $('select[name="szp_regions"] .region_state_none').show();
-                $('select[name="szp_regions"] .region_state_'+node_id).show();
-                $('select[name="szp_regions"]').val('');
-            });
-            </script>
-EOT;
+        $this->html .= $this->javascriptNodesInfo();
+        $this->html .= $this->javascriptSelectManager();
 
         $this->inputFieldContainerTail();
         $this->inputContainerTail();
 
         return $this->html;
+    }
+
+    private function javascriptNodesInfo(){
+        $js = '';
+        foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo)
+        {
+            $js .= '"'.$wojewodztwoName.'":{';
+            foreach ($wojewodztwo['szp_regions'] as $regionName => $region)
+            {
+                $js .= $region['node_id'].':{name:"'.$regionName.'",lat:'.$region['lat'].',lng:'.$region['lng'].'},';
+            }
+            $js .= '},';
+        }
+
+        return '<script type="text/javascript">RejonySzp={'.$js.'};</script>';
+    }
+
+    private function javascriptSelectManager(){
+        return <<<EOT
+        <script type="text/javascript">
+        $('select[name="country_state"]').change(function(){
+            var node_id = $(this).val();
+            stateNodeChanged(node_id);
+            var wojewodztwoName = $('select[name="country_state"] option[value="'+node_id+'"]').html();
+            WOJoptions.selected = wojewodztwoName;
+
+            centerOnWojewodztwo(wojewodztwoName);
+        });
+        $('select[name="szp_regions"]').change(function(){
+            var node_id = $(this).val();
+            $('input[name="node_id"]').val(node_id);
+        });
+        function stateNodeChanged(node_id){
+            $('select[name="szp_regions"] option').hide();
+            $('select[name="szp_regions"] .region_state_none').show();
+            $('select[name="szp_regions"] .region_state_'+node_id).show();
+            $('select[name="szp_regions"]').val('');
+        }
+        function regionNodeChanged(node_id){
+            var state_node_id = $('select[name="szp_regions"] option[value="'+node_id+'"]').attr('class').split('_')[2];
+
+            stateNodeChanged(state_node_id);
+            $('select[name="country_state"]').val(state_node_id);
+            $('select[name="szp_regions"]').val(node_id);
+            $('input[name="node_id"]').val(node_id);
+        }
+        </script>
+EOT;
     }
 
     function showToView()
