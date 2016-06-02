@@ -1265,6 +1265,14 @@
                                             {
                                                 "type": "isValidContainer",
                                                 "container": "RegisterForm"
+                                            },
+                                            {
+                                                "type": "isValidContainer",
+                                                "container": "RegisterEmail"
+                                            },
+                                            {
+                                                "type": "isValidContainer",
+                                                "container": "RegisterPassword"
                                             }
                                         ]
                                     },
