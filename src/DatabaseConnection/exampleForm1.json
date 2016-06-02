@@ -460,7 +460,7 @@
             "type": "DatePicker",
             "container": "RegisterData",
             "position": 4,
-            "title": "Wiek",
+            "title": "Data urodzenia",
             "state": 0,
             "save": true,
             "validationPHP":
@@ -512,7 +512,7 @@
             "title": "Zgoda na przetwarzanie danych",
             "state": 0,
             "save": true,
-            "longer_text": "Bla Bla Bal Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla",
+            "longer_text": "Wyrażam zgodę na przetwarzanie danych osobowych zawartych w moim kwestionariuszu dla potrzeb niezbędnych do realizacji procesu rekrutacji (podstawa prawna: Dz. U. Nr 133, poz. 883).",
             "validationPHP":
             [
                 {
@@ -529,7 +529,7 @@
             "title": "Zgoda na zakładanie kont",
             "state": 0,
             "save": true,
-            "longer_text": "Burk Burk Burk Bruk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk Burk ",
+            "longer_text": "Oświadczam, że zapoznałem/am się z obowiązującym regulaminem korzystania z serwisuwww.superw.pl i akceptuję wszystkie jego postanowienia.",
             "validationPHP":
             [
                 {
