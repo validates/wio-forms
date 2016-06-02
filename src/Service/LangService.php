@@ -1,0 +1,29 @@
+<?php
+namespace WioForms\Service;
+
+class LangService
+{
+    private $langsArray;
+    private $wioForms;
+
+    public function __construct($wioFormsObject)
+    {
+        $this->wioForms = $wioFormsObject;
+
+        $this->langsArray = json_decode(
+            file_get_contents(
+                $this->wioForms->settings['SrcDir'] . $this->wioForms->settings['LangsFilePath']
+            ),
+            TRUE
+        );
+    }
+
+    public function getLang($langKey)
+    {
+        if (isset($this->langsArray[$langKey])) {
+            return $this->langsArray[$langKey];
+        }
+
+        throw new \Exception('Undefined lang key.');
+    }
+}

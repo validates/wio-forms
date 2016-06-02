@@ -1,0 +1,12 @@
+{
+    "field_invalid"                 : "Pole zostało uzupełnione niepoprawnie.",
+    "fill_all_fields"               : "Uzupełnij wszystkie pola.",
+    "fill_all_fields_before_save"   : "Przed zatwierdzeniem formularza uzupełnij wszystkie pola",
+    "date_invalid"                  : "Pole data jest niepoprawne.",
+    "date_invalid_format"           : "Pole data ma niepoprawny format.",
+    "email_invalid"                 : "Pole e-mail ma niepoprawny format.",
+    "field_required"                : "Pole jest obowiązkowe.",
+    "password_to_short"             : "Hasło jest za krótkie.",
+    "phone_number_to_short"         : "Numer telefonu jest za krótki.",
+    "enter_captcha"                 : "Nie uzupełniono captchy."
+}

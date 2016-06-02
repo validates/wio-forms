@@ -18,5 +18,6 @@
         "SiteKey": "ABC",
         "SecretKey": "CBA"
     },
-    "SrcDir": "vendor/wiosna-dev/wio-forms/src"
+    "SrcDir": "vendor/wiosna-dev/wio-forms/src",
+    "LangsFilePath": "/assets/langs.json"
 }

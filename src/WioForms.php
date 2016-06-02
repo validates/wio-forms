@@ -18,6 +18,7 @@ use WioForms\Service\StyleManagementService;
 use WioForms\Service\HeaderCollectorService;
 use WioForms\Service\EntryCollectorService;
 use WioForms\Service\FormSaverService;
+use WioForms\Service\LangService;
 
 
 class WioForms
@@ -52,6 +53,7 @@ class WioForms
     public $headerCollectorService;
     public $entryCollectorService;
     public $formSaverService;
+    public $langService;
 
 
     function __construct($localSettings = false){
@@ -76,6 +78,7 @@ class WioForms
         $this->headerCollectorService     = new HeaderCollectorService($this);
         $this->entryCollectorService      = new EntryCollectorService($this);
         $this->formSaverService           = new FormSaverService($this);
+        $this->langService                = new LangService($this);
 
         if ($this->databaseService->setConnections() === false)
         {
