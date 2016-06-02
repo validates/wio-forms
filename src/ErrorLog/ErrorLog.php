@@ -23,6 +23,7 @@ class ErrorLog extends AbstractErrorLog
 
     function showLog()
     {
+        return '';
         if (count($this->messages))
         {
             echo '<br/><b> Error Log: </b><br/>';

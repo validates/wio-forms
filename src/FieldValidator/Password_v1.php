@@ -8,7 +8,7 @@ class Password_v1 extends AbstractFieldValidator
     {
         $this->invalidMessage = 'password_to_short';
 
-        if (strlen($value) >= 8)
+        if (strlen($value) >= 4)
         {
             $this->valid = true;
         }
