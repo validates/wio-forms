@@ -83,6 +83,10 @@
         "Date":
         {
             "class": "Date"
+        },
+        "PhoneNumber":
+        {
+            "class": "PhoneNumber"
         }
     },
     "FieldValidatorsJS": {},
@@ -143,7 +147,7 @@
         },
         "node_id":
         {
-            "type": "GoogleMap",
+            "type": "HiddenNode",
             "container": "Site2",
             "position": 2,
             "title": "Miejsce",
@@ -156,17 +160,76 @@
                 }
             ]
         },
-        "wojewodztwo":
+        "map_wojewodztwoSZP":
         {
-            "type": "NodeSelect",
-            "container": "Site2",
-            "position": 3,
+            "type": "GoogleMaps",
+            "container": "MapWojSZP",
+            "position": 1,
             "title": "Wybierz Województwo",
             "state": 0,
             "save": true,
             "dataSet":
             {
                 "repositoryName": "wioStruct"
+            },
+            "rendererData":
+            {
+                "mapColor": "#FF0000"
+            }
+        },
+        "choose_wojewodztwoAP":
+        {
+            "type": "GoogleMaps",
+            "container": "MapWojAP",
+            "position": 1,
+            "title": "Wybierz Województwo",
+            "state": 0,
+            "save": true,
+            "dataSet":
+            {
+                "repositoryName": "wioStruct"
+            },
+            "rendererData":
+            {
+                "mapColor": "#0000FF"
+            }
+        },
+        "choose_rejonSZP":
+        {
+            "type": "GoogleMaps",
+            "container": "MapRejonSZP",
+            "position": 1,
+            "title": "Wybierz Rejon",
+            "state": 0,
+            "save": true,
+            "dataSet":
+            {
+                "repositoryName": "wioStruct"
+            },
+            "rendererData":
+            {
+                "mapColor": "#FF0000",
+                "secondLvl": "szp_regions",
+                "secondLvlTitle": "Wybierz Region"
+            }
+        },
+        "choose_miastoAP":
+        {
+            "type": "GoogleMaps",
+            "container": "MapCityAP",
+            "position": 1,
+            "title": "Wybierz Miasto",
+            "state": 0,
+            "save": true,
+            "dataSet":
+            {
+                "repositoryName": "wioStruct"
+            },
+            "rendererData":
+            {
+                "mapColor": "#0000FF",
+                "secondLvl": "ap_cities",
+                "secondLvlTitle": "Wybierz Miasto"
             }
         },
         "login_switch":
@@ -365,11 +428,38 @@
                 "subset": ["nazwisko"]
             }
         },
+        "register_phone_number":
+        {
+            "type": "TextInput",
+            "container": "RegisterData",
+            "position": 3,
+            "title": "Telefon Kontaktowy",
+            "state": 0,
+            "save": true,
+            "dataSet":
+            {
+                "repositoryName": "gender"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                },
+                {
+                    "method": "PhoneNumber"
+                }
+            ],
+            "defaultValue":
+            {
+                "repositoryName": "wioUsers",
+                "subset": ["telefon"]
+            }
+        },
         "register_date":
         {
             "type": "DatePicker",
             "container": "RegisterData",
-            "position": 3,
+            "position": 4,
             "title": "Wiek",
             "state": 0,
             "save": true,
@@ -393,7 +483,7 @@
         {
             "type": "Select",
             "container": "RegisterData",
-            "position": 4,
+            "position": 5,
             "title": "Płeć",
             "state": 0,
             "save": true,
@@ -418,7 +508,7 @@
         {
             "type": "AgreementWithText",
             "container": "RegisterData",
-            "position": 5,
+            "position": 6,
             "title": "Zgoda na przetwarzanie danych",
             "state": 0,
             "save": true,
@@ -435,7 +525,7 @@
         {
             "type": "AgreementWithText",
             "container": "RegisterData",
-            "position": 6,
+            "position": 7,
             "title": "Zgoda na zakładanie kont",
             "state": 0,
             "save": true,
@@ -565,6 +655,254 @@
                     "settings":
                     {
                         "formSaverToCheck": "finalSave"
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "MapWojSZP":
+        {
+            "site": 1,
+            "container": "Site2",
+            "position": 3,
+            "displayType": "FullDisplay",
+            "title": "Wybierz Województwo",
+            "validationPHP":
+            [
+                {
+                    "type": "logic",
+                    "newState": 1,
+                    "newErrorState": -1,
+                    "logicEquation":
+                    {
+                        "type": "and",
+                        "data":
+                        [
+                            {
+                                "type": "equal",
+                                "data":
+                                [
+                                    {
+                                        "type": "fieldValue",
+                                        "field": "akcja"
+                                    },
+                                    {
+                                        "type": "const",
+                                        "const": "SZP"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "equal",
+                                "data":
+                                [
+                                    {
+                                        "type": "fieldValue",
+                                        "field": "stanowisko"
+                                    },
+                                    {
+                                        "type": "const",
+                                        "const": "rada"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "MapWojAP":
+        {
+            "site": 1,
+            "container": "Site2",
+            "position": 4,
+            "displayType": "FullDisplay",
+            "title": "Wybierz Województwo",
+            "validationPHP":
+            [
+                {
+                    "type": "logic",
+                    "newState": 1,
+                    "newErrorState": -1,
+                    "logicEquation":
+                    {
+                        "type": "and",
+                        "data":
+                        [
+                            {
+                                "type": "equal",
+                                "data":
+                                [
+                                    {
+                                        "type": "fieldValue",
+                                        "field": "akcja"
+                                    },
+                                    {
+                                        "type": "const",
+                                        "const": "AP"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "equal",
+                                "data":
+                                [
+                                    {
+                                        "type": "fieldValue",
+                                        "field": "stanowisko"
+                                    },
+                                    {
+                                        "type": "const",
+                                        "const": "rada"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "MapRejonSZP":
+        {
+            "site": 1,
+            "container": "Site2",
+            "position": 5,
+            "displayType": "FullDisplay",
+            "title": "Wybierz Rejon",
+            "validationPHP":
+            [
+                {
+                    "type": "logic",
+                    "newState": 1,
+                    "newErrorState": -1,
+                    "logicEquation":
+                    {
+                        "type": "and",
+                        "data":
+                        [
+                            {
+                                "type": "equal",
+                                "data":
+                                [
+                                    {
+                                        "type": "fieldValue",
+                                        "field": "akcja"
+                                    },
+                                    {
+                                        "type": "const",
+                                        "const": "SZP"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "equal",
+                                "data":
+                                [
+                                    {
+                                        "type": "fieldValue",
+                                        "field": "stanowisko"
+                                    },
+                                    {
+                                        "type": "const",
+                                        "const": "lider"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "MapCityAP":
+        {
+            "site": 1,
+            "container": "Site2",
+            "position": 6,
+            "displayType": "FullDisplay",
+            "title": "Wybierz Miasto",
+            "validationPHP":
+            [
+                {
+                    "type": "logic",
+                    "newState": 1,
+                    "newErrorState": -1,
+                    "logicEquation":
+                    {
+                        "type": "and",
+                        "data":
+                        [
+                            {
+                                "type": "equal",
+                                "data":
+                                [
+                                    {
+                                        "type": "fieldValue",
+                                        "field": "akcja"
+                                    },
+                                    {
+                                        "type": "const",
+                                        "const": "AP"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "equal",
+                                "data":
+                                [
+                                    {
+                                        "type": "fieldValue",
+                                        "field": "stanowisko"
+                                    },
+                                    {
+                                        "type": "const",
+                                        "const": "lider"
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 }
             ],
@@ -879,7 +1217,6 @@
     {
         "finalSave":
         {
-
             "clearTemporarySave": true,
             "databaseConnection": "Main",
             "validationPHP":
@@ -1029,7 +1366,7 @@
                 },
                 {
                     "type": "insert",
-                    "tableName": "user_basic_data",
+                    "tableName": "wio_flow_entities",
                     "fields":
                     {
                         "wio_user_id":
@@ -1038,6 +1375,33 @@
                             "table": "wio_users"
                         },
                         "wio_flow_id":
+                        {
+                            "type": "const",
+                            "const": "1"
+                        },
+                        "flow_status":
+                        {
+                            "type": "const",
+                            "const": "0"
+                        },
+                        "active_status":
+                        {
+                            "type": "const",
+                            "const": "active"
+                        }
+                    }
+                },
+                {
+                    "type": "insert",
+                    "tableName": "user_basic_data",
+                    "fields":
+                    {
+                        "wio_user_id":
+                        {
+                            "type": "insertedId",
+                            "table": "wio_users"
+                        },
+                        "verified_in_wio_flow_id":
                         {
                             "type": "const",
                             "const": "1"
@@ -1062,6 +1426,98 @@
                             "type": "field",
                             "field": "register_date",
                             "converter": "DatePicker2DateTime"
+                        }
+                    }
+                },
+                {
+                    "type": "insert",
+                    "tableName": "user_phone_data",
+                    "fields":
+                    {
+                        "wio_user_id":
+                        {
+                            "type": "insertedId",
+                            "table": "wio_users"
+                        },
+                        "verified_in_wio_flow_id":
+                        {
+                            "type": "const",
+                            "const": "1"
+                        },
+                        "type":
+                        {
+                            "type": "const",
+                            "const": "contact"
+                        },
+                        "phone_number":
+                        {
+                            "type": "field",
+                            "field": "register_phone_number"
+                        }
+                    }
+                },
+                {
+                    "type": "insert",
+                    "tableName": "recrutation_roles",
+                    "fields":
+                    {
+                        "wio_flow_entity_id":
+                        {
+                            "type": "insertedId",
+                            "table": "wio_flow_entities"
+                        },
+                        "wio_flow_id":
+                        {
+                            "type": "const",
+                            "const": "1"
+                        },
+                        "status":
+                        {
+                            "type": "const",
+                            "const": "active"
+                        },
+                        "program_short_name":
+                        {
+                            "type": "field",
+                            "field": "akcja"
+                        },
+                        "role_short_name":
+                        {
+                            "type": "field",
+                            "field": "stanowisko",
+                            "converter": "Stanowisko2Role"
+                        }
+                    }
+                },
+                {
+                    "type": "insert",
+                    "tableName": "recrutation_areas",
+                    "fields":
+                    {
+                        "wio_flow_entity_id":
+                        {
+                            "type": "insertedId",
+                            "table": "wio_flow_entities"
+                        },
+                        "wio_flow_id":
+                        {
+                            "type": "const",
+                            "const": "1"
+                        },
+                        "recrutation_role_id":
+                        {
+                            "type": "insertedId",
+                            "table": "recrutation_roles"
+                        },
+                        "status":
+                        {
+                            "type": "const",
+                            "const": "active"
+                        },
+                        "wio_struct_node_id":
+                        {
+                            "type": "field",
+                            "field": "node_id"
                         }
                     }
                 }

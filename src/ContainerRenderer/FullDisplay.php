@@ -6,24 +6,23 @@ class FullDisplay extends AbstractContainerRenderer
 
     function showHead()
     {
-        $html = '<div class="wioForms_Container">'."\n";
+        $this->html = '';
+        $this->html .= '<div class="wioForms_Container">'."\n";
         if ($this->title)
         {
-            $html .= '<div class="wioForms_ContainerTitle">'.$this->title.'</div>';
-        }
-        if ($this->message)
-        {
-            $html .= '<b style="color: red;">'.$this->message.'</b><br/>'."\n";
+            $this->html .= '<div class="wioForms_ContainerTitle">'.$this->title.'</div>';
         }
 
-        return $html;
+        $this->standardErrorDisplay();
+
+        return $this->html;
     }
 
     function showTail()
     {
-        $html = '</div>'."\n";
+        $this->html = '</div>'."\n";
 
-        return $html;
+        return $this->html;
     }
 
 }

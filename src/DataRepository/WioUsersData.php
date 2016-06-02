@@ -13,7 +13,10 @@ class WioUsersData extends AbstractDataRepository
         $this->data = [];
 
         $apiService = new ApiService();
-        $this->data = $apiService->getData($requiredFields['email'], $requiredFields['password']);
+        $this->data = $apiService->getData(
+            $requiredFields['email'],
+            $requiredFields['password']
+        );
 
         if (empty($this->data))
         {

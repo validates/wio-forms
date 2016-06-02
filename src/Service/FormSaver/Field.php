@@ -34,7 +34,7 @@ class Field
                 $value = false;
         }
 
-        if ($saveField['converter'])
+        if (isset($saveField['converter']))
         {
             $value = $this->getConverted($value, $saveField['converter']);
         }

@@ -11,6 +11,8 @@ abstract class AbstractContainerRenderer
     protected $title;
     protected $message;
 
+    protected $html;
+
     function __construct($containerName, $wioFormsObject)
     {
         $this->containerName = $containerName;
@@ -42,6 +44,15 @@ abstract class AbstractContainerRenderer
             $this->message = false;
         }
     }
+
+    protected function standardErrorDisplay()
+    {
+        if ($this->message !== false)
+        {
+            $this->html .= '<div class="wioForms_ErrorMessage">'.$this->message.'</div>'."\n";
+        }
+    }
+
 
     abstract function showHead();
     abstract function showTail();
