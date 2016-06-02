@@ -29,15 +29,14 @@ abstract class AbstractContainerValidator
 
     protected function setAnswer()
     {
-        if ($this->valid)
-        {
+        if ($this->valid) {
             $this->state = $this->validState;
             $this->message = $this->validMessage;
-        }
-        else
-        {
+        } else {
             $this->state = $this->invalidState;
-            $this->message = $this->invalidMessage;
+            $this->message = $this->wioForms
+                                ->langService
+                                ->getLang($this->invalidMessage);
         }
 
     }
