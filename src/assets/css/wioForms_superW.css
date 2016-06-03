@@ -114,3 +114,11 @@ form.wioForms_Form div.wioForms_container{
     height: 600px;
 
 }
+
+.wioForms_Form .wioForms_Container > .wioForms_ErrorMessage {
+    color: red;
+    position: relative;
+    font-size: 13px;
+    padding: 5px 0;
+    margin: 5px 0px 10px;
+}

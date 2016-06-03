@@ -67,7 +67,9 @@ class Field
             if ($validationResult['valid']===false
                 and isset( $validatorInfo['newErrorMessage']))
             {
-                $field['message'] = $validatorInfo['newErrorMessage'];
+                $field['message'] = $this->wioForms
+                                        ->langService
+                                        ->getLang($validatorInfo['newErrorMessage']);
             }
             else
             {
