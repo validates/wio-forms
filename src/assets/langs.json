@@ -8,5 +8,9 @@
     "field_required"                : "Pole jest obowiązkowe.",
     "password_to_short"             : "Hasło jest za krótkie.",
     "phone_number_to_short"         : "Numer telefonu jest za krótki.",
-    "enter_captcha"                 : "Nie uzupełniono captchy."
+    "enter_captcha"                 : "Nie uzupełniono captchy.",
+    "no_account"                    : "noacc lang",
+    "agreement_reguired"            : "agree req lang",
+    "emails_not_equal"              : "Podane adresy e-mail nie są identyczne.",
+    "passwords_not_equal"           : "Podane hasła nie są identyczne."
 }

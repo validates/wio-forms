@@ -24,6 +24,6 @@ class LangService
             return $this->langsArray[$langKey];
         }
 
-        throw new \Exception('Undefined lang key.');
+        return $langKey;
     }
 }

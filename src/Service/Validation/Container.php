@@ -95,7 +95,9 @@ class Container
             }
             if (isset($validatorInfo['newErrorMessage']))
             {
-                $validationResult['message'] = $validatorInfo['newErrorMessage'];
+                $validationResult['message'] = $this->wioForms
+                                                ->langService
+                                                ->getLang($validatorInfo['newErrorMessage']);
             }
         }
 
