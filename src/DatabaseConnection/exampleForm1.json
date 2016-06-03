@@ -165,7 +165,7 @@
             "type": "GoogleMaps",
             "container": "MapWojSZP",
             "position": 1,
-            "title": "Wybierz Województwo",
+            "title": "Wybierz województwo",
             "state": 0,
             "save": true,
             "dataSet":
@@ -182,7 +182,7 @@
             "type": "GoogleMaps",
             "container": "MapWojAP",
             "position": 1,
-            "title": "Wybierz Województwo",
+            "title": "Wybierz województwo",
             "state": 0,
             "save": true,
             "dataSet":
@@ -199,7 +199,7 @@
             "type": "GoogleMaps",
             "container": "MapRejonSZP",
             "position": 1,
-            "title": "Wybierz Rejon",
+            "title": "Wybierz rejon",
             "state": 0,
             "save": true,
             "dataSet":
@@ -210,7 +210,7 @@
             {
                 "mapColor": "#FF0000",
                 "secondLvl": "szp_regions",
-                "secondLvlTitle": "Wybierz Region"
+                "secondLvlTitle": "Wybierz region"
             }
         },
         "choose_miastoAP":
@@ -218,7 +218,7 @@
             "type": "GoogleMaps",
             "container": "MapCityAP",
             "position": 1,
-            "title": "Wybierz Miasto",
+            "title": "Wybierz województwo",
             "state": 0,
             "save": true,
             "dataSet":
@@ -229,7 +229,7 @@
             {
                 "mapColor": "#0000FF",
                 "secondLvl": "ap_cities",
-                "secondLvlTitle": "Wybierz Miasto"
+                "secondLvlTitle": "Wybierz miasto"
             }
         },
         "login_switch":
@@ -548,7 +548,7 @@
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "Podstawowe dane - site:0"
+            "title": "Podstawowe dane"
         },
         "Site2":
         {
@@ -556,7 +556,7 @@
           "container": "_site",
           "position": 1,
           "displayType": "FullDisplay",
-          "title": "Podstawowe dane - main:1",
+          "title": "",
           "validationPHP":
           [
               {
@@ -586,7 +586,7 @@
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "Wybór - logowanie vs. rejestracja",
+            "title": "",
             "validationPHP":
             [
                 {
@@ -616,7 +616,7 @@
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "Mini Formularz",
+            "title": "",
             "validationPHP":
             [
                 {
@@ -646,7 +646,7 @@
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "Dziękujemy za wypełnienie formularza",
+            "title": "Dziękujemy za wypełnienie formularza. <br />Sprawdź swoją skrzynkę mailową i postępuj zgodnie z instrukcjami żeby kontynuować proces rejestracji.",
             "validationPHP":
             [
                 {
@@ -676,7 +676,7 @@
             "container": "Site2",
             "position": 3,
             "displayType": "FullDisplay",
-            "title": "Wybierz Województwo",
+            "title": "Wybierz województwo",
             "validationPHP":
             [
                 {
@@ -738,7 +738,7 @@
             "container": "Site2",
             "position": 4,
             "displayType": "FullDisplay",
-            "title": "Wybierz Województwo",
+            "title": "Wybierz województwo",
             "validationPHP":
             [
                 {
@@ -800,7 +800,7 @@
             "container": "Site2",
             "position": 5,
             "displayType": "FullDisplay",
-            "title": "Wybierz Rejon",
+            "title": "",
             "validationPHP":
             [
                 {
@@ -862,7 +862,7 @@
             "container": "Site2",
             "position": 6,
             "displayType": "FullDisplay",
-            "title": "Wybierz Miasto",
+            "title": "Wybierz miasto",
             "validationPHP":
             [
                 {
@@ -1047,7 +1047,7 @@
             "container": "RegisterForm",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "Adres Email",
+            "title": "",
             "validationPHP":
             [
                 {
@@ -1079,7 +1079,7 @@
             "container": "RegisterForm",
             "position": 2,
             "displayType": "FullDisplay",
-            "title": "Haslo",
+            "title": "",
             "validationPHP":
             [
                 {
@@ -1184,7 +1184,7 @@
             "container": "Site1",
             "position": 4,
             "displayType": "Button1",
-            "title": "Dalej - site:0"
+            "title": "Dalej"
 
         },
         "TopPoints2":
@@ -1193,7 +1193,7 @@
             "container": "Site2",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "TopPoints2 - main:1"
+            "title": ""
         },
         "SubmitButton2":
         {
@@ -1201,7 +1201,7 @@
             "container": "Site2",
             "position": 9,
             "displayType": "Button1",
-            "title": "Dalej - site:1"
+            "title": "Dalej"
         },
         "SubmitButton3":
         {
