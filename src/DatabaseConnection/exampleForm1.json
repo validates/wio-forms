@@ -556,7 +556,7 @@
           "container": "_site",
           "position": 1,
           "displayType": "FullDisplay",
-          "title": "Podstawowe dane",
+          "title": "",
           "validationPHP":
           [
               {
@@ -586,7 +586,7 @@
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "Wybór - logowanie vs. rejestracja",
+            "title": "",
             "validationPHP":
             [
                 {
@@ -616,7 +616,7 @@
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "Mini Formularz",
+            "title": "",
             "validationPHP":
             [
                 {
@@ -800,7 +800,7 @@
             "container": "Site2",
             "position": 5,
             "displayType": "FullDisplay",
-            "title": "Wybierz region",
+            "title": "",
             "validationPHP":
             [
                 {
@@ -1047,7 +1047,7 @@
             "container": "RegisterForm",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "Adres Email",
+            "title": "",
             "validationPHP":
             [
                 {
@@ -1079,7 +1079,7 @@
             "container": "RegisterForm",
             "position": 2,
             "displayType": "FullDisplay",
-            "title": "Haslo",
+            "title": "",
             "validationPHP":
             [
                 {
@@ -1193,7 +1193,7 @@
             "container": "Site2",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "TopPoints2"
+            "title": ""
         },
         "SubmitButton2":
         {
