@@ -646,7 +646,7 @@
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "Dziękujemy za wypełnienie formularza",
+            "title": "Dziękujemy za wypełnienie formularza. <br />Sprawdź swoją skrzynkę mailową i postępuj zgodnie z instrukcjami żeby kontynuować proces rejestracji.",
             "validationPHP":
             [
                 {
