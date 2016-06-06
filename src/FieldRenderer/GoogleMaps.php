@@ -48,7 +48,8 @@ class GoogleMaps extends AbstractFieldRenderer
         $this->wioForms->headerCollectorService->addJS('assets/js/wojewodztwa16.js');
 
         $this->html .= '<div id="map" class="wioForms_Map"></div>';
-        $this->html .= '<script src="https://maps.googleapis.com/maps/api/js?key='.$this->wioForms->settings['GoogleMapsApi']['Key'].'&callback=initMap" async defer></script>';
+        $this->html .= '<script src="https://maps.googleapis.com/maps/api/js?key='.$this->wioForms->settings['GoogleMapsApi']['Key'].'"></script>';
+        $this->html .= '<script type="text/javascript" src="//rawgit.com/googlemaps/js-map-label/gh-pages/src/maplabel-compiled.js"></script>';
 
         $this->inputFieldContainerTail();
         $this->inputContainerTail();
@@ -242,7 +243,8 @@ EOT;
                     geodesic: true,
                     fillColor: WOJoptions.color,
                     fillOpacity: 0.3,
-                    strokeWeight: 0
+                    strokeWeight: 1,
+                    // zIndex: 1
                 });
                 WOJ[i].GMO.setMap(map);
                 WOJ[i].center = findPolygonCenter(WOJEWODZTWA[i]);
@@ -260,6 +262,25 @@ EOT;
                         this.setOptions({fillOpacity:0.3});
                     }
                 });
+                continue;
+                var cityCircle = new google.maps.Circle({
+                  strokeWeight: 0,
+                  fillColor: '#fff',
+                  fillOpacity: 1,
+                  map: map,
+                  center: WOJ[i].center,
+                  radius: 30000
+                });
+                var mapLabel = new MapLabel({
+                 text: i,
+                 position: new google.maps.LatLng(WOJ[i].center.lat, WOJ[i].center.lng),
+                 map: map,
+                 fontSize: 10,
+                 align: 'right',
+                 strokeWeight: 0,
+                 fontColor: '#fff',
+                 zIndex: 3000
+               });
 
             }
 
@@ -323,6 +344,10 @@ EOT;
                 createMarkers();
             }
         }
+
+        $(function() {
+            initMap();
+        });
         </script>
 EOT;
         return $return;
