@@ -680,7 +680,7 @@
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "Dziękujemy za wypełnienie formularza. <br />Sprawdź swoją skrzynkę mailową i postępuj zgodnie z instrukcjami żeby kontynuować proces rejestracji.",
+            "title": "<div style=\"margin-top: 30px; text-align: center; box-shadow: 1px 2px 8px 0px rgba(39, 34, 26, 0.3); border-radius: 5px; padding: 20px 40px;\"><h2 style=\"text-align: center; font-family: Lato; color: #e95141; font-size: 24px;\">Dziękujemy za Twoje zgłoszenie!</h2> <p style=\"font-family: Lato; font-size: 20px;text-align: center; \">Sprawdź pocztę. Właśnie otrzymałeś od nas maila z potwierdzeniem rejestracji.</p><img style=\"margin-top: 10px;\" src=\"/assets/img/rekrutacja_lr_2016/decision.png\"></div>",
             "validationPHP":
             [
                 {
