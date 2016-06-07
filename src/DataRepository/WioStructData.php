@@ -45,6 +45,10 @@ class WioStructData extends AbstractDataRepository
                 )
             )
             ->get('Node');
+
+        usort($szp_regions, function($a, $b) {
+                return strcmp($a->NodeName, $b->NodeName);
+        });
         foreach ($szp_regions as $region)
         {
             $wojewodztwa[ $region->ParentNodeName ]['szp_regions'][ $region->NodeName ] = [
