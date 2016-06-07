@@ -122,3 +122,28 @@ form.wioForms_Form div.wioForms_container{
     padding: 5px 0;
     margin: 5px 0px 10px;
 }
+
+.wioForms_Form .wioForms_Map .circle-box {
+    padding-top: 5px;
+    text-align: center;
+    background: #FFF;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+}
+
+.wioForms_Form .wioForms_Map .circle-box .count {
+    display: block;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.wioForms_Form .wioForms_Map .circle-box.red {
+    color: #FF0000;
+}
+
+.wioForms_Form .wioForms_Map .circle-box.blue {
+    color: #0000FF;
+}
