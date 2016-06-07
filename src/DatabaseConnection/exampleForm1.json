@@ -301,6 +301,17 @@
                 }
             ]
         },
+        "reset_password":
+        {
+            "type": "Link",
+            "container": "LoginForm",
+            "position": 4,
+            "title": "Nie pamiętam hasła &gt;&gt;",
+            "url": "/zmiana-hasla",
+            "state": 0,
+            "class": "",
+            "save": false
+        },
         "register_login":
         {
           "type": "TextInput",

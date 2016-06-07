@@ -123,6 +123,7 @@ class RendererService
 
         foreach (['Fields','Containers'] as $elemType)
         {
+
             foreach ($this->formStruct[$elemType]  as $elemName => $elem)
             {
                 $cont = $elem['container'];
