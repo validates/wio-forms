@@ -81,7 +81,8 @@ abstract class AbstractFieldRenderer
     }
     protected function inputFieldContainerHead()
     {
-        $this->html .= '<div class="wioForms_InputFieldContainer">'."\n";
+        $this->html .= '<div data-wio-forms="' . $this->fieldName
+            . '"class="wioForms_InputFieldContainer">'."\n";
     }
     protected function inputFieldContainerTail()
     {

@@ -7,7 +7,7 @@ class FullDisplay extends AbstractContainerRenderer
     function showHead()
     {
         $this->html = '';
-        $this->html .= '<div class="wioForms_Container">'."\n";
+        $this->html .= '<div data-wio-forms="' . $this->containerName . '" class="wioForms_Container">'."\n";
         if ($this->title)
         {
             $this->html .= '<div class="wioForms_ContainerTitle">'.$this->title.'</div>';

@@ -30,8 +30,8 @@
             "type": "local",
             "data":
             {
-                "have_account": "Mam konto",
-                "new_account": "Zakładam nowe konto"
+                "have_account": "TAK",
+                "new_account": "NIE"
             }
         },
         "gender":
@@ -199,7 +199,7 @@
             "type": "GoogleMaps",
             "container": "MapRejonSZP",
             "position": 1,
-            "title": "Wybierz rejon",
+            "title": "Wybierz województwo",
             "state": 0,
             "save": true,
             "dataSet":
@@ -210,7 +210,7 @@
             {
                 "mapColor": "#FF0000",
                 "secondLvl": "szp_regions",
-                "secondLvlTitle": "Wybierz region"
+                "secondLvlTitle": "Wybierz rejon"
             }
         },
         "choose_miastoAP":
