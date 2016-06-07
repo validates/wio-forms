@@ -49,6 +49,7 @@ class GoogleMaps extends AbstractFieldRenderer
 
         $this->html .= '<div id="map" class="wioForms_Map"></div>';
         $this->html .= '<script src="https://maps.googleapis.com/maps/api/js?key='.$this->wioForms->settings['GoogleMapsApi']['Key'].'"></script>';
+        $this->html .= '<script type="text/javascript" src="//rawgit.com/googlemaps/v3-utility-library/master/infobox/src/infobox.js"></script>';
         $this->html .= '<script type="text/javascript" src="//rawgit.com/googlemaps/js-map-label/gh-pages/src/maplabel-compiled.js"></script>';
 
         $this->inputFieldContainerTail();
@@ -235,7 +236,11 @@ EOT;
         }
 
         function createWojewodztwa(){
+            var areaCount = 0;
+
             for(var i in WOJEWODZTWA){
+                areaCount = WOJEWODZTWA[i].length;
+
                 WOJ[i] = {center:{lat:0,lng:0}};
                 WOJ[i].GMO = new google.maps.Polygon({
                     path: WOJEWODZTWA[i],
@@ -246,6 +251,7 @@ EOT;
                     strokeWeight: 1,
                     // zIndex: 1
                 });
+
                 WOJ[i].GMO.setMap(map);
                 WOJ[i].center = findPolygonCenter(WOJEWODZTWA[i]);
 
@@ -262,25 +268,17 @@ EOT;
                         this.setOptions({fillOpacity:0.3});
                     }
                 });
-                continue;
-                var cityCircle = new google.maps.Circle({
-                  strokeWeight: 0,
-                  fillColor: '#fff',
-                  fillOpacity: 1,
-                  map: map,
-                  center: WOJ[i].center,
-                  radius: 30000
-                });
-                var mapLabel = new MapLabel({
-                 text: i,
-                 position: new google.maps.LatLng(WOJ[i].center.lat, WOJ[i].center.lng),
-                 map: map,
-                 fontSize: 10,
-                 align: 'right',
-                 strokeWeight: 0,
-                 fontColor: '#fff',
-                 zIndex: 3000
-               });
+
+                var circleBoxOptions = {
+                    content: '<div class="circle-box red"><span class="count">' + areaCount + '</span>' + areaDeclension(areaCount) + '</div>',
+                    position: new google.maps.LatLng(WOJEWODZTWA_CENTRUM[i].lat, WOJEWODZTWA_CENTRUM[i].lng),
+                    disableAutoPan: true,
+                    closeBoxURL: "",
+                    isHidden: false,
+                };
+
+                var circleBox = new InfoBox(circleBoxOptions);
+                circleBox.open(map);
 
             }
 
@@ -343,6 +341,16 @@ EOT;
             if(WOJoptions.secondLvl){
                 createMarkers();
             }
+        }
+
+        function areaDeclension(number) {
+
+        	if (number !== 1 && (number % 10 <= 1 || number % 10 >= 5 || (number % 100 >= 11 && number % 100 <= 19))) {
+        		return "regionów";
+            } else if (number == 1) {
+                return "region";
+            }
+            return "regiony";
         }
 
         $(function() {
