@@ -68,11 +68,9 @@ abstract class AbstractFieldRenderer
         }
     }
 
-
-
-
     protected function inputContainerHead($additional_class = '')
     {
+        $additional_class .= $this->getAdditionalWrapperClasses();
         $this->html .= '<div class="wioForms_InputContainer '.$additional_class.'">'."\n";
     }
     protected function inputContainerTail()
@@ -106,4 +104,14 @@ abstract class AbstractFieldRenderer
     abstract function showToEdit();
 
     abstract function showToView();
+
+    protected function getAdditionalWrapperClasses()
+    {
+        return isset($this->fieldInfo['class']['wrapper']) ? $this->fieldInfo['class']['wrapper'] : '';
+    }
+
+    protected function getAdditionalInputClasses()
+    {
+        return isset($this->fieldInfo['class']['input']) ? $this->fieldInfo['class']['input'] : '';
+    }
 }

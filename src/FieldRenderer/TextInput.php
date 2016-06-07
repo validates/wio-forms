@@ -12,7 +12,7 @@ class TextInput extends AbstractFieldRenderer
         $this->inputTitleContainer();
         $this->inputFieldContainerHead();
 
-        $this->html .= '<input type="text" name="'.$this->fieldName.'" value="'.$this->value.'" />';
+        $this->html .= '<input type="text" name="'.$this->fieldName.'" value="'.$this->value.'" class ="'.$this->getAdditionalInputClasses().'" />';
 
         $this->inputFieldContainerTail();
         $this->inputContainerTail();

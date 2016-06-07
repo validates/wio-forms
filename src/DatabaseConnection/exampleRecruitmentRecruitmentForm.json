@@ -17,29 +17,26 @@
         },
         "gender": {
             "type": "local",
-            "data":
-            {
+            "data": {
                 "male": "Mężczyzna",
                 "female": "Kobieta"
             }
         },
         "program": {
             "type": "local",
-            "data":
-            {
+            "data": {
                 "AP": "Akademia Przyszłości",
                 "SZP": "Szlachetna Paczka"
             }
         },
         "role": {
             "type": "local",
-            "data":
-            {
+            "data": {
                 "LR": "Lider",
                 "RW": "Rada Wojewódzka"
             }
         },
-        "recruitment" : {
+        "recruitment": {
             "type": "foreign",
             "class": "RecruitmentData",
             "data": false,
@@ -47,14 +44,12 @@
                 "userId": "userId"
             }
         },
-        "wioStruct":
-        {
+        "wioStruct": {
             "type": "foreign",
             "data": false,
             "class": "WioStructData"
         },
-        "wioStructProvince":
-        {
+        "wioStructProvince": {
             "type": "foreign",
             "data": false,
             "class": "WioStructProvinceData"
@@ -72,14 +67,13 @@
     "ContainerValidatorsJS": {},
     "Fields": {
         "userId": {
-            "type": "TextInput",
+            "type": "Hidden",
             "container": "recruitmentForm",
             "position": 1,
             "title": "User Id",
             "state": 0,
             "save": true,
-            "defaultValue":
-            {
+            "defaultValue": {
                 "repositoryName": "userId"
             }
         },
@@ -93,10 +87,13 @@
             "dataSet": {
                 "repositoryName": "status"
             },
-            "defaultValue":
-            {
+            "defaultValue": {
                 "repositoryName": "recruitment",
                 "subset": ["flow_status"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
             }
         },
         "name" : {
@@ -106,10 +103,13 @@
             "title": "Imię",
             "state": 0,
             "save": true,
-            "defaultValue":
-            {
+            "defaultValue": {
                 "repositoryName": "recruitment",
                 "subset": ["name"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
             }
         },
         "surname" : {
@@ -119,10 +119,13 @@
             "title": "Nazwisko",
             "state": 0,
             "save": true,
-            "defaultValue":
-            {
+            "defaultValue": {
                 "repositoryName": "recruitment",
                 "subset": ["surname"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
             }
         },
         "email" : {
@@ -132,10 +135,13 @@
             "title": "Email",
             "state": 0,
             "save": true,
-            "defaultValue":
-            {
+            "defaultValue": {
                 "repositoryName": "recruitment",
                 "subset": ["email"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
             }
         },
         "phone" : {
@@ -145,10 +151,13 @@
             "title": "Numer",
             "state": 0,
             "save": true,
-            "defaultValue":
-            {
+            "defaultValue": {
                 "repositoryName": "recruitment",
                 "subset": ["phone_number"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
             }
         },
         "birth_date" : {
@@ -158,10 +167,13 @@
             "title": "Data urodzenia",
             "state": 0,
             "save": true,
-            "defaultValue":
-            {
+            "defaultValue": {
                 "repositoryName": "recruitment",
                 "subset": ["birth_date"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
             }
         },
         "gender" : {
@@ -174,10 +186,13 @@
             "dataSet": {
                 "repositoryName": "gender"
             },
-            "defaultValue":
-            {
+            "defaultValue": {
                 "repositoryName": "recruitment",
                 "subset": ["gender"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
             }
         },
         "program" : {
@@ -190,10 +205,13 @@
             "dataSet": {
                 "repositoryName": "program"
             },
-            "defaultValue":
-            {
+            "defaultValue": {
                 "repositoryName": "recruitment",
                 "subset": ["program_short_name"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
             }
         },
         "role" : {
@@ -206,10 +224,13 @@
             "dataSet": {
                 "repositoryName": "role"
             },
-            "defaultValue":
-            {
+            "defaultValue": {
                 "repositoryName": "recruitment",
                 "subset": ["role_short_name"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
             }
         },
         "province":
@@ -220,9 +241,12 @@
             "title": "Wybrane Województwo",
             "state": 0,
             "save": true,
-            "dataSet":
-            {
+            "dataSet": {
                 "repositoryName": "wioStruct"
+            },
+            "class": {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
             }
         },
         "role_given":
@@ -236,13 +260,16 @@
             "dataSet": {
                 "repositoryName": "role"
             },
-            "defaultValue":
-            {
+            "defaultValue": {
                 "repositoryName": "recruitment",
                 "subset": ["role_short_name"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
             }
         },
-        "province":
+        "council_province":
         {
             "type": "Select",
             "container": "dataForm",
@@ -250,8 +277,7 @@
             "title": "Województwo rady",
             "state": 0,
             "save": true,
-            "dataSet":
-            {
+            "dataSet": {
                 "repositoryName": "wioStructProvince"
             }
         }

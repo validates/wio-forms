@@ -14,7 +14,7 @@ class Select extends AbstractFieldRenderer
         $this->inputFieldContainerHead();
 
 
-        $this->html .= '<select name="'.$this->fieldName.'">';
+        $this->html .= '<select name="'.$this->fieldName.'" class ="'.$this->getAdditionalInputClasses().'" >';
 
         $this->html .= '<option value="">wybierz</option>';
         foreach ($this->dataSet as $option => $option_name)
@@ -41,4 +41,5 @@ class Select extends AbstractFieldRenderer
 
         return $html;
     }
+
 }
