@@ -5,8 +5,6 @@ class RecruitmentData extends AbstractDataRepository
 {
     public function getData($requiredFields)
     {
-        $this->repositoryDefinition['tried'] = true;
-
         global $queryBuilder;
         $this->data = $queryBuilder->table('wio_flow_entities')
             ->setFetchMode(\PDO::FETCH_ASSOC)
