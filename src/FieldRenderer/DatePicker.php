@@ -19,8 +19,8 @@ class DatePicker extends AbstractFieldRenderer
         $this->inputTitleContainer();
         $this->inputFieldContainerHead();
 
-        // $this->html .= '<script type="text/javascript">$(function(){ $(".datePicker_'.$this->fieldName.'").datepicker(); });</script>';
-        $this->html .= '<input placeholder="rrrr-mm-dd" type="date" name="'.$this->fieldName.'" class="datePicker_'.$this->fieldName.'" value="'.$this->value.'" />';
+        $this->html .= '<script type="text/javascript">$(function(){ $(".datePicker_'.$this->fieldName.'").datepicker({changeMonth: true, changeYear: true}); });</script>';
+        $this->html .= '<input type="text" name="'.$this->fieldName.'" class="datePicker_'.$this->fieldName.'" value="'.$this->value.'" />';
 
         $this->inputFieldContainerTail();
         $this->inputContainerTail();
