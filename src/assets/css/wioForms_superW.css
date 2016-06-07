@@ -139,11 +139,3 @@ form.wioForms_Form div.wioForms_container{
     font-weight: bold;
     font-size: 1.5em;
 }
-
-.wioForms_Form .wioForms_Map .circle-box.red {
-    color: #FF0000;
-}
-
-.wioForms_Form .wioForms_Map .circle-box.blue {
-    color: #0000FF;
-}
