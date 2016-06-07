@@ -110,6 +110,7 @@ EOT;
         $return = <<<EOT
         <script type="text/javascript">
         var map;
+        var circleBoxes = [];
         WOJ={};
 EOT;
         $return .= 'WOJoptions={';
@@ -185,6 +186,20 @@ EOT;
             }
         }
 
+        function openCircleBoxes()
+        {
+            for(var i in circleBoxes) {
+                circleBoxes[i].open(map);
+            }
+        }
+
+        function closeCircleBoxes()
+        {
+            for(var i in circleBoxes) {
+                circleBoxes[i].close();
+            }
+        }
+
         function changeZoom(zoomLvl){
             var oldZoomStage = WOJoptions.zoomStage;
 
@@ -206,6 +221,7 @@ EOT;
         function changeZoomStage(){
             switch(WOJoptions.zoomStage){
                 case 1:
+                    openCircleBoxes();
                     hideMarkers();
                     for(var wojName in WOJ){
                         WOJ[wojName].GMO.setOptions({fillOpacity:0.3});
@@ -215,6 +231,7 @@ EOT;
                     }
                 break;
                 case 2:
+                    closeCircleBoxes();
                     hideMarkers();
                     for(var wojName in WOJ){
                         WOJ[wojName].GMO.setOptions({fillOpacity:0});
@@ -226,6 +243,7 @@ EOT;
 
                 break;
                 case 3:
+                    openCircleBoxes();
                     for(var wojName in WOJ){
                         WOJ[wojName].GMO.setOptions({fillOpacity:0});
                         showMarkers(wojName);
@@ -270,7 +288,7 @@ EOT;
                 });
 
                 var circleBoxOptions = {
-                    content: '<div class="circle-box red"><span class="count">' + areaCount + '</span>' + areaDeclension(areaCount) + '</div>',
+                    content: '<div class="circle-box" style="color: ' + WOJoptions.color +'"><span class="count">' + areaCount + '</span>' + areaDeclension(areaCount) + '</div>',
                     position: new google.maps.LatLng(WOJEWODZTWA_CENTRUM[i].lat, WOJEWODZTWA_CENTRUM[i].lng),
                     disableAutoPan: true,
                     closeBoxURL: "",
@@ -279,6 +297,7 @@ EOT;
 
                 var circleBox = new InfoBox(circleBoxOptions);
                 circleBox.open(map);
+                circleBoxes.push(circleBox);
 
             }
 
