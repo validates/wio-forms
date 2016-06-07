@@ -109,7 +109,7 @@ class EntryCollectorService
 
 
         $field['value'] = $value;
-        unset($field['waitForDefaultValue']);
+//        unset($field['waitForDefaultValue']);
     }
 
 }

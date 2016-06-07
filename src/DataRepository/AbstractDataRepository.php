@@ -7,7 +7,7 @@ abstract class AbstractDataRepository
     protected $wioForms;
     protected $repositoryDefinition;
 
-    protected $data;
+    protected $data = [];
 
     function __construct($wioFormsObject, $repositoryName)
     {
@@ -20,5 +20,17 @@ abstract class AbstractDataRepository
     }
 
     abstract function getData($requiredFields);
+
+    protected function setRepositoryFlags()
+    {
+        if (empty($this->data)) {
+            $this->repositoryDefinition['success'] = false;
+            $this->repositoryDefinition['message'] = 'no_map_data';
+            $this->data = false;
+        } else {
+            $this->repositoryDefinition['success'] = true;
+        }
+        $this->repositoryDefinition['tried'] = true;
+    }
 
 }

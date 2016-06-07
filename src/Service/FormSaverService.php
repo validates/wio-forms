@@ -155,7 +155,7 @@ class FormSaverService
     {
         $query = [
             'table' => $databaseSave['tableName'],
-            'insert' => []
+            $databaseSave['type'] => []
         ];
 
         foreach ($databaseSave['fields'] as $saveFieldName => &$saveField)
@@ -163,7 +163,7 @@ class FormSaverService
             $fieldValue = $this->fieldSaver->get($saveField);
             if ($fieldValue !== false)
             {
-                $query['insert'][ $saveFieldName ] = $fieldValue;
+                $query[$databaseSave['type']][ $saveFieldName ] = $fieldValue;
             }
             else
             {
@@ -171,8 +171,15 @@ class FormSaverService
                 return false;
             }
         }
+        if ($databaseSave['type'] === 'update') {
+            $updateOn = reset(array_keys($databaseSave['where']));
+            $query['where'] = [
+                $updateOn => $this->fieldSaver->get($databaseSave['where'][$updateOn])
+            ];
+        }
 
-        $insertedId = $this->databaseConnection->insert($query);
+
+        $insertedId = $this->databaseConnection->$databaseSave['type']($query);
 
         $this->databaseEntries[ $databaseSave['tableName'] ][] = $insertedId;
     }

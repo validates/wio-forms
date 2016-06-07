@@ -63,7 +63,7 @@ class DataRepositoryService
         {
             if ($this->formStruct['Fields'][$fieldName]['valid'])
             {
-                $requiredFields[$requiredFieldName] = $this->formStruct['Fields'][$fieldName]['value'];
+                $requiredFields[$requiredFieldName] = !empty($this->formStruct['Fields'][$fieldName]['value']) ? $this->formStruct['Fields'][$fieldName]['value'] : $this->formStruct['DataRepositories'][$fieldName]['data'];
             }
             else
             {

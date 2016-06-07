@@ -68,8 +68,8 @@ class Container
 
                 }
             }
-            return $container['valid'];
         }
+        return $container['valid'];
     }
 
 

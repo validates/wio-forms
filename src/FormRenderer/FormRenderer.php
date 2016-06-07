@@ -6,7 +6,7 @@ class FormRenderer extends AbstractFormRenderer
 
     function showHead()
     {
-        $this->wioForms->headerCollectorService->addCss('assets/css/wioForms_superW.css');
+//        $this->wioForms->headerCollectorService->addCss('assets/css/wioForms_superW.css');
 
         $html = '';
         $html .= '<form method="post" action="" class="wioForms_Form">'."\n";

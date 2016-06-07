@@ -4,7 +4,6 @@ namespace WioForms\DatabaseConnection;
 class Main extends AbstractDatabaseConnection
 {
 
-
     private $connectionData;
 
     // Pixie\QueryBuildr
@@ -17,8 +16,6 @@ class Main extends AbstractDatabaseConnection
 
         $this->connectionData = $connectionData;
     }
-
-
 
     function insert($queryData)
     {
@@ -52,6 +49,5 @@ class Main extends AbstractDatabaseConnection
             return ['dataStruct'=> $example_file];
         }
     }
-
 
 }
