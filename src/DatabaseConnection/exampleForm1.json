@@ -316,7 +316,7 @@
             "title": "Nie pamiętam hasła &gt;&gt;",
             "url": "/zmiana-hasla",
             "state": 0,
-            "class": "",
+            "class": "mb-20 display-block",
             "save": false
         },
         "register_login":
