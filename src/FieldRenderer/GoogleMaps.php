@@ -257,8 +257,11 @@ EOT;
         function createWojewodztwa(){
             var areaCount = 0;
 
-            for(var i in WOJEWODZTWA){
-                areaCount = Object.keys(SecondLvlMarkers[i]).length;
+            for(var i in WOJEWODZTWA) {
+
+                if (typeof SecondLvlMarkers !== 'undefined') {
+                    areaCount = Object.keys(SecondLvlMarkers[i]).length;
+                }
 
                 WOJ[i] = {center:{lat:0,lng:0}};
                 WOJ[i].GMO = new google.maps.Polygon({
@@ -288,17 +291,19 @@ EOT;
                     }
                 });
 
-                var circleBoxOptions = {
-                    content: '<div class="circle-box" style="color: ' + WOJoptions.color +'"><span class="count">' + areaCount + '</span>' + declension(areaCount) + '</div>',
-                    position: new google.maps.LatLng(WOJEWODZTWA_CENTRUM[i].lat, WOJEWODZTWA_CENTRUM[i].lng),
-                    disableAutoPan: true,
-                    closeBoxURL: "",
-                    isHidden: false,
-                };
+                if (areaCount > 0) {
+                    var circleBoxOptions = {
+                        content: '<div class="circle-box" style="color: ' + WOJoptions.color +'"><span class="count">' + areaCount + '</span>' + declension(areaCount) + '</div>',
+                        position: new google.maps.LatLng(WOJEWODZTWA_CENTRUM[i].lat, WOJEWODZTWA_CENTRUM[i].lng),
+                        disableAutoPan: true,
+                        closeBoxURL: "",
+                        isHidden: false,
+                    };
 
-                var circleBox = new InfoBox(circleBoxOptions);
-                circleBox.open(map);
-                circleBoxes.push(circleBox);
+                    var circleBox = new InfoBox(circleBoxOptions);
+                    circleBox.open(map);
+                    circleBoxes.push(circleBox);
+                }
 
             }
 
