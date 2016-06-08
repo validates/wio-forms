@@ -113,6 +113,7 @@ EOT;
         var circleBoxes = [];
         WOJ={};
 EOT;
+        $return .= 'var program = ' . ($this->wioForms->entryData['akcja'] == 'AP' ? '"AP"' : '"SZP"') . ';';
         $return .= 'WOJoptions={';
         $return .= 'zoomLvl: 6, ';
         $return .= 'zoomStage: 1, ';
@@ -256,8 +257,11 @@ EOT;
         function createWojewodztwa(){
             var areaCount = 0;
 
-            for(var i in WOJEWODZTWA){
-                areaCount = WOJEWODZTWA[i].length;
+            for(var i in WOJEWODZTWA) {
+
+                if (typeof SecondLvlMarkers !== 'undefined') {
+                    areaCount = Object.keys(SecondLvlMarkers[i]).length;
+                }
 
                 WOJ[i] = {center:{lat:0,lng:0}};
                 WOJ[i].GMO = new google.maps.Polygon({
@@ -287,17 +291,19 @@ EOT;
                     }
                 });
 
-                var circleBoxOptions = {
-                    content: '<div class="circle-box" style="color: ' + WOJoptions.color +'"><span class="count">' + areaCount + '</span>' + areaDeclension(areaCount) + '</div>',
-                    position: new google.maps.LatLng(WOJEWODZTWA_CENTRUM[i].lat, WOJEWODZTWA_CENTRUM[i].lng),
-                    disableAutoPan: true,
-                    closeBoxURL: "",
-                    isHidden: false,
-                };
+                if (areaCount > 0) {
+                    var circleBoxOptions = {
+                        content: '<div class="circle-box" style="color: ' + WOJoptions.color +'"><span class="count">' + areaCount + '</span>' + declension(areaCount) + '</div>',
+                        position: new google.maps.LatLng(WOJEWODZTWA_CENTRUM[i].lat, WOJEWODZTWA_CENTRUM[i].lng),
+                        disableAutoPan: true,
+                        closeBoxURL: "",
+                        isHidden: false,
+                    };
 
-                var circleBox = new InfoBox(circleBoxOptions);
-                circleBox.open(map);
-                circleBoxes.push(circleBox);
+                    var circleBox = new InfoBox(circleBoxOptions);
+                    circleBox.open(map);
+                    circleBoxes.push(circleBox);
+                }
 
             }
 
@@ -362,14 +368,22 @@ EOT;
             }
         }
 
-        function areaDeclension(number) {
-
+        function declension(number) {
         	if (number !== 1 && (number % 10 <= 1 || number % 10 >= 5 || (number % 100 >= 11 && number % 100 <= 19))) {
-        		return "regionów";
+                if (program == 'AP') {
+                    return "miast";
+                }
+                return "rejonów";
             } else if (number == 1) {
-                return "region";
+                if (program == 'AP') {
+                    return "miasto";
+                }
+                return "rejon";
             }
-            return "regiony";
+            if (program == 'AP') {
+                return "miasta";
+            }
+            return "rejony";
         }
 
         $(function() {
