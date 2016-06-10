@@ -22,6 +22,21 @@
                 "female": "Kobieta"
             }
         },
+        "yesNo" : {
+            "type": "local",
+            "data": {
+                "1": "Tak",
+                "2": "Nie"
+            }
+        },
+        "wiosnaExperience" : {
+            "type": "foreign",
+            "class": "WiosnaExperienceData",
+            "data": false,
+            "requiredFields": {
+                "userId": "userId"
+            }
+        },
         "program": {
             "type": "local",
             "data": {
@@ -53,6 +68,14 @@
             "type": "foreign",
             "data": false,
             "class": "WioStructProvinceData"
+        },
+        "type" : {
+            "type": "local",
+            "data": {
+                "1": "Nowy",
+                "2": "Weteran",
+                "3": "Awansowany"
+            }
         }
     },
     "FieldValidatorsJS": {},
@@ -195,6 +218,25 @@
                 "input" : "veryLong wypisz"
             }
         },
+        "wiosnaExperience" : {
+            "type": "Select",
+            "container": "basicDataForm",
+            "position": 9,
+            "title": "Czy działał już w WIOŚNIE",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "yesNo"
+            },
+            "defaultValue": {
+                "repositoryName": "wiosnaExperience",
+                "subset": ["wiosnaExperience"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
         "program" : {
             "type": "Select",
             "container": "dataForm",
@@ -279,6 +321,152 @@
             "save": true,
             "dataSet": {
                 "repositoryName": "wioStructProvince"
+            },
+            "class" : {
+                "wrapper": "edititem half-r",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "type":
+        {
+            "type": "Select",
+            "container": "dataForm",
+            "position": 6,
+            "title": "Typ",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "type"
+            },
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["type"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "wanted_area":
+        {
+            "type": "Link",
+            "container": "dataForm",
+            "position": 7,
+            "url": "http://superw.pl/linkdoregionu/$1",
+            "paramSet": {
+                "$1": {
+                    "repositoryName": "recruitment",
+                    "subset": ["wanted_area_id"]
+                }
+            },
+            "label": "Rejon ze zgłoszenia",
+            "titleSet" : {
+                "repositoryName": "recruitment",
+                "subset": ["wanted_area_name"]
+            },
+            "state": 0,
+            "save": false,
+            "class": ""
+        },
+        "assigned_area":
+        {
+            "type": "Link",
+            "container": "dataForm",
+            "position": 8,
+            "url": "http://superw.pl/linkdoregionu/$1",
+            "paramSet": {
+                "$1": {
+                    "repositoryName": "recruitment",
+                    "subset": ["assigned_area_id"]
+                }
+            },
+            "label": "Rejon, w którym będzie działał",
+            "titleSet" : {
+                "repositoryName": "recruitment",
+                "subset": ["assigned_area_name"]
+            },
+            "state": 0,
+            "save": false,
+            "class": ""
+        },
+        "senior_program":
+        {
+            "type": "Select",
+            "container": "dataForm",
+            "position": 9,
+            "title": "Paczka Seniorów",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "yesNo"
+            },
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["senior_program"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "lawyer_program":
+        {
+            "type": "Select",
+            "container": "dataForm",
+            "position": 10,
+            "title": "Paczka Prawników",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "yesNo"
+            },
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["lawyer_program"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "adventure_program":
+        {
+            "type": "Select",
+            "container": "dataForm",
+            "position": 11,
+            "title": "Paczka Przygody",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "yesNo"
+            },
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["adventure_program"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "doctor_program":
+        {
+            "type": "Select",
+            "container": "dataForm",
+            "position": 12,
+            "title": "Paczka lekarzy",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "yesNo"
+            },
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["doctor_program"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
             }
         }
     },

@@ -1,8 +1,14 @@
 <?php
 namespace WioForms\DataRepository;
 
+use WioStruct\Core\StructDefinition;
+use WioStruct\WioStruct;
+
 class RecruitmentData extends AbstractDataRepository
 {
+    /**
+     * @todo : logika dla pola typ (nowy, weteran, awansowany)
+     */
     public function getData($requiredFields)
     {
         global $queryBuilder;
@@ -15,9 +21,33 @@ class RecruitmentData extends AbstractDataRepository
             ->where('wio_users.id', '=', $requiredFields['userId'])
             ->first();
 
+        $this->data['type'] = rand(1,3);
+        $this->data['wanted_area_id'] = rand(1, 300);
+        $this->setUpDummyAreaLogic('wanted_area_name', $this->data['wanted_area_id']);
+
+        $this->data['assigned_area_id'] = rand(1, 300);
+        $this->setUpDummyAreaLogic('assigned_area_name', $this->data['assigned_area_id']);
+
         $this->setRepositoryFlags();
 
         return $this->data;
+    }
+
+    /**
+     * @param $wioStruct
+     * @param $area
+     */
+    private function setUpDummyAreaLogic($field, $nodeId)
+    {
+        $wioStruct = new WioStruct(new \Pixie\QueryBuilder\QueryBuilderHandler);
+        $area = $wioStruct->structQuery(
+            (new StructDefinition)
+                ->nodeId($nodeId)
+        )
+            ->get('Node');
+
+        $area = reset($area);
+        $this->data[$field] = $area->NodeName;
     }
 
 }

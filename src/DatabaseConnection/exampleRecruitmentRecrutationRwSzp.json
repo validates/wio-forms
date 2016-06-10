@@ -22,6 +22,21 @@
                 "female": "Kobieta"
             }
         },
+        "wiosnaExperienceSelect" : {
+            "type": "local",
+            "data": {
+                "1": "Tak",
+                "2": "Nie"
+            }
+        },
+        "wiosnaExperience" : {
+            "type": "foreign",
+            "class": "WiosnaExperienceData",
+            "data": false,
+            "requiredFields": {
+                "userId": "userId"
+            }
+        },
         "program": {
             "type": "local",
             "data": {
@@ -53,6 +68,14 @@
             "type": "foreign",
             "data": false,
             "class": "WioStructProvinceData"
+        },
+        "type" : {
+            "type": "local",
+            "data": {
+                "1": "Nowy",
+                "2": "Weteran",
+                "3": "Awansowany"
+            }
         }
     },
     "FieldValidatorsJS": {},
@@ -195,6 +218,25 @@
                 "input" : "veryLong wypisz"
             }
         },
+        "wiosnaExperience" : {
+            "type": "Select",
+            "container": "basicDataForm",
+            "position": 9,
+            "title": "Czy działał już w WIOŚNIE",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "wiosnaExperienceSelect"
+            },
+            "defaultValue": {
+                "repositoryName": "wiosnaExperience",
+                "subset": ["wiosnaExperience"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
         "program" : {
             "type": "Select",
             "container": "dataForm",
@@ -279,6 +321,30 @@
             "save": true,
             "dataSet": {
                 "repositoryName": "wioStructProvince"
+            },
+            "class" : {
+                "wrapper": "edititem half-r",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "type":
+        {
+            "type": "Select",
+            "container": "dataForm",
+            "position": 6,
+            "title": "Typ",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "type"
+            },
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["type"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
             }
         }
     },
