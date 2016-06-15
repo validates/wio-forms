@@ -19,7 +19,7 @@ class DatePicker extends AbstractFieldRenderer
         $this->inputTitleContainer();
         $this->inputFieldContainerHead();
 
-        $this->html .= '<script type="text/javascript">$(function(){ $(".datePicker_'.$this->fieldName.'").datepicker({changeMonth: true, changeYear: true}); });</script>';
+        $this->html .= '<script type="text/javascript">$(function(){ $(".datePicker_'.$this->fieldName.'").datepicker({dateFormat: \'yy-mm-dd\', changeMonth: true, changeYear: true, yearRange: \'1940:2000\'}); });</script>';
         $this->html .= '<input type="text" name="'.$this->fieldName.'" class="datePicker_'.$this->fieldName.'" value="'.$this->value.'" />';
 
         $this->inputFieldContainerTail();
