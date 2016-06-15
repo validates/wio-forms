@@ -1,10 +1,10 @@
 <?php
+
 namespace WioForms\FieldRenderer;
 
 class Hidden extends AbstractFieldRenderer
 {
-
-    function showToEdit()
+    public function showToEdit()
     {
         $this->standardErrorDisplay();
 
@@ -13,7 +13,7 @@ class Hidden extends AbstractFieldRenderer
         return $this->html;
     }
 
-    function showToView()
+    public function showToView()
     {
         $html = 'TextInput: '.'abc'.'<br/>'."\n";
 

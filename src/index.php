@@ -1,28 +1,28 @@
 <?php
 namespace WioForms;
 
-require_once('../../../autoload.php');
+require_once '../../../autoload.php';
 
 $GoogleReCaptchaSiteKey = 'ABC';
 $GoogleReCaptchaSecretKey = 'CBA';
 
-include('../googleApi.keys');
+include '../googleApi.keys';
 
 
 $localSettings = [
-    'DatabaseConnections'=> [
+    'DatabaseConnections' => [
         'OtherConnection' => [
-            'dbName' => "System2"
-        ]
+            'dbName' => 'System2',
+        ],
     ],
-    "ReCaptcha" => [
-        "SiteKey" => $GoogleReCaptchaSiteKey,
-        "SecretKey" => $GoogleReCaptchaSecretKey
+    'ReCaptcha' => [
+        'SiteKey'   => $GoogleReCaptchaSiteKey,
+        'SecretKey' => $GoogleReCaptchaSecretKey,
     ],
-    "GoogleMapsApi" => [
-        "Key" => $GoogleMapsApiKey
+    'GoogleMapsApi' => [
+        'Key' => $GoogleMapsApiKey,
     ],
-    "SrcDir" => ''
+    'SrcDir' => '',
 ];
 
 $wioForms = new WioForms($localSettings);
@@ -35,7 +35,7 @@ $wioHeaders = $wioForms->getHeaders();
 <html>
 <head>
   <meta charset="utf-8">
-  <?= implode($wioHeaders,"\n"); ?>
+  <?= implode($wioHeaders, "\n"); ?>
 </head>
 <body>
   <?= $wioFormHtml; ?>

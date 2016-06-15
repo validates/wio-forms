@@ -1,9 +1,10 @@
 <?php
+
 namespace WioForms\ErrorLog;
 
-abstract class AbstractErrorLog{
+abstract class AbstractErrorLog
+{
+    abstract public function errorLog($message);
 
-    abstract function errorLog($message);
-
-    abstract function showLog();
+    abstract public function showLog();
 }

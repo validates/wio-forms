@@ -1,9 +1,9 @@
 <?php
+
 namespace WioForms\FieldRenderer;
 
 class Link extends AbstractFieldRenderer
 {
-
     protected $paramSet = [];
     protected $title;
 
@@ -33,8 +33,8 @@ class Link extends AbstractFieldRenderer
     {
         foreach ($this->fieldInfo['paramSet'] as $paramKey => $paramRepository) {
             $paramSetName = $paramRepository['repositoryName'];
-            if (!isset($this->formStruct['DataRepositories'][ $paramSetName ])) {
-                $this->wioForms->errorLog->errorLog('DataRepository: ' . $paramSetName . ' not found.');
+            if (!isset($this->formStruct['DataRepositories'][$paramSetName])) {
+                $this->wioForms->errorLog->errorLog('DataRepository: '.$paramSetName.' not found.');
                 continue;
             }
 
@@ -46,7 +46,6 @@ class Link extends AbstractFieldRenderer
             }
 
             $this->paramSet[$paramKey] = $this->formStruct['DataRepositories'][$paramSetName]['data'];
-
         }
     }
 
@@ -66,9 +65,9 @@ class Link extends AbstractFieldRenderer
         if (is_array($this->fieldInfo['titleSet'])) {
             $titleRepository = $this->fieldInfo['titleSet'];
             $this->title = $this->formStruct['DataRepositories'][$titleRepository['repositoryName']]['data'][reset($titleRepository['subset'])];
+
             return;
         }
         $this->title = $this->fieldInfo['titleSet'];
     }
-
 }
