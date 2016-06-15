@@ -8,6 +8,12 @@ class PhoneNumber extends AbstractFieldValidator
     {
         $this->invalidMessage = 'phone_number_to_short';
 
+        $value = str_replace(
+          array(" ", "-", ".", "+", "(", ")"),
+          "",
+          $value
+        );
+
         if (strlen($value) >= 9 and is_numeric($value))
         {
             $this->valid = true;
