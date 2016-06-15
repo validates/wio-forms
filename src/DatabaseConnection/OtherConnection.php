@@ -1,4 +1,5 @@
 <?php
+
 namespace WioForms\DatabaseConnection;
 
 class OtherConnection extends AbstractDatabaseConnection
@@ -7,48 +8,42 @@ class OtherConnection extends AbstractDatabaseConnection
     private $connectionData;
 
 
-    function __construct($connectionData)
+    public function __construct($connectionData)
     {
         $this->isConnected = false;
         $this->connectionData = $connectionData;
     }
 
-    function connect()
+    public function connect()
     {
         $this->isConnected = true;
     }
 
-    function insert($queryData)
+    public function insert($queryData)
     {
-        if (!$this->isConnected)
-        {
+        if (!$this->isConnected) {
             $this->connect();
         }
     }
 
-    function update($queryData)
+    public function update($queryData)
     {
-        if (!$this->isConnected)
-        {
+        if (!$this->isConnected) {
             $this->connect();
         }
     }
 
-    function select($queryData)
+    public function select($queryData)
     {
-        if (!$this->isConnected)
-        {
+        if (!$this->isConnected) {
             $this->connect();
         }
     }
 
-    function selectOne($queryData)
+    public function selectOne($queryData)
     {
-        if (!$this->isConnected)
-        {
+        if (!$this->isConnected) {
             $this->connect();
         }
     }
-
-
 }

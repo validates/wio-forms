@@ -1,10 +1,10 @@
 <?php
+
 namespace WioForms\FieldRenderer;
 
 class TextInput extends AbstractFieldRenderer
 {
-
-    function showToEdit()
+    public function showToEdit()
     {
         $this->html = '';
         $this->inputContainerHead();
@@ -20,7 +20,7 @@ class TextInput extends AbstractFieldRenderer
         return $this->html;
     }
 
-    function showToView()
+    public function showToView()
     {
         $html = 'TextInput: '.'abc'.'<br/>';
 

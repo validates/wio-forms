@@ -1,8 +1,9 @@
 <?php
+
 namespace WioForms\Service;
 
-use \WioForms\Service\Validation\Container as ContainerValidationService;
-use \WioForms\Service\Validation\Field as FieldValidationService;
+use WioForms\Service\Validation\Container as ContainerValidationService;
+use WioForms\Service\Validation\Field as FieldValidationService;
 
 class ValidatorService
 {
@@ -12,24 +13,22 @@ class ValidatorService
     private $containerValidationService;
     private $fieldValidationService;
 
-    function __construct($wioFormsObject)
+    public function __construct($wioFormsObject)
     {
         $this->wioForms = $wioFormsObject;
         $this->formStruct = &$this->wioForms->formStruct;
 
         $this->containerValidationService = new ContainerValidationService($this->wioForms);
-        $this->fieldValidationService     = new FieldValidationService($this->wioForms);
+        $this->fieldValidationService = new FieldValidationService($this->wioForms);
 
         $this->PHPvalidators = [];
     }
 
     public function validateFields()
     {
-        foreach ($this->formStruct['Fields'] as $fieldName => &$field)
-        {
+        foreach ($this->formStruct['Fields'] as $fieldName => &$field) {
             if (!$field['waitForDefaultValue']
-                and !$field['validated'])
-            {
+                and !$field['validated']) {
                 $this->fieldValidationService->validate($fieldName);
                 $field['validated'] = true;
             }
@@ -38,26 +37,23 @@ class ValidatorService
 
     public function validateContainers()
     {
-        foreach ($this->formStruct['Containers'] as $containerName => &$container)
-        {
+        foreach ($this->formStruct['Containers'] as $containerName => &$container) {
             $this->containerValidationService->validate($container);
         }
     }
 
-
-    private function checkIfDataInRepository($fieldName){}
-
+    private function checkIfDataInRepository($fieldName)
+    {
+    }
 
     public function getAvaliableSiteNumber()
     {
         $maxSite = 0;
 
-        foreach ($this->formStruct['Containers'] as $container)
-        {
+        foreach ($this->formStruct['Containers'] as $container) {
             if ($container['container'] == '_site'
               and !(isset($container['hidden']) and $container['hidden'])
-              and $container['site'] > $maxSite)
-            {
+              and $container['site'] > $maxSite) {
                 $maxSite = $container['site'];
             }
         }
@@ -67,11 +63,10 @@ class ValidatorService
 
     public function getLastEditedSite()
     {
-        if (isset($this->wioForms->entryData['_wioFormsSite']))
-        {
-            return (Int)($this->wioForms->entryData['_wioFormsSite'])+1;
+        if (isset($this->wioForms->entryData['_wioFormsSite'])) {
+            return (int) ($this->wioForms->entryData['_wioFormsSite']) + 1;
         }
+
         return 0;
     }
-
 }

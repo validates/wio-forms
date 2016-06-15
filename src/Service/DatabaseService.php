@@ -1,4 +1,5 @@
 <?php
+
 namespace WioForms\Service;
 
 class DatabaseService
@@ -9,14 +10,12 @@ class DatabaseService
 
     public $connections;
 
-    function __construct($wioFormsObject)
+    public function __construct($wioFormsObject)
     {
         $this->wioForms = $wioFormsObject;
 
         $this->connections = [];
     }
-
-
 
     /*
     this function get FormSettings and bind in to out object
@@ -27,46 +26,41 @@ class DatabaseService
     */
     public function getFormDataStruct($formDataStructId)
     {
-
         $databaseQuery =
         [
             'table' => 'wio_form_struct',
-            'where' => ['formStructId' => $formDataStructId ]
+            'where' => ['formStructId' => $formDataStructId],
         ];
 
         $queryResult = $this->connections['Main']->selectOne($databaseQuery);
 
-        if ($queryResult == 'false')
-        {
+        if ($queryResult == 'false') {
             $this->wioForms->errorLog->errorLog('Cannot get DataStruct from Database.');
+
             return false;
         }
 
         $this->wioForms->formStruct = json_decode($queryResult['dataStruct'], true);
-        if (json_last_error()!= JSON_ERROR_NONE)
-        {
+        if (json_last_error() != JSON_ERROR_NONE) {
             $this->wioForms->errorLog->errorLog('Problem with JSON validation of formStruct file.');
+
             return false;
         }
+
         return true;
     }
-
 
     public function setConnections()
     {
-        foreach ($this->wioForms->settings['DatabaseConnections'] as $DBconn_Name => $DBconn_Data)
-        {
-            $className = $this->wioForms->classFinderService->checkName('DatabaseConnection',$DBconn_Name);
-            if ($className)
-            {
-                $this->connections[ $DBconn_Name ] = new $className($DBconn_Data);
-            }
-            else
-            {
+        foreach ($this->wioForms->settings['DatabaseConnections'] as $DBconn_Name => $DBconn_Data) {
+            $className = $this->wioForms->classFinderService->checkName('DatabaseConnection', $DBconn_Name);
+            if ($className) {
+                $this->connections[$DBconn_Name] = new $className($DBconn_Data);
+            } else {
                 return false;
             }
         }
+
         return true;
     }
-
 }

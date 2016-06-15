@@ -1,4 +1,5 @@
 <?php
+
 namespace WioForms\FieldValidator;
 
 abstract class AbstractFieldValidator
@@ -14,7 +15,7 @@ abstract class AbstractFieldValidator
     protected $invalidState = -1;
     protected $invalidMessage = 'field_invalid';
 
-    function __construct($wioFormsObject)
+    public function __construct($wioFormsObject)
     {
         $this->wioForms = $wioFormsObject;
 
@@ -23,9 +24,7 @@ abstract class AbstractFieldValidator
         $this->message = '';
     }
 
-
-    abstract function validatePHP($value, $settings);
-
+    abstract public function validatePHP($value, $settings);
 
     protected function setAnswer()
     {
@@ -38,7 +37,6 @@ abstract class AbstractFieldValidator
                                 ->langService
                                 ->getLang($this->invalidMessage);
         }
-
     }
 
     protected function getReturn()
@@ -46,8 +44,9 @@ abstract class AbstractFieldValidator
         $array = [
             'valid'   => $this->valid,
             'state'   => $this->state,
-            'message' => $this->message
+            'message' => $this->message,
         ];
+
         return $array;
     }
 

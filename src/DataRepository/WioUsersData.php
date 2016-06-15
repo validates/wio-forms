@@ -1,12 +1,12 @@
 <?php
+
 namespace WioForms\DataRepository;
 
 use SuperW\Service\ApiService;
 
 class WioUsersData extends AbstractDataRepository
 {
-
-    function getData($requiredFields)
+    public function getData($requiredFields)
     {
         $this->repositoryDefinition['tried'] = true;
 
@@ -18,18 +18,14 @@ class WioUsersData extends AbstractDataRepository
             $requiredFields['password']
         );
 
-        if (empty($this->data))
-        {
+        if (empty($this->data)) {
             $this->repositoryDefinition['success'] = false;
             $this->repositoryDefinition['message'] = 'login_failed';
             $this->data = false;
-        }
-        else
-        {
+        } else {
             $this->repositoryDefinition['success'] = true;
         }
 
         return $this->data;
     }
-
 }

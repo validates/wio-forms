@@ -1,37 +1,34 @@
 <?php
-namespace WioForms\ErrorLog;
 
+namespace WioForms\ErrorLog;
 
 class ErrorLog extends AbstractErrorLog
 {
     private $messages;
 
-    function _construct()
+    public function _construct()
     {
         $this->messages = [];
     }
 
-    function errorLog($message)
+    public function errorLog($message)
     {
         $this->messages[] = $message;
     }
 
-    function __destruct()
+    public function __destruct()
     {
         $this->showLog();
     }
 
-    function showLog()
+    public function showLog()
     {
         return '';
-        if (count($this->messages))
-        {
+        if (count($this->messages)) {
             echo '<br/><b> Error Log: </b><br/>';
-            foreach ($this->messages as $m)
-            {
+            foreach ($this->messages as $m) {
                 echo $m.'<br/>';
             }
         }
     }
-
 }

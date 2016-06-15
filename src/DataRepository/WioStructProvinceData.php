@@ -1,20 +1,21 @@
 <?php
+
 namespace WioForms\DataRepository;
 
 use Pixie\QueryBuilder\QueryBuilderHandler;
-use \WioStruct\WioStruct;
-use \WioStruct\Core\StructDefinition;
+use WioStruct\Core\StructDefinition;
+use WioStruct\WioStruct;
 
 class WioStructProvinceData extends AbstractDataRepository
 {
-    function getData($requiredFields)
+    public function getData($requiredFields)
     {
         $this->data = [];
 
         $wioStruct = new WioStruct(new QueryBuilderHandler());
 
         $provinceList = $wioStruct->structQuery(
-            (new StructDefinition)
+            (new StructDefinition())
                 ->networkName('administrative')
                 ->nodeTypeName('state')
             )

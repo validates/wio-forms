@@ -1,4 +1,5 @@
 <?php
+
 namespace WioForms\DataRepository;
 
 use WioStruct\Core\StructDefinition;
@@ -14,14 +15,14 @@ class RecruitmentData extends AbstractDataRepository
         global $queryBuilder;
         $this->data = $queryBuilder->table('wio_flow_entities')
             ->setFetchMode(\PDO::FETCH_ASSOC)
-            ->join('recrutation_roles','recrutation_roles.wio_flow_entity_id','=','wio_flow_entities.id')
+            ->join('recrutation_roles', 'recrutation_roles.wio_flow_entity_id', '=', 'wio_flow_entities.id')
             ->join('wio_users', 'wio_users.id', '=', 'wio_flow_entities.wio_user_id')
             ->join('user_basic_data', 'user_basic_data.wio_user_id', '=', 'wio_users.id')
-            ->join('user_phone_data','user_phone_data.wio_user_id','=','wio_users.id')
+            ->join('user_phone_data', 'user_phone_data.wio_user_id', '=', 'wio_users.id')
             ->where('wio_users.id', '=', $requiredFields['userId'])
             ->first();
 
-        $this->data['type'] = rand(1,3);
+        $this->data['type'] = rand(1, 3);
         $this->data['wanted_area_id'] = rand(1, 300);
         $this->setUpDummyAreaLogic('wanted_area_name', $this->data['wanted_area_id']);
 
@@ -39,9 +40,9 @@ class RecruitmentData extends AbstractDataRepository
      */
     private function setUpDummyAreaLogic($field, $nodeId)
     {
-        $wioStruct = new WioStruct(new \Pixie\QueryBuilder\QueryBuilderHandler);
+        $wioStruct = new WioStruct(new \Pixie\QueryBuilder\QueryBuilderHandler());
         $area = $wioStruct->structQuery(
-            (new StructDefinition)
+            (new StructDefinition())
                 ->nodeId($nodeId)
         )
             ->get('Node');
@@ -49,5 +50,4 @@ class RecruitmentData extends AbstractDataRepository
         $area = reset($area);
         $this->data[$field] = $area->NodeName;
     }
-
 }

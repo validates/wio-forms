@@ -1,6 +1,6 @@
 <?php
-namespace WioForms\DatabaseConnection;
 
+namespace WioForms\DatabaseConnection;
 
 abstract class AbstractDatabaseConnection
 {
@@ -8,12 +8,13 @@ abstract class AbstractDatabaseConnection
     functions used by DatabaseStore connection
     every connection can have own set of functions
     */
-    abstract function __construct($connectionData);
+    abstract public function __construct($connectionData);
 
-    abstract function insert($queryData);
-    abstract function update($queryData);
-    abstract function select($queryData);
-    abstract function selectOne($queryData);
+    abstract public function insert($queryData);
 
+    abstract public function update($queryData);
 
+    abstract public function select($queryData);
+
+    abstract public function selectOne($queryData);
 }

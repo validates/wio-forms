@@ -1,4 +1,5 @@
 <?php
+
 namespace WioForms\Service;
 
 class LangService
@@ -12,9 +13,9 @@ class LangService
 
         $this->langsArray = json_decode(
             file_get_contents(
-                $this->wioForms->settings['SrcDir'] . $this->wioForms->settings['LangsFilePath']
+                $this->wioForms->settings['SrcDir'].$this->wioForms->settings['LangsFilePath']
             ),
-            TRUE
+            true
         );
     }
 

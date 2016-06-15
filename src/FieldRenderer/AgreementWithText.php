@@ -1,10 +1,10 @@
 <?php
+
 namespace WioForms\FieldRenderer;
 
 class AgreementWithText extends AbstractFieldRenderer
 {
-
-    function showToEdit()
+    public function showToEdit()
     {
         $this->html = '';
         $this->inputContainerHead('wioForms_AgreementWithText');
@@ -13,8 +13,7 @@ class AgreementWithText extends AbstractFieldRenderer
         $this->inputFieldContainerHead();
 
         $checked = '';
-        if ($this->value)
-        {
+        if ($this->value) {
             $checked = ' checked="checked"';
         }
         $this->html .= '<input type="hidden" name="'.$this->fieldName.'" value="" />';
@@ -28,8 +27,8 @@ class AgreementWithText extends AbstractFieldRenderer
         return $this->html;
     }
 
-    function showToView()
-      {
+    public function showToView()
+    {
         $html = 'TextInput: '.'abc'.'<br/>';
 
         return $html;

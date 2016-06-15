@@ -1,6 +1,6 @@
 <?php
-namespace WioForms\ContainerRenderer;
 
+namespace WioForms\ContainerRenderer;
 
 abstract class AbstractContainerRenderer
 {
@@ -13,11 +13,11 @@ abstract class AbstractContainerRenderer
 
     protected $html;
 
-    function __construct($containerName, $wioFormsObject)
+    public function __construct($containerName, $wioFormsObject)
     {
         $this->containerName = $containerName;
         $this->wioForms = $wioFormsObject;
-        $this->containerInfo = &$this->wioForms->formStruct['Containers'][ $this->containerName ];
+        $this->containerInfo = &$this->wioForms->formStruct['Containers'][$this->containerName];
 
         $this->prepareDefaultData();
     }
@@ -26,35 +26,30 @@ abstract class AbstractContainerRenderer
     {
         $this->title = false;
         if (isset($this->containerInfo['title'])
-            and !empty($this->containerInfo['title']))
-        {
+            and !empty($this->containerInfo['title'])) {
             $this->title = $this->containerInfo['title'];
         }
 
         $this->message = false;
         if (isset($this->containerInfo['valid'])
             and !$this->containerInfo['valid']
-            and isset($this->containerInfo['message']))
-        {
+            and isset($this->containerInfo['message'])) {
             $this->message = $this->containerInfo['message'];
         }
         if (isset($this->styleOptions['dont_display_errors'])
-            and $this->styleOptions['dont_display_errors'])
-        {
+            and $this->styleOptions['dont_display_errors']) {
             $this->message = false;
         }
     }
 
     protected function standardErrorDisplay()
     {
-        if ($this->message !== false)
-        {
+        if ($this->message !== false) {
             $this->html .= '<div class="wioForms_ErrorMessage">'.$this->message.'</div>'."\n";
         }
     }
 
+    abstract public function showHead();
 
-    abstract function showHead();
-    abstract function showTail();
-
+    abstract public function showTail();
 }

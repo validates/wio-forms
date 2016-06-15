@@ -1,10 +1,10 @@
 <?php
+
 namespace WioForms\FieldRenderer;
 
 class ChooseOneButton extends AbstractFieldRenderer
 {
-
-    function showToEdit()
+    public function showToEdit()
     {
         $this->prepareDataSet();
 
@@ -14,11 +14,9 @@ class ChooseOneButton extends AbstractFieldRenderer
         $this->inputTitleContainer();
         $this->inputFieldContainerHead();
 
-        foreach ($this->dataSet as $option => $option_name)
-        {
+        foreach ($this->dataSet as $option => $option_name) {
             $addClass = '';
-            if ($option=='new_account')
-            {
+            if ($option == 'new_account') {
                 $addClass = ' colorRed';
             }
 
@@ -31,11 +29,11 @@ class ChooseOneButton extends AbstractFieldRenderer
         return $this->html;
     }
 
-    function showToView()
+    public function showToView()
     {
         $this->prepareDataSet();
 
-        $html = 'TextInput: '.$this->dataSet[ $this->value ].'<br/>';
+        $html = 'TextInput: '.$this->dataSet[$this->value].'<br/>';
 
         return $html;
     }

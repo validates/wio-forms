@@ -1,4 +1,5 @@
 <?php
+
 namespace WioForms\DataRepository;
 
 class WioFlowStatusData extends AbstractDataRepository
@@ -18,5 +19,4 @@ class WioFlowStatusData extends AbstractDataRepository
 
         return $this->data;
     }
-
 }

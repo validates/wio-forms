@@ -1,4 +1,5 @@
 <?php
+
 namespace WioForms\FieldRenderer;
 
 abstract class AbstractFieldRenderer
@@ -8,22 +9,22 @@ abstract class AbstractFieldRenderer
     protected $formStruct;
     protected $fieldInfo;
 
-    # data prepared by prepareDefauldData method
+    // data prepared by prepareDefauldData method
     protected $value;
     protected $styleOptions;
     protected $message;
 
-    # data prepared by prepareDataSet method
+    // data prepared by prepareDataSet method
     protected $dataSet;
 
     protected $html;
 
-    function __construct($fieldName, $wioFormsObject)
+    public function __construct($fieldName, $wioFormsObject)
     {
         $this->fieldName = $fieldName;
         $this->wioForms = $wioFormsObject;
         $this->formStruct = &$this->wioForms->formStruct;
-        $this->fieldInfo = &$this->wioForms->formStruct['Fields'][ $this->fieldName ];
+        $this->fieldInfo = &$this->wioForms->formStruct['Fields'][$this->fieldName];
 
         $this->prepareDefaultData();
     }
@@ -31,25 +32,21 @@ abstract class AbstractFieldRenderer
     private function prepareDefaultData()
     {
         $this->value = '';
-        if (!empty($this->fieldInfo['value']))
-        {
+        if (!empty($this->fieldInfo['value'])) {
             $this->value = $this->fieldInfo['value'];
         }
 
         $this->styleOptions = [];
-        if (isset($this->fieldInfo['styleOptions']))
-        {
+        if (isset($this->fieldInfo['styleOptions'])) {
             $this->styleOptions = $this->fieldInfo['styleOptions'];
         }
 
         $this->message = false;
-        if (isset($this->fieldInfo['valid']) and !$this->fieldInfo['valid'])
-        {
+        if (isset($this->fieldInfo['valid']) and !$this->fieldInfo['valid']) {
             $this->message = $this->fieldInfo['message'];
         }
         if (isset($this->styleOptions['dont_display_errors'])
-            and $this->styleOptions['dont_display_errors'])
-        {
+            and $this->styleOptions['dont_display_errors']) {
             $this->message = false;
         }
     }
@@ -58,12 +55,9 @@ abstract class AbstractFieldRenderer
     {
         $this->dataSet = [];
         $dataSetName = $this->fieldInfo['dataSet']['repositoryName'];
-        if (isset($this->formStruct['DataRepositories'][ $dataSetName ]))
-        {
-            $this->dataSet = &$this->formStruct['DataRepositories'][ $dataSetName ]['data'];
-        }
-        else
-        {
+        if (isset($this->formStruct['DataRepositories'][$dataSetName])) {
+            $this->dataSet = &$this->formStruct['DataRepositories'][$dataSetName]['data'];
+        } else {
             $this->wioForms->errorLog->errorLog('DataRepository: '.$dataSetName.' not found.');
         }
     }
@@ -73,20 +67,22 @@ abstract class AbstractFieldRenderer
         $additional_class .= $this->getAdditionalWrapperClasses();
         $this->html .= '<div class="wioForms_InputContainer '.$additional_class.'">'."\n";
     }
+
     protected function inputContainerTail()
     {
         $this->html .= '</div>'."\n";
     }
+
     protected function inputFieldContainerHead()
     {
-        $this->html .= '<div data-wio-forms="' . $this->fieldName
-            . '"class="wioForms_InputFieldContainer">'."\n";
+        $this->html .= '<div data-wio-forms="'.$this->fieldName
+            .'"class="wioForms_InputFieldContainer">'."\n";
     }
+
     protected function inputFieldContainerTail()
     {
         $this->html .= '</div>'."\n";
     }
-
 
     protected function inputTitleContainer()
     {
@@ -95,15 +91,14 @@ abstract class AbstractFieldRenderer
 
     protected function standardErrorDisplay()
     {
-        if ($this->message !== false)
-        {
+        if ($this->message !== false) {
             $this->html .= '<div class="wioForms_ErrorMessage">'.$this->message.'</div>'."\n";
         }
     }
 
-    abstract function showToEdit();
+    abstract public function showToEdit();
 
-    abstract function showToView();
+    abstract public function showToView();
 
     protected function getAdditionalWrapperClasses()
     {

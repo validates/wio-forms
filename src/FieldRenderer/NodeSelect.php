@@ -1,10 +1,10 @@
 <?php
+
 namespace WioForms\FieldRenderer;
 
 class NodeSelect extends AbstractFieldRenderer
 {
-
-    function showToEdit()
+    public function showToEdit()
     {
         $this->html = '';
         $this->prepareDataSet();
@@ -16,24 +16,21 @@ class NodeSelect extends AbstractFieldRenderer
 
         $this->html .= '<select name="country_state">';
         $this->html .= '<option value="">wybierz</option>';
-        foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo)
-        {
+        foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo) {
             $this->html .= '<option value="'.$wojewodztwo['node_id'].'">'.$wojewodztwoName.'</option>';
         }
-        $this->html .='</select>';
+        $this->html .= '</select>';
 
 
         $this->html .= '<div class="wioForms_InputTitleContainer '.$this->getAdditionalWrapperClasses().'">Wybierz Region:</div>';
         $this->html .= '<select name="szp_regions">';
         $this->html .= '<option class="region_state_none" value="">wybierz</option>';
-        foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo)
-        {
-            foreach ($wojewodztwo['szp_regions'] as $regionName => $region)
-            {
+        foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo) {
+            foreach ($wojewodztwo['szp_regions'] as $regionName => $region) {
                 $this->html .= '<option class="region_state_'.$wojewodztwo['node_id'].'" value="'.$region['node_id'].'">'.$regionName.'</option>';
             }
         }
-        $this->html .='</select>';
+        $this->html .= '</select>';
 
         $this->html .= $this->javascriptNodesInfo();
         $this->html .= $this->javascriptSelectManager();
@@ -44,13 +41,12 @@ class NodeSelect extends AbstractFieldRenderer
         return $this->html;
     }
 
-    private function javascriptNodesInfo(){
+    private function javascriptNodesInfo()
+    {
         $js = '';
-        foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo)
-        {
+        foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo) {
             $js .= '"'.$wojewodztwoName.'":{';
-            foreach ($wojewodztwo['szp_regions'] as $regionName => $region)
-            {
+            foreach ($wojewodztwo['szp_regions'] as $regionName => $region) {
                 $js .= $region['node_id'].':{name:"'.$regionName.'",lat:'.$region['lat'].',lng:'.$region['lng'].'},';
             }
             $js .= '},';
@@ -59,8 +55,9 @@ class NodeSelect extends AbstractFieldRenderer
         return '<script type="text/javascript">RejonySzp={'.$js.'};</script>';
     }
 
-    private function javascriptSelectManager(){
-        return <<<EOT
+    private function javascriptSelectManager()
+    {
+        return <<<'EOT'
         <script type="text/javascript">
         $('select[name="country_state"]').change(function(){
             var node_id = $(this).val();
@@ -92,7 +89,7 @@ class NodeSelect extends AbstractFieldRenderer
 EOT;
     }
 
-    function showToView()
+    public function showToView()
     {
         $html = 'TextInput: '.'abc'.'<br/>';
 
