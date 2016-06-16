@@ -7,7 +7,6 @@ class OtherConnection extends AbstractDatabaseConnection
     private $isConnected;
     private $connectionData;
 
-
     public function __construct($connectionData)
     {
         $this->isConnected = false;

@@ -2,7 +2,8 @@
 
 namespace WioForms;
 
-use WioForms\ErrorLog\ErrorLog;use WioForms\Service\ClassFinderService;
+use WioForms\ErrorLog\ErrorLog;
+use WioForms\Service\ClassFinderService;
 use WioForms\Service\DatabaseService;
 use WioForms\Service\DataRepositoryService;
 use WioForms\Service\EntryCollectorService;
