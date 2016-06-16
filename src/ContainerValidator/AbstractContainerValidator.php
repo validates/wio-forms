@@ -42,8 +42,8 @@ abstract class AbstractContainerValidator
     protected function getReturn()
     {
         $array = [
-            'valid'   => $this->valid,
-            'state'   => $this->state,
+            'valid' => $this->valid,
+            'state' => $this->state,
             'message' => $this->message,
         ];
 

@@ -110,7 +110,7 @@ EOT;
         var circleBoxes = [];
         WOJ={};
 EOT;
-        $return .= 'var program = ' . ($this->wioForms->entryData['akcja'] == 'AP' ? '"AP"' : '"SZP"') . ';';
+        $return .= 'var program = '.($this->wioForms->entryData['akcja'] == 'AP' ? '"AP"' : '"SZP"').';';
         $return .= 'WOJoptions={';
         $return .= 'zoomLvl: 6, ';
         $return .= 'zoomStage: 1, ';
