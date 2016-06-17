@@ -6,6 +6,10 @@ class Pesel2Date extends AbstractFieldConverter
 {
     public function convert($data)
     {
+        if (empty($data)) {
+            return $data;
+        }
+
         $year = (int) ($data[0].$data[1]);
         $month = (int) ($data[2].$data[3]);
         $day = (int) ($data[4].$data[5]);

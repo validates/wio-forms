@@ -1,0 +1,192 @@
+{
+    "FormName": "Form1",
+    "Version": "2016",
+    "Subversion": 11,
+    "VersionId": "2016.11",
+    "FormId": "Form1.2016.11",
+    "DataRepositories": {
+        "userId": {
+            "type": "foreign",
+            "class": "WioFlowUserFromHash",
+            "data": false
+        },
+        "editionCounter" : {
+            "type": "local",
+            "data" : {
+                "0" : "W żadnej",
+                "1" : "W jednej",
+                "2" : "W dwóch",
+                "3" : "W trzech lub więcej"
+            }
+        },
+        "programType": {
+            "type": "local",
+            "data": {
+                "AP": "Akademia Przyszłości",
+                "SZP": "Szlachetna Paczka"
+            }
+        },
+        "roles": {
+            "type": "local",
+            "data": {
+                "SZP" : {
+                    "201" : "Koordynatora Wojewódzkiego",
+                    "202" : "Koordynatora Regionalnego",
+                    "203" : "Pomocnika ds. Rekrutacji",
+                    "204" : "Koordynatora ds. Promocji",
+                    "205" : "Koordynatora ds. Logistyki",
+                    "206" : "Koordynatora ds. Wdrożeń",
+                    "207" : "Koordynatora ds. Współpracy Lokalnej",
+                    "208" : "HR-a w Radzie Wojewódzkiej",
+                    "209" : "Asystenta ds. Promocji w Województwie",
+                    "210" : "Asystenta ds. Promocji w Rejonie",
+                    "211" : "Asystenta ds. Logistyki w Rejonie",
+                    "212" : "Lidera Rejonu",
+                    "213" : "Lidera Zespołu",
+                    "214" : "Wolontariusza",
+                    "215" : "Wolontariusza Paczki Seniorów",
+                    "216" : "Darczyńcy",
+                    "217" : "Lidera Specjalistów",
+                    "218" : "Trenera wewnętrznego",
+                    "219" : "Młodszego Specjalisty ds. Opisów",
+                    "220" : "Asystenta ds. Wdrożeń"
+                },
+                "AP" : {
+                    "101" : "Koordynatora Wojewódzkiego",
+                    "102" : "Asystenta Koordynatora Wojewódzkiego",
+                    "103" : "Koordynatora ds. Wdrożeń",
+                    "104" : "Asystenta ds. Wdrożeń",
+                    "105" : "Koordynatora ds. Logistyki",
+                    "106" : "Koordynatora ds. Promocji",
+                    "107" : "Asystenta ds. Promocji",
+                    "108" : "Lidera Kolegium",
+                    "109" : "Kolidera",
+                    "110" : "Wolontariusza",
+                    "111" : "Lidera Zespołu Specjalistów",
+                    "112" : "Specjalistę ds. Opisów",
+                    "113" : "Trenera Wewnętrznego",
+                    "114" : "Darczyńcy"
+                }
+
+            }
+        },
+        "roleAp" : {
+            "type": "local",
+            "data": {
+
+            }
+        }
+    },
+
+
+    "FieldValidatorsJS": {},
+    "ContainerValidatorsPHP": {
+        "AllFieldsOk": {
+            "class": "AllFieldsOk"
+        },
+        "FormSaverOk": {
+            "class": "FormSaverOk"
+        }
+    },
+    "ContainerValidatorsJS": {},
+    "Fields": {
+        "userId": {
+            "type": "Hidden",
+            "container": "bigFormFront",
+            "position": 1,
+            "title": "User Id",
+            "state": 0,
+            "save": true,
+            "defaultValue": {
+                "repositoryName": "userId"
+            }
+        },
+        "editionSzPCount": {
+            "type": "Select",
+            "container": "bigFormFront",
+            "position": 2,
+            "title": "W ilu Edycjach SZLACHETNEJ PACZKI brałeś udział",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "editionCounter"
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "editionAPCount": {
+            "type": "Select",
+            "container": "bigFormFront",
+            "position": 3,
+            "title": "W ilu Edycjach AKADEMII PRZYSZŁOŚCI brałeś udział",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "editionCounter"
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "previousProgram": {
+            "type": "Select",
+            "container": "bigFormFront",
+            "position": 4,
+            "title": "Program",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "programType"
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            },
+            "isGroup" : true
+        },
+        "previousRole": {
+            "type": "Select",
+            "container": "bigFormFront",
+            "position": 5,
+            "title": "Program",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "roles"
+            },
+            "dynamicOptions": "previousProgram",
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            },
+            "isGroup" : true
+        }
+    },
+    "Containers": {
+        "bigFormFront": {
+            "site": 0,
+            "container": "_site",
+            "position": 1,
+            "displayType": "SectionDisplay",
+            "title": "Historia zaangażowania"
+        },
+        "SubmitButton1": {
+            "site": 0,
+            "container": "_site",
+            "position": 4,
+            "displayType": "Button1",
+            "title": "Wyślij"
+        }
+    },
+    "FormSavers": {
+        "finalSave": {
+            "clearTemporarySave": true,
+            "databaseConnection": "Main",
+            "DatabaseSaves": [
+            ]
+        }
+    }
+}
