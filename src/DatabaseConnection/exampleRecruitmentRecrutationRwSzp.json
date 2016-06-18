@@ -1,0 +1,477 @@
+{
+    "FormName": "Form1",
+    "Version": "2016",
+    "Subversion": 11,
+    "VersionId": "2016.11",
+    "FormId": "Form1.2016.11",
+    "DataRepositories": {
+        "userId": {
+            "type": "foreign",
+            "class": "WioFlowCurrentUserData",
+            "data": false
+        },
+        "status": {
+            "type": "foreign",
+            "class": "WioFlowStatusData",
+            "data": false
+        },
+        "gender": {
+            "type": "local",
+            "data": {
+                "male": "Mężczyzna",
+                "female": "Kobieta"
+            }
+        },
+        "wiosnaExperienceSelect" : {
+            "type": "local",
+            "data": {
+                "1": "Tak",
+                "2": "Nie"
+            }
+        },
+        "wiosnaExperience" : {
+            "type": "foreign",
+            "class": "WiosnaExperienceData",
+            "data": false,
+            "requiredFields": {
+                "userId": "userId"
+            }
+        },
+        "program": {
+            "type": "local",
+            "data": {
+                "AP": "Akademia Przyszłości",
+                "SZP": "Szlachetna Paczka"
+            }
+        },
+        "role": {
+            "type": "local",
+            "data": {
+                "LR": "Lider",
+                "RW": "Rada Wojewódzka"
+            }
+        },
+        "recruitment": {
+            "type": "foreign",
+            "class": "RecruitmentData",
+            "data": false,
+            "requiredFields": {
+                "userId": "userId"
+            }
+        },
+        "wioStruct": {
+            "type": "foreign",
+            "data": false,
+            "class": "WioStructData"
+        },
+        "wioStructProvince": {
+            "type": "foreign",
+            "data": false,
+            "class": "WioStructProvinceData"
+        },
+        "type" : {
+            "type": "local",
+            "data": {
+                "1": "Nowy",
+                "2": "Weteran",
+                "3": "Awansowany"
+            }
+        }
+    },
+    "FieldValidatorsJS": {},
+    "ContainerValidatorsPHP": {
+        "AllFieldsOk": {
+            "class": "AllFieldsOk"
+        },
+        "FormSaverOk": {
+            "class": "FormSaverOk"
+        }
+    },
+    "ContainerValidatorsJS": {},
+    "Fields": {
+        "userId": {
+            "type": "Hidden",
+            "container": "recruitmentForm",
+            "position": 1,
+            "title": "User Id",
+            "state": 0,
+            "save": true,
+            "defaultValue": {
+                "repositoryName": "userId"
+            }
+        },
+        "status": {
+            "type": "Select",
+            "container": "recruitmentForm",
+            "position": 2,
+            "title": "Status",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "status"
+            },
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["flow_status"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "name" : {
+            "type": "TextInput",
+            "container": "basicDataForm",
+            "position": 3,
+            "title": "Imię",
+            "state": 0,
+            "save": true,
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["name"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "surname" : {
+            "type": "TextInput",
+            "container": "basicDataForm",
+            "position": 4,
+            "title": "Nazwisko",
+            "state": 0,
+            "save": true,
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["surname"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "email" : {
+            "type": "TextInput",
+            "container": "basicDataForm",
+            "position": 5,
+            "title": "Email",
+            "state": 0,
+            "save": true,
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["email"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "phone" : {
+            "type": "TextInput",
+            "container": "basicDataForm",
+            "position": 6,
+            "title": "Numer",
+            "state": 0,
+            "save": true,
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["phone_number"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "birth_date" : {
+            "type": "TextInput",
+            "container": "basicDataForm",
+            "position": 7,
+            "title": "Data urodzenia",
+            "state": 0,
+            "save": true,
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["birth_date"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "gender" : {
+            "type": "Select",
+            "container": "basicDataForm",
+            "position": 8,
+            "title": "Płeć",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "gender"
+            },
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["gender"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "wiosnaExperience" : {
+            "type": "Select",
+            "container": "basicDataForm",
+            "position": 9,
+            "title": "Czy działał już w WIOŚNIE",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "wiosnaExperienceSelect"
+            },
+            "defaultValue": {
+                "repositoryName": "wiosnaExperience",
+                "subset": ["wiosnaExperience"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "program" : {
+            "type": "Select",
+            "container": "dataForm",
+            "position": 1,
+            "title": "Wybrany program",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "program"
+            },
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["program_short_name"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "role" : {
+            "type": "Select",
+            "container": "dataForm",
+            "position": 2,
+            "title": "Wybrana rola",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "role"
+            },
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["role_short_name"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "province":
+        {
+            "type": "NodeSelect",
+            "container": "dataForm",
+            "position": 3,
+            "title": "Wybrane Województwo",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "wioStruct"
+            },
+            "class": {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "role_given":
+        {
+            "type": "Select",
+            "container": "dataForm",
+            "position": 4,
+            "title": "Rola nadana",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "role"
+            },
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["role_short_name"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "council_province":
+        {
+            "type": "Select",
+            "container": "dataForm",
+            "position": 5,
+            "title": "Województwo rady",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "wioStructProvince"
+            },
+            "class" : {
+                "wrapper": "edititem half-r",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "type":
+        {
+            "type": "Select",
+            "container": "dataForm",
+            "position": 6,
+            "title": "Typ",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "type"
+            },
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["type"]
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        }
+    },
+    "Containers": {
+        "recruitmentForm": {
+            "site": 0,
+            "container": "_site",
+            "position": 1,
+            "displayType": "SectionDisplay",
+            "title": "Status rekrutacji"
+        },
+        "basicDataForm": {
+            "site": 0,
+            "container": "_site",
+            "position": 2,
+            "displayType": "SectionDisplay",
+            "title": "Dane osobowe"
+        },
+        "dataForm": {
+            "site": 0,
+            "container": "_site",
+            "position": 3,
+            "displayType": "SectionDisplay",
+            "title": "Dane"
+        },
+        "SubmitButton1": {
+            "site": 0,
+            "container": "_site",
+            "position": 4,
+            "displayType": "Button1",
+            "title": "Wyślij"
+        }
+    },
+    "FormSavers": {
+        "finalSave": {
+            "clearTemporarySave": true,
+            "databaseConnection": "Main",
+            "DatabaseSaves": [
+                {
+                    "type": "update",
+                    "where" : {
+                        "wio_user_id": {
+                            "type": "field",
+                            "field": "userId"
+                        }
+                    },
+                    "tableName": "wio_flow_entities",
+                    "fields": {
+                        "flow_status": {
+                            "type": "field",
+                            "field": "status"
+                        }
+                    }
+                },
+                {
+                    "type": "update",
+                    "where" : {
+                        "wio_user_id": {
+                            "type": "field",
+                            "field": "userId"
+                        }
+                    },
+                    "tableName": "user_basic_data",
+                    "fields": {
+                        "name": {
+                            "type": "field",
+                            "field": "name"
+                        },
+                        "surname": {
+                            "type": "field",
+                            "field": "surname"
+                        },
+                        "gender": {
+                            "type": "field",
+                            "field": "gender"
+                        },
+                        "birth_date": {
+                            "type": "field",
+                            "field": "birth_date"
+                        }
+                    }
+                },
+                {
+                    "type": "update",
+                    "where" : {
+                        "wio_user_id": {
+                            "type": "field",
+                            "field": "userId"
+                        }
+                    },
+                    "tableName": "user_basic_data",
+                    "fields": {
+                        "name": {
+                            "type": "field",
+                            "field": "name"
+                        },
+                        "surname": {
+                            "type": "field",
+                            "field": "surname"
+                        },
+                        "gender": {
+                            "type": "field",
+                            "field": "gender"
+                        },
+                        "birth_date": {
+                            "type": "field",
+                            "field": "birth_date"
+                        }
+                    }
+                },
+                {
+                    "type": "update",
+                    "where" : {
+                        "id": {
+                            "type": "field",
+                            "field": "userId"
+                        }
+                    },
+                    "tableName": "wio_users",
+                    "fields": {
+                        "email": {
+                            "type": "field",
+                            "field": "email"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

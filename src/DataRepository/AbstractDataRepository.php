@@ -1,15 +1,15 @@
 <?php
-namespace WioForms\DataRepository;
 
+namespace WioForms\DataRepository;
 
 abstract class AbstractDataRepository
 {
     protected $wioForms;
     protected $repositoryDefinition;
 
-    protected $data;
+    protected $data = [];
 
-    function __construct($wioFormsObject, $repositoryName)
+    public function __construct($wioFormsObject, $repositoryName)
     {
         $this->wioForms = $wioFormsObject;
         $this->repositoryDefinition = &$this->wioForms->formStruct['DataRepositories'][$repositoryName];
@@ -19,6 +19,17 @@ abstract class AbstractDataRepository
         $this->repositoryDefinition['message'] = '';
     }
 
-    abstract function getData($requiredFields);
+    abstract public function getData($requiredFields);
 
+    protected function setRepositoryFlags()
+    {
+        if (empty($this->data)) {
+            $this->repositoryDefinition['success'] = false;
+            $this->repositoryDefinition['message'] = 'no_map_data';
+            $this->data = false;
+        } else {
+            $this->repositoryDefinition['success'] = true;
+        }
+        $this->repositoryDefinition['tried'] = true;
+    }
 }

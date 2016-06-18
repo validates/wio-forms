@@ -1,14 +1,13 @@
 <?php
+
 namespace WioForms\ContainerRenderer;
 
 class Button1 extends AbstractContainerRenderer
 {
-
-    function showHead()
+    public function showHead()
     {
         $title = 'Wyślij';
-        if ($this->title)
-        {
+        if ($this->title) {
             $title = $this->title;
         }
         $html = '<button class="button-big-red">'.$title.'</button>';
@@ -16,10 +15,10 @@ class Button1 extends AbstractContainerRenderer
         return $html;
     }
 
-    function showTail()
+    public function showTail()
     {
         $html = '';
+
         return $html;
     }
-
 }

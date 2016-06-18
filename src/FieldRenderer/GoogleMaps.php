@@ -1,10 +1,10 @@
 <?php
+
 namespace WioForms\FieldRenderer;
 
 class GoogleMaps extends AbstractFieldRenderer
 {
-
-    function showToEdit()
+    public function showToEdit()
     {
         $this->html = '';
         $this->prepareDataSet();
@@ -13,32 +13,28 @@ class GoogleMaps extends AbstractFieldRenderer
         $this->inputTitleContainer();
         $this->inputFieldContainerHead();
 
-        if (!isset($this->wioForms->settings['GoogleMapsApi']['Key']))
-        {
+        if (!isset($this->wioForms->settings['GoogleMapsApi']['Key'])) {
             $this->wioForms->errorLog->errorLog('No GoogleMapsApi Key in settings');
         }
 
         $this->html .= '<select name="country_state">';
         $this->html .= '<option value="">wybierz</option>';
-        foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo)
-        {
+        foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo) {
             $this->html .= '<option value="'.$wojewodztwo['node_id'].'">'.$wojewodztwoName.'</option>';
         }
-        $this->html .='</select>';
+        $this->html .= '</select>';
 
 
-        if(isset($this->fieldInfo['rendererData']['secondLvl'])){
+        if (isset($this->fieldInfo['rendererData']['secondLvl'])) {
             $this->html .= '<div class="wioForms_InputTitleContainer">'.$this->fieldInfo['rendererData']['secondLvlTitle'].'</div>';
             $this->html .= '<select name="szp_regions">';
             $this->html .= '<option class="region_state_none" value="">wybierz</option>';
-            foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo)
-            {
-                foreach ($wojewodztwo[$this->fieldInfo['rendererData']['secondLvl']] as $regionName => $region)
-                {
+            foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo) {
+                foreach ($wojewodztwo[$this->fieldInfo['rendererData']['secondLvl']] as $regionName => $region) {
                     $this->html .= '<option class="region_state_'.$wojewodztwo['node_id'].'" value="'.$region['node_id'].'">'.$regionName.'</option>';
                 }
             }
-            $this->html .='</select>';
+            $this->html .= '</select>';
             $this->html .= $this->javascriptNodesInfo();
         }
 
@@ -58,13 +54,12 @@ class GoogleMaps extends AbstractFieldRenderer
         return $this->html;
     }
 
-    private function javascriptNodesInfo(){
+    private function javascriptNodesInfo()
+    {
         $js = '';
-        foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo)
-        {
+        foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo) {
             $js .= '"'.$wojewodztwoName.'":{';
-            foreach ($wojewodztwo[$this->fieldInfo['rendererData']['secondLvl']] as $regionName => $region)
-            {
+            foreach ($wojewodztwo[$this->fieldInfo['rendererData']['secondLvl']] as $regionName => $region) {
                 $js .= $region['node_id'].':{name:"'.$regionName.'",lat:'.$region['lat'].',lng:'.$region['lng'].'},';
             }
             $js .= '},';
@@ -73,8 +68,9 @@ class GoogleMaps extends AbstractFieldRenderer
         return '<script type="text/javascript">SecondLvlMarkers={'.$js.'};</script>';
     }
 
-    private function javascriptSelectManager(){
-        return <<<EOT
+    private function javascriptSelectManager()
+    {
+        return <<<'EOT'
         <script type="text/javascript">
         $('select[name="country_state"]').change(function(){
             var node_id = $(this).val();
@@ -106,21 +102,22 @@ class GoogleMaps extends AbstractFieldRenderer
 EOT;
     }
 
-    function javascriptMapManager(){
-        $return = <<<EOT
+    public function javascriptMapManager()
+    {
+        $return = <<<'EOT'
         <script type="text/javascript">
         var map;
         var circleBoxes = [];
         WOJ={};
 EOT;
-        $return .= 'var program = ' . ($this->wioForms->entryData['akcja'] == 'AP' ? '"AP"' : '"SZP"') . ';';
+        $return .= 'var program = '.($this->wioForms->entryData['akcja'] == 'AP' ? '"AP"' : '"SZP"').';';
         $return .= 'WOJoptions={';
         $return .= 'zoomLvl: 6, ';
         $return .= 'zoomStage: 1, ';
         $return .= "selected: 'mazowieckie', ";
-        $return .= 'secondLvl: '.((isset($this->fieldInfo['rendererData']['secondLvl']))?'true':'false').',';
-        $return .= "color: '".($this->fieldInfo['rendererData']['mapColor']?$this->fieldInfo['rendererData']['mapColor']:'#FF0000')."'};";
-        $return .= <<<EOT
+        $return .= 'secondLvl: '.((isset($this->fieldInfo['rendererData']['secondLvl'])) ? 'true' : 'false').',';
+        $return .= "color: '".($this->fieldInfo['rendererData']['mapColor'] ? $this->fieldInfo['rendererData']['mapColor'] : '#FF0000')."'};";
+        $return .= <<<'EOT'
 
         function findPolygonCenter(P){
             var latMin = 200, latMax = -200, lngMin = 200, lngMax = -200;
@@ -391,11 +388,11 @@ EOT;
         });
         </script>
 EOT;
+
         return $return;
     }
 
-
-    function showToView()
+    public function showToView()
     {
         $html = 'TextInput: '.'abc'.'<br/>';
 
