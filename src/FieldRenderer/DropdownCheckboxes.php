@@ -27,7 +27,7 @@ class DropdownCheckboxes extends AbstractFieldRenderer
 
             $inner_html = '';
             foreach ($groupData as $item) {
-                if(is_string($item)) {
+                if (is_string($item)) {
                     $inner_html .= '<input type="checkbox" name="'.$this->fieldName.'[]" value="'.$item.'"';
                     if (isset($this->valueArray[$groupName]) and isset($this->valueArray[$item])) {
                         $inner_html .= ' checked="checked"';
@@ -62,7 +62,7 @@ class DropdownCheckboxes extends AbstractFieldRenderer
 
     private function javascriptActions()
     {
-        return <<<EOT
+        return <<<'EOT'
         <script type="text/javascript">
         jQuery(document).ready(function(){
             jQuery('.wioForms_DropdownCheckboxes_outerContainerCheckbox').click(function(){
@@ -86,7 +86,7 @@ EOT;
 
     private function prepareValueArray()
     {
-        $valArray = array_flip( explode('|',$this->value));
+        $valArray = array_flip(explode('|', $this->value));
         $this->valueArray = $valArray;
 
         $this->textValuesArray = [];
@@ -102,7 +102,7 @@ EOT;
             }
         }
 
-        foreach ($valArray as $textinput=>$none) {
+        foreach ($valArray as $textinput => $none) {
             $keyA = each($this->textValuesArray);
             $key = $keyA['key'];
             $this->textValuesArray[$key] = $textinput;

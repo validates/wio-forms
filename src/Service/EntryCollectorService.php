@@ -21,7 +21,7 @@ class EntryCollectorService
         }
         foreach ($entryData as $dataIndex => $dataValue) {
             if (is_array($dataValue)) {
-                $entryData[$dataIndex] = implode($dataValue,'|');
+                $entryData[$dataIndex] = implode($dataValue, '|');
             }
         }
         if (!empty($tempSave = $this->wioForms->temporarySave->getFormData())) {

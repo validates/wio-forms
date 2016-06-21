@@ -83,7 +83,6 @@ class WioForms
         $this->temporarySave = new $temporarySaveClass($this);
     }
 
-
     public function showForm($formDataStructId = false, $permissionsArray = false, $partialEntryData = false)
     {
         if ($formDataStructId === false) {
@@ -133,5 +132,4 @@ class WioForms
     {
         return $this->headerCollectorService->getHeaders($dir);
     }
-
 }
