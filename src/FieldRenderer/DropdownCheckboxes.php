@@ -14,9 +14,6 @@ class DropdownCheckboxes extends AbstractFieldRenderer
         $this->inputTitleContainer();
         $this->inputFieldContainerHead();
 
-
-        var_dump($this->fieldInfo);
-
         foreach ($this->dataSet as $groupName => $groupData) {
             $this->html .= '<div class="wioForms_DropdownCheckboxes_outerContainer">';
             $this->html .= '<input type="checkbox" name="'.$this->fieldName.'[]" ';
@@ -107,8 +104,6 @@ EOT;
             $key = $keyA['key'];
             $this->textValuesArray[$key] = $textinput;
         }
-
-        var_dump($this->textValuesArray);
     }
 
     public function showToView()
