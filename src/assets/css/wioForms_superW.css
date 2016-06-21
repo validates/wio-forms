@@ -139,3 +139,7 @@ form.wioForms_Form div.wioForms_container{
     font-weight: bold;
     font-size: 1.5em;
 }
+
+.wioForms_Form .wioForms_DropdownCheckboxes_innerContainer {
+    margin-left: 20px;
+}

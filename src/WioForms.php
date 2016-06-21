@@ -83,12 +83,6 @@ class WioForms
         $this->temporarySave = new $temporarySaveClass($this);
     }
 
-    /*
-    Renders the form.
-    If form has multiple sites, it renders 1 site.
-    Also can render "thank you" view.
-    Partial entry data can also by set by hand (for example going from some link will set some field)
-    */
     public function showForm($formDataStructId = false, $permissionsArray = false, $partialEntryData = false)
     {
         if ($formDataStructId === false) {
@@ -137,53 +131,5 @@ class WioForms
     public function getHeaders($dir = '')
     {
         return $this->headerCollectorService->getHeaders($dir);
-    }
-
-    /*
-    Renders the filled form entry.
-    If Form has multiple sites or popout containers all are shown on single site.
-    Form entry can be shown in read only mode or edit mode
-    It can depend on PermissionsArray or other data
-    */
-    public function showEntry($formEntryId, $permissionsArray)
-    {
-    }
-
-    /*
-    Send by Ajax after clicking submit button on form site.
-    Checks if all fields are valid and sends info back to the browser
-    If form is valid then its submitted
-    If form is not valid it will show validasu tion errors
-    */
-    public function preSubmit($postData)
-    {
-    }
-
-    /*
-    Checks if form is valid
-    uses showForm() to shows next page/thank you page, or the same page with errors
-    saves FromEntry
-    use DatabaseStore to make additional data savings
-    */
-    public function submit($postData)
-    {
-    }
-
-    /*
-    Checks if form is valid
-    uses showEntry() to show the updated entry again
-    updates FormEntry
-    updates all data set by DatabaseStore
-    */
-    public function update($postData)
-    {
-    }
-
-    /*
-    prints FromEntry as PHP multilevel array
-    can apply permissions of viewing fields
-    */
-    public function getEntryAsArray($formEntryId, $permissionsArray)
-    {
     }
 }
