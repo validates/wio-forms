@@ -10,7 +10,6 @@ function addDynamicOptions(options)
     child.html("");
     for (var key in options) {
         if (options.hasOwnProperty(key)) {
-            console.log(key);
             child.append("<option value=\""+key+"\">"+options[key]+"</option>");
         }
     }

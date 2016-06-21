@@ -80,6 +80,11 @@
 
 
     "FieldValidatorsJS": {},
+    "FieldValidatorsPHP": {
+        "NotEmpty": {
+            "class": "NotEmpty"
+        }
+    },
     "ContainerValidatorsPHP": {
         "AllFieldsOk": {
             "class": "AllFieldsOk"
@@ -114,7 +119,13 @@
             "class" : {
                 "wrapper": "edititem half-l",
                 "input" : "veryLong wypisz"
-            }
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
         },
         "editionAPCount": {
             "type": "Select",
@@ -151,7 +162,7 @@
             "type": "Select",
             "container": "bigFormFront",
             "position": 5,
-            "title": "Program",
+            "title": "Rola",
             "state": 0,
             "save": true,
             "dataSet": {
@@ -163,22 +174,117 @@
                 "input" : "veryLong wypisz"
             },
             "isGroup" : true
+        },
+        "dupliacte": {
+            "type": "Duplicator",
+            "duplicate" : ["previousProgram", "previousRole"],
+            "container": "bigFormFront",
+            "position": 6,
+            "title": "+",
+            "state": 0,
+            "save": false,
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            },
+            "dataSet": {
+                "repositoryName" : ""
+            }
         }
     },
     "Containers": {
-        "bigFormFront": {
+        "Site1": {
             "site": 0,
             "container": "_site",
             "position": 1,
-            "displayType": "SectionDisplay",
+            "displayType": "FullDisplay",
             "title": "Historia zaangażowania"
         },
-        "SubmitButton1": {
-            "site": 0,
+        "Site2": {
+            "site": 1,
             "container": "_site",
-            "position": 4,
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "Zadania",
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "AllFieldsOk",
+                    "settings":
+                    {
+                        "containerToCheck": "_site_0"
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "Site3": {
+            "site": 2,
+            "container": "_site",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "Doświadczenie",
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "AllFieldsOk",
+                    "settings":
+                    {
+                        "containerToCheck": "_site_0"
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "bigFormFront": {
+            "site": 0,
+            "container": "Site2",
+            "position": 1,
+            "displayType": "SectionDisplay",
+            "title": ""
+        },
+        "SubmitButton": {
+            "site": 0,
+            "container": "Site2",
+            "position": 2,
             "displayType": "Button1",
-            "title": "Wyślij"
+            "title": "Dalej"
+        },
+        "bigFormFront2": {
+            "site": 1,
+            "container": "Site3",
+            "position": 1,
+            "displayType": "SectionDisplay",
+            "title": "Zadania"
+        },
+        "SubmitButton2": {
+            "site": 1,
+            "container": "Site3",
+            "position": 2,
+            "displayType": "Button1",
+            "title": "Dalej"
         }
     },
     "FormSavers": {
