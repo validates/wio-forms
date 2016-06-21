@@ -19,6 +19,11 @@ class EntryCollectorService
         if (!empty($_POST['_wioForms'])) {
             $entryData = $_POST;
         }
+        foreach ($entryData as $dataIndex => $dataValue) {
+            if (is_array($dataValue)) {
+                $entryData[$dataIndex] = implode($dataValue,'|');
+            }
+        }
         if (!empty($tempSave = $this->wioForms->temporarySave->getFormData())) {
             $entryData = array_merge($tempSave, $entryData);
         }
