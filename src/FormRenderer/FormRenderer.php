@@ -9,7 +9,7 @@ class FormRenderer extends AbstractFormRenderer
         $this->wioForms->headerCollectorService->addCss('assets/css/wioForms_superW.css');
 
         $html = '';
-        $html .= '<form method="post" action="" class="wioForms_Form">'."\n";
+        $html .= '<form method="post" action="" class="wioForms_Form" enctype="multipart/form-data">'."\n";
 
         return $html;
     }

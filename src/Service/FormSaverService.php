@@ -44,9 +44,7 @@ class FormSaverService
         $FormSavers = &$this->formStruct['FormSavers'];
 
         foreach ($FormSavers as $FormSaverName => &$FormSaver) {
-            $valid = $this->validateFormSaver($FormSaver);
-
-            if ($valid) {
+            if ($this->validateFormSaver($FormSaver)) {
                 $this->saveForm($FormSaver);
             }
         }
@@ -60,17 +58,35 @@ class FormSaverService
     private function saveForm(&$FormSaver)
     {
         $this->setDatabaseConnection($FormSaver);
-        $this->saveEntry();
 
-        foreach ($FormSaver['DatabaseSaves'] as &$databaseSave) {
-            $valid = $this->validateDatabaseSave($databaseSave);
+        $doEntrySave = true;
+        if (isset($FormSaver['saveAsEntry']) and $FormSaver['saveAsEntry'] === false) {
+            $doEntrySave = false;
+        }
 
-            if ($valid) {
-                $this->makeDatabaseSave($databaseSave);
+        if ($doEntrySave) {
+            $this->saveEntry();
+        }
+
+        if (isset($FormSaver['DatabaseSaves'])) {
+            foreach ($FormSaver['DatabaseSaves'] as &$databaseSave) {
+                if ($this->validateDatabaseSave($databaseSave)) {
+                    $this->makeDatabaseSave($databaseSave);
+                }
             }
         }
 
-        $this->updateDatabaseEntries();
+        if (isset($FormSaver['MethodSaves'])) {
+            foreach ($FormSaver['MethodSaves'] as &$methodSave) {
+                if ($this->validateMethodSave($methodSave)) {
+                    $this->makeMethodSave($methodSave);
+                }
+            }
+        }
+
+        if ($doEntrySave) {
+            $this->updateDatabaseEntries();
+        }
 
         if (isset($FormSaver['clearTemporarySave'])) {
             $this->clearTemporarySave = $FormSaver['clearTemporarySave'];
@@ -87,9 +103,17 @@ class FormSaverService
         if (isset($databaseSave['validationPHP'])) {
             return $this->containerValidationService->validate($databaseSave);
         }
-
         return true;
     }
+
+    private function validateMethodSave(&$methodSave)
+    {
+        if (isset($methodSave['validationPHP'])) {
+            return $this->containerValidationService->validate($methodSave);
+        }
+        return true;
+    }
+
 
     private function saveEntry()
     {
@@ -164,9 +188,20 @@ class FormSaverService
             ];
         }
 
-
         $insertedId = $this->databaseConnection->$databaseSave['type']($query);
 
         $this->databaseEntries[$databaseSave['tableName']][] = $insertedId;
+    }
+
+    private function makeMethodSave(&$methodSave)
+    {
+        $className = $this->wioForms->classFinderService->checkName('FormSaver', $methodSave['method']);
+        if ($className) {
+            $formSaverObject = new $className($this->wioForms);
+        } else {
+            return false;
+        }
+
+        $formSaverObject->makeSavingAction($methodSave['settings']);
     }
 }

@@ -12,7 +12,7 @@ class TextArea extends AbstractFieldRenderer
         $this->inputTitleContainer();
         $this->inputFieldContainerHead();
 
-        $this->html .= '<textarea name="'.$this->fieldName.'" value="'.$this->value.'" class ="'.$this->getAdditionalInputClasses().'" ></textarea>';
+        $this->html .= '<textarea name="'.$this->fieldName.'" value="'.$this->value.'" class ="'.$this->getAdditionalInputClasses().'" >'.$this->value.'</textarea>';
 
         $this->inputFieldContainerTail();
         $this->inputContainerTail();

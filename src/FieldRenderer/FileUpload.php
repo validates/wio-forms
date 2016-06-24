@@ -12,7 +12,12 @@ class FileUpload extends AbstractFieldRenderer
         $this->inputTitleContainer();
         $this->inputFieldContainerHead();
 
-        $this->html .= '<input type="file" name="'.$this->fieldName.'" />';
+        $this->html .= '<input type="hidden" name="'.$this->fieldName.'" value="'.'" />';
+
+        $this->html .= '<input type="file" name="'.$this->fieldName.'_file" />';
+
+
+
 
         $this->inputFieldContainerTail();
         $this->inputContainerTail();
