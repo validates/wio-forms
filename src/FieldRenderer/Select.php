@@ -15,7 +15,7 @@ class Select extends AbstractFieldRenderer
 
         $name = isset($this->fieldInfo['isGroup']) ? $this->fieldName."[]" : $this->fieldName;
         $this->manageDynamicOptions();
-        $this->html .= '<select name="'.$name.'" class ="'.$this->getAdditionalInputClasses().'" >';
+        $this->html .= '<select name="'.$name.'" class ="'.$this->getAdditionalInputClasses().'" '.$this->setDisabled().' >';
 
         $this->html .= '<option value="">wybierz</option>';
         foreach ($this->dataSet as $option => $option_name) {
