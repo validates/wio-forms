@@ -55,8 +55,8 @@ class EntryCollectorService
         foreach ($this->wioForms->formStruct['Fields'] as $fieldName => &$field) {
             if (isset($field['defaultValue'])
                 and empty($field['value'])) {
-                    $field['waitForDefaultValue'] = true;
-                    $field['value'] = $this->getDefaultValue($field['defaultValue']);
+                $field['waitForDefaultValue'] = true;
+                $field['value'] = $this->getDefaultValue($field['defaultValue']);
             }
         }
     }
