@@ -103,6 +103,7 @@ class FormSaverService
         if (isset($databaseSave['validationPHP'])) {
             return $this->containerValidationService->validate($databaseSave);
         }
+
         return true;
     }
 
@@ -111,9 +112,9 @@ class FormSaverService
         if (isset($methodSave['validationPHP'])) {
             return $this->containerValidationService->validate($methodSave);
         }
+
         return true;
     }
-
 
     private function saveEntry()
     {

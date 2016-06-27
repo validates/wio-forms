@@ -27,6 +27,5 @@ class FileUpload extends AbstractFieldRenderer
 
     public function showToView()
     {
-
     }
 }

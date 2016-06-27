@@ -10,6 +10,14 @@
             "class": "WioFlowCurrentUserData",
             "data": false
         },
+        "wioFlowEnityId": {
+            "type": "foreign",
+            "class": "WioFlowEntityData",
+            "data": false,
+            "requiredFields": {
+                "userId": "userId"
+            }
+        },
         "status": {
             "type": "foreign",
             "class": "WioFlowStatusData",
@@ -109,6 +117,17 @@
             "save": true,
             "defaultValue": {
                 "repositoryName": "userId"
+            }
+        },
+        "wioFlowEnityId": {
+            "type": "Hidden",
+            "container": "recruitmentForm",
+            "position": 100,
+            "title": "Flow Id",
+            "state": 0,
+            "save": true,
+            "defaultValue": {
+                "repositoryName": "wioFlowEnityId"
             }
         },
         "status": {
@@ -408,6 +427,30 @@
                         "flow_status": {
                             "type": "field",
                             "field": "status"
+                        }
+                    }
+                },
+                {
+                    "type": "update",
+                    "where" : {
+                        "wio_flow_entity_id": {
+                            "type": "field",
+                            "field": "wioFlowEnityId"
+                        }
+                    },
+                    "tableName": "recrutation_roles",
+                    "fields": {
+                        "program_short_name": {
+                            "type": "field",
+                            "field": "program"
+                        },
+                        "role_short_name": {
+                            "type": "field",
+                            "field": "role"
+                        },
+                        "role_given_short_name": {
+                            "type": "field",
+                            "field": "role_given"
                         }
                     }
                 },
