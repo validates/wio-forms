@@ -14,9 +14,7 @@ class UploadFileToFolder extends AbstractFormSaver
 
         $fileData = $_FILES[$fieldName.'_file'];
 
-
-
-        var_dump($fileData);
+//        var_dump($fileData);
 
 
     }

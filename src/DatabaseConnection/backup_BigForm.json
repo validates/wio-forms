@@ -5,14 +5,6 @@
     "VersionId": "2016.11",
     "FormId": "Form1.2016.11",
     "DataRepositories": {
-        "recruitment": {
-            "type": "foreign",
-            "class": "RecruitmentData",
-            "data": false,
-            "requiredFields": {
-                "userId": "userId"
-            }
-        },
         "editionCounter" : {
             "type": "local",
             "data" : {
@@ -68,12 +60,12 @@
         "engagement" : {
             "type": "local",
             "data": {
-                "uczę się": "select",
-                "studiuję": "select",
-                "studiuję i pracuję": "select",
-                "pracuję": "select",
-                "jestem na emeryturze/rencie": "select",
-                "inne": "textfield"
+                "1"  : "uczę się",
+                "2"  : "studiuję",
+                "4"  : "studiuję i pracuję",
+                "3"  : "pracuję",
+                "5"  : "jestem na emeryturze/rencie",
+                "-1" : "inne"
             }
         },
         "education" : {
@@ -108,55 +100,6 @@
                 "12" : "z reklamy w internecie",
                 "13" : "z plakatu lub ulotki",
                 "-1" : "z innego źródła – jakiego?"
-            }
-        },
-        "skille": {
-            "type": "local",
-            "data":
-            {
-                "Public Relations":
-                [
-                    "tworzenie strategii kapmani PR(marki, wizerunku)",
-                    "przeprowadzanie kampani PR",
-                    "obsługa mediów"
-                ],
-                "Marketing":
-                [
-                    "obsługa cms",
-                    "pozycjonowanie stron internetowych",
-                    "media planning"
-                ],
-                "Grafika":
-                [
-                    "umiejętność obsługi programów graficznych: Photoshop, indesign, Corel, Illustrator",
-                    "umiejętność tworzenia animacji Flash",
-                    "umiejętność przygotowania projektu do druku"
-                ],
-                "Finanse i księgowość":
-                [
-                    "analiza kosztów i przychodów",
-                    "tworzenie budżetów",
-                    "prowadzenie rozliczeń z ZUS i US"
-                ],
-                "Znajomość języków obcych":
-                [
-                    "język angielski",
-                    "język niemiecki",
-                    "język rosyjski",
-                    "język hiszpański",
-                    "język migowy",
-                    {
-                        "textfield": "inny_jezyk",
-                        "name": "inne języki"
-                    }
-                ],
-                "Inne kompetencje":
-                [
-                    {
-                        "textfield": "inne",
-                        "name": ""
-                    }
-                ]
             }
         }
     },
@@ -281,6 +224,30 @@
 
 
 
+
+
+
+
+
+
+        "file": {
+            "type": "FileUpload",
+            "container": "bigFormFront2",
+            "position": 1,
+            "title": "Upload",
+            "state": 0,
+            "save": true,
+            "class": {
+                "wrapper": "edititem half-l",
+                "input": "veryLong wypisz"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
         "openWhyLider": {
             "type": "TextArea",
             "container": "bigFormFront2",
@@ -320,7 +287,7 @@
 
 
         "engagement": {
-            "type": "SelectWithTextfield",
+            "type": "Select",
             "container": "bigFormFront3",
             "position": 1,
             "title": "Czym się zajmujesz",
@@ -330,7 +297,7 @@
                 "repositoryName": "engagement"
             },
             "class" : {
-                "wrapper": "edititem",
+                "wrapper": "edititem half-l",
                 "input" : "veryLong wypisz"
             },
             "validationPHP":
@@ -339,6 +306,14 @@
                     "method": "NotEmpty"
                 }
             ]
+        },
+        "otherEngagement": {
+            "type": "TextInput",
+            "container": "bigFormFront3",
+            "position": 2,
+            "title": "Inne",
+            "state": 0,
+            "save": true
         },
         "education": {
             "type": "Select",
@@ -351,7 +326,7 @@
                 "repositoryName": "education"
             },
             "class" : {
-                "wrapper": "edititem",
+                "wrapper": "edititem half-l",
                 "input" : "veryLong wypisz"
             },
             "validationPHP":
@@ -361,25 +336,6 @@
                 }
             ]
         },
-        "skille": {
-            "type": "DropdownCheckboxes",
-            "container": "bigFormFront3",
-            "position": 4,
-            "title": "Wybierz umiejętności",
-            "state": 0,
-            "save": true,
-            "dataSet":
-            {
-                "repositoryName": "skille"
-            },
-            "validationPHP":
-            [
-                {
-                    "method": "NotEmpty"
-                }
-            ]
-        },
-
 
 
 
@@ -505,6 +461,14 @@
                     "method": "NotEmpty"
                 }
             ]
+        },
+        "otherInfoSource": {
+            "type": "TextInput",
+            "container": "bigFormFront4",
+            "position": 9,
+            "title": "Inne",
+            "state": 0,
+            "save": true
         }
     },
 
@@ -520,15 +484,25 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
     "Containers": {
-        "SiteBigForm0": {
+        "Site0": {
             "site": 0,
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
             "title": "Historia zaangażowania"
         },
-        "SiteBigForm1": {
+        "Site1": {
             "site": 1,
             "container": "_site",
             "position": 1,
@@ -557,7 +531,7 @@
                 }
             ]
         },
-        "SiteBigForm2": {
+        "Site2": {
             "site": 2,
             "container": "_site",
             "position": 1,
@@ -586,7 +560,7 @@
                 }
             ]
         },
-        "SiteBigForm3": {
+        "Site3": {
             "site": 3,
             "container": "_site",
             "position": 1,
@@ -617,7 +591,7 @@
         },
         "bigFormFront": {
             "site": 0,
-            "container": "SiteBigForm0",
+            "container": "Site0",
             "position": 1,
             "displayType": "SectionDisplay",
             "title": "Historia Zaangażowania"
@@ -629,96 +603,51 @@
             "displayType": "SectionDisplay",
             "title": "Historia Zaangażowania"
         },
-        "radaQuestion1" : {
-            "site": 0,
-            "container": "bigFormFront",
-            "position": 5,
-            "displayType": "SectionDisplay",
-            "title": "Jakim członkiem rady chciałabyś/chciałbyś zostać?",
-            "validationPHP":
-            [
-                {
-                    "type": "logic",
-                    "newState": 1,
-                    "newErrorState": -1,
-                    "logicEquation":
-                    {
-                        "type": "equal",
-                        "data":
-                        [
-                            {
-                                "type": "repositoryValue",
-                                "repositoryName": "recruitment",
-                                "subset": ["role_short_name"]
-                            },
-                            {
-                                "type": "const",
-                                "const": "RW"
-                            }
-                        ]
-
-                    }
-                }
-            ],
-            "stateActions":
-            [
-                {
-                    "state": -1,
-                    "actions": ["hide"]
-                },
-                {
-                    "state": 1,
-                    "actions": ["show"]
-                }
-            ]
-
-
-        },
         "SubmitButton": {
             "site": 0,
-            "container": "SiteBigForm0",
+            "container": "Site0",
             "position": 2,
             "displayType": "Button1",
             "title": "Dalej"
         },
         "bigFormFront2": {
             "site": 1,
-            "container": "SiteBigForm1",
+            "container": "Site1",
             "position": 1,
             "displayType": "SectionDisplay",
             "title": "Zadania"
         },
         "SubmitButton2": {
             "site": 1,
-            "container": "SiteBigForm1",
+            "container": "Site1",
             "position": 2,
             "displayType": "Button1",
             "title": "Dalej"
         },
         "bigFormFront3": {
             "site": 2,
-            "container": "SiteBigForm2",
+            "container": "Site2",
             "position": 1,
             "displayType": "SectionDisplay",
             "title": "Doświadczenie"
         },
         "SubmitButton3": {
             "site": 2,
-            "container": "SiteBigForm2",
+            "container": "Site2",
             "position": 2,
             "displayType": "Button1",
             "title": "Dalej"
         },
         "bigFormFront4": {
             "site": 3,
-            "container": "SiteBigForm3",
+            "container": "Site3",
             "position": 1,
             "displayType": "SectionDisplay",
             "title": "Metryczka"
         },
         "SubmitButton4": {
             "site": 3,
-            "container": "SiteBigForm3",
+            "container": "Site3",
             "position": 2,
             "displayType": "Button1",
             "title": "Dalej"
@@ -736,174 +665,49 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     "FormSavers": {
-        "finalSave":
-        {
-            "clearTemporarySave": true,
+        "fileSave": {
+            "clearTemporarySave": false,
             "databaseConnection": "Main",
+            "saveAsEntry": false,
             "validationPHP":
             [
                 {
-                    "type": "logic",
-                    "logicEquation":
+                    "type": "method",
+                    "method": "FileReadyToUpload",
+                    "settings":
                     {
-                        "type": "and",
-                        "data":
-                        [
-                            {
-                                "type": "runMethod",
-                                "method": "AllFieldsOk",
-                                "settings":
-                                {
-                                    "containerToCheck": "bigFormFront"
-                                }
-                            },
-                            {
-                                "type": "runMethod",
-                                "method": "AllFieldsOk",
-                                "settings":
-                                {
-                                    "containerToCheck": "bigFormFront2"
-                                }
-                            },
-                            {
-                                "type": "runMethod",
-                                "method": "AllFieldsOk",
-                                "settings":
-                                {
-                                    "containerToCheck": "bigFormFront3"
-                                }
-                            },
-                            {
-                                "type": "runMethod",
-                                "method": "AllFieldsOk",
-                                "settings":
-                                {
-                                    "containerToCheck": "bigFormFront4"
-                                }
-                            }
-                        ]
+                        "field": "file"
                     }
                 }
             ],
-            "DatabaseSaves":
-            [
+            "MethodSaves": [
                 {
-                    "type": "update",
-                    "tableName": "user_basic_data",
-                    "where" : {
-                        "wio_user_id": {
-                            "type": "field",
-                            "field": "userId"
-                        }
-                    },
-                    "tableName": "wio_users",
-                    "fields": {
-                        "id_number": {
-                            "type": "field",
-                            "field": "pesel"
-                        },
-                        "birth_date": {
-                            "type": "filed",
-                            "field": "birthDate",
-                            "converter": "DatePicker2DateTime"
-                        }
-                    }
-                },
-                {
-                    "type": "insert",
-                    "tableName": "user_address_data",
-                    "fields": {
-                        "wio_user_id": {
-                            "type": "field",
-                            "field": "userId"
-                        },
-                        "country": {
-                            "type": "const",
-                            "const": "Poland"
-                        },
-                        "province": {
-                            "type": "field",
-                            "field": "province"
-                        },
-                        "city": {
-                            "type": "field",
-                            "field": "city"
-                        },
-                        "postal_code": {
-                            "type": "field",
-                            "field": "zipCode"
-                        },
-                        "address_street": {
-                            "type": "field",
-                            "field": "street"
-                        },
-                        "address_number": {
-                            "type": "field",
-                            "field": "houseNumber"
-                        },
-                        "type": {
-                            "type": "const",
-                            "const": "adres z metryczki"
-                        }
-                    }
-                },
-                {
-                    "type": "insert",
-                    "tableName": "user_recrutation_answers",
-                    "fields": {
-                        "wio_user_id": {
-                            "type": "field",
-                            "field": "userId"
-                        },
-                        "szp_editions": {
-                            "type": "field",
-                            "field": "editionSzPCount"
-                        },
-                        "ap_editions": {
-                            "type": "field",
-                            "field": "editionAPCount"
-                        },
-                        "who_told_you": {
-                            "type": "field",
-                            "field": "infoSource"
-                        },
-                        "open_question_1": {
-                            "type": "field",
-                            "field": "openWhyLider"
-                        },
-                        "open_question_2": {
-                            "type": "field",
-                            "field": "openExpectations"
-                        },
-                        "occupation": {
-                            "type": "field",
-                            "field": "engagement"
-                        },
-                        "education": {
-                            "type": "field",
-                            "field": "education"
-                        },
-                        "wiosna_volunteerings": {
-                            "type": "field",
-                            "field": "previousRoles"
-                        }
-                    }
-                },
-                {
-                    "type": "insert",
-                    "tableName": "user_skills",
-                    "fields": {
-                        "wio_user_id": {
-                            "type": "field",
-                            "field": "userId"
-                        },
-                        "skills": {
-                            "type": "field",
-                            "field": "skille"
-                        }
+                    "method": "UploadFileToFolder",
+                    "settings":
+                    {
+                        "dir": "ciapki",
+                        "field": "file"
                     }
                 }
+            ]
+        },
+        "finalSave": {
+            "clearTemporarySave": false,
+            "databaseConnection": "Main",
+            "DatabaseSaves": [
             ]
         }
     }
