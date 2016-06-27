@@ -11,5 +11,5 @@ abstract class AbstractFormSaver
         $this->wioForms = $wioFormObject;
     }
 
-    abstract function makeSavingAction($settings);
+    abstract public function makeSavingAction($settings);
 }
