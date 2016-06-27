@@ -56,14 +56,14 @@ class EntryCollectorService
             if (isset($field['defaultValue'])
               and empty($field['value'])) {
                 $field['waitForDefaultValue'] = true;
-                $this->getDefaultValue($field);
+                $this['value'] = $this->getDefaultValue($field['defaultValue']);
             }
         }
     }
 
-    private function getDefaultValue(&$field)
+    public function getDefaultValue($defaultValue)
     {
-        $repositoryName = $field['defaultValue']['repositoryName'];
+        $repositoryName = $defaultValue['repositoryName'];
         if (!$this->formStruct['DataRepositories'][$repositoryName]['success']) {
             $this->wioForms->errorLog->errorLog('getDefaultValue: Repository "'.$repositoryName.'" not ended with success.');
 
@@ -72,8 +72,8 @@ class EntryCollectorService
 
         $value = $this->formStruct['DataRepositories'][$repositoryName]['data'];
 
-        if (isset($field['defaultValue']['subset'])) {
-            $subset = $field['defaultValue']['subset'];
+        if (isset($defaultValue['subset'])) {
+            $subset = $defaultValue['subset'];
             foreach ($subset as $branchName) {
                 if (!isset($value[$branchName])) {
                     $this->wioForms->errorLog->errorLog('getDefaultValue: wrong data subset in '.$repositoryName.'.');
@@ -84,8 +84,8 @@ class EntryCollectorService
             }
         }
 
-        if (isset($field['defaultValue']['converter'])) {
-            $converterName = $field['defaultValue']['converter'];
+        if (isset($defaultValue['converter'])) {
+            $converterName = $defaultValue['converter'];
             $converterClass = $this->wioForms->classFinderService->checkName('FieldConverter', $converterName);
 
             if (!$converterClass) {
@@ -98,7 +98,6 @@ class EntryCollectorService
             $value = $converter->convert($value);
         }
 
-
-        $field['value'] = $value;
+        return $value;
     }
 }

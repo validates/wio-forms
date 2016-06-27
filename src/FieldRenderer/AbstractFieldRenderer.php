@@ -45,6 +45,8 @@ abstract class AbstractFieldRenderer
         if (isset($this->fieldInfo['valid']) and !$this->fieldInfo['valid']) {
             $this->message = $this->fieldInfo['message'];
         }
+
+
         if (isset($this->styleOptions['dont_display_errors'])
             and $this->styleOptions['dont_display_errors']) {
             $this->message = false;
@@ -86,7 +88,16 @@ abstract class AbstractFieldRenderer
 
     protected function inputTitleContainer()
     {
-        $this->html .= '<div class="wioForms_InputTitleContainer">'.$this->fieldInfo['title'].': </div>'."\n";
+        if (isset($this->fieldInfo['title']) and strlen($this->fieldInfo['title']) > 0) {
+            $this->html .= '<div class="wioForms_InputTitleContainer">'.$this->fieldInfo['title'].': </div>'."\n";
+        }
+    }
+
+    protected function inputDescriptionContainer()
+    {
+        if (isset($this->fieldInfo['description']) and strlen($this->fieldInfo['description']) > 0) {
+            $this->html .= '<div class="wioForms_InputDescriptionContainer">'.$this->fieldInfo['description'].'</div>'."\n";
+        }
     }
 
     protected function standardErrorDisplay()

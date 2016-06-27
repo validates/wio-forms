@@ -64,7 +64,7 @@ class ValidatorService
     public function getLastEditedSite()
     {
         if (isset($this->wioForms->entryData['_wioFormsSite'])) {
-            return (int) ($this->wioForms->entryData['_wioFormsSite']) + 1;
+            return ((int) ($this->wioForms->entryData['_wioFormsSite']) +1);
         }
 
         return 0;

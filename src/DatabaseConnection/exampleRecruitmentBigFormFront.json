@@ -1,0 +1,910 @@
+{
+    "FormName": "Form1",
+    "Version": "2016",
+    "Subversion": 11,
+    "VersionId": "2016.11",
+    "FormId": "Form1.2016.11",
+    "DataRepositories": {
+        "recruitment": {
+            "type": "foreign",
+            "class": "RecruitmentData",
+            "data": false,
+            "requiredFields": {
+                "userId": "userId"
+            }
+        },
+        "editionCounter" : {
+            "type": "local",
+            "data" : {
+                "zadna" : "W żadnej",
+                "jedna" : "W jednej",
+                "dwie" : "W dwóch",
+                "trzy_lub_wiecej" : "W trzech lub więcej"
+            }
+        },
+        "roles": {
+            "type": "local",
+            "data": {
+                "Szlachetna Paczka" : [
+                    "Koordynatora Wojewódzkiego",
+                    "Koordynatora Regionalnego",
+                    "Pomocnika ds. Rekrutacji",
+                    "Koordynatora ds. Promocji",
+                    "Koordynatora ds. Logistyki",
+                    "Koordynatora ds. Wdrożeń",
+                    "Koordynatora ds. Współpracy Lokalnej",
+                    "HR-a w Radzie Wojewódzkiej",
+                    "Asystenta ds. Promocji w Województwie",
+                    "Asystenta ds. Promocji w Rejonie",
+                    "Asystenta ds. Logistyki w Rejonie",
+                    "Lidera Rejonu",
+                    "Lidera Zespołu",
+                    "Wolontariusza",
+                    "Wolontariusza Paczki Seniorów",
+                    "Darczyńcy",
+                    "Lidera Specjalistów",
+                    "Trenera wewnętrznego",
+                    "Młodszego Specjalisty ds. Opisów",
+                    "Asystenta ds. Wdrożeń"
+                ],
+                "Akademia Przyszłości" : [
+                    "Koordynatora Wojewódzkiego",
+                    "Asystenta Koordynatora Wojewódzkiego",
+                    "Koordynatora ds. Wdrożeń",
+                    "Asystenta ds. Wdrożeń",
+                    "Koordynatora ds. Logistyki",
+                    "Koordynatora ds. Promocji",
+                    "Asystenta ds. Promocji",
+                    "Lidera Kolegium",
+                    "Kolidera",
+                    "Wolontariusza",
+                    "Lidera Zespołu Specjalistów",
+                    "Specjalistę ds. Opisów",
+                    "Trenera Wewnętrznego",
+                    "Darczyńcy"
+                ]
+            }
+        },
+        "engagement" : {
+            "type": "local",
+            "data": {
+                "uczę się": "select",
+                "studiuję": "select",
+                "studiuję i pracuję": "select",
+                "pracuję": "select",
+                "jestem na emeryturze/rencie": "select",
+                "inne": "textfield"
+            }
+        },
+        "education" : {
+            "type": "local",
+            "data": {
+                "1" : "podstawowe",
+                "2" : "zawodowe",
+                "3" : "średnie techniczne",
+                "4" : "średnie ogólnokształcące",
+                "5" : "wyższe"
+            }
+        },
+        "wioStructProvince": {
+            "type": "foreign",
+            "data": false,
+            "class": "WioStructProvinceData"
+        },
+        "infoSource" : {
+            "type": "local",
+            "data": {
+                "1" : "z portalu z ogłoszeniami o pracy",
+                "2" : "ze spotkania z przedstawicielem SZLACHETNEJ PACZKI",
+                "3" : "od znajomego, który wcześniej był w Paczce",
+                "4" : "w firmie, w której pracuj",
+                "5" : "z portalu facebook.pl",
+                "6" : "z newslettera od Stowarzyszenia Wiosna",
+                "7" : "z innego newslettera",
+                "8" : "z artykułu w internecie",
+                "9" : "z artykułu w prasie",
+                "10" : "z radia",
+                "11" : "z telewizji",
+                "12" : "z reklamy w internecie",
+                "13" : "z plakatu lub ulotki",
+                "-1" : "z innego źródła – jakiego?"
+            }
+        },
+        "skille": {
+            "type": "local",
+            "data":
+            {
+                "Public Relations":
+                [
+                    "tworzenie strategii kapmani PR(marki, wizerunku)",
+                    "przeprowadzanie kampani PR",
+                    "obsługa mediów"
+                ],
+                "Marketing":
+                [
+                    "obsługa cms",
+                    "pozycjonowanie stron internetowych",
+                    "media planning"
+                ],
+                "Grafika":
+                [
+                    "umiejętność obsługi programów graficznych: Photoshop, indesign, Corel, Illustrator",
+                    "umiejętność tworzenia animacji Flash",
+                    "umiejętność przygotowania projektu do druku"
+                ],
+                "Finanse i księgowość":
+                [
+                    "analiza kosztów i przychodów",
+                    "tworzenie budżetów",
+                    "prowadzenie rozliczeń z ZUS i US"
+                ],
+                "Znajomość języków obcych":
+                [
+                    "język angielski",
+                    "język niemiecki",
+                    "język rosyjski",
+                    "język hiszpański",
+                    "język migowy",
+                    {
+                        "textfield": "inny_jezyk",
+                        "name": "inne języki"
+                    }
+                ],
+                "Inne kompetencje":
+                [
+                    {
+                        "textfield": "inne",
+                        "name": ""
+                    }
+                ]
+            }
+        }
+    },
+
+
+    "FieldValidatorsJS": {},
+    "FieldValidatorsPHP": {
+        "NotEmpty": {
+            "class": "NotEmpty"
+        }
+    },
+    "ContainerValidatorsPHP": {
+        "AllFieldsOk": {
+            "class": "AllFieldsOk"
+        },
+        "FormSaverOk": {
+            "class": "FormSaverOk"
+        },
+        "FileReadyToUpload": {
+            "class": "FileReadyToUpload"
+        }
+    },
+    "ContainerValidatorsJS": {},
+
+    "FormSavers": {
+        "UploadFile": {
+            "class": "UploadFile"
+        }
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    "Fields": {
+        "userId": {
+            "type": "Hidden",
+            "container": "bigFormFront",
+            "position": 1,
+            "title": "User Id",
+            "state": 0,
+            "save": true
+        },
+
+
+
+
+
+
+        "editionSzPCount": {
+            "type": "Select",
+            "container": "bigFormFront",
+            "position": 2,
+            "title": "W ilu edycjach SZLACHETNEJ PACZKI brałeś udział",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "editionCounter"
+            },
+            "class" : {
+                "wrapper": "edititem half-size",
+                "input" : "veryLong wypisz"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "editionAPCount": {
+            "type": "Select",
+            "container": "bigFormFront",
+            "position": 3,
+            "title": "W ilu edycjach AKADEMII PRZYSZŁOŚCI brałeś udział",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "editionCounter"
+            },
+            "class" : {
+                "wrapper": "edititem half-size",
+                "input" : "veryLong wypisz"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "previousRoles": {
+            "type": "DuplicableDoubleDropdown",
+            "container": "repeatableQuestion",
+            "position": 1,
+            "title": "",
+            "description": "Wskaż jakie role do tej pory pełniłeś/aś w naszych programach SZLECHETNA PACZKA i/lub AKADEMIA PRZYSZŁOŚCI. Używając znaku + możesz dodawać kolejne role.",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "roles"
+            },
+            "class" : {
+                "wrapper": "edititem",
+                "input" : "veryLong wypisz"
+            },
+            "isGroup" : true
+        },
+
+
+
+        "openWhyLider": {
+            "type": "TextArea",
+            "container": "bigFormFront2",
+            "position": 2,
+            "title": "Dlaczego chcesz zostać Liderem?",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "openExpectations": {
+            "type": "TextArea",
+            "container": "bigFormFront2",
+            "position": 3,
+            "title": "Masz za sobą udział w Dużym Spotkaniu. Na podstawie tego, czego się na nim dowiedziałeś/aś, napisz o swoich oczekiwaniach względem Paczki/Akademii",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+
+
+
+
+
+
+
+
+
+
+        "engagement": {
+            "type": "SelectWithTextfield",
+            "container": "bigFormFront3",
+            "position": 1,
+            "title": "Czym się zajmujesz",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "engagement"
+            },
+            "class" : {
+                "wrapper": "edititem",
+                "input" : "veryLong wypisz"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "education": {
+            "type": "Select",
+            "container": "bigFormFront3",
+            "position": 2,
+            "title": "Wyształcenie",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "education"
+            },
+            "class" : {
+                "wrapper": "edititem",
+                "input" : "veryLong wypisz"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "skille": {
+            "type": "DropdownCheckboxes",
+            "container": "bigFormFront3",
+            "position": 4,
+            "title": "Wybierz umiejętności",
+            "state": 0,
+            "save": true,
+            "dataSet":
+            {
+                "repositoryName": "skille"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+
+
+
+
+
+
+
+
+
+        "pesel": {
+            "type": "TextInput",
+            "container": "bigFormFront4",
+            "position": 1,
+            "title": "Pesel",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "birthDate": {
+            "type": "DatePicker",
+            "container": "bigFormFront4",
+            "position": 2,
+            "title": "Data urodzenia",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "province": {
+            "type": "Select",
+            "container": "bigFormFront4",
+            "position": 3,
+            "title": "Województwo",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName":"wioStructProvince"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "zipCode": {
+            "type": "TextInput",
+            "container": "bigFormFront4",
+            "position": 4,
+            "title": "Kod pocztowy",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "city": {
+            "type": "TextInput",
+            "container": "bigFormFront4",
+            "position": 5,
+            "title": "Miejscowość",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "street": {
+            "type": "TextInput",
+            "container": "bigFormFront4",
+            "position": 6,
+            "title": "Ulica",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "houseNumber": {
+            "type": "TextInput",
+            "container": "bigFormFront4",
+            "position": 7,
+            "title": "Nr domu/mieszkania",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "infoSource": {
+            "type": "Select",
+            "container": "bigFormFront4",
+            "position": 8,
+            "title": "Skąd dowiedziałeś się o procesie rekrutacji?",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName":"infoSource"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        }
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+    "Containers": {
+        "SiteBigForm0": {
+            "site": 0,
+            "container": "_site",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "Historia zaangażowania"
+        },
+        "SiteBigForm1": {
+            "site": 1,
+            "container": "_site",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "Zadania",
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "AllFieldsOk",
+                    "settings":
+                    {
+                        "containerToCheck": "_site_0"
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "SiteBigForm2": {
+            "site": 2,
+            "container": "_site",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "Doświadczenie",
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "AllFieldsOk",
+                    "settings":
+                    {
+                        "containerToCheck": "_site_1"
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "SiteBigForm3": {
+            "site": 3,
+            "container": "_site",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "Metryczka",
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "AllFieldsOk",
+                    "settings":
+                    {
+                        "containerToCheck": "_site_2"
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "bigFormFront": {
+            "site": 0,
+            "container": "SiteBigForm0",
+            "position": 1,
+            "displayType": "SectionDisplay",
+            "title": "Historia Zaangażowania"
+        },
+        "repeatableQuestion": {
+            "site": 0,
+            "container": "bigFormFront",
+            "position": 4,
+            "displayType": "SectionDisplay",
+            "title": "Historia Zaangażowania"
+        },
+        "radaQuestion1" : {
+            "site": 0,
+            "container": "bigFormFront",
+            "position": 5,
+            "displayType": "SectionDisplay",
+            "title": "Jakim członkiem rady chciałabyś/chciałbyś zostać?",
+            "validationPHP":
+            [
+                {
+                    "type": "logic",
+                    "newState": 1,
+                    "newErrorState": -1,
+                    "logicEquation":
+                    {
+                        "type": "equal",
+                        "data":
+                        [
+                            {
+                                "type": "repositoryValue",
+                                "repositoryName": "recruitment",
+                                "subset": ["role_short_name"]
+                            },
+                            {
+                                "type": "const",
+                                "const": "RW"
+                            }
+                        ]
+
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+
+
+        },
+        "SubmitButton": {
+            "site": 0,
+            "container": "SiteBigForm0",
+            "position": 2,
+            "displayType": "Button1",
+            "title": "Dalej"
+        },
+        "bigFormFront2": {
+            "site": 1,
+            "container": "SiteBigForm1",
+            "position": 1,
+            "displayType": "SectionDisplay",
+            "title": "Zadania"
+        },
+        "SubmitButton2": {
+            "site": 1,
+            "container": "SiteBigForm1",
+            "position": 2,
+            "displayType": "Button1",
+            "title": "Dalej"
+        },
+        "bigFormFront3": {
+            "site": 2,
+            "container": "SiteBigForm2",
+            "position": 1,
+            "displayType": "SectionDisplay",
+            "title": "Doświadczenie"
+        },
+        "SubmitButton3": {
+            "site": 2,
+            "container": "SiteBigForm2",
+            "position": 2,
+            "displayType": "Button1",
+            "title": "Dalej"
+        },
+        "bigFormFront4": {
+            "site": 3,
+            "container": "SiteBigForm3",
+            "position": 1,
+            "displayType": "SectionDisplay",
+            "title": "Metryczka"
+        },
+        "SubmitButton4": {
+            "site": 3,
+            "container": "SiteBigForm3",
+            "position": 2,
+            "displayType": "Button1",
+            "title": "Dalej"
+        }
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+    "FormSavers": {
+        "finalSave":
+        {
+            "clearTemporarySave": true,
+            "databaseConnection": "Main",
+            "validationPHP":
+            [
+                {
+                    "type": "logic",
+                    "logicEquation":
+                    {
+                        "type": "and",
+                        "data":
+                        [
+                            {
+                                "type": "runMethod",
+                                "method": "AllFieldsOk",
+                                "settings":
+                                {
+                                    "containerToCheck": "bigFormFront"
+                                }
+                            },
+                            {
+                                "type": "runMethod",
+                                "method": "AllFieldsOk",
+                                "settings":
+                                {
+                                    "containerToCheck": "bigFormFront2"
+                                }
+                            },
+                            {
+                                "type": "runMethod",
+                                "method": "AllFieldsOk",
+                                "settings":
+                                {
+                                    "containerToCheck": "bigFormFront3"
+                                }
+                            },
+                            {
+                                "type": "runMethod",
+                                "method": "AllFieldsOk",
+                                "settings":
+                                {
+                                    "containerToCheck": "bigFormFront4"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ],
+            "DatabaseSaves":
+            [
+                {
+                    "type": "update",
+                    "tableName": "user_basic_data",
+                    "where" : {
+                        "wio_user_id": {
+                            "type": "field",
+                            "field": "userId"
+                        }
+                    },
+                    "tableName": "wio_users",
+                    "fields": {
+                        "id_number": {
+                            "type": "field",
+                            "field": "pesel"
+                        },
+                        "birth_date": {
+                            "type": "filed",
+                            "field": "birthDate",
+                            "converter": "DatePicker2DateTime"
+                        }
+                    }
+                },
+                {
+                    "type": "insert",
+                    "tableName": "user_address_data",
+                    "fields": {
+                        "wio_user_id": {
+                            "type": "field",
+                            "field": "userId"
+                        },
+                        "country": {
+                            "type": "const",
+                            "const": "Poland"
+                        },
+                        "province": {
+                            "type": "field",
+                            "field": "province"
+                        },
+                        "city": {
+                            "type": "field",
+                            "field": "city"
+                        },
+                        "postal_code": {
+                            "type": "field",
+                            "field": "zipCode"
+                        },
+                        "address_street": {
+                            "type": "field",
+                            "field": "street"
+                        },
+                        "address_number": {
+                            "type": "field",
+                            "field": "houseNumber"
+                        },
+                        "type": {
+                            "type": "const",
+                            "const": "adres z metryczki"
+                        }
+                    }
+                },
+                {
+                    "type": "insert",
+                    "tableName": "user_recrutation_answers",
+                    "fields": {
+                        "wio_user_id": {
+                            "type": "field",
+                            "field": "userId"
+                        },
+                        "szp_editions": {
+                            "type": "field",
+                            "field": "editionSzPCount"
+                        },
+                        "ap_editions": {
+                            "type": "field",
+                            "field": "editionAPCount"
+                        },
+                        "who_told_you": {
+                            "type": "field",
+                            "field": "infoSource"
+                        },
+                        "open_question_1": {
+                            "type": "field",
+                            "field": "openWhyLider"
+                        },
+                        "open_question_2": {
+                            "type": "field",
+                            "field": "openExpectations"
+                        },
+                        "occupation": {
+                            "type": "field",
+                            "field": "engagement"
+                        },
+                        "education": {
+                            "type": "field",
+                            "field": "education"
+                        },
+                        "wiosna_volunteerings": {
+                            "type": "field",
+                            "field": "previousRoles"
+                        }
+                    }
+                },
+                {
+                    "type": "insert",
+                    "tableName": "user_skills",
+                    "fields": {
+                        "wio_user_id": {
+                            "type": "field",
+                            "field": "userId"
+                        },
+                        "skills": {
+                            "type": "field",
+                            "field": "skille"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
