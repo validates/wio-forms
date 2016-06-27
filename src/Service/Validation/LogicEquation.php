@@ -33,6 +33,8 @@ class LogicEquation
         switch ($sentence['type']) {
             case 'fieldValue':
                 $result = $this->getFieldValue($sentence); break;
+            case 'repositoryValue':
+                $result = $this->getRepositoryValue($sentence); break;
             case 'const':
                 $result = $this->getConst($sentence); break;
             case 'equal':
@@ -53,7 +55,8 @@ class LogicEquation
                 $result = $this->getIsSuccessRepository($sentence); break;
             case 'isNotSuccessRepository':
                 $result = $this->getIsNotSuccessRepository($sentence); break;
-
+            case 'runMethod':
+                $result = $this->getRunMethod($sentence); break;
             default:
                 $this->wioForms->errorLog->errorLog('LogicEquationError: No "'.$sentence['type'].'" sentence type.');
         }
@@ -64,6 +67,13 @@ class LogicEquation
     private function getFieldValue($sentence)
     {
         $result = $this->formStruct['Fields'][$sentence['field']]['value'];
+
+        return $result;
+    }
+
+    private function getRepositoryValue($sentence)
+    {
+        $result = $this->wioForms->entryCollectorService->getDefaultValue($sentence);
 
         return $result;
     }
@@ -176,6 +186,33 @@ class LogicEquation
             and $this->formStruct['DataRepositories'][$sentence['repository']]['success']) {
             $result = true;
         }
+
+        return $result;
+    }
+
+    private function getRunMethod($sentence)
+    {
+        $result = false;
+
+        if (!isset($this->formStruct['ContainerValidatorsPHP'][$sentence['method']]['class'])) {
+            return false;
+        }
+        $className = $this->formStruct['ContainerValidatorsPHP'][$sentence['method']]['class'];
+
+
+        if (!($validatorClass = $this->wioForms->classFinderService->checkName('ContainerValidator', $className))) {
+            return false;
+        }
+
+        $settings = [];
+        if (isset($sentence['settings'])) {
+            $settings = $sentence['settings'];
+        }
+
+        $validator = new $validatorClass($this->wioForms);
+        $validationResult = $validator->validatePHP($container, $settings);
+
+        $result = $validationResult['valid'];
 
         return $result;
     }

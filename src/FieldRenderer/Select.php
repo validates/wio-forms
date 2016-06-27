@@ -1,5 +1,4 @@
 <?php
-
 namespace WioForms\FieldRenderer;
 
 class Select extends AbstractFieldRenderer
@@ -13,9 +12,7 @@ class Select extends AbstractFieldRenderer
         $this->inputTitleContainer();
         $this->inputFieldContainerHead();
 
-
         $this->html .= '<select name="'.$this->fieldName.'" class ="'.$this->getAdditionalInputClasses().'" >';
-
         $this->html .= '<option value="">wybierz</option>';
         foreach ($this->dataSet as $option => $option_name) {
             $selected = '';
@@ -26,17 +23,13 @@ class Select extends AbstractFieldRenderer
         }
         $this->html .= '</select>';
 
-
         $this->inputFieldContainerTail();
         $this->inputContainerTail();
-
         return $this->html;
     }
-
     public function showToView()
     {
         $html = 'TextInput: '.'abc'.'<br/>';
-
         return $html;
     }
 }

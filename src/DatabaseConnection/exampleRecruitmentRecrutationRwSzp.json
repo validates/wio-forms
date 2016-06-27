@@ -255,6 +255,7 @@
             "title": "Czy działał już w WIOŚNIE",
             "state": 0,
             "save": true,
+            "disabled" : true,
             "dataSet": {
                 "repositoryName": "wiosnaExperienceSelect"
             },
