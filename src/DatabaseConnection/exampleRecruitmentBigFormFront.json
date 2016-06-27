@@ -65,6 +65,15 @@
                 ]
             }
         },
+        "otherRoles": {
+            "type": "local",
+            "data": {
+                "KR": "Koordynator Regionalny",
+                "KdsL": "Koordynator ds. Logistyki",
+                "KdsW": "Koordynator ds. Wdrożeń",
+                "KdsP": "Koordynator ds. Promocji"
+            }
+        },
         "engagement" : {
             "type": "local",
             "data": {
@@ -278,6 +287,25 @@
             },
             "isGroup" : true
         },
+        "otherRoles": {
+            "type": "RadioList",
+            "container": "redaQuestion1",
+            "position": 1,
+            "title": "",
+            "save": true,
+            "dataSet": {
+                "repositoryName": "otherRoles"
+            }
+        },
+
+
+
+
+
+
+
+
+
 
 
 

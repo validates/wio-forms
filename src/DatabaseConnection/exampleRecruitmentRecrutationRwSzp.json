@@ -51,6 +51,17 @@
                 "RW": "Rada Wojewódzka"
             }
         },
+        "role_given": {
+            "type": "local",
+            "data": {
+                "--": "nie wybrano",
+                "KR": "Koordynator Regionalny",
+                "KdsL": "KdsL",
+                "KdsT": "KdsT",
+                "KdsP": "KdsP",
+                "KdsWL": "KdsWL"
+            }
+        },
         "recruitment": {
             "type": "foreign",
             "class": "RecruitmentData",
@@ -301,11 +312,11 @@
             "state": 0,
             "save": true,
             "dataSet": {
-                "repositoryName": "role"
+                "repositoryName": "role_given"
             },
             "defaultValue": {
                 "repositoryName": "recruitment",
-                "subset": ["role_short_name"]
+                "subset": ["role_given_short_name"]
             },
             "class" : {
                 "wrapper": "edititem half-l",
