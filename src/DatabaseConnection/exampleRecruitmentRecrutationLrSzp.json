@@ -291,26 +291,6 @@
                 "input" : "veryLong wypisz"
             }
         },
-        "role_given":
-        {
-            "type": "Select",
-            "container": "dataForm",
-            "position": 4,
-            "title": "Rola nadana",
-            "state": 0,
-            "save": true,
-            "dataSet": {
-                "repositoryName": "role"
-            },
-            "defaultValue": {
-                "repositoryName": "recruitment",
-                "subset": ["role_short_name"]
-            },
-            "class" : {
-                "wrapper": "edititem half-l",
-                "input" : "veryLong wypisz"
-            }
-        },
         "council_province":
         {
             "type": "Select",
