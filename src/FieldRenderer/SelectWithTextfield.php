@@ -13,7 +13,7 @@ class SelectWithTextfield extends AbstractFieldRenderer
         $this->inputTitleContainer();
         $this->inputFieldContainerHead();
 
-        list($selectValue,$inputValue) = $this->prepareValues();
+        list($selectValue, $inputValue) = $this->prepareValues();
 
         $this->html .= '<input type="hidden" name="'.$this->fieldName.'" value="'.$this->value.'">';
 
@@ -28,9 +28,9 @@ class SelectWithTextfield extends AbstractFieldRenderer
         }
         $this->html .= '</select>';
 
-        $this->html .='<div class="'.$this->fieldName.'_textInputContainer"'.($inputValue!=''?'':' style="display: none;"').'>';
-        $this->html .='Wpisz: <input type="text" class="wioForms_SelectWithTextfield_textInput" name="'.$this->fieldName.'_textInput" value="'.$inputValue.'">';
-        $this->html .='</div>';
+        $this->html .= '<div class="'.$this->fieldName.'_textInputContainer"'.($inputValue != '' ? '' : ' style="display: none;"').'>';
+        $this->html .= 'Wpisz: <input type="text" class="wioForms_SelectWithTextfield_textInput" name="'.$this->fieldName.'_textInput" value="'.$inputValue.'">';
+        $this->html .= '</div>';
 
         $this->html .= $this->javascriptData();
         $this->html .= $this->javascriptActions();
@@ -60,21 +60,23 @@ class SelectWithTextfield extends AbstractFieldRenderer
             $inputValue = $this->value;
             $selectValue = $possibleInputName;
         }
+
         return [$selectValue, $inputValue];
     }
 
     private function javascriptData()
     {
         $js = '<script type="text/javascript">';
-        $js.= 'WioForms_fieldData=[];';
-        $js.= 'WioForms_fieldData["'.$this->fieldName.'"]={';
+        $js .= 'WioForms_fieldData=[];';
+        $js .= 'WioForms_fieldData["'.$this->fieldName.'"]={';
         foreach ($this->dataSet as $itemName => $itemType) {
             if ($itemType == 'textfield') {
-                $js.= '"'.$itemName.'":true, ';
+                $js .= '"'.$itemName.'":true, ';
             }
         }
-        $js.= '};';
-        $js.= '</script>';
+        $js .= '};';
+        $js .= '</script>';
+
         return $js;
     }
 

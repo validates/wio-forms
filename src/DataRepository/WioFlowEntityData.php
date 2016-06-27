@@ -13,6 +13,7 @@ class WioFlowEntityData extends AbstractDataRepository
             ->where('wio_user_id', '=', $requiredFields['userId'])
             ->first();
         $this->setRepositoryFlags();
+
         return $this->data['id'];
     }
 }
