@@ -24,11 +24,11 @@ class WioStructData extends AbstractDataRepository
         foreach ($woj as $w) {
             $wojewodztwa[$w->NodeName] =
             [
-                'node_id'     => $w->NodeId,
-                'lat'         => $w->NodeLat,
-                'lng'         => $w->NodeLng,
+                'node_id' => $w->NodeId,
+                'lat' => $w->NodeLat,
+                'lng' => $w->NodeLng,
                 'szp_regions' => [],
-                'ap_cities'   => [],
+                'ap_cities' => [],
             ];
         }
 
@@ -52,8 +52,8 @@ class WioStructData extends AbstractDataRepository
         foreach ($szp_regions as $region) {
             $wojewodztwa[$region->ParentNodeName]['szp_regions'][$region->NodeName] = [
                 'node_id' => $region->NodeId,
-                'lat'     => $region->NodeLat,
-                'lng'     => $region->NodeLng,
+                'lat' => $region->NodeLat,
+                'lng' => $region->NodeLng,
             ];
         }
 
@@ -72,8 +72,8 @@ class WioStructData extends AbstractDataRepository
         foreach ($ap_cities as $city) {
             $wojewodztwa[$city->ParentNodeName]['ap_cities'][$city->NodeName] = [
                 'node_id' => $city->NodeId,
-                'lat'     => $city->NodeLat,
-                'lng'     => $city->NodeLng,
+                'lat' => $city->NodeLat,
+                'lng' => $city->NodeLng,
             ];
         }
 

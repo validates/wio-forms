@@ -123,13 +123,13 @@ class FormSaverService
         }
 
         $query = [
-            'table'  => 'wio_forms_entries',
+            'table' => 'wio_forms_entries',
             'insert' => [
-                'form_struct_id'     => 'example-rlr-2016',
-                'previous_version'   => -1,
+                'form_struct_id' => 'example-rlr-2016',
+                'previous_version' => -1,
                 'is_current_version' => 1,
-                'database_entries'   => '',
-                'entry_data'         => json_encode($fieldsValues),
+                'database_entries' => '',
+                'entry_data' => json_encode($fieldsValues),
             ],
         ];
 
@@ -167,7 +167,7 @@ class FormSaverService
     private function makeDatabaseSave(&$databaseSave)
     {
         $query = [
-            'table'               => $databaseSave['tableName'],
+            'table' => $databaseSave['tableName'],
             $databaseSave['type'] => [],
         ];
 

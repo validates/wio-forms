@@ -11,7 +11,7 @@ class Sex2Gender extends AbstractFieldConverter
     {
         $sexMap = [
             $this::API_FEMALE => 'female',
-            $this::API_MALE   => 'male',
+            $this::API_MALE => 'male',
         ];
 
         if (isset($sexMap[$data])) {

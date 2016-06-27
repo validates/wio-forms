@@ -14,7 +14,7 @@ class ReCaptcha extends AbstractFieldValidator
         if (isset($this->wioForms->entryData['g-recaptcha-response'])) {
             $client = new Client();
             $requestData['form_params'] = [
-                'secret'   => $this->wioForms->settings['ReCaptcha']['SecretKey'],
+                'secret' => $this->wioForms->settings['ReCaptcha']['SecretKey'],
                 'response' => $this->wioForms->entryData['g-recaptcha-response'],
             ];
 
