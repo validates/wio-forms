@@ -53,7 +53,7 @@ class Container
                     $result = $this->logicEquationValidationService->solveEquation($validatorInfo['logicEquation']);
 
                     $validationResult = $this->prepareLogicResult($container, $validatorInfo, $result);
-
+                    
                     $this->applyValidationResult($container, $validationResult);
                 }
             }

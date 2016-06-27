@@ -7,7 +7,7 @@
  */
 namespace WioForms\DataRepository;
 
-class WiosnaExperienceData extends AbstractDataRepository
+class wiosnaExperienceData extends AbstractDataRepository
 {
     /**
      * @TODO: Napisac logikę dla tego, jak tylko ją poznam ;)
