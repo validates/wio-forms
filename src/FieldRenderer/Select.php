@@ -12,7 +12,7 @@ class Select extends AbstractFieldRenderer
         $this->inputTitleContainer();
         $this->inputFieldContainerHead();
 
-        $this->html .= '<select name="'.$this->fieldName.'" class ="'.$this->getAdditionalInputClasses().'" >';
+        $this->html .= '<select name="'.$this->fieldName.'" class ="'.$this->getAdditionalInputClasses().'" '.$this->setDisabledStatus().' >';
         $this->html .= '<option value="">wybierz</option>';
         foreach ($this->dataSet as $option => $option_name) {
             $selected = '';
