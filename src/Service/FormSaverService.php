@@ -1,9 +1,9 @@
 <?php
+
 namespace WioForms\Service;
 
-use \WioForms\Service\Validation\Container as ContainerValidationService;
-
-use \WioForms\Service\FormSaver\Field as FieldSaverService;
+use WioForms\Service\FormSaver\Field as FieldSaverService;
+use WioForms\Service\Validation\Container as ContainerValidationService;
 
 class FormSaverService
 {
@@ -18,7 +18,7 @@ class FormSaverService
 
     private $databaseConneciton;
 
-    function __construct($wioFormsObject)
+    public function __construct($wioFormsObject)
     {
         $this->wioForms = $wioFormsObject;
         $this->formStruct = &$this->wioForms->formStruct;
@@ -43,14 +43,9 @@ class FormSaverService
     {
         $FormSavers = &$this->formStruct['FormSavers'];
 
-        foreach ($FormSavers as $FormSaverName => &$FormSaver)
-        {
-            $valid = $this->validateFormSaver($FormSaver);
-
-            if ($valid)
-            {
+        foreach ($FormSavers as $FormSaverName => &$FormSaver) {
+            if ($this->validateFormSaver($FormSaver)) {
                 $this->saveForm($FormSaver);
-
             }
         }
     }
@@ -60,50 +55,71 @@ class FormSaverService
         return $this->containerValidationService->validate($FormSaver);
     }
 
-
     private function saveForm(&$FormSaver)
     {
         $this->setDatabaseConnection($FormSaver);
-        $this->saveEntry();
 
-        foreach ($FormSaver['DatabaseSaves'] as &$databaseSave)
-        {
-            $valid = $this->validateDatabaseSave($databaseSave);
+        $doEntrySave = true;
+        if (isset($FormSaver['saveAsEntry']) and $FormSaver['saveAsEntry'] === false) {
+            $doEntrySave = false;
+        }
 
-            if ($valid)
-            {
-                $this->makeDatabaseSave($databaseSave);
+        if ($doEntrySave) {
+            $this->saveEntry();
+        }
+
+        if (isset($FormSaver['DatabaseSaves'])) {
+            foreach ($FormSaver['DatabaseSaves'] as &$databaseSave) {
+                if ($this->validateDatabaseSave($databaseSave)) {
+                    $this->makeDatabaseSave($databaseSave);
+                }
             }
         }
 
-        $this->updateDatabaseEntries();
+        if (isset($FormSaver['MethodSaves'])) {
+            foreach ($FormSaver['MethodSaves'] as &$methodSave) {
+                if ($this->validateMethodSave($methodSave)) {
+                    $this->makeMethodSave($methodSave);
+                }
+            }
+        }
 
-        if (isset($FormSaver['clearTemporarySave']))
-        {
+        if ($doEntrySave) {
+            $this->updateDatabaseEntries();
+        }
+
+        if (isset($FormSaver['clearTemporarySave'])) {
             $this->clearTemporarySave = $FormSaver['clearTemporarySave'];
         }
     }
 
     private function setDatabaseConnection(&$FormSaver)
     {
-        $this->databaseConnection = $this->wioForms->databaseService->connections[ $FormSaver['databaseConnection'] ];
+        $this->databaseConnection = $this->wioForms->databaseService->connections[$FormSaver['databaseConnection']];
     }
 
     private function validateDatabaseSave(&$databaseSave)
     {
-        if (isset($databaseSave['validationPHP']))
-        {
+        if (isset($databaseSave['validationPHP'])) {
             return $this->containerValidationService->validate($databaseSave);
         }
+
         return true;
     }
 
+    private function validateMethodSave(&$methodSave)
+    {
+        if (isset($methodSave['validationPHP'])) {
+            return $this->containerValidationService->validate($methodSave);
+        }
+
+        return true;
+    }
 
     private function saveEntry()
     {
         $fieldsValues = [];
-        foreach ($this->formStruct['Fields'] as $fieldName=>&$field)
-        {
+        foreach ($this->formStruct['Fields'] as $fieldName => &$field) {
             $fieldsValues[$fieldName] = $field['value'];
         }
 
@@ -114,8 +130,8 @@ class FormSaverService
                 'previous_version' => -1,
                 'is_current_version' => 1,
                 'database_entries' => '',
-                'entry_data' => json_encode($fieldsValues)
-            ]
+                'entry_data' => json_encode($fieldsValues),
+            ],
         ];
 
         $insertedId = $this->databaseConnection->insert($query);
@@ -127,24 +143,22 @@ class FormSaverService
     {
         $databaseEntries = &$this->databaseEntries;
 
-        if (!isset($databaseEntries['wio_forms_entries'][0]))
-        {
+        if (!isset($databaseEntries['wio_forms_entries'][0])) {
             $this->wioForms->errorLog->errorLog('updateDatabaseEntries: Main wioFormsEntries insertedId not found.');
         }
         $wioFormsEntryId = $databaseEntries['wio_forms_entries'][0];
 
         unset($databaseEntries['wio_forms_entries']);
 
-        if (!empty($databaseEntries))
-        {
+        if (!empty($databaseEntries)) {
             $query = [
                 'table' => 'wio_forms_entries',
                 'where' => [
-                    'id' => '$wioFormsEntryId'
+                    'id' => '$wioFormsEntryId',
                 ],
                 'update' => [
-                    'database_entries' => json_encode($databaseEntries)
-                ]
+                    'database_entries' => json_encode($databaseEntries),
+                ],
             ];
 
             $this->databaseConnection->update($query);
@@ -155,26 +169,40 @@ class FormSaverService
     {
         $query = [
             'table' => $databaseSave['tableName'],
-            'insert' => []
+            $databaseSave['type'] => [],
         ];
 
-        foreach ($databaseSave['fields'] as $saveFieldName => &$saveField)
-        {
+        foreach ($databaseSave['fields'] as $saveFieldName => &$saveField) {
             $fieldValue = $this->fieldSaver->get($saveField);
-            if ($fieldValue !== false)
-            {
-                $query['insert'][ $saveFieldName ] = $fieldValue;
-            }
-            else
-            {
+            if ($fieldValue !== false) {
+                $query[$databaseSave['type']][$saveFieldName] = $fieldValue;
+            } else {
                 $this->wioForms->errorLog->errorLog('makeDatabaseSave: field '.$saveFieldName.' for '.$databaseSave['tableName'].' not get properly.');
+
                 return false;
             }
         }
+        if ($databaseSave['type'] === 'update') {
+            $updateOn = reset(array_keys($databaseSave['where']));
+            $query['where'] = [
+                $updateOn => $this->fieldSaver->get($databaseSave['where'][$updateOn]),
+            ];
+        }
 
-        $insertedId = $this->databaseConnection->insert($query);
+        $insertedId = $this->databaseConnection->$databaseSave['type']($query);
 
-        $this->databaseEntries[ $databaseSave['tableName'] ][] = $insertedId;
+        $this->databaseEntries[$databaseSave['tableName']][] = $insertedId;
     }
 
+    private function makeMethodSave(&$methodSave)
+    {
+        $className = $this->wioForms->classFinderService->checkName('FormSaver', $methodSave['method']);
+        if ($className) {
+            $formSaverObject = new $className($this->wioForms);
+        } else {
+            return false;
+        }
+
+        $formSaverObject->makeSavingAction($methodSave['settings']);
+    }
 }

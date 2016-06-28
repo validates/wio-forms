@@ -1,20 +1,20 @@
 <?php
+
 namespace WioForms\FormRenderer;
 
 class FormRenderer extends AbstractFormRenderer
 {
-
-    function showHead()
+    public function showHead()
     {
         $this->wioForms->headerCollectorService->addCss('assets/css/wioForms_superW.css');
 
         $html = '';
-        $html .= '<form method="post" action="" class="wioForms_Form">'."\n";
+        $html .= '<form method="post" action="" class="wioForms_Form" enctype="multipart/form-data">'."\n";
 
         return $html;
     }
 
-    function showTail()
+    public function showTail()
     {
         $html = '';
 
@@ -24,5 +24,4 @@ class FormRenderer extends AbstractFormRenderer
 
         return $html;
     }
-
 }

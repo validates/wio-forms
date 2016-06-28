@@ -1,0 +1,132 @@
+{
+    "FormName": "Example2",
+    "Version": "2016",
+    "Subversion": 11,
+    "VersionId": "2016.11",
+    "FormId": "Example2.2016.11",
+
+    "DataRepositories":
+    {
+        "skille":
+        {
+            "type": "local",
+            "data":
+            {
+                "Public Relations":
+                [
+                    "tworzenie strategii kapmani PR(marki, wizerunku)",
+                    "przeprowadzanie kampani PR",
+                    "obsługa mediów"
+                ],
+                "Marketing":
+                [
+                    "obsługa cms",
+                    "pozycjonowanie stron internetowych",
+                    "media planning"
+                ],
+                "Grafika":
+                [
+                    "umiejętność obsługi programów graficznych: Photoshop, indesign, Corel, Illustrator",
+                    "umiejętność tworzenia animacji Flash",
+                    "umiejętność przygotowania projektu do druku"
+                ],
+                "Finanse i księgowość":
+                [
+                    "analiza kosztów i przychodów",
+                    "tworzenie budżetów",
+                    "prowadzenie rozliczeń z ZUS i US"
+                ],
+                "Znajomość języków obcych":
+                [
+                    "język angielski",
+                    "język niemiecki",
+                    "język rosyjski",
+                    "język hiszpański",
+                    "język migowy",
+                    {
+                        "textfield": "inny_jezyk",
+                        "name": "inne języki"
+                    }
+                ],
+                "Inne kompetencje":
+                [
+                    {
+                        "textfield": "inne",
+                        "name": ""
+                    }
+                ]
+            }
+        }
+    },
+
+    "FieldValidatorsPHP":
+    {
+        "NotEmpty":
+        {
+            "class": "NotEmpty"
+        }
+    },
+    "FieldValidatorsJS": {},
+
+    "ContainerValidatorsPHP":
+    {
+        "AllFieldsOk":
+        {
+            "class": "AllFieldsOk"
+        },
+        "FormSaverOk":
+        {
+            "class": "FormSaverOk"
+        }
+    },
+    "ContainerValidatorsJS": {},
+
+
+    "Fields":
+    {
+        "skille":
+        {
+            "type": "DropdownCheckboxes",
+            "container": "Site1",
+            "position": 1,
+            "title": "Wybierz umiejętności",
+            "state": 0,
+            "save": true,
+            "dataSet":
+            {
+                "repositoryName": "skille"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        }
+    },
+
+    "Containers":
+    {
+        "Site1":
+        {
+            "site": 0,
+            "container": "_site",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "Podstawowe dane"
+        },
+        "SubmitButton1":
+        {
+            "site": 0,
+            "container": "Site1",
+            "position": 2,
+            "displayType": "Button1",
+            "title": "Dalej"
+
+        }
+    },
+
+    "FormSavers":
+    {
+    }
+}

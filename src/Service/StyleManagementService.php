@@ -1,13 +1,13 @@
 <?php
-namespace WioForms\Service;
 
+namespace WioForms\Service;
 
 class StyleManagementService
 {
     public $wioForms;
     public $formStruct;
 
-    function __construct($wioFormsObject)
+    public function __construct($wioFormsObject)
     {
         $this->wioForms = $wioFormsObject;
         $this->formStruct = &$this->wioForms->formStruct;
@@ -15,16 +15,12 @@ class StyleManagementService
 
     public function dontShowErrorsOnSite($siteNumber)
     {
-        if (isset($this->wioForms->containersContains['_site_'.$siteNumber]))
-        {
-            foreach ($this->wioForms->containersContains['_site_'.$siteNumber] as $elem)
-            {
-                if ($elem['type'] == 'Fields')
-                {
+        if (isset($this->wioForms->containersContains['_site_'.$siteNumber])) {
+            foreach ($this->wioForms->containersContains['_site_'.$siteNumber] as $elem) {
+                if ($elem['type'] == 'Fields') {
                     $this->addStyleToField($elem['name'], 'dont_display_errors', true);
                 }
-                if ($elem['type'] == 'Containers')
-                {
+                if ($elem['type'] == 'Containers') {
                     $this->addStyleToContainer($elem['name'], 'dont_display_errors', true);
                 }
             }
@@ -33,45 +29,38 @@ class StyleManagementService
 
     private function addStyleToField($fieldName, $style, $force = false)
     {
-        $field = &$this->formStruct['Fields'][ $fieldName ];
+        $field = &$this->formStruct['Fields'][$fieldName];
 
-        if (!isset($field['styleOptions']))
-        {
+        if (!isset($field['styleOptions'])) {
             $field['styleOptions'] = [];
         }
-        if ($force or !isset($field['styleOptions'][$style]))
-        {
-            $field['styleOptions'][ $style ] = true;
+        if ($force or !isset($field['styleOptions'][$style])) {
+            $field['styleOptions'][$style] = true;
         }
     }
 
     private function addStyleToContainer($containerName, $style, $force = false)
     {
-        $container = &$this->formStruct['Containers'][ $containerName ];
+        $container = &$this->formStruct['Containers'][$containerName];
 
-        if (!isset($container['styleOptions']))
-        {
+        if (!isset($container['styleOptions'])) {
             $container['styleOptions'] = [];
         }
-        if ($force or !isset( $container['styleOptions'][$style]))
-        {
-            $container['styleOptions'][ $style ] = true;
+        if ($force or !isset($container['styleOptions'][$style])) {
+            $container['styleOptions'][$style] = true;
         }
     }
 
     public function getContainerParentStyles($containerName)
     {
-        $container = &$this->formStruct['Containers'][ $containerName ];
-        if ($container['container'] == '_site')
-        {
+        $container = &$this->formStruct['Containers'][$containerName];
+        if ($container['container'] == '_site') {
             return true;
         }
-        $parentContainer = &$this->formStruct['Containers'][ $container['container'] ];
+        $parentContainer = &$this->formStruct['Containers'][$container['container']];
 
-        if (isset($parentContainer['styleOptions']))
-        {
-            foreach ($parentContainer['styleOptions'] as $style => $styleState)
-            {
+        if (isset($parentContainer['styleOptions'])) {
+            foreach ($parentContainer['styleOptions'] as $style => $styleState) {
                 $this->addStyleToContainer($containerName, $style);
             }
         }
@@ -79,18 +68,14 @@ class StyleManagementService
 
     public function getFieldParentStyles($fieldName)
     {
-        $field = &$this->formStruct['Fields'][ $fieldName ];
+        $field = &$this->formStruct['Fields'][$fieldName];
 
-        $parentContainer = &$this->formStruct['Containers'][ $field['container'] ];
+        $parentContainer = &$this->formStruct['Containers'][$field['container']];
 
-        if (isset($parentContainer['styleOptions']))
-        {
-            foreach ($parentContainer['styleOptions'] as $style => $styleState)
-            {
+        if (isset($parentContainer['styleOptions'])) {
+            foreach ($parentContainer['styleOptions'] as $style => $styleState) {
                 $this->addStyleToField($fieldName, $style);
             }
         }
     }
-
-
 }

@@ -1,0 +1,714 @@
+{
+    "FormName": "Form1",
+    "Version": "2016",
+    "Subversion": 11,
+    "VersionId": "2016.11",
+    "FormId": "Form1.2016.11",
+    "DataRepositories": {
+        "editionCounter" : {
+            "type": "local",
+            "data" : {
+                "zadna" : "W żadnej",
+                "jedna" : "W jednej",
+                "dwie" : "W dwóch",
+                "trzy_lub_wiecej" : "W trzech lub więcej"
+            }
+        },
+        "roles": {
+            "type": "local",
+            "data": {
+                "Szlachetna Paczka" : [
+                    "Koordynatora Wojewódzkiego",
+                    "Koordynatora Regionalnego",
+                    "Pomocnika ds. Rekrutacji",
+                    "Koordynatora ds. Promocji",
+                    "Koordynatora ds. Logistyki",
+                    "Koordynatora ds. Wdrożeń",
+                    "Koordynatora ds. Współpracy Lokalnej",
+                    "HR-a w Radzie Wojewódzkiej",
+                    "Asystenta ds. Promocji w Województwie",
+                    "Asystenta ds. Promocji w Rejonie",
+                    "Asystenta ds. Logistyki w Rejonie",
+                    "Lidera Rejonu",
+                    "Lidera Zespołu",
+                    "Wolontariusza",
+                    "Wolontariusza Paczki Seniorów",
+                    "Darczyńcy",
+                    "Lidera Specjalistów",
+                    "Trenera wewnętrznego",
+                    "Młodszego Specjalisty ds. Opisów",
+                    "Asystenta ds. Wdrożeń"
+                ],
+                "Akademia Przyszłości" : [
+                    "Koordynatora Wojewódzkiego",
+                    "Asystenta Koordynatora Wojewódzkiego",
+                    "Koordynatora ds. Wdrożeń",
+                    "Asystenta ds. Wdrożeń",
+                    "Koordynatora ds. Logistyki",
+                    "Koordynatora ds. Promocji",
+                    "Asystenta ds. Promocji",
+                    "Lidera Kolegium",
+                    "Kolidera",
+                    "Wolontariusza",
+                    "Lidera Zespołu Specjalistów",
+                    "Specjalistę ds. Opisów",
+                    "Trenera Wewnętrznego",
+                    "Darczyńcy"
+                ]
+            }
+        },
+        "engagement" : {
+            "type": "local",
+            "data": {
+                "1"  : "uczę się",
+                "2"  : "studiuję",
+                "4"  : "studiuję i pracuję",
+                "3"  : "pracuję",
+                "5"  : "jestem na emeryturze/rencie",
+                "-1" : "inne"
+            }
+        },
+        "education" : {
+            "type": "local",
+            "data": {
+                "1" : "podstawowe",
+                "2" : "zawodowe",
+                "3" : "średnie techniczne",
+                "4" : "średnie ogólnokształcące",
+                "5" : "wyższe"
+            }
+        },
+        "wioStructProvince": {
+            "type": "foreign",
+            "data": false,
+            "class": "WioStructProvinceData"
+        },
+        "infoSource" : {
+            "type": "local",
+            "data": {
+                "1" : "z portalu z ogłoszeniami o pracy",
+                "2" : "ze spotkania z przedstawicielem SZLACHETNEJ PACZKI",
+                "3" : "od znajomego, który wcześniej był w Paczce",
+                "4" : "w firmie, w której pracuj",
+                "5" : "z portalu facebook.pl",
+                "6" : "z newslettera od Stowarzyszenia Wiosna",
+                "7" : "z innego newslettera",
+                "8" : "z artykułu w internecie",
+                "9" : "z artykułu w prasie",
+                "10" : "z radia",
+                "11" : "z telewizji",
+                "12" : "z reklamy w internecie",
+                "13" : "z plakatu lub ulotki",
+                "-1" : "z innego źródła – jakiego?"
+            }
+        }
+    },
+
+
+    "FieldValidatorsJS": {},
+    "FieldValidatorsPHP": {
+        "NotEmpty": {
+            "class": "NotEmpty"
+        }
+    },
+    "ContainerValidatorsPHP": {
+        "AllFieldsOk": {
+            "class": "AllFieldsOk"
+        },
+        "FormSaverOk": {
+            "class": "FormSaverOk"
+        },
+        "FileReadyToUpload": {
+            "class": "FileReadyToUpload"
+        }
+    },
+    "ContainerValidatorsJS": {},
+
+    "FormSavers": {
+        "UploadFileToFolder": {
+            "class": "UploadFileToFolder"
+        }
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    "Fields": {
+        "userId": {
+            "type": "Hidden",
+            "container": "bigFormFront",
+            "position": 1,
+            "title": "User Id",
+            "state": 0,
+            "save": true
+        },
+
+
+
+
+
+
+        "editionSzPCount": {
+            "type": "Select",
+            "container": "bigFormFront",
+            "position": 2,
+            "title": "W ilu edycjach SZLACHETNEJ PACZKI brałeś udział",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "editionCounter"
+            },
+            "class" : {
+                "wrapper": "edititem half-size",
+                "input" : "veryLong wypisz"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "editionAPCount": {
+            "type": "Select",
+            "container": "bigFormFront",
+            "position": 3,
+            "title": "W ilu edycjach AKADEMII PRZYSZŁOŚCI brałeś udział",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "editionCounter"
+            },
+            "class" : {
+                "wrapper": "edititem half-size",
+                "input" : "veryLong wypisz"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "previousRoles": {
+            "type": "DuplicableDoubleDropdown",
+            "container": "repeatableQuestion",
+            "position": 1,
+            "title": "",
+            "description": "Wskaż jakie role do tej pory pełniłeś/aś w naszych programach SZLECHETNA PACZKA i/lub AKADEMIA PRZYSZŁOŚCI. Używając znaku + możesz dodawać kolejne role.",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "roles"
+            },
+            "class" : {
+                "wrapper": "edititem",
+                "input" : "veryLong wypisz"
+            },
+            "isGroup" : true
+        },
+
+
+
+
+
+
+
+
+
+        "file": {
+            "type": "FileUpload",
+            "container": "bigFormFront2",
+            "position": 1,
+            "title": "Upload",
+            "state": 0,
+            "save": true,
+            "class": {
+                "wrapper": "edititem half-l",
+                "input": "veryLong wypisz"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "openWhyLider": {
+            "type": "TextArea",
+            "container": "bigFormFront2",
+            "position": 2,
+            "title": "Dlaczego chcesz zostać Liderem?",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "openExpectations": {
+            "type": "TextArea",
+            "container": "bigFormFront2",
+            "position": 3,
+            "title": "Masz za sobą udział w Dużym Spotkaniu. Na podstawie tego, czego się na nim dowiedziałeś/aś, napisz o swoich oczekiwaniach względem Paczki/Akademii",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+
+
+
+
+
+
+
+
+
+
+        "engagement": {
+            "type": "Select",
+            "container": "bigFormFront3",
+            "position": 1,
+            "title": "Czym się zajmujesz",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "engagement"
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "otherEngagement": {
+            "type": "TextInput",
+            "container": "bigFormFront3",
+            "position": 2,
+            "title": "Inne",
+            "state": 0,
+            "save": true
+        },
+        "education": {
+            "type": "Select",
+            "container": "bigFormFront3",
+            "position": 2,
+            "title": "Wyształcenie",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "education"
+            },
+            "class" : {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+
+
+
+
+
+
+
+
+        "pesel": {
+            "type": "TextInput",
+            "container": "bigFormFront4",
+            "position": 1,
+            "title": "Pesel",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "birthDate": {
+            "type": "DatePicker",
+            "container": "bigFormFront4",
+            "position": 2,
+            "title": "Data urodzenia",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "province": {
+            "type": "Select",
+            "container": "bigFormFront4",
+            "position": 3,
+            "title": "Województwo",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName":"wioStructProvince"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "zipCode": {
+            "type": "TextInput",
+            "container": "bigFormFront4",
+            "position": 4,
+            "title": "Kod pocztowy",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "city": {
+            "type": "TextInput",
+            "container": "bigFormFront4",
+            "position": 5,
+            "title": "Miejscowość",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "street": {
+            "type": "TextInput",
+            "container": "bigFormFront4",
+            "position": 6,
+            "title": "Ulica",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "houseNumber": {
+            "type": "TextInput",
+            "container": "bigFormFront4",
+            "position": 7,
+            "title": "Nr domu/mieszkania",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "infoSource": {
+            "type": "Select",
+            "container": "bigFormFront4",
+            "position": 8,
+            "title": "Skąd dowiedziałeś się o procesie rekrutacji?",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName":"infoSource"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
+        "otherInfoSource": {
+            "type": "TextInput",
+            "container": "bigFormFront4",
+            "position": 9,
+            "title": "Inne",
+            "state": 0,
+            "save": true
+        }
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    "Containers": {
+        "Site0": {
+            "site": 0,
+            "container": "_site",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "Historia zaangażowania"
+        },
+        "Site1": {
+            "site": 1,
+            "container": "_site",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "Zadania",
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "AllFieldsOk",
+                    "settings":
+                    {
+                        "containerToCheck": "_site_0"
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "Site2": {
+            "site": 2,
+            "container": "_site",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "Doświadczenie",
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "AllFieldsOk",
+                    "settings":
+                    {
+                        "containerToCheck": "_site_1"
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "Site3": {
+            "site": 3,
+            "container": "_site",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "Metryczka",
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "AllFieldsOk",
+                    "settings":
+                    {
+                        "containerToCheck": "_site_2"
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "bigFormFront": {
+            "site": 0,
+            "container": "Site0",
+            "position": 1,
+            "displayType": "SectionDisplay",
+            "title": "Historia Zaangażowania"
+        },
+        "repeatableQuestion": {
+            "site": 0,
+            "container": "bigFormFront",
+            "position": 4,
+            "displayType": "SectionDisplay",
+            "title": "Historia Zaangażowania"
+        },
+        "SubmitButton": {
+            "site": 0,
+            "container": "Site0",
+            "position": 2,
+            "displayType": "Button1",
+            "title": "Dalej"
+        },
+        "bigFormFront2": {
+            "site": 1,
+            "container": "Site1",
+            "position": 1,
+            "displayType": "SectionDisplay",
+            "title": "Zadania"
+        },
+        "SubmitButton2": {
+            "site": 1,
+            "container": "Site1",
+            "position": 2,
+            "displayType": "Button1",
+            "title": "Dalej"
+        },
+        "bigFormFront3": {
+            "site": 2,
+            "container": "Site2",
+            "position": 1,
+            "displayType": "SectionDisplay",
+            "title": "Doświadczenie"
+        },
+        "SubmitButton3": {
+            "site": 2,
+            "container": "Site2",
+            "position": 2,
+            "displayType": "Button1",
+            "title": "Dalej"
+        },
+        "bigFormFront4": {
+            "site": 3,
+            "container": "Site3",
+            "position": 1,
+            "displayType": "SectionDisplay",
+            "title": "Metryczka"
+        },
+        "SubmitButton4": {
+            "site": 3,
+            "container": "Site3",
+            "position": 2,
+            "displayType": "Button1",
+            "title": "Dalej"
+        }
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    "FormSavers": {
+        "fileSave": {
+            "clearTemporarySave": false,
+            "databaseConnection": "Main",
+            "saveAsEntry": false,
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "FileReadyToUpload",
+                    "settings":
+                    {
+                        "field": "file"
+                    }
+                }
+            ],
+            "MethodSaves": [
+                {
+                    "method": "UploadFileToFolder",
+                    "settings":
+                    {
+                        "dir": "ciapki",
+                        "field": "file"
+                    }
+                }
+            ]
+        },
+        "finalSave": {
+            "clearTemporarySave": false,
+            "databaseConnection": "Main",
+            "DatabaseSaves": [
+            ]
+        }
+    }
+}

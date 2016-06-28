@@ -1,10 +1,10 @@
 <?php
+
 namespace WioForms\FieldRenderer;
 
 class DatePicker extends AbstractFieldRenderer
 {
-
-    function showToEdit()
+    public function showToEdit()
     {
         $this->html = '';
         $this->wioForms->headerCollectorService->addJS('assets/js/jquery-1.12.3.min.js');
@@ -28,8 +28,8 @@ class DatePicker extends AbstractFieldRenderer
         return $this->html;
     }
 
-    function showToView()
-      {
+    public function showToView()
+    {
         $html = 'TextInput: '.'abc'.'<br/>';
 
         return $html;

@@ -7,10 +7,10 @@
         },
         "OtherConnection":
         {
-            "host": "localhost",
-            "dbName": "System1",
-            "usrName": "Janusz",
-            "password": "admin1234"
+            "host": "superw.loc",
+            "dbName": "super_w",
+            "usrName": "root",
+            "password": ""
         }
     },
     "ReCaptcha":
