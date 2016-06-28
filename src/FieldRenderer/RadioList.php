@@ -19,7 +19,7 @@ class RadioList extends AbstractFieldRenderer
             if ($option == $this->value) {
                 $checked = ' checked="checked"';
             }
-            $this->html .= '<li><input type="checkbox" value="'.$option.'"'.$checked.' name="'.$this->fieldName.'">'.$option_name.'</li>';
+            $this->html .= '<li><input type="radio" value="'.$option.'"'.$checked.' name="'.$this->fieldName.'">'.$option_name.'</li>';
         }
         $this->html .= '</ul>';
 

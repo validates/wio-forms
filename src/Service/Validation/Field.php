@@ -46,12 +46,6 @@ class Field
             }
         }
 
-        // hide error message for fields which weren't send by user
-        // TODO: verify the solution
-        if (!isset($_POST[$fieldName])) {
-            $field['message'] = false;
-        }
-
         return $field['valid'];
     }
 

@@ -13,19 +13,19 @@
                 "userId": "userId"
             }
         },
-        "editionCounter" : {
+        "editionCounter": {
             "type": "local",
-            "data" : {
-                "zadna" : "W żadnej",
-                "jedna" : "W jednej",
-                "dwie" : "W dwóch",
-                "trzy_lub_wiecej" : "W trzech lub więcej"
+            "data": {
+                "zadna": "W żadnej",
+                "jedna": "W jednej",
+                "dwie": "W dwóch",
+                "trzy_lub_wiecej": "W trzech lub więcej"
             }
         },
         "roles": {
             "type": "local",
             "data": {
-                "Szlachetna Paczka" : [
+                "Szlachetna Paczka": [
                     "Koordynatora Wojewódzkiego",
                     "Koordynatora Regionalnego",
                     "Pomocnika ds. Rekrutacji",
@@ -47,7 +47,7 @@
                     "Młodszego Specjalisty ds. Opisów",
                     "Asystenta ds. Wdrożeń"
                 ],
-                "Akademia Przyszłości" : [
+                "Akademia Przyszłości": [
                     "Koordynatora Wojewódzkiego",
                     "Asystenta Koordynatora Wojewódzkiego",
                     "Koordynatora ds. Wdrożeń",
@@ -74,7 +74,7 @@
                 "KdsP": "Koordynator ds. Promocji"
             }
         },
-        "engagement" : {
+        "engagement": {
             "type": "local",
             "data": {
                 "uczę się": "select",
@@ -85,14 +85,14 @@
                 "inne": "textfield"
             }
         },
-        "education" : {
+        "education": {
             "type": "local",
             "data": {
-                "1" : "podstawowe",
-                "2" : "zawodowe",
-                "3" : "średnie techniczne",
-                "4" : "średnie ogólnokształcące",
-                "5" : "wyższe"
+                "1": "podstawowe",
+                "2": "zawodowe",
+                "3": "średnie techniczne",
+                "4": "średnie ogólnokształcące",
+                "5": "wyższe"
             }
         },
         "wioStructProvince": {
@@ -100,23 +100,23 @@
             "data": false,
             "class": "WioStructProvinceData"
         },
-        "infoSource" : {
+        "infoSource": {
             "type": "local",
             "data": {
-                "1" : "z portalu z ogłoszeniami o pracy",
-                "2" : "ze spotkania z przedstawicielem SZLACHETNEJ PACZKI",
-                "3" : "od znajomego, który wcześniej był w Paczce",
-                "4" : "w firmie, w której pracuj",
-                "5" : "z portalu facebook.pl",
-                "6" : "z newslettera od Stowarzyszenia Wiosna",
-                "7" : "z innego newslettera",
-                "8" : "z artykułu w internecie",
-                "9" : "z artykułu w prasie",
-                "10" : "z radia",
-                "11" : "z telewizji",
-                "12" : "z reklamy w internecie",
-                "13" : "z plakatu lub ulotki",
-                "-1" : "z innego źródła – jakiego?"
+                "1": "z portalu z ogłoszeniami o pracy",
+                "2": "ze spotkania z przedstawicielem SZLACHETNEJ PACZKI",
+                "3": "od znajomego, który wcześniej był w Paczce",
+                "4": "w firmie, w której pracuj",
+                "5": "z portalu facebook.pl",
+                "6": "z newslettera od Stowarzyszenia Wiosna",
+                "7": "z innego newslettera",
+                "8": "z artykułu w internecie",
+                "9": "z artykułu w prasie",
+                "10": "z radia",
+                "11": "z telewizji",
+                "12": "z reklamy w internecie",
+                "13": "z plakatu lub ulotki",
+                "-1": "z innego źródła – jakiego?"
             }
         },
         "skille": {
@@ -230,7 +230,7 @@
 
         "editionSzPCount": {
             "type": "Select",
-            "container": "bigFormFront",
+            "container": "editionCounts",
             "position": 2,
             "title": "W ilu edycjach SZLACHETNEJ PACZKI brałeś udział",
             "state": 0,
@@ -238,9 +238,9 @@
             "dataSet": {
                 "repositoryName": "editionCounter"
             },
-            "class" : {
+            "class": {
                 "wrapper": "edititem half-size",
-                "input" : "veryLong wypisz"
+                "input": "veryLong wypisz"
             },
             "validationPHP":
             [
@@ -251,7 +251,7 @@
         },
         "editionAPCount": {
             "type": "Select",
-            "container": "bigFormFront",
+            "container": "editionCounts",
             "position": 3,
             "title": "W ilu edycjach AKADEMII PRZYSZŁOŚCI brałeś udział",
             "state": 0,
@@ -259,9 +259,9 @@
             "dataSet": {
                 "repositoryName": "editionCounter"
             },
-            "class" : {
+            "class": {
                 "wrapper": "edititem half-size",
-                "input" : "veryLong wypisz"
+                "input": "veryLong wypisz"
             },
             "validationPHP":
             [
@@ -281,17 +281,18 @@
             "dataSet": {
                 "repositoryName": "roles"
             },
-            "class" : {
+            "class": {
                 "wrapper": "edititem",
-                "input" : "veryLong wypisz"
+                "input": "veryLong wypisz"
             },
-            "isGroup" : true
+            "isGroup": true
         },
         "otherRoles": {
             "type": "RadioList",
             "container": "radaQuestion1",
             "position": 1,
             "title": "Jakim członkiem rady chciałabyś/chciałbyś zostać?",
+            "state": 0,
             "save": true,
             "dataSet": {
                 "repositoryName": "otherRoles"
@@ -363,9 +364,9 @@
             "dataSet": {
                 "repositoryName": "engagement"
             },
-            "class" : {
+            "class": {
                 "wrapper": "edititem",
-                "input" : "veryLong wypisz"
+                "input": "veryLong wypisz"
             },
             "validationPHP":
             [
@@ -384,9 +385,9 @@
             "dataSet": {
                 "repositoryName": "education"
             },
-            "class" : {
+            "class": {
                 "wrapper": "edititem",
-                "input" : "veryLong wypisz"
+                "input": "veryLong wypisz"
             },
             "validationPHP":
             [
@@ -678,24 +679,24 @@
                 }
             ]
         },
-        "bigFormFront": {
+        "editionCounts": {
             "site": 0,
             "container": "SiteBigForm0",
             "position": 1,
             "displayType": "SectionDisplay",
-            "title": "Historia Zaangażowania"
+            "title": ""
         },
         "repeatableQuestion": {
             "site": 0,
-            "container": "bigFormFront",
-            "position": 4,
+            "container": "SiteBigForm0",
+            "position": 2,
             "displayType": "SectionDisplay",
-            "title": "Historia Zaangażowania"
+            "title": ""
         },
-        "radaQuestion1" : {
+        "radaQuestion1": {
             "site": 0,
-            "container": "bigFormFront",
-            "position": 5,
+            "container": "SiteBigForm0",
+            "position": 3,
             "displayType": "SectionDisplay",
             "title": "",
             "validationPHP":
@@ -703,7 +704,7 @@
                 {
                     "type": "logic",
                     "newState": 1,
-                    "newErrorState": -1,
+                    "newErrorState": -2,
                     "logicEquation":
                     {
                         "type": "equal",
@@ -726,8 +727,12 @@
             "stateActions":
             [
                 {
-                    "state": -1,
+                    "state": -2,
                     "actions": ["hide"]
+                },
+                {
+                    "state": -1,
+                    "actions": ["show"]
                 },
                 {
                     "state": 1,
@@ -740,7 +745,7 @@
         "SubmitButton": {
             "site": 0,
             "container": "SiteBigForm0",
-            "position": 2,
+            "position": 4,
             "displayType": "Button1",
             "title": "Dalej"
         },
@@ -854,7 +859,7 @@
                 {
                     "type": "update",
                     "tableName": "user_basic_data",
-                    "where" : {
+                    "where": {
                         "wio_user_id": {
                             "type": "field",
                             "field": "userId"
