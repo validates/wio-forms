@@ -289,13 +289,19 @@
         },
         "otherRoles": {
             "type": "RadioList",
-            "container": "redaQuestion1",
+            "container": "radaQuestion1",
             "position": 1,
-            "title": "",
+            "title": "Jakim członkiem rady chciałabyś/chciałbyś zostać?",
             "save": true,
             "dataSet": {
                 "repositoryName": "otherRoles"
-            }
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
         },
 
 
@@ -643,6 +649,35 @@
                 }
             ]
         },
+        "SiteBigForm4": {
+            "site": 4,
+            "container": "_site",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "Dziękujemy za wypełnienie formularza",
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "FormSaverOk",
+                    "settings":
+                    {
+                        "formSaverToCheck": "finalSave"
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -1,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
         "bigFormFront": {
             "site": 0,
             "container": "SiteBigForm0",
@@ -662,7 +697,7 @@
             "container": "bigFormFront",
             "position": 5,
             "displayType": "SectionDisplay",
-            "title": "Jakim członkiem rady chciałabyś/chciałbyś zostać?",
+            "title": "",
             "validationPHP":
             [
                 {
