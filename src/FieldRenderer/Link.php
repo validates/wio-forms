@@ -17,7 +17,7 @@ class Link extends AbstractFieldRenderer
 
     public function showToEdit()
     {
-        $html = "<div>".$this->fieldInfo['label'].' <a class="'.$this->fieldInfo['class'].'" href="'.$this->fieldInfo['url'].'">'.$this->title.'</a>'."\n"."</div>";
+        $html = '<div>'.$this->fieldInfo['label'].' <a class="'.$this->fieldInfo['class'].'" href="'.$this->fieldInfo['url'].'">'.$this->title.'</a>'."\n".'</div>';
 
         return $html;
     }
