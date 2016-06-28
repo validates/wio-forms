@@ -120,4 +120,9 @@ abstract class AbstractFieldRenderer
     {
         return isset($this->fieldInfo['class']['input']) ? $this->fieldInfo['class']['input'] : '';
     }
+
+    protected function setDisabledStatus()
+    {
+        return isset($this->fieldInfo['disabled']) && $this->fieldInfo['disabled'] ? 'disabled = "true"' : '';
+    }
 }
