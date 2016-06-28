@@ -125,8 +125,8 @@
     "ContainerValidatorsJS": {},
 
     "FormSavers": {
-        "UploadFile": {
-            "class": "UploadFile"
+        "UploadFileToFolder": {
+            "class": "UploadFileToFolder"
         }
     },
 

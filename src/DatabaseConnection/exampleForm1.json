@@ -87,6 +87,10 @@
         "PhoneNumber":
         {
             "class": "PhoneNumber"
+        },
+        "EmailNotUsed":
+        {
+            "class": "EmailNotUsed"
         }
     },
     "FieldValidatorsJS": {},
@@ -283,6 +287,9 @@
               },
               {
                   "method": "Email"
+              },
+              {
+                  "method": "EmailNotUsed"
               }
           ]
         },
@@ -327,6 +334,9 @@
               },
               {
                   "method": "NotEmpty"
+              },
+              {
+                  "method": "EmailNotUsed"
               }
           ]
         },
