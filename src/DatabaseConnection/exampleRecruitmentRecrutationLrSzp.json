@@ -297,14 +297,31 @@
         },
         "province":
         {
-            "type": "NodeSelect",
+            "type": "Select",
             "container": "dataForm",
             "position": 3,
             "title": "Wybrane Województwo",
             "state": 0,
             "save": true,
             "dataSet": {
-                "repositoryName": "wioStruct"
+                "repositoryName": "wioStructProvince"
+            },
+            "class": {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "region":
+        {
+            "type": "Select",
+            "container": "dataForm",
+            "position": 4,
+            "title": "Wybrany region",
+            "state": 0,
+            "save": true,
+            "disabled": true,
+            "dataSet": {
+                "repositoryName": "wioStructProvince"
             },
             "class": {
                 "wrapper": "edititem half-l",
@@ -359,7 +376,7 @@
                     "subset": ["wanted_area_id"]
                 }
             },
-            "label": "Rejon ze zgłoszenia",
+            "label": "Rejon ze zgłoszenia: ",
             "titleSet" : {
                 "repositoryName": "recruitment",
                 "subset": ["wanted_area_name"]
@@ -380,7 +397,7 @@
                     "subset": ["assigned_area_id"]
                 }
             },
-            "label": "Rejon, w którym będzie działał",
+            "label": "Rejon, w którym będzie działał: ",
             "titleSet" : {
                 "repositoryName": "recruitment",
                 "subset": ["assigned_area_name"]
