@@ -95,6 +95,11 @@
                 "2": "Weteran",
                 "3": "Awansowany"
             }
+        },
+        "wioStructAPNodes" : {
+            "type": "foreign",
+            "data": false,
+            "class": "WioStructAPNodes"
         }
     },
     "FieldValidatorsJS": {},
@@ -343,7 +348,7 @@
         {
             "type": "Select",
             "container": "dataForm",
-            "position": 4,
+            "position": 5,
             "title": "Rola nadana",
             "state": 0,
             "save": true,
@@ -363,12 +368,13 @@
         {
             "type": "Select",
             "container": "dataForm",
-            "position": 5,
+            "position": 6,
             "title": "Województwo rady",
             "state": 0,
             "save": true,
             "dataSet": {
-                "repositoryName": "wioStructProvince"
+                "repositoryName": "wioStructAPNodes",
+                "subset": ["province"]
             },
             "class" : {
                 "wrapper": "edititem half-r",
@@ -379,7 +385,7 @@
         {
             "type": "Select",
             "container": "dataForm",
-            "position": 6,
+            "position": 7,
             "title": "Typ",
             "state": 0,
             "save": true,
