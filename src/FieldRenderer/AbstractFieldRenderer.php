@@ -59,6 +59,7 @@ abstract class AbstractFieldRenderer
         $dataSetName = $this->fieldInfo['dataSet']['repositoryName'];
         if (!isset($this->formStruct['DataRepositories'][$dataSetName])) {
             $this->wioForms->errorLog->errorLog('DataRepository: '.$dataSetName.' not found.');
+
             return;
         }
         if (isset($this->fieldInfo['dataSet']['subset'])) {
@@ -69,6 +70,7 @@ abstract class AbstractFieldRenderer
                 }
                 $this->dataSet += $this->formStruct['DataRepositories'][$dataSetName]['data'][$subset];
             }
+
             return;
         }
         $this->dataSet = &$this->formStruct['DataRepositories'][$dataSetName]['data'];
