@@ -13,13 +13,9 @@ class EmailNotUsed extends AbstractFieldValidator
 
         global $queryBuilder;
         $recruitmentRepository = new RecruitmentRepository($queryBuilder);
-        $roleConverter = new Stanowisko2Role();
-
-        $role = $roleConverter->convert($this->wioForms->entryData['stanowisko']);
-        $program = $this->wioForms->entryData['akcja'];
 
         $this->valid = !$recruitmentRepository
-                            ->ifEmailAlreadyUsed($value, $program, $role);
+                            ->ifEmailAlreadyUsed($value, $this->wioForms->formStruct['Fields']['wioFlow']['id']);
 
         $this->setAnswer();
 
