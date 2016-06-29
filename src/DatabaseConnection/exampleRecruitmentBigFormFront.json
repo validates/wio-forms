@@ -217,12 +217,19 @@
         "userId": {
             "type": "Hidden",
             "container": "bigFormFront",
-            "position": 1,
+            "position": 10,
             "title": "User Id",
             "state": 0,
             "save": true
         },
-
+        "wioFlowEntityId": {
+            "type": "Hidden",
+            "container": "bigFormFront",
+            "position": 11,
+            "title": "Wio Flow Entity Id",
+            "state": 0,
+            "save": true
+        },
 
 
 
@@ -316,10 +323,24 @@
 
 
 
+        "openWhyRada": {
+            "type": "TextArea",
+            "container": "radaQuestion2",
+            "position": 1,
+            "title": "Dlaczego chcesz zostać członkiem Rady?",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
         "openWhyLider": {
             "type": "TextArea",
-            "container": "bigFormFront2",
-            "position": 2,
+            "container": "liderQuestion2",
+            "position": 1,
             "title": "Dlaczego chcesz zostać Liderem?",
             "state": 0,
             "save": true,
@@ -332,8 +353,8 @@
         },
         "openExpectations": {
             "type": "TextArea",
-            "container": "bigFormFront2",
-            "position": 3,
+            "container": "bigFormFront2after",
+            "position": 1,
             "title": "Masz za sobą udział w Dużym Spotkaniu. Na podstawie tego, czego się na nim dowiedziałeś/aś, napisz o swoich oczekiwaniach względem Paczki/Akademii",
             "state": 0,
             "save": true,
@@ -561,7 +582,54 @@
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "Historia zaangażowania"
+            "title": "Historia zaangażowania",
+            "validationPHP":
+            [
+                {
+                    "type": "logic",
+                    "newErrorState": -1,
+                    "logicEquation":
+                    {
+                        "type": "and",
+                        "data":
+                        [
+                            {
+                                "type": "runMethod",
+                                "method": "AllFieldsOk",
+                                "settings":
+                                {
+                                    "containerToCheck": "editionCounts"
+                                }
+                            },
+                            {
+                                "type": "or",
+                                "data":
+                                [
+                                    {
+                                        "type": "equal",
+                                        "data":
+                                        [
+                                            {
+                                                "type": "repositoryValue",
+                                                "repositoryName": "recruitment",
+                                                "subset": ["role_short_name"]
+                                            },
+                                            {
+                                                "type": "const",
+                                                "const": "LR"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "isValidField",
+                                        "field": "otherRoles"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
         },
         "SiteBigForm1": {
             "site": 1,
@@ -572,19 +640,109 @@
             "validationPHP":
             [
                 {
-                    "type": "method",
-                    "method": "AllFieldsOk",
-                    "settings":
+                    "type": "logic",
+                    "newErrorState": -1,
+                    "logicEquation":
                     {
-                        "containerToCheck": "_site_0"
+                        "type": "and",
+                        "data":
+                        [
+                            {
+                                "type": "runMethod",
+                                "method": "AllFieldsOk",
+                                "settings":
+                                {
+                                    "containerToCheck": "bigFormFront2after"
+                                }
+                            },
+                            {
+                                "type": "or",
+                                "data":
+                                [
+                                    {
+                                        "type": "and",
+                                        "data":
+                                        [
+                                            {
+                                                "type": "equal",
+                                                "data":
+                                                [
+                                                    {
+                                                        "type": "repositoryValue",
+                                                        "repositoryName": "recruitment",
+                                                        "subset": ["role_short_name"]
+                                                    },
+                                                    {
+                                                        "type": "const",
+                                                        "const": "LR"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "runMethod",
+                                                "method": "AllFieldsOk",
+                                                "settings":
+                                                {
+                                                    "containerToCheck": "liderQuestion2"
+                                                }
+
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "and",
+                                        "data":
+                                        [
+                                            {
+                                                "type": "equal",
+                                                "data":
+                                                [
+                                                    {
+                                                        "type": "repositoryValue",
+                                                        "repositoryName": "recruitment",
+                                                        "subset": ["role_short_name"]
+                                                    },
+                                                    {
+                                                        "type": "const",
+                                                        "const": "RW"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "runMethod",
+                                                "method": "AllFieldsOk",
+                                                "settings":
+                                                {
+                                                    "containerToCheck": "radaQuestion2"
+                                                }
+
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "logic",
+                    "newErrorState": -2,
+                    "logicEquation":
+                    {
+                        "type": "isValidContainer",
+                        "container": "SiteBigForm0"
                     }
                 }
             ],
             "stateActions":
             [
                 {
-                    "state": -1,
+                    "state": -2,
                     "actions": ["hide"]
+                },
+                {
+                    "state": -1,
+                    "actions": ["show"]
                 },
                 {
                     "state": 1,
@@ -605,15 +763,28 @@
                     "method": "AllFieldsOk",
                     "settings":
                     {
-                        "containerToCheck": "_site_1"
+                        "containerToCheck": "SiteBigForm2"
+                    }
+                },
+                {
+                    "type": "logic",
+                    "newErrorState": -2,
+                    "logicEquation":
+                    {
+                        "type": "isValidContainer",
+                        "container": "SiteBigForm1"
                     }
                 }
             ],
             "stateActions":
             [
                 {
-                    "state": -1,
+                    "state": -2,
                     "actions": ["hide"]
+                },
+                {
+                    "state": -1,
+                    "actions": ["show"]
                 },
                 {
                     "state": 1,
@@ -634,15 +805,28 @@
                     "method": "AllFieldsOk",
                     "settings":
                     {
-                        "containerToCheck": "_site_2"
+                        "containerToCheck": "SiteBigForm3"
+                    }
+                },
+                {
+                    "type": "logic",
+                    "newErrorState": -2,
+                    "logicEquation":
+                    {
+                        "type": "isValidContainer",
+                        "container": "SiteBigForm2"
                     }
                 }
             ],
             "stateActions":
             [
                 {
-                    "state": -1,
+                    "state": -2,
                     "actions": ["hide"]
+                },
+                {
+                    "state": -1,
+                    "actions": ["show"]
                 },
                 {
                     "state": 1,
@@ -720,7 +904,6 @@
                                 "const": "RW"
                             }
                         ]
-
                     }
                 }
             ],
@@ -739,8 +922,98 @@
                     "actions": ["show"]
                 }
             ]
-
-
+        },
+        "radaQuestion2": {
+            "site": 0,
+            "container": "SiteBigForm1",
+            "position": 2,
+            "displayType": "SectionDisplay",
+            "title": "",
+            "validationPHP":
+            [
+                {
+                    "type": "logic",
+                    "newState": 1,
+                    "newErrorState": -2,
+                    "logicEquation":
+                    {
+                        "type": "equal",
+                        "data":
+                        [
+                            {
+                                "type": "repositoryValue",
+                                "repositoryName": "recruitment",
+                                "subset": ["role_short_name"]
+                            },
+                            {
+                                "type": "const",
+                                "const": "RW"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -2,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": -1,
+                    "actions": ["show"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "liderQuestion2": {
+            "site": 0,
+            "container": "SiteBigForm1",
+            "position": 3,
+            "displayType": "SectionDisplay",
+            "title": "",
+            "validationPHP":
+            [
+                {
+                    "type": "logic",
+                    "newState": 1,
+                    "newErrorState": -2,
+                    "logicEquation":
+                    {
+                        "type": "equal",
+                        "data":
+                        [
+                            {
+                                "type": "repositoryValue",
+                                "repositoryName": "recruitment",
+                                "subset": ["role_short_name"]
+                            },
+                            {
+                                "type": "const",
+                                "const": "LR"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -2,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": -1,
+                    "actions": ["show"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
         },
         "SubmitButton": {
             "site": 0,
@@ -749,17 +1022,17 @@
             "displayType": "Button1",
             "title": "Dalej"
         },
-        "bigFormFront2": {
+        "bigFormFront2after": {
             "site": 1,
             "container": "SiteBigForm1",
-            "position": 1,
+            "position": 4,
             "displayType": "SectionDisplay",
-            "title": "Zadania"
+            "title": ""
         },
         "SubmitButton2": {
             "site": 1,
             "container": "SiteBigForm1",
-            "position": 2,
+            "position": 5,
             "displayType": "Button1",
             "title": "Dalej"
         },
@@ -819,20 +1092,12 @@
                         "data":
                         [
                             {
-                                "type": "runMethod",
-                                "method": "AllFieldsOk",
-                                "settings":
-                                {
-                                    "containerToCheck": "bigFormFront"
-                                }
+                                "type": "isValidContainer",
+                                "container": "SiteBigForm1"
                             },
                             {
-                                "type": "runMethod",
-                                "method": "AllFieldsOk",
-                                "settings":
-                                {
-                                    "containerToCheck": "bigFormFront2"
-                                }
+                                "type": "isValidContainer",
+                                "container": "SiteBigForm2"
                             },
                             {
                                 "type": "runMethod",
@@ -865,16 +1130,30 @@
                             "field": "userId"
                         }
                     },
-                    "tableName": "wio_users",
                     "fields": {
                         "id_number": {
                             "type": "field",
                             "field": "pesel"
                         },
                         "birth_date": {
-                            "type": "filed",
+                            "type": "field",
                             "field": "birthDate",
                             "converter": "DatePicker2DateTime"
+                        }
+                    }
+                },
+                {
+                    "type": "update",
+                    "tableName": "wio_hash",
+                    "where": {
+                        "wio_flow_entity_id": {
+                            "type": "field",
+                            "field": "wioFlowEntityId"
+                        }
+                    },
+                    "fields": {
+                        "used_on": {
+                            "type": "currentDate"
                         }
                     }
                 },
@@ -941,6 +1220,10 @@
                             "field": "openWhyLider"
                         },
                         "open_question_2": {
+                            "type": "field",
+                            "field": "openWhyRada"
+                        },
+                        "open_question_3": {
                             "type": "field",
                             "field": "openExpectations"
                         },
