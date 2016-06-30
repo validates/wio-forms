@@ -84,6 +84,11 @@
                 "2": "Weteran",
                 "3": "Awansowany"
             }
+        },
+        "wioStructAPNodes" : {
+            "type": "foreign",
+            "data": false,
+            "class": "WioStructAPNodes"
         }
     },
     "FieldValidatorsJS": {},
@@ -297,33 +302,21 @@
         },
         "province":
         {
-            "type": "NodeSelect",
-            "container": "dataForm",
-            "position": 3,
-            "title": "Wybrane Województwo",
-            "state": 0,
-            "save": true,
-            "dataSet": {
-                "repositoryName": "wioStruct"
-            },
-            "class": {
-                "wrapper": "edititem half-l",
-                "input" : "veryLong wypisz"
-            }
-        },
-        "council_province":
-        {
             "type": "Select",
             "container": "dataForm",
-            "position": 5,
-            "title": "Województwo rady",
+            "position": 3,
+            "title": "Województwo, w którym chce działać",
             "state": 0,
             "save": true,
             "dataSet": {
                 "repositoryName": "wioStructProvince"
             },
-            "class" : {
-                "wrapper": "edititem half-r",
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["province"]
+            },
+            "class": {
+                "wrapper": "edititem half-l",
                 "input" : "veryLong wypisz"
             }
         },
@@ -331,7 +324,7 @@
         {
             "type": "Select",
             "container": "dataForm",
-            "position": 6,
+            "position": 4,
             "title": "Typ",
             "state": 0,
             "save": true,
@@ -347,125 +340,92 @@
                 "input" : "veryLong wypisz"
             }
         },
-        "wanted_area":
+        "active_province":
         {
-            "type": "Link",
+            "type": "Select",
             "container": "dataForm",
-            "position": 7,
-            "url": "http://superw.pl/linkdoregionu/$1",
-            "paramSet": {
-                "$1": {
-                    "repositoryName": "recruitment",
-                    "subset": ["wanted_area_id"]
-                }
-            },
-            "label": "Rejon ze zgłoszenia",
-            "titleSet" : {
-                "repositoryName": "recruitment",
-                "subset": ["wanted_area_name"]
-            },
+            "position": 5,
+            "title": "Działa w województwie",
             "state": 0,
-            "save": false,
-            "class": ""
+            "save": true,
+            "dataSet": {
+                "repositoryName": "wioStructAPNodes",
+                "subset": ["province"]
+            },
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["active_province"]
+            },
+            "class" : {
+                "wrapper": "edititem half-r",
+                "input" : "veryLong wypisz"
+            }
         },
-        "assigned_area":
+        "city":
         {
-            "type": "Link",
+            "type": "Select",
             "container": "dataForm",
             "position": 8,
-            "url": "http://superw.pl/linkdoregionu/$1",
-            "paramSet": {
-                "$1": {
-                    "repositoryName": "recruitment",
-                    "subset": ["assigned_area_id"]
-                }
-            },
-            "label": "Rejon, w którym będzie działał",
-            "titleSet" : {
-                "repositoryName": "recruitment",
-                "subset": ["assigned_area_name"]
-            },
+            "title": "Miasto",
             "state": 0,
-            "save": false,
-            "class": ""
+            "save": true,
+            "dataSet": {
+                "repositoryName": "wioStructAPNodes",
+                "subset": ["city"]
+            },
+            "class" : {
+                "wrapper": "edititem half-r",
+                "input" : "veryLong wypisz"
+            }
         },
-        "senior_program":
+        "region":
         {
             "type": "Select",
             "container": "dataForm",
             "position": 9,
-            "title": "Paczka Seniorów",
+            "title": "Region",
             "state": 0,
             "save": true,
+            "disabled": true,
             "dataSet": {
-                "repositoryName": "yesNo"
+                "repositoryName": "wioStructProvince"
             },
-            "defaultValue": {
-                "repositoryName": "recruitment",
-                "subset": ["senior_program"]
-            },
-            "class" : {
+            "class": {
                 "wrapper": "edititem half-l",
                 "input" : "veryLong wypisz"
             }
         },
-        "lawyer_program":
+        "school":
         {
             "type": "Select",
             "container": "dataForm",
             "position": 10,
-            "title": "Paczka Prawników",
+            "title": "Szkoła",
             "state": 0,
             "save": true,
             "dataSet": {
-                "repositoryName": "yesNo"
-            },
-            "defaultValue": {
-                "repositoryName": "recruitment",
-                "subset": ["lawyer_program"]
+                "repositoryName": "wioStructAPNodes",
+                "subset": ["school"]
             },
             "class" : {
-                "wrapper": "edititem half-l",
+                "wrapper": "edititem half-r",
                 "input" : "veryLong wypisz"
             }
         },
-        "adventure_program":
+        "collegium":
         {
             "type": "Select",
             "container": "dataForm",
             "position": 11,
-            "title": "Paczka Przygody",
+            "title": "Kolegium",
             "state": 0,
             "save": true,
             "dataSet": {
-                "repositoryName": "yesNo"
-            },
-            "defaultValue": {
-                "repositoryName": "recruitment",
-                "subset": ["adventure_program"]
+                "repositoryName": "wioStructAPNodes",
+                "subset": ["collegium"]
             },
             "class" : {
-                "wrapper": "edititem half-l",
-                "input" : "veryLong wypisz"
-            }
-        },
-        "doctor_program":
-        {
-            "type": "Select",
-            "container": "dataForm",
-            "position": 12,
-            "title": "Paczka lekarzy",
-            "state": 0,
-            "save": true,
-            "dataSet": {
-                "repositoryName": "yesNo"
-            },
-            "defaultValue": {
-                "repositoryName": "recruitment",
-                "subset": ["doctor_program"]
-            },
-            "class" : {
-                "wrapper": "edititem half-l",
+                "wrapper": "edititem half-r",
                 "input" : "veryLong wypisz"
             }
         }

@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dpa
- * Date: 08/06/16
- * Time: 16:15.
- */
+
 namespace WioForms\DataRepository;
 
 class WiosnaExperienceData extends AbstractDataRepository
