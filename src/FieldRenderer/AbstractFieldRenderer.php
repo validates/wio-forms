@@ -57,11 +57,23 @@ abstract class AbstractFieldRenderer
     {
         $this->dataSet = [];
         $dataSetName = $this->fieldInfo['dataSet']['repositoryName'];
-        if (isset($this->formStruct['DataRepositories'][$dataSetName])) {
-            $this->dataSet = &$this->formStruct['DataRepositories'][$dataSetName]['data'];
-        } else {
+        if (!isset($this->formStruct['DataRepositories'][$dataSetName])) {
             $this->wioForms->errorLog->errorLog('DataRepository: '.$dataSetName.' not found.');
+
+            return;
         }
+        if (isset($this->fieldInfo['dataSet']['subset'])) {
+            foreach ($this->fieldInfo['dataSet']['subset'] as $subset) {
+                if (!isset($this->formStruct['DataRepositories'][$dataSetName]['data'][$subset])) {
+                    $this->wioForms->errorLog->errorLog('DataRepository: Subset: '.$subset.' not found in repository '.$dataSetName.'');
+                    continue;
+                }
+                $this->dataSet += $this->formStruct['DataRepositories'][$dataSetName]['data'][$subset];
+            }
+
+            return;
+        }
+        $this->dataSet = &$this->formStruct['DataRepositories'][$dataSetName]['data'];
     }
 
     protected function inputContainerHead($additional_class = '')
