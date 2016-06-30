@@ -21,7 +21,10 @@
         "status": {
             "type": "foreign",
             "class": "WioFlowStatusData",
-            "data": false
+            "data": false,
+            "requiredFields": {
+                "status": "status"
+            }
         },
         "gender": {
             "type": "local",
