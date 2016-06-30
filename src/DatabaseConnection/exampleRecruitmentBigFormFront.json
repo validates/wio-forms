@@ -341,7 +341,7 @@
             "type": "Select",
             "container": "editionCounts",
             "position": 2,
-            "title": "W ilu edycjach SZLACHETNEJ PACZKI brałeś udział",
+            "title": "W ilu edycjach programu SZLACHETNA PACZKA brałeś/aś udział?",
             "state": 0,
             "save": true,
             "dataSet": {
@@ -362,7 +362,7 @@
             "type": "Select",
             "container": "editionCounts",
             "position": 3,
-            "title": "W ilu edycjach AKADEMII PRZYSZŁOŚCI brałeś udział",
+            "title": "W ilu edycjach programu AKADEMIA PRZYSZŁOŚCI brałeś/aś udział?",
             "state": 0,
             "save": true,
             "dataSet": {
@@ -384,7 +384,7 @@
             "container": "repeatableQuestion",
             "position": 1,
             "title": "",
-            "description": "Wskaż jakie role do tej pory pełniłeś/aś w naszych programach SZLECHETNA PACZKA i/lub AKADEMIA PRZYSZŁOŚCI. Używając znaku + możesz dodawać kolejne role.",
+            "description": "Wskaż jakie role do tej pory pełniłeś/pełniłaś w naszych programach: SZLECHETNA PACZKA i/lub AKADEMIA PRZYSZŁOŚCI. Używając znaku + możesz dodawać kolejne role.",
             "state": 0,
             "save": true,
             "dataSet": {
@@ -400,7 +400,7 @@
             "type": "RadioList",
             "container": "radaQuestion1",
             "position": 1,
-            "title": "Jakim członkiem rady chciałabyś/chciałbyś zostać?",
+            "title": "Rola, którą chcesz pełnić w Radzie Wojewódzkiej?",
             "state": 0,
             "save": true,
             "dataSet": {
@@ -423,13 +423,25 @@
 
 
 
-
-
+        "openFile1": {
+            "type": "FileUpload",
+            "container": "bigFormFront2before",
+            "position": 1,
+            "title": "Opisz najbardziej rozwojowe doświadczenie w Twoim życiu. Zastanów się, jak wpłynęło ono na Ciebie. Jakie wnioski wyciągasz dla siebie i dlaczego to właśnie to doświadczenie/wydarzenie jest dla Ciebie ważne? Załącz zadanie na ok. 1 stronę A4 w formacie PDF.",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
         "openWhyRada": {
             "type": "TextArea",
             "container": "radaQuestion2",
             "position": 1,
-            "title": "Dlaczego chcesz zostać członkiem Rady?",
+            "title": "Dlaczego chcesz zostać członkiem Rady Wojewódzkiej?",
             "state": 0,
             "save": true,
             "validationPHP":
@@ -467,6 +479,20 @@
                 }
             ]
         },
+        "openDreaming": {
+            "type": "TextArea",
+            "container": "bigFormFront2after",
+            "position": 2,
+            "title": "Wyobraź sobie siebie za 5 lat. Gdzie jesteś? Jakim jesteś człowiekiem? Czym zajmujesz się na co dzień? Z czego jesteś dumny/a?",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
 
 
 
@@ -481,7 +507,7 @@
             "type": "SelectWithTextfield",
             "container": "bigFormFront3",
             "position": 1,
-            "title": "Czym się zajmujesz",
+            "title": "Czym się zajmujesz?*",
             "state": 0,
             "save": true,
             "dataSet": {
@@ -502,7 +528,8 @@
             "type": "Select",
             "container": "bigFormFront3",
             "position": 2,
-            "title": "Wyształcenie",
+            "title": "Wyształcenie*",
+            "description": "(UWAGA: Jeśli jesteś uczniem/studentem kończącym ten etap swojego życia, zaznacz status, który określi to, czym będziesz się zajmować od października).",
             "state": 0,
             "save": true,
             "dataSet": {
@@ -518,6 +545,21 @@
                     "method": "NotEmpty"
                 }
             ]
+        },
+        "openFile1": {
+            "type": "FileUpload",
+            "container": "bigFormFront3",
+            "position": 3,
+            "title": "CV",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+
         },
         "skille": {
             "type": "DropdownCheckboxes",
@@ -1126,6 +1168,13 @@
             "position": 4,
             "displayType": "Button1",
             "title": "Dalej"
+        },
+        "bigFormFront2before": {
+            "site": 1,
+            "container": "SiteBigForm1",
+            "position": 1,
+            "displayType": "SectionDisplay",
+            "title": ""
         },
         "bigFormFront2after": {
             "site": 1,
