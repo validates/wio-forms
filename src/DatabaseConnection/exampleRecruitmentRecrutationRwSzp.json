@@ -88,6 +88,11 @@
             "data": false,
             "class": "WioStructProvinceData"
         },
+        "wioStructProvinceSZP": {
+            "type": "foreign",
+            "data": false,
+            "class": "WioStructProvinceSZPData"
+        },
         "type" : {
             "type": "local",
             "data": {
@@ -308,14 +313,35 @@
         },
         "province":
         {
-            "type": "NodeSelect",
+            "type": "Select",
             "container": "dataForm",
             "position": 3,
             "title": "Wybrane Województwo",
             "state": 0,
             "save": true,
             "dataSet": {
-                "repositoryName": "wioStruct"
+                "repositoryName": "wioStructProvince"
+            },
+            "class": {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            },
+      	    "defaultValue": {
+      	    	  "repositoryName": "recruitment",
+      		      "subset": ["wio_struct_node_id"]
+      	    }
+        },
+        "region":
+        {
+            "type": "Select",
+            "container": "dataForm",
+            "position": 4,
+            "title": "Wybrany region",
+            "state": 0,
+            "save": true,
+            "disabled": true,
+            "dataSet": {
+                "repositoryName": "wioStructProvince"
             },
             "class": {
                 "wrapper": "edititem half-l",
@@ -351,12 +377,17 @@
             "state": 0,
             "save": true,
             "dataSet": {
-                "repositoryName": "wioStructProvince"
+                "repositoryName": "wioStructProvinceSZP"
             },
             "class" : {
                 "wrapper": "edititem half-r",
                 "input" : "veryLong wypisz"
+            },
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["wio_struct_given_node_id"]
             }
+
         },
         "type":
         {
@@ -416,13 +447,13 @@
             "DatabaseSaves": [
                 {
                     "type": "update",
+                    "tableName": "wio_flow_entities",
                     "where" : {
                         "wio_user_id": {
                             "type": "field",
                             "field": "userId"
                         }
                     },
-                    "tableName": "wio_flow_entities",
                     "fields": {
                         "flow_status": {
                             "type": "field",
@@ -432,13 +463,13 @@
                 },
                 {
                     "type": "update",
+                    "tableName": "recrutation_roles",
                     "where" : {
                         "wio_flow_entity_id": {
                             "type": "field",
                             "field": "wioFlowEnityId"
                         }
                     },
-                    "tableName": "recrutation_roles",
                     "fields": {
                         "program_short_name": {
                             "type": "field",
@@ -456,13 +487,33 @@
                 },
                 {
                     "type": "update",
+                    "tableName": "recrutation_areas",
+                    "where" : {
+                        "wio_flow_entity_id": {
+                            "type": "field",
+                            "field": "wioFlowEnityId"
+                        }
+                    },
+                    "fields": {
+                        "wio_struct_node_id": {
+                            "type": "field",
+                            "field": "province"
+                        },
+                        "wio_struct_given_node_id": {
+                            "type": "field",
+                            "field": "council_province"
+                        }
+                    }
+                },
+                {
+                    "type": "update",
+                    "tableName": "user_basic_data",
                     "where" : {
                         "wio_user_id": {
                             "type": "field",
                             "field": "userId"
                         }
                     },
-                    "tableName": "user_basic_data",
                     "fields": {
                         "name": {
                             "type": "field",
@@ -484,41 +535,13 @@
                 },
                 {
                     "type": "update",
-                    "where" : {
-                        "wio_user_id": {
-                            "type": "field",
-                            "field": "userId"
-                        }
-                    },
-                    "tableName": "user_basic_data",
-                    "fields": {
-                        "name": {
-                            "type": "field",
-                            "field": "name"
-                        },
-                        "surname": {
-                            "type": "field",
-                            "field": "surname"
-                        },
-                        "gender": {
-                            "type": "field",
-                            "field": "gender"
-                        },
-                        "birth_date": {
-                            "type": "field",
-                            "field": "birth_date"
-                        }
-                    }
-                },
-                {
-                    "type": "update",
+                    "tableName": "wio_users",
                     "where" : {
                         "id": {
                             "type": "field",
                             "field": "userId"
                         }
                     },
-                    "tableName": "wio_users",
                     "fields": {
                         "email": {
                             "type": "field",

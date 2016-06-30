@@ -74,17 +74,6 @@
                 "KdsP": "Koordynator ds. Promocji"
             }
         },
-        "otherRolesSZP": {
-            "type": "local",
-            "data": {
-                "ZKW": "Zastępca Koordynatora Wojewódzkiego",
-                "KR": "Koordynator Regionalny",
-                "KdsL": "Koordynator ds. Logistyki",
-                "KdsW": "Koordynator ds. Wdrożeń",
-                "KdsP": "Koordynator ds. Promocji",
-                "KdsWL": "Koordynator ds. Współpracy Lokalnej"
-            }
-        },
         "engagement": {
             "type": "local",
             "data": {
@@ -114,20 +103,20 @@
         "infoSource": {
             "type": "local",
             "data": {
-                "z portalu z ogłoszeniami o pracy": "select",
-                "ze spotkania z przedstawicielem SZLACHETNEJ PACZKI": "select",
-                "od znajomego, który wcześniej był w Paczce": "select",
-                "w firmie, w której pracuj": "select",
-                "z portalu facebook.pl": "select",
-                "z newslettera od Stowarzyszenia Wiosna": "select",
-                "z innego newslettera": "select",
-                "z artykułu w internecie": "select",
-                "z artykułu w prasie": "select",
-                "z radia": "select",
-                "z telewizji": "select",
-                "z reklamy w internecie": "select",
-                "z plakatu lub ulotki": "select",
-                "z innego źródła – jakiego?": "textfield"
+                "1": "z portalu z ogłoszeniami o pracy",
+                "2": "ze spotkania z przedstawicielem SZLACHETNEJ PACZKI",
+                "3": "od znajomego, który wcześniej był w Paczce",
+                "4": "w firmie, w której pracuj",
+                "5": "z portalu facebook.pl",
+                "6": "z newslettera od Stowarzyszenia Wiosna",
+                "7": "z innego newslettera",
+                "8": "z artykułu w internecie",
+                "9": "z artykułu w prasie",
+                "10": "z radia",
+                "11": "z telewizji",
+                "12": "z reklamy w internecie",
+                "13": "z plakatu lub ulotki",
+                "-1": "z innego źródła – jakiego?"
             }
         },
         "skille": {
@@ -136,115 +125,27 @@
             {
                 "Public Relations":
                 [
-                    "tworzenie streategii kampani PR(marki, wizerunku)",
-                    "przeprowadzanie kampanii PR",
-                    "obsługa mediów",
-                    "praca w mediach (radio, tv, internet, prasa)",
-                    "umiejętność pisania tekstów",
-                    "planowanie i organizacja eventów",
-                    "obsługa social mediów"
+                    "tworzenie strategii kapmani PR(marki, wizerunku)",
+                    "przeprowadzanie kampani PR",
+                    "obsługa mediów"
                 ],
                 "Marketing":
                 [
-                    "znajomość Google AdWORDS oraz Google Analytics",
                     "obsługa cms",
                     "pozycjonowanie stron internetowych",
-                    "przeprowadzanie badań marketingowych",
-                    "media planning",
-                    "obsługa systemów newsletterowych"
+                    "media planning"
                 ],
                 "Grafika":
                 [
                     "umiejętność obsługi programów graficznych: Photoshop, indesign, Corel, Illustrator",
                     "umiejętność tworzenia animacji Flash",
-                    "umiejętność przygotowania projektu do druku",
-                    "umiejętność projektowania serwisów WWW",
-                    "szeroka wiedza z zakresu projektowania i usability"
-                ],
-                "Obsługa klienta/Fundraising":
-                [
-                    "prowadzenie negocjacji",
-                    "konstruowanie ofert i prezentacji biznesowych",
-                    "pozyskiwanie sponsorów",
-                    "realizacja wskaźników sprzedażowych"
+                    "umiejętność przygotowania projektu do druku"
                 ],
                 "Finanse i księgowość":
                 [
-                    "analizowanie kosztów i przychodów",
-                    "sporządzania sprawozdań finansowych",
+                    "analiza kosztów i przychodów",
                     "tworzenie budżetów",
-                    "sporządzanie dokumentów kadrowych",
-                    "prowadzenie rozliczeń z ZUS i US",
-                    "tworzenie i obsługa systemu zatrudniania i wynagradzania",
-                    "obsługa systemu księgowania",
-                    "obsługa programu Enova"
-                ],
-                "IT":
-                [
-                    "programowanie w języku (C#/PHP/xHTML/Zapytań SQL)",
-                    "budowanie stron przy użyciu stylów CSS",
-                    "projektowanie kostek OLAP na platformie Microsoft",
-                    "budowanie raportów i zapytań z wykorzystaniem Reporting Servieces",
-                    "budowanie aplikacji na platformę Android",
-                    "projektowanie witryn Sharepoint",
-                    "administrowanie serwerami i usługami",
-                    "znajomość pakietu MS Office na poziomie zaawansowanym wraz z tworzeniem aplikacji i makr automatyzujących",
-                    "diagnozowanie problemów w systemach IT",
-                    "znajomości sprzętu komputerowego i peryferyjnego"
-                ],
-                "Pozyskiwanie funduszy z UE oraz grantów":
-                [
-                    "monitoring konkursów grantowych",
-                    "pisanie projektów/wniosków o dofinansowanie",
-                    "tworzenie budżetu",
-                    "umiejętność rozliczania grantów",
-                    "wdrażanie i realizacja projektów"
-                ],
-                "Human Resources":
-                [
-                    "diagnozowanie kompetencji/potencjału",
-                    "rekrutacja",
-                    "oceny pracownicze",
-                    "tworzenie systemów wynagrodzeń",
-                    "komunikacja wewnętrzna",
-                    "prawo pracy",
-                    "employer branding",
-                    "zarządzanie talentami"
-                ],
-                "Szkolenia":
-                [
-                    "identyfikacja i analiza potrzeb szkoleniowych",
-                    "projektowanie szkoleń",
-                    "prowadzenie szkoleń",
-                    "ewaluacja procesu szkoleniowego",
-                    "organizacja logistyczna szkoleń"
-                ],
-                "Zarządzanie projektem":
-                [
-                    "tworzenie i wdrażanie strategii",
-                    "realizacja wskaźników ilościowych i jakościowych",
-                    "zarządzanie zespołem",
-                    "ewaluacja działań"
-                ],
-                "Logistyka":
-                [
-                    "organizacja logistyki szkoleń/eventów",
-                    "organizacja magazynów",
-                    "organizacja wysyłek",
-                    "współpraca z firmami zewnętrznymi"
-                ],
-                "Administracja":
-                [
-                    "rozliczanie kosztów",
-                    "zarządzanie obiegiem dokumentów",
-                    "obsługa kanałów informacyjnych",
-                    "redagowanie treści dokumentów"
-                ],
-                "Praca socjalna":
-                [
-                    "wiedza na temat psychologicznych mechanizmów biedy",
-                    "wiedza na temat zasiłków, programów pomocowych dostępnych w Polsce",
-                    "umiejętność przeprowadzania wywiadów kierowanych (zdobywanie informacji o sytuacji życiowej rodziny)"
+                    "prowadzenie rozliczeń z ZUS i US"
                 ],
                 "Znajomość języków obcych":
                 [
@@ -274,9 +175,6 @@
     "FieldValidatorsPHP": {
         "NotEmpty": {
             "class": "NotEmpty"
-        },
-        "Pesel": {
-            "class": "Pesel"
         }
     },
     "ContainerValidatorsPHP": {
@@ -556,9 +454,6 @@
             "validationPHP":
             [
                 {
-                    "method": "Pesel"
-                },
-                {
                     "method": "NotEmpty"
                 }
             ]
@@ -651,7 +546,7 @@
             ]
         },
         "infoSource": {
-            "type": "SelectWithTextfield",
+            "type": "Select",
             "container": "bigFormFront4",
             "position": 8,
             "title": "Skąd dowiedziałeś się o procesie rekrutacji?",
@@ -741,7 +636,7 @@
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "Zadanie wraz z pytaniami pogłębiającymi",
+            "title": "Zadania",
             "validationPHP":
             [
                 {
@@ -860,7 +755,7 @@
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "Doświadczenie, wykształcenie i kompetencje",
+            "title": "Doświadczenie",
             "validationPHP":
             [
                 {
@@ -987,7 +882,7 @@
             "container": "SiteBigForm0",
             "position": 3,
             "displayType": "SectionDisplay",
-            "title": "Wybór roli",
+            "title": "",
             "validationPHP":
             [
                 {
@@ -1146,7 +1041,7 @@
             "container": "SiteBigForm2",
             "position": 1,
             "displayType": "SectionDisplay",
-            "title": ""
+            "title": "Doświadczenie"
         },
         "SubmitButton3": {
             "site": 2,
@@ -1160,7 +1055,7 @@
             "container": "SiteBigForm3",
             "position": 1,
             "displayType": "SectionDisplay",
-            "title": ""
+            "title": "Metryczka"
         },
         "SubmitButton4": {
             "site": 3,

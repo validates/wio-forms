@@ -77,6 +77,11 @@
             "data": false,
             "class": "WioStructProvinceData"
         },
+        "wioStructProvinceSZP": {
+            "type": "foreign",
+            "data": false,
+            "class": "WioStructProvinceSZPData"
+        },
         "type" : {
             "type": "local",
             "data": {
@@ -297,14 +302,32 @@
         },
         "province":
         {
-            "type": "NodeSelect",
+            "type": "Select",
             "container": "dataForm",
             "position": 3,
             "title": "Wybrane Województwo",
             "state": 0,
             "save": true,
+            "disabled": true,
             "dataSet": {
-                "repositoryName": "wioStruct"
+                "repositoryName": "wioStructProvince"
+            },
+            "class": {
+                "wrapper": "edititem half-l",
+                "input" : "veryLong wypisz"
+            }
+        },
+        "region":
+        {
+            "type": "Select",
+            "container": "dataForm",
+            "position": 4,
+            "title": "Wybrany region",
+            "state": 0,
+            "save": true,
+            "disabled": true,
+            "dataSet": {
+                "repositoryName": "wioStructProvince"
             },
             "class": {
                 "wrapper": "edititem half-l",
@@ -319,8 +342,9 @@
             "title": "Województwo rady",
             "state": 0,
             "save": true,
+            "disabled": true,
             "dataSet": {
-                "repositoryName": "wioStructProvince"
+                "repositoryName": "wioStructProvinceSZP"
             },
             "class" : {
                 "wrapper": "edititem half-r",
@@ -359,7 +383,7 @@
                     "subset": ["wanted_area_id"]
                 }
             },
-            "label": "Rejon ze zgłoszenia",
+            "label": "Rejon ze zgłoszenia: ",
             "titleSet" : {
                 "repositoryName": "recruitment",
                 "subset": ["wanted_area_name"]
@@ -380,7 +404,7 @@
                     "subset": ["assigned_area_id"]
                 }
             },
-            "label": "Rejon, w którym będzie działał",
+            "label": "Rejon, w którym będzie działał: ",
             "titleSet" : {
                 "repositoryName": "recruitment",
                 "subset": ["assigned_area_name"]
@@ -543,13 +567,13 @@
                 },
                 {
                     "type": "update",
+                    "tableName": "user_basic_data",
                     "where" : {
                         "wio_user_id": {
                             "type": "field",
                             "field": "userId"
                         }
                     },
-                    "tableName": "user_basic_data",
                     "fields": {
                         "name": {
                             "type": "field",
@@ -571,35 +595,7 @@
                 },
                 {
                     "type": "update",
-                    "where" : {
-                        "wio_user_id": {
-                            "type": "field",
-                            "field": "userId"
-                        }
-                    },
-                    "tableName": "user_basic_data",
-                    "fields": {
-                        "name": {
-                            "type": "field",
-                            "field": "name"
-                        },
-                        "surname": {
-                            "type": "field",
-                            "field": "surname"
-                        },
-                        "gender": {
-                            "type": "field",
-                            "field": "gender"
-                        },
-                        "birth_date": {
-                            "type": "field",
-                            "field": "birth_date"
-                        }
-                    }
-                },
-                {
-                    "type": "update",
-                    "where" : {
+                    "where": {
                         "id": {
                             "type": "field",
                             "field": "userId"
