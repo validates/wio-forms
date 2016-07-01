@@ -89,6 +89,16 @@
                 "2": "Weteran",
                 "3": "Awansowany"
             }
+        },
+        "availableRegions": {
+            "type": "foreign",
+            "data": false,
+            "class": "WioStructAvailableSzPRegions"
+        }
+    },
+    "FormSavers": {
+        "ChangeLpSzPStatus": {
+            "class": "ChangeLpSzPStatus"
         }
     },
     "FieldValidatorsJS": {},
@@ -394,24 +404,25 @@
         },
         "assigned_area":
         {
-            "type": "Link",
+            "type": "Select",
             "container": "dataForm",
             "position": 8,
-            "url": "http://superw.pl/linkdoregionu/$1",
-            "paramSet": {
-                "$1": {
-                    "repositoryName": "recruitment",
-                    "subset": ["assigned_area_id"]
-                }
-            },
-            "label": "Rejon, w którym będzie działał: ",
-            "titleSet" : {
-                "repositoryName": "recruitment",
-                "subset": ["assigned_area_name"]
-            },
+            "title": "Rejon działania",
             "state": 0,
-            "save": false,
-            "class": ""
+            "save": true,
+            "dataSet": {
+                "repositoryName": "availableRegions"
+            },
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": [
+                    "active_region"
+                ]
+            },
+            "class": {
+                "wrapper": "edititem half-l",
+                "input": "veryLong wypisz"
+            }
         },
         "senior_program":
         {
@@ -607,6 +618,13 @@
                             "type": "field",
                             "field": "email"
                         }
+                    }
+                }
+            ],
+            "MethodSaves": [
+                {
+                    "method": "ChangeLpSzPStatus",
+                    "settings": {
                     }
                 }
             ]
