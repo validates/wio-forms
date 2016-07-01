@@ -16,6 +16,7 @@ class WioStructAPNodes extends AbstractDataRepository
 
         $this->addNodesByType($wioStruct, 'województwo', 'province');
         $this->addNodesByType($wioStruct, 'szkoła', 'school');
+
         $apCities = $wioStruct->structQuery(
             (new StructDefinition())
                 ->networkName('administrative')
