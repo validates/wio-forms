@@ -47,7 +47,7 @@ class WioFlowUserNodes extends AbstractDataRepository
 
                 if ($nodeU != null) {
                     $data['city'] = $primaryNode;
-                    $nodeU = $wioStruct->structQuery( (new StructDefinition())->nodeTypeId($wojType)
+                    $nodeU = $wioStruct->structQuery((new StructDefinition())->nodeTypeId($wojType)
                         ->linkChildren((new StructDefinition())->nodeId($primaryNode))
                     )->get('Node');
 

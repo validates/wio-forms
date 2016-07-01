@@ -359,11 +359,6 @@
             "save": true,
             "disabled": true,
             "dataSet": {
-                "repositoryName": "wioStructAPNodes",
-                "subset": ["province"],
-                "heyThatIs": "goodVersionOf: dataSet, next one is a fast fix"
-            },
-            "dataSet": {
                 "repositoryName": "wioStructProvince"
             },
             "defaultValue":{
