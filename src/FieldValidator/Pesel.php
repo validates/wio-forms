@@ -9,7 +9,7 @@ class Pesel extends AbstractFieldValidator
         $this->invalidMessage = 'pesel_invalid';
 
 
-        $weightTable = [1,3,7,9,1,3,7,9,1,3];
+        $weightTable = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
 
         if (!is_numeric($value)) {
             $this->valid = false;
@@ -17,13 +17,13 @@ class Pesel extends AbstractFieldValidator
             $this->valid = false;
         } else {
             $sum = 0;
-            for ($i=0; $i<10; ++$i) {
-                $sum += $value[$i]*$weightTable[$i];
+            for ($i = 0; $i < 10; ++$i) {
+                $sum += $value[$i] * $weightTable[$i];
             }
 
-            $control = $sum%10;
+            $control = $sum % 10;
             if ($control != 0) {
-                $control = 10-$control;
+                $control = 10 - $control;
             }
 
             if ($control == $value[10]) {
@@ -31,7 +31,6 @@ class Pesel extends AbstractFieldValidator
             } else {
                 $this->valid = false;
             }
-
         }
 
         $this->setAnswer();

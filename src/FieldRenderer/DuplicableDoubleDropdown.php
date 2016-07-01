@@ -26,7 +26,7 @@ class DuplicableDoubleDropdown extends AbstractFieldRenderer
         }
 
         if (count($valueTab) == 0) {
-            $valueTab[]= '-';
+            $valueTab[] = '-';
         }
 
         foreach ($valueTab as $programRoleName) {

@@ -22,7 +22,6 @@ class WioFlowUserNodes extends AbstractDataRepository
             ->where('wio_users.id', '=', $userId)
             ->first();
 
-
         $primaryNode = $queryResult["wio_struct_node_id"];
         $givenNode = $queryResult["wio_struct_given_node_id"];
 
@@ -40,16 +39,16 @@ class WioFlowUserNodes extends AbstractDataRepository
         ];
 
         if ($primaryNode > 0) {
-            $nodeU = $wioStruct->structQuery( (new StructDefinition())->nodeId($primaryNode)->nodeTypeId($wojType) )->get('Node');
+            $nodeU = $wioStruct->structQuery((new StructDefinition())->nodeId($primaryNode)->nodeTypeId($wojType))->get('Node');
             if ($nodeU != null) {
                 $data['province'] = $primaryNode;
             } else {
-                $nodeU = $wioStruct->structQuery( (new StructDefinition())->nodeId($primaryNode)->nodeTypeId($miastoType) )->get('Node');
+                $nodeU = $wioStruct->structQuery((new StructDefinition())->nodeId($primaryNode)->nodeTypeId($miastoType))->get('Node');
 
                 if ($nodeU != null) {
                     $data['city'] = $primaryNode;
                     $nodeU = $wioStruct->structQuery( (new StructDefinition())->nodeTypeId($wojType)
-                        ->linkChildren( (new StructDefinition())->nodeId($primaryNode) )
+                        ->linkChildren((new StructDefinition())->nodeId($primaryNode))
                     )->get('Node');
 
                     if ($nodeU != null) {
@@ -60,16 +59,16 @@ class WioFlowUserNodes extends AbstractDataRepository
         }
 
         if ($givenNode > 0) {
-            $nodeU = $wioStruct->structQuery( (new StructDefinition())->nodeId($givenNode)->nodeTypeId($wojType) )->get('Node');
+            $nodeU = $wioStruct->structQuery((new StructDefinition())->nodeId($givenNode)->nodeTypeId($wojType))->get('Node');
             if ($nodeU != null) {
                 $data['given_province'] = $givenNode;
             } else {
-                $nodeU = $wioStruct->structQuery( (new StructDefinition())->nodeId($givenNode)->nodeTypeId($miastoType) )->get('Node');
+                $nodeU = $wioStruct->structQuery((new StructDefinition())->nodeId($givenNode)->nodeTypeId($miastoType))->get('Node');
 
                 if ($nodeU != null) {
                     $data['given_city'] = $givenNode;
-                    $nodeU = $wioStruct->structQuery( (new StructDefinition())->nodeTypeId($wojType)
-                        ->linkChildren( (new StructDefinition())->nodeId($givenNode) )
+                    $nodeU = $wioStruct->structQuery((new StructDefinition())->nodeTypeId($wojType)
+                        ->linkChildren((new StructDefinition())->nodeId($givenNode))
                     )->get('Node');
 
                     if ($nodeU != null) {
