@@ -10,7 +10,7 @@
             "class": "WioFlowCurrentUserData",
             "data": false
         },
-        "wioFlowEnityId": {
+        "wioFlowEntityId": {
             "type": "foreign",
             "class": "WioFlowEntityData",
             "data": false,
@@ -67,7 +67,7 @@
                 "userId": "userId"
             }
         },
-        "wioFlowUserNodes": {
+        "WioFlowUserNodes": {
             "type": "foreign",
             "class": "WioFlowUserNodes",
             "data": false,
@@ -121,7 +121,7 @@
                 "repositoryName": "userId"
             }
         },
-        "wioFlowEnityId": {
+        "wioFlowEntityId": {
             "type": "Hidden",
             "container": "recruitmentForm",
             "position": 100,
@@ -129,7 +129,7 @@
             "state": 0,
             "save": true,
             "defaultValue": {
-                "repositoryName": "wioFlowEnityId"
+                "repositoryName": "wioFlowEntityId"
             }
         },
         "status": {
@@ -320,8 +320,8 @@
             "dataSet": {
                 "repositoryName": "wioStructProvince"
             },
-            "defaultValue": {
-                "repositoryName": "recruitment",
+            "defaultValue":{
+                "repositoryName": "WioFlowUserNodes",
                 "subset": ["province"]
             },
             "class": {
@@ -360,13 +360,17 @@
             "disabled": true,
             "dataSet": {
                 "repositoryName": "wioStructAPNodes",
-                "subset": ["province"]
+                "subset": ["province"],
+                "heyThatIs": "goodVersionOf: dataSet, next one is a fast fix"
             },
-            "defaultValue": {
-                "repositoryName": "recruitment",
-                "subset": ["active_province"]
+            "dataSet": {
+                "repositoryName": "wioStructProvince"
             },
-            "class" : {
+            "defaultValue":{
+                "repositoryName": "WioFlowUserNodes",
+                "subset": ["given_province"]
+            },
+            "class": {
                 "wrapper": "edititem half-r",
                 "input" : "veryLong wypisz"
             }
@@ -384,8 +388,8 @@
                 "subset": ["city"]
             },
             "defaultValue":{
-                "repositoryName": "recruitment",
-                "subset": ["wio_struct_node_id"]
+                "repositoryName": "WioFlowUserNodes",
+                "subset": ["given_city"]
             },
             "class" : {
                 "wrapper": "edititem half-r",
@@ -481,13 +485,13 @@
             "DatabaseSaves": [
                 {
                     "type": "update",
+                    "tableName": "wio_flow_entities",
                     "where" : {
                         "wio_user_id": {
                             "type": "field",
                             "field": "userId"
                         }
                     },
-                    "tableName": "wio_flow_entities",
                     "fields": {
                         "flow_status": {
                             "type": "field",
@@ -497,13 +501,39 @@
                 },
                 {
                     "type": "update",
+                    "tableName": "recrutation_areas",
+                    "validationPHP":[
+                        {
+                            "type": "logic",
+                            "logicEquation":
+                            {
+                                "type": "isValidField",
+                                "field": "city"
+                            }
+                        }
+                    ],
+                    "where": {
+                        "wio_flow_entity_id": {
+                            "type": "field",
+                            "field": "wioFlowEntityId"
+                        }
+                    },
+                    "fields": {
+                        "wio_struct_given_node_id":{
+                            "type": "field",
+                            "field": "city"
+                        }
+                    }
+                },
+                {
+                    "type": "update",
+                    "tableName": "recrutation_roles",
                     "where" : {
                         "wio_flow_entity_id": {
                             "type": "field",
-                            "field": "wioFlowEnityId"
+                            "field": "wioFlowEntityId"
                         }
                     },
-                    "tableName": "recrutation_roles",
                     "fields": {
                         "program_short_name": {
                             "type": "field",
@@ -545,13 +575,13 @@
                 },
                 {
                     "type": "update",
+                    "tableName": "wio_users",
                     "where": {
                         "id": {
                             "type": "field",
                             "field": "userId"
                         }
                     },
-                    "tableName": "wio_users",
                     "fields": {
                         "email": {
                             "type": "field",
