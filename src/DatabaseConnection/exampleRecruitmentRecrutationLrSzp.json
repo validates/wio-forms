@@ -77,6 +77,11 @@
             "data": false,
             "class": "WioStructProvinceData"
         },
+        "wioStructProvinceSZP": {
+            "type": "foreign",
+            "data": false,
+            "class": "WioStructProvinceSZPData"
+        },
         "type" : {
             "type": "local",
             "data": {
@@ -313,6 +318,7 @@
             "title": "Wybrane Województwo",
             "state": 0,
             "save": true,
+            "disabled": true,
             "dataSet": {
                 "repositoryName": "wioStructProvince"
             },
@@ -346,8 +352,9 @@
             "title": "Województwo rady",
             "state": 0,
             "save": true,
+            "disabled": true,
             "dataSet": {
-                "repositoryName": "wioStructProvince"
+                "repositoryName": "wioStructProvinceSZP"
             },
             "class" : {
                 "wrapper": "edititem half-r",
@@ -452,7 +459,7 @@
                 "repositoryName": "recruitment",
                 "subset": ["lawyer_program"]
             },
-            "class" : {
+            "class": {
                 "wrapper": "edititem half-l",
                 "input" : "veryLong wypisz"
             }
@@ -534,6 +541,7 @@
             "databaseConnection": "Main",
             "DatabaseSaves": [
                 {
+                  "tableName": "wio_flow_entities",
                     "type": "update",
                     "where" : {
                         "wio_user_id": {
@@ -541,7 +549,6 @@
                             "field": "userId"
                         }
                     },
-                    "tableName": "wio_flow_entities",
                     "fields": {
                         "flow_status": {
                             "type": "field",
@@ -551,13 +558,13 @@
                 },
                 {
                     "type": "update",
+                    "tableName": "recrutation_roles",
                     "where" : {
                         "wio_flow_entity_id": {
                             "type": "field",
                             "field": "wioFlowEnityId"
                         }
                     },
-                    "tableName": "recrutation_roles",
                     "fields": {
                         "program_short_name": {
                             "type": "field",
@@ -571,13 +578,13 @@
                 },
                 {
                     "type": "update",
+                    "tableName": "user_basic_data",
                     "where" : {
                         "wio_user_id": {
                             "type": "field",
                             "field": "userId"
                         }
                     },
-                    "tableName": "user_basic_data",
                     "fields": {
                         "name": {
                             "type": "field",
@@ -599,41 +606,13 @@
                 },
                 {
                     "type": "update",
-                    "where" : {
-                        "wio_user_id": {
-                            "type": "field",
-                            "field": "userId"
-                        }
-                    },
-                    "tableName": "user_basic_data",
-                    "fields": {
-                        "name": {
-                            "type": "field",
-                            "field": "name"
-                        },
-                        "surname": {
-                            "type": "field",
-                            "field": "surname"
-                        },
-                        "gender": {
-                            "type": "field",
-                            "field": "gender"
-                        },
-                        "birth_date": {
-                            "type": "field",
-                            "field": "birth_date"
-                        }
-                    }
-                },
-                {
-                    "type": "update",
-                    "where" : {
+                    "tableName": "wio_users",
+                    "where": {
                         "id": {
                             "type": "field",
                             "field": "userId"
                         }
                     },
-                    "tableName": "wio_users",
                     "fields": {
                         "email": {
                             "type": "field",

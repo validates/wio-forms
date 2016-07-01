@@ -189,4 +189,6 @@ form.wioForms_Form fieldset{
 
 .wioForms_Form ul.wioForms_RadioList li {}
 
-.wioForms_Form ul.wioForms_RadioList input[type=checkbox] {}
+.wioForms_Form ul.wioForms_RadioList input[type=radio] {
+    width: 40px;
+}

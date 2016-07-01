@@ -39,6 +39,8 @@ class LogicEquation
                 $result = $this->getConst($sentence); break;
             case 'equal':
                 $result = $this->getEqual($sentence); break;
+            case 'notEqual':
+                $result = $this->getNotEqual($sentence); break;
             case 'and':
                 $result = $this->getAnd($sentence); break;
             case 'or':
@@ -91,6 +93,19 @@ class LogicEquation
         for ($i = 1; $i < count($sentence['data']); ++$i) {
             if ($sentence['data'][$i] != $sentence['data'][($i - 1)]) {
                 $result = false;
+                break;
+            }
+        }
+
+        return $result;
+    }
+
+    private function getNotEqual($sentence)
+    {
+        $result = false;
+        for ($i = 1; $i < count($sentence['data']); ++$i) {
+            if ($sentence['data'][$i] != $sentence['data'][($i - 1)]) {
+                $result = true;
                 break;
             }
         }

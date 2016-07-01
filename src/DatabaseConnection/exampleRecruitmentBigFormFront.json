@@ -13,19 +13,19 @@
                 "userId": "userId"
             }
         },
-        "editionCounter" : {
+        "editionCounter": {
             "type": "local",
-            "data" : {
-                "zadna" : "W żadnej",
-                "jedna" : "W jednej",
-                "dwie" : "W dwóch",
-                "trzy_lub_wiecej" : "W trzech lub więcej"
+            "data": {
+                "zadna": "W żadnej",
+                "jedna": "W jednej",
+                "dwie": "W dwóch",
+                "trzy_lub_wiecej": "W trzech lub więcej"
             }
         },
         "roles": {
             "type": "local",
             "data": {
-                "Szlachetna Paczka" : [
+                "Szlachetna Paczka": [
                     "Koordynatora Wojewódzkiego",
                     "Koordynatora Regionalnego",
                     "Pomocnika ds. Rekrutacji",
@@ -47,7 +47,7 @@
                     "Młodszego Specjalisty ds. Opisów",
                     "Asystenta ds. Wdrożeń"
                 ],
-                "Akademia Przyszłości" : [
+                "Akademia Przyszłości": [
                     "Koordynatora Wojewódzkiego",
                     "Asystenta Koordynatora Wojewódzkiego",
                     "Koordynatora ds. Wdrożeń",
@@ -74,7 +74,7 @@
                 "KdsP": "Koordynator ds. Promocji"
             }
         },
-        "engagement" : {
+        "engagement": {
             "type": "local",
             "data": {
                 "uczę się": "select",
@@ -85,14 +85,14 @@
                 "inne": "textfield"
             }
         },
-        "education" : {
+        "education": {
             "type": "local",
             "data": {
-                "1" : "podstawowe",
-                "2" : "zawodowe",
-                "3" : "średnie techniczne",
-                "4" : "średnie ogólnokształcące",
-                "5" : "wyższe"
+                "1": "podstawowe",
+                "2": "zawodowe",
+                "3": "średnie techniczne",
+                "4": "średnie ogólnokształcące",
+                "5": "wyższe"
             }
         },
         "wioStructProvince": {
@@ -100,23 +100,23 @@
             "data": false,
             "class": "WioStructProvinceData"
         },
-        "infoSource" : {
+        "infoSource": {
             "type": "local",
             "data": {
-                "1" : "z portalu z ogłoszeniami o pracy",
-                "2" : "ze spotkania z przedstawicielem SZLACHETNEJ PACZKI",
-                "3" : "od znajomego, który wcześniej był w Paczce",
-                "4" : "w firmie, w której pracuj",
-                "5" : "z portalu facebook.pl",
-                "6" : "z newslettera od Stowarzyszenia Wiosna",
-                "7" : "z innego newslettera",
-                "8" : "z artykułu w internecie",
-                "9" : "z artykułu w prasie",
-                "10" : "z radia",
-                "11" : "z telewizji",
-                "12" : "z reklamy w internecie",
-                "13" : "z plakatu lub ulotki",
-                "-1" : "z innego źródła – jakiego?"
+                "1": "z portalu z ogłoszeniami o pracy",
+                "2": "ze spotkania z przedstawicielem SZLACHETNEJ PACZKI",
+                "3": "od znajomego, który wcześniej był w Paczce",
+                "4": "w firmie, w której pracuj",
+                "5": "z portalu facebook.pl",
+                "6": "z newslettera od Stowarzyszenia Wiosna",
+                "7": "z innego newslettera",
+                "8": "z artykułu w internecie",
+                "9": "z artykułu w prasie",
+                "10": "z radia",
+                "11": "z telewizji",
+                "12": "z reklamy w internecie",
+                "13": "z plakatu lub ulotki",
+                "-1": "z innego źródła – jakiego?"
             }
         },
         "skille": {
@@ -217,8 +217,16 @@
         "userId": {
             "type": "Hidden",
             "container": "bigFormFront",
-            "position": 1,
+            "position": 10,
             "title": "User Id",
+            "state": 0,
+            "save": true
+        },
+        "wioFlowEntityId": {
+            "type": "Hidden",
+            "container": "bigFormFront",
+            "position": 11,
+            "title": "Wio Flow Entity Id",
             "state": 0,
             "save": true
         },
@@ -227,10 +235,9 @@
 
 
 
-
         "editionSzPCount": {
             "type": "Select",
-            "container": "bigFormFront",
+            "container": "editionCounts",
             "position": 2,
             "title": "W ilu edycjach SZLACHETNEJ PACZKI brałeś udział",
             "state": 0,
@@ -238,9 +245,9 @@
             "dataSet": {
                 "repositoryName": "editionCounter"
             },
-            "class" : {
+            "class": {
                 "wrapper": "edititem half-size",
-                "input" : "veryLong wypisz"
+                "input": "veryLong wypisz"
             },
             "validationPHP":
             [
@@ -251,7 +258,7 @@
         },
         "editionAPCount": {
             "type": "Select",
-            "container": "bigFormFront",
+            "container": "editionCounts",
             "position": 3,
             "title": "W ilu edycjach AKADEMII PRZYSZŁOŚCI brałeś udział",
             "state": 0,
@@ -259,9 +266,9 @@
             "dataSet": {
                 "repositoryName": "editionCounter"
             },
-            "class" : {
+            "class": {
                 "wrapper": "edititem half-size",
-                "input" : "veryLong wypisz"
+                "input": "veryLong wypisz"
             },
             "validationPHP":
             [
@@ -281,17 +288,18 @@
             "dataSet": {
                 "repositoryName": "roles"
             },
-            "class" : {
+            "class": {
                 "wrapper": "edititem",
-                "input" : "veryLong wypisz"
+                "input": "veryLong wypisz"
             },
-            "isGroup" : true
+            "isGroup": true
         },
         "otherRoles": {
             "type": "RadioList",
             "container": "radaQuestion1",
             "position": 1,
             "title": "Jakim członkiem rady chciałabyś/chciałbyś zostać?",
+            "state": 0,
             "save": true,
             "dataSet": {
                 "repositoryName": "otherRoles"
@@ -315,10 +323,24 @@
 
 
 
+        "openWhyRada": {
+            "type": "TextArea",
+            "container": "radaQuestion2",
+            "position": 1,
+            "title": "Dlaczego chcesz zostać członkiem Rady?",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
         "openWhyLider": {
             "type": "TextArea",
-            "container": "bigFormFront2",
-            "position": 2,
+            "container": "liderQuestion2",
+            "position": 1,
             "title": "Dlaczego chcesz zostać Liderem?",
             "state": 0,
             "save": true,
@@ -331,8 +353,8 @@
         },
         "openExpectations": {
             "type": "TextArea",
-            "container": "bigFormFront2",
-            "position": 3,
+            "container": "bigFormFront2after",
+            "position": 1,
             "title": "Masz za sobą udział w Dużym Spotkaniu. Na podstawie tego, czego się na nim dowiedziałeś/aś, napisz o swoich oczekiwaniach względem Paczki/Akademii",
             "state": 0,
             "save": true,
@@ -363,9 +385,9 @@
             "dataSet": {
                 "repositoryName": "engagement"
             },
-            "class" : {
+            "class": {
                 "wrapper": "edititem",
-                "input" : "veryLong wypisz"
+                "input": "veryLong wypisz"
             },
             "validationPHP":
             [
@@ -384,9 +406,9 @@
             "dataSet": {
                 "repositoryName": "education"
             },
-            "class" : {
+            "class": {
                 "wrapper": "edititem",
-                "input" : "veryLong wypisz"
+                "input": "veryLong wypisz"
             },
             "validationPHP":
             [
@@ -560,7 +582,54 @@
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "Historia zaangażowania"
+            "title": "Historia zaangażowania",
+            "validationPHP":
+            [
+                {
+                    "type": "logic",
+                    "newErrorState": -1,
+                    "logicEquation":
+                    {
+                        "type": "and",
+                        "data":
+                        [
+                            {
+                                "type": "runMethod",
+                                "method": "AllFieldsOk",
+                                "settings":
+                                {
+                                    "containerToCheck": "editionCounts"
+                                }
+                            },
+                            {
+                                "type": "or",
+                                "data":
+                                [
+                                    {
+                                        "type": "equal",
+                                        "data":
+                                        [
+                                            {
+                                                "type": "repositoryValue",
+                                                "repositoryName": "recruitment",
+                                                "subset": ["role_short_name"]
+                                            },
+                                            {
+                                                "type": "const",
+                                                "const": "LR"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "isValidField",
+                                        "field": "otherRoles"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
         },
         "SiteBigForm1": {
             "site": 1,
@@ -571,19 +640,109 @@
             "validationPHP":
             [
                 {
-                    "type": "method",
-                    "method": "AllFieldsOk",
-                    "settings":
+                    "type": "logic",
+                    "newErrorState": -1,
+                    "logicEquation":
                     {
-                        "containerToCheck": "_site_0"
+                        "type": "and",
+                        "data":
+                        [
+                            {
+                                "type": "runMethod",
+                                "method": "AllFieldsOk",
+                                "settings":
+                                {
+                                    "containerToCheck": "bigFormFront2after"
+                                }
+                            },
+                            {
+                                "type": "or",
+                                "data":
+                                [
+                                    {
+                                        "type": "and",
+                                        "data":
+                                        [
+                                            {
+                                                "type": "equal",
+                                                "data":
+                                                [
+                                                    {
+                                                        "type": "repositoryValue",
+                                                        "repositoryName": "recruitment",
+                                                        "subset": ["role_short_name"]
+                                                    },
+                                                    {
+                                                        "type": "const",
+                                                        "const": "LR"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "runMethod",
+                                                "method": "AllFieldsOk",
+                                                "settings":
+                                                {
+                                                    "containerToCheck": "liderQuestion2"
+                                                }
+
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "and",
+                                        "data":
+                                        [
+                                            {
+                                                "type": "equal",
+                                                "data":
+                                                [
+                                                    {
+                                                        "type": "repositoryValue",
+                                                        "repositoryName": "recruitment",
+                                                        "subset": ["role_short_name"]
+                                                    },
+                                                    {
+                                                        "type": "const",
+                                                        "const": "RW"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "runMethod",
+                                                "method": "AllFieldsOk",
+                                                "settings":
+                                                {
+                                                    "containerToCheck": "radaQuestion2"
+                                                }
+
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "logic",
+                    "newErrorState": -2,
+                    "logicEquation":
+                    {
+                        "type": "isValidContainer",
+                        "container": "SiteBigForm0"
                     }
                 }
             ],
             "stateActions":
             [
                 {
-                    "state": -1,
+                    "state": -2,
                     "actions": ["hide"]
+                },
+                {
+                    "state": -1,
+                    "actions": ["show"]
                 },
                 {
                     "state": 1,
@@ -604,15 +763,28 @@
                     "method": "AllFieldsOk",
                     "settings":
                     {
-                        "containerToCheck": "_site_1"
+                        "containerToCheck": "SiteBigForm2"
+                    }
+                },
+                {
+                    "type": "logic",
+                    "newErrorState": -2,
+                    "logicEquation":
+                    {
+                        "type": "isValidContainer",
+                        "container": "SiteBigForm1"
                     }
                 }
             ],
             "stateActions":
             [
                 {
-                    "state": -1,
+                    "state": -2,
                     "actions": ["hide"]
+                },
+                {
+                    "state": -1,
+                    "actions": ["show"]
                 },
                 {
                     "state": 1,
@@ -633,15 +805,28 @@
                     "method": "AllFieldsOk",
                     "settings":
                     {
-                        "containerToCheck": "_site_2"
+                        "containerToCheck": "SiteBigForm3"
+                    }
+                },
+                {
+                    "type": "logic",
+                    "newErrorState": -2,
+                    "logicEquation":
+                    {
+                        "type": "isValidContainer",
+                        "container": "SiteBigForm2"
                     }
                 }
             ],
             "stateActions":
             [
                 {
-                    "state": -1,
+                    "state": -2,
                     "actions": ["hide"]
+                },
+                {
+                    "state": -1,
+                    "actions": ["show"]
                 },
                 {
                     "state": 1,
@@ -678,24 +863,24 @@
                 }
             ]
         },
-        "bigFormFront": {
+        "editionCounts": {
             "site": 0,
             "container": "SiteBigForm0",
             "position": 1,
             "displayType": "SectionDisplay",
-            "title": "Historia Zaangażowania"
+            "title": ""
         },
         "repeatableQuestion": {
             "site": 0,
-            "container": "bigFormFront",
-            "position": 4,
+            "container": "SiteBigForm0",
+            "position": 2,
             "displayType": "SectionDisplay",
-            "title": "Historia Zaangażowania"
+            "title": ""
         },
-        "radaQuestion1" : {
+        "radaQuestion1": {
             "site": 0,
-            "container": "bigFormFront",
-            "position": 5,
+            "container": "SiteBigForm0",
+            "position": 3,
             "displayType": "SectionDisplay",
             "title": "",
             "validationPHP":
@@ -703,7 +888,7 @@
                 {
                     "type": "logic",
                     "newState": 1,
-                    "newErrorState": -1,
+                    "newErrorState": -2,
                     "logicEquation":
                     {
                         "type": "equal",
@@ -719,42 +904,135 @@
                                 "const": "RW"
                             }
                         ]
-
                     }
                 }
             ],
             "stateActions":
             [
                 {
-                    "state": -1,
+                    "state": -2,
                     "actions": ["hide"]
+                },
+                {
+                    "state": -1,
+                    "actions": ["show"]
                 },
                 {
                     "state": 1,
                     "actions": ["show"]
                 }
             ]
-
-
+        },
+        "radaQuestion2": {
+            "site": 0,
+            "container": "SiteBigForm1",
+            "position": 2,
+            "displayType": "SectionDisplay",
+            "title": "",
+            "validationPHP":
+            [
+                {
+                    "type": "logic",
+                    "newState": 1,
+                    "newErrorState": -2,
+                    "logicEquation":
+                    {
+                        "type": "equal",
+                        "data":
+                        [
+                            {
+                                "type": "repositoryValue",
+                                "repositoryName": "recruitment",
+                                "subset": ["role_short_name"]
+                            },
+                            {
+                                "type": "const",
+                                "const": "RW"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -2,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": -1,
+                    "actions": ["show"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "liderQuestion2": {
+            "site": 0,
+            "container": "SiteBigForm1",
+            "position": 3,
+            "displayType": "SectionDisplay",
+            "title": "",
+            "validationPHP":
+            [
+                {
+                    "type": "logic",
+                    "newState": 1,
+                    "newErrorState": -2,
+                    "logicEquation":
+                    {
+                        "type": "equal",
+                        "data":
+                        [
+                            {
+                                "type": "repositoryValue",
+                                "repositoryName": "recruitment",
+                                "subset": ["role_short_name"]
+                            },
+                            {
+                                "type": "const",
+                                "const": "LR"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -2,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": -1,
+                    "actions": ["show"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
         },
         "SubmitButton": {
             "site": 0,
             "container": "SiteBigForm0",
-            "position": 2,
+            "position": 4,
             "displayType": "Button1",
             "title": "Dalej"
         },
-        "bigFormFront2": {
+        "bigFormFront2after": {
             "site": 1,
             "container": "SiteBigForm1",
-            "position": 1,
+            "position": 4,
             "displayType": "SectionDisplay",
-            "title": "Zadania"
+            "title": ""
         },
         "SubmitButton2": {
             "site": 1,
             "container": "SiteBigForm1",
-            "position": 2,
+            "position": 5,
             "displayType": "Button1",
             "title": "Dalej"
         },
@@ -814,20 +1092,12 @@
                         "data":
                         [
                             {
-                                "type": "runMethod",
-                                "method": "AllFieldsOk",
-                                "settings":
-                                {
-                                    "containerToCheck": "bigFormFront"
-                                }
+                                "type": "isValidContainer",
+                                "container": "SiteBigForm1"
                             },
                             {
-                                "type": "runMethod",
-                                "method": "AllFieldsOk",
-                                "settings":
-                                {
-                                    "containerToCheck": "bigFormFront2"
-                                }
+                                "type": "isValidContainer",
+                                "container": "SiteBigForm2"
                             },
                             {
                                 "type": "runMethod",
@@ -854,22 +1124,36 @@
                 {
                     "type": "update",
                     "tableName": "user_basic_data",
-                    "where" : {
+                    "where": {
                         "wio_user_id": {
                             "type": "field",
                             "field": "userId"
                         }
                     },
-                    "tableName": "wio_users",
                     "fields": {
                         "id_number": {
                             "type": "field",
                             "field": "pesel"
                         },
                         "birth_date": {
-                            "type": "filed",
+                            "type": "field",
                             "field": "birthDate",
                             "converter": "DatePicker2DateTime"
+                        }
+                    }
+                },
+                {
+                    "type": "update",
+                    "tableName": "wio_hash",
+                    "where": {
+                        "wio_flow_entity_id": {
+                            "type": "field",
+                            "field": "wioFlowEntityId"
+                        }
+                    },
+                    "fields": {
+                        "used_on": {
+                            "type": "currentDate"
                         }
                     }
                 },
@@ -936,6 +1220,10 @@
                             "field": "openWhyLider"
                         },
                         "open_question_2": {
+                            "type": "field",
+                            "field": "openWhyRada"
+                        },
+                        "open_question_3": {
                             "type": "field",
                             "field": "openExpectations"
                         },

@@ -325,7 +325,11 @@
             "class": {
                 "wrapper": "edititem half-l",
                 "input" : "veryLong wypisz"
-            }
+            },
+	          "defaultValue": {
+	    	        "repositoryName": "recruitment",
+		            "subset": ["wio_struct_node_id"]
+	          }
         },
         "region":
         {
@@ -379,6 +383,10 @@
             "class" : {
                 "wrapper": "edititem half-r",
                 "input" : "veryLong wypisz"
+            },
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": ["wio_struct_given_node_id"]
             }
         },
         "type":
@@ -479,13 +487,33 @@
                 },
                 {
                     "type": "update",
+                    "tableName": "recrutation_areas",
+                    "where" : {
+                        "wio_flow_entity_id": {
+                            "type": "field",
+                            "field": "wioFlowEnityId"
+                        }
+                    },
+                    "fields": {
+                        "wio_struct_node_id": {
+                            "type": "field",
+                            "field": "province"
+                        },
+                        "wio_struct_given_node_id": {
+                            "type": "field",
+                            "field": "council_province"
+                        }
+                    }
+                },
+                {
+                    "type": "update",
+                    "tableName": "user_basic_data",
                     "where" : {
                         "wio_user_id": {
                             "type": "field",
                             "field": "userId"
                         }
                     },
-                    "tableName": "user_basic_data",
                     "fields": {
                         "name": {
                             "type": "field",
@@ -507,41 +535,13 @@
                 },
                 {
                     "type": "update",
-                    "where" : {
-                        "wio_user_id": {
-                            "type": "field",
-                            "field": "userId"
-                        }
-                    },
-                    "tableName": "user_basic_data",
-                    "fields": {
-                        "name": {
-                            "type": "field",
-                            "field": "name"
-                        },
-                        "surname": {
-                            "type": "field",
-                            "field": "surname"
-                        },
-                        "gender": {
-                            "type": "field",
-                            "field": "gender"
-                        },
-                        "birth_date": {
-                            "type": "field",
-                            "field": "birth_date"
-                        }
-                    }
-                },
-                {
-                    "type": "update",
-                    "where" : {
+                    "tableName": "wio_users",
+                    "where": {
                         "id": {
                             "type": "field",
                             "field": "userId"
                         }
                     },
-                    "tableName": "wio_users",
                     "fields": {
                         "email": {
                             "type": "field",

@@ -29,6 +29,9 @@ class Field
             case 'field':
                 $value = $this->getField($saveField);
             break;
+            case 'currentDate':
+                $value = date('Y-m-d H:i:s');
+            break;
             default:
                 $value = false;
         }

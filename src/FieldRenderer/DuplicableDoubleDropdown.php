@@ -25,6 +25,10 @@ class DuplicableDoubleDropdown extends AbstractFieldRenderer
             }
         }
 
+        if (count($valueTab) == 0) {
+            $valueTab[] = '-';
+        }
+
         foreach ($valueTab as $programRoleName) {
             list($programName) = explode(' - ', $programRoleName);
 
@@ -63,11 +67,6 @@ class DuplicableDoubleDropdown extends AbstractFieldRenderer
             $this->html .= '</select><br/><br/>';
             ++$this->duplicateCounter;
         }
-
-
-
-
-
 
         $this->inputFieldContainerTail();
         $this->html .= '<br/><a id="duplicate" class="duplicatorButton">dodaj dane</a>'."\n";
