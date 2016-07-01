@@ -422,8 +422,7 @@
 
 
 
-
-        "openFile1": {
+        "uploadFile1": {
             "type": "FileUpload",
             "container": "bigFormFront2before",
             "position": 1,
@@ -437,6 +436,7 @@
                 }
             ]
         },
+
         "openWhyRada": {
             "type": "TextArea",
             "container": "radaQuestion2",
@@ -546,7 +546,7 @@
                 }
             ]
         },
-        "openFile1": {
+        "uploadFile2": {
             "type": "FileUpload",
             "container": "bigFormFront3",
             "position": 3,
@@ -1232,6 +1232,33 @@
 
 
     "FormSavers": {
+        "fileSave": {
+            "clearTemporarySave": false,
+            "databaseConnection": "Main",
+            "saveAsEntry": false,
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "FileReadyToUpload",
+                    "settings":
+                    {
+                        "field": "uploadFile1"
+                    }
+                }
+            ],
+            "MethodSaves": [
+                {
+                    "method": "UploadFileToFolder",
+                    "settings":
+                    {
+                        "dir": "ciapki",
+                        "field": "file"
+                    }
+                }
+            ]
+        },
+
         "finalSave":
         {
             "clearTemporarySave": true,
