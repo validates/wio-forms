@@ -3,7 +3,6 @@
 namespace WioForms\FieldValidator;
 
 use SuperW\Repository\Recruitment as RecruitmentRepository;
-use WioForms\FieldConverter\Stanowisko2Role;
 
 class EmailNotUsed extends AbstractFieldValidator
 {
