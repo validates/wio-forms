@@ -22,8 +22,8 @@ class WioFlowUserNodes extends AbstractDataRepository
             ->where('wio_users.id', '=', $userId)
             ->first();
 
-        $primaryNode = $queryResult["wio_struct_node_id"];
-        $givenNode = $queryResult["wio_struct_given_node_id"];
+        $primaryNode = $queryResult['wio_struct_node_id'];
+        $givenNode = $queryResult['wio_struct_given_node_id'];
 
         $wojType = 1;
         $miastoType = 4;
