@@ -21,7 +21,7 @@ class ChangeLpSzPStatus extends AbstractFormSaver
 
     private function isFinalStatus($newStatus)
     {
-        return (int)$newStatus === 70;
+        return (int) $newStatus === 70;
     }
 
     private function handleNodeFlags($assignedArea)
@@ -29,7 +29,7 @@ class ChangeLpSzPStatus extends AbstractFormSaver
         global $queryBuilder;
         $wioStruct = new WioStruct($queryBuilder);
 
-        $node = (new StructDefinition)
+        $node = (new StructDefinition())
             ->nodeId($assignedArea);
 
         $wioStruct->structQuery($node)
@@ -53,6 +53,5 @@ class ChangeLpSzPStatus extends AbstractFormSaver
         $queryBuilder->table('recrutation_areas')
             ->where('wio_flow_entity_id', $wioFlowId)
             ->update($data);
-
     }
 }

@@ -4,7 +4,6 @@ namespace WioForms\DataRepository;
 
 class WioStructAvailableSzPRegions extends AbstractDataRepository
 {
-
     /**
      * @TODO: Rewrite methods fetching available regions
      */
@@ -54,6 +53,7 @@ class WioStructAvailableSzPRegions extends AbstractDataRepository
         $sql = $queryObj->getRawSql();
 
         $regionList = $query->get();
+
         return $regionList;
     }
 
@@ -79,6 +79,7 @@ class WioStructAvailableSzPRegions extends AbstractDataRepository
         $sql = $queryObj->getRawSql();
 
         $regionList = $query->get();
+
         return $regionList;
     }
 
@@ -107,6 +108,7 @@ class WioStructAvailableSzPRegions extends AbstractDataRepository
         $sql = $queryObj->getRawSql();
 
         $regionList = $query->get();
+
         return $regionList;
     }
 }
