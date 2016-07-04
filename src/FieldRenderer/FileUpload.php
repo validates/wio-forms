@@ -18,7 +18,6 @@ class FileUpload extends AbstractFieldRenderer
 
 
 
-
         $this->inputFieldContainerTail();
         $this->inputContainerTail();
 

@@ -12,8 +12,6 @@ class FileReadyToUpload extends AbstractContainerValidator
             $this->valid = true;
         }
 
-        var_dump($this->valid);
-
         $this->setAnswer();
 
         return $this->getReturn();

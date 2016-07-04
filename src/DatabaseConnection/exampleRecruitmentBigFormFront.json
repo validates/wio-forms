@@ -306,15 +306,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
     "Fields": {
         "userId": {
             "type": "Hidden",
@@ -332,8 +323,6 @@
             "state": 0,
             "save": true
         },
-
-
 
 
 
@@ -416,12 +405,6 @@
 
 
 
-
-
-
-
-
-
         "uploadFile1": {
             "type": "FileUpload",
             "container": "bigFormFront2before",
@@ -436,7 +419,6 @@
                 }
             ]
         },
-
         "openWhyRada": {
             "type": "TextArea",
             "container": "radaQuestion2",
@@ -493,13 +475,6 @@
                 }
             ]
         },
-
-
-
-
-
-
-
 
 
 
@@ -579,12 +554,6 @@
                 }
             ]
         },
-
-
-
-
-
-
 
 
 
@@ -710,8 +679,6 @@
             ]
         }
     },
-
-
 
 
 
@@ -1232,7 +1199,7 @@
 
 
     "FormSavers": {
-        "fileSave": {
+        "fileSave1": {
             "clearTemporarySave": false,
             "databaseConnection": "Main",
             "saveAsEntry": false,
@@ -1252,8 +1219,34 @@
                     "method": "UploadFileToFolder",
                     "settings":
                     {
-                        "dir": "ciapki",
-                        "field": "file"
+                        "dir": "big_form_2016_open_question",
+                        "field": "uploadFile1"
+                    }
+                }
+            ]
+        },
+        "fileSave2": {
+            "clearTemporarySave": false,
+            "databaseConnection": "Main",
+            "saveAsEntry": false,
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "FileReadyToUpload",
+                    "settings":
+                    {
+                        "field": "uploadFile2"
+                    }
+                }
+            ],
+            "MethodSaves": [
+                {
+                    "method": "UploadFileToFolder",
+                    "settings":
+                    {
+                        "dir": "big_form_2016_cv",
+                        "field": "uploadFile2"
                     }
                 }
             ]
