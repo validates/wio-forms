@@ -681,7 +681,8 @@
             "MethodSaves": [
                 {
                     "method": "ChangeLpSzPStatus",
-                    "settings": {}
+                    "settings": {
+                    }
                 }
             ]
         }

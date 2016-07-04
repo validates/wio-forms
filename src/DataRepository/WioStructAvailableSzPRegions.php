@@ -12,6 +12,7 @@ class WioStructAvailableSzPRegions extends AbstractDataRepository
         $this->data = [];
         $dontUnsetRegion = $this->getUserRegion($requiredFields['userId']);
 
+
         $regionsWithDeclined = $this->getRegionsWithDeclinedLider();
         $unbuildRegions = $this->getUnbuildRegions();
         $regionsWithLider = $this->getRegionsWithLider();
@@ -103,6 +104,7 @@ class WioStructAvailableSzPRegions extends AbstractDataRepository
             ->whereIn('wio_flow_entities.flow_status', $declinedStatusArray)
             ->select('wio_struct_nodes.id', 'wio_struct_nodes.name');
 
+
         $queryObj = $query->getQuery();
         $sql = $queryObj->getRawSql();
 
@@ -122,6 +124,4 @@ class WioStructAvailableSzPRegions extends AbstractDataRepository
         $answer = $query->first();
         return $answer->wio_struct_given_node_id;
     }
-
-
 }
