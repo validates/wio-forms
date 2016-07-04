@@ -10,7 +10,7 @@
             "class": "WioFlowCurrentUserData",
             "data": false
         },
-        "wioFlowEnityId": {
+        "wioFlowEntityId": {
             "type": "foreign",
             "class": "WioFlowEntityData",
             "data": false,
@@ -89,6 +89,19 @@
                 "2": "Weteran",
                 "3": "Awansowany"
             }
+        },
+        "availableRegions": {
+            "type": "foreign",
+            "data": false,
+            "class": "WioStructAvailableSzPRegions",
+            "requiredFields": {
+                "userId": "userId"
+            }
+        }
+    },
+    "FormSavers": {
+        "ChangeLpSzPStatus": {
+            "class": "ChangeLpSzPStatus"
         }
     },
     "FieldValidatorsJS": {},
@@ -98,6 +111,9 @@
         },
         "FormSaverOk": {
             "class": "FormSaverOk"
+        },
+        "RegionAvaliable": {
+            "class": "LrSzPRegionAvaliable"
         }
     },
     "ContainerValidatorsJS": {},
@@ -113,7 +129,7 @@
                 "repositoryName": "userId"
             }
         },
-        "wioFlowEnityId": {
+        "wioFlowEntityId": {
             "type": "Hidden",
             "container": "recruitmentForm",
             "position": 100,
@@ -121,7 +137,7 @@
             "state": 0,
             "save": true,
             "defaultValue": {
-                "repositoryName": "wioFlowEnityId"
+                "repositoryName": "wioFlowEntityId"
             }
         },
         "status": {
@@ -394,24 +410,32 @@
         },
         "assigned_area":
         {
-            "type": "Link",
+            "type": "Select",
             "container": "dataForm",
             "position": 8,
-            "url": "http://superw.pl/linkdoregionu/$1",
-            "paramSet": {
-                "$1": {
-                    "repositoryName": "recruitment",
-                    "subset": ["assigned_area_id"]
-                }
-            },
-            "label": "Rejon, w którym będzie działał: ",
-            "titleSet" : {
-                "repositoryName": "recruitment",
-                "subset": ["assigned_area_name"]
-            },
+            "title": "Rejon działania",
             "state": 0,
-            "save": false,
-            "class": ""
+            "save": true,
+            "defaultValue": {
+                "repositoryName": "recruitment",
+                "subset": [
+                    "wio_struct_given_node_id"
+                ]
+            },
+            "dataSet": {
+                "repositoryName": "availableRegions",
+                "actions": "alphabetic_sort"
+            },
+            "class": {
+                "wrapper": "edititem half-l",
+                "input": "veryLong wypisz"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
         },
         "senior_program":
         {
@@ -500,7 +524,14 @@
             "container": "_site",
             "position": 1,
             "displayType": "SectionDisplay",
-            "title": "Status rekrutacji"
+            "title": "Status rekrutacji",
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "RegionAvaliable"
+                }
+            ]
         },
         "basicDataForm": {
             "site": 0,
@@ -527,7 +558,18 @@
     "FormSavers": {
         "finalSave": {
             "clearTemporarySave": true,
+            "clearTemporarySaveOnError": true,
             "databaseConnection": "Main",
+            "validationPHP": [
+                {
+                    "type": "logic",
+                    "newErrorState": -1,
+                    "logicEquation": {
+                        "type": "isValidContainer",
+                        "container": "recruitmentForm"
+                    }
+                }
+            ],
             "DatabaseSaves": [
                 {
                   "tableName": "wio_flow_entities",
@@ -551,7 +593,7 @@
                     "where" : {
                         "wio_flow_entity_id": {
                             "type": "field",
-                            "field": "wioFlowEnityId"
+                            "field": "wioFlowEntityId"
                         }
                     },
                     "fields": {
@@ -562,6 +604,32 @@
                         "role_short_name": {
                             "type": "field",
                             "field": "role"
+                        }
+                    }
+                },
+                {
+                    "type": "update",
+                    "tableName": "recrutation_areas",
+                    "validationPHP":[
+                        {
+                            "type": "logic",
+                            "logicEquation":
+                            {
+                                "type": "isValidField",
+                                "field": "assigned_area"
+                            }
+                        }
+                    ],
+                    "where": {
+                        "wio_flow_entity_id": {
+                            "type": "field",
+                            "field": "wioFlowEntityId"
+                        }
+                    },
+                    "fields": {
+                        "wio_struct_given_node_id": {
+                            "type": "field",
+                            "field": "assigned_area"
                         }
                     }
                 },
@@ -608,6 +676,12 @@
                             "field": "email"
                         }
                     }
+                }
+            ],
+            "MethodSaves": [
+                {
+                    "method": "ChangeLpSzPStatus",
+                    "settings": {}
                 }
             ]
         }

@@ -13,5 +13,6 @@
     "agreement_reguired"            : "agree req lang",
     "emails_not_equal"              : "Podane adresy e-mail nie są identyczne.",
     "passwords_not_equal"           : "Podane hasła nie są identyczne.",
-    "email_already_used"            : "Dokonano już zgłoszenia na ten adres e-mail."
+    "email_already_used"            : "Dokonano już zgłoszenia na ten adres e-mail.",
+    "region_not_avaliable"          : "Wybrany rejon nie jest dostępny."
 }
