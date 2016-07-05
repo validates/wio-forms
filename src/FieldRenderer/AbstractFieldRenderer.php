@@ -70,6 +70,7 @@ abstract class AbstractFieldRenderer
                 }
                 $this->dataSet += $this->formStruct['DataRepositories'][$dataSetName]['data'][$subset];
             }
+
             return;
         }
 

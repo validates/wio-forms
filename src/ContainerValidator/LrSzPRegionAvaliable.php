@@ -14,12 +14,11 @@ class LrSzPRegionAvaliable extends AbstractContainerValidator
 
         if ($userStatus == 60 or $userStatus == 70) {
             $this->valid = false;
-            if ($this->isRegionFree($userNode,$userId)) {
+            if ($this->isRegionFree($userNode, $userId)) {
                 $this->valid = true;
             }
         } else {
             $this->valid = true;
-
         }
 
         $this->setAnswer();
@@ -27,11 +26,10 @@ class LrSzPRegionAvaliable extends AbstractContainerValidator
         return $this->getReturn();
     }
 
-
     private function isRegionFree($regionId, $allowedUserId)
     {
         global $queryBuilder;
-        $declinedStatusArray = [60,70];
+        $declinedStatusArray = [60, 70];
 
 
         $query = $queryBuilder->table('wio_struct_nodes')
@@ -40,8 +38,8 @@ class LrSzPRegionAvaliable extends AbstractContainerValidator
             ->leftJoin('wio_struct_flags', 'wio_struct_flags.node_id', '=', 'wio_struct_nodes.id')
             ->leftJoin('wio_struct_flag_types', 'wio_struct_flag_types.id', '=', 'wio_struct_flags.flag_type_id')
             ->where('wio_struct_flag_types.name', 'is_built')
-            ->where('wio_flow_entities.active_status','active')
-            ->where('recrutation_areas.status','active')
+            ->where('wio_flow_entities.active_status', 'active')
+            ->where('recrutation_areas.status', 'active')
             ->whereIn('wio_flow_entities.flow_status', $declinedStatusArray)
             ->where('wio_flow_entities.wio_user_id', '<>', $allowedUserId)
             ->where('recrutation_areas.wio_struct_given_node_id', $regionId);
@@ -51,6 +49,7 @@ class LrSzPRegionAvaliable extends AbstractContainerValidator
         if ($answer != null) {
             return false;
         }
+
         return true;
     }
 }
