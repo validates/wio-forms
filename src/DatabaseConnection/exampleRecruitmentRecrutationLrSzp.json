@@ -547,10 +547,17 @@
             "displayType": "SectionDisplay",
             "title": "Dane"
         },
-        "SubmitButton1": {
+        "errorJumper": {
             "site": 0,
             "container": "_site",
             "position": 4,
+            "displayType": "ErrorJumper",
+            "title": ""
+        },
+        "SubmitButton1": {
+            "site": 0,
+            "container": "_site",
+            "position": 5,
             "displayType": "Button1",
             "title": "Wyślij"
         }

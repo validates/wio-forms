@@ -6,15 +6,15 @@ class SectionDisplay extends AbstractContainerRenderer
 {
     public function showHead()
     {
-        $html = '<fieldset class="edit">'."\n";
+        $this->html = '<fieldset class="edit">'."\n";
         if ($this->title) {
-            $html .= '<legend class="editlabel">'.$this->title.'</legend>';
-        }
-        if ($this->message) {
-            $html .= '<b style="color: red;">'.$this->message.'</b><br/>'."\n";
+            $this->html .= '<legend class="editlabel">'.$this->title.'</legend>';
         }
 
-        return $html;
+        $this->standardErrorDisplay();
+
+
+        return $this->html;
     }
 
     public function showTail()

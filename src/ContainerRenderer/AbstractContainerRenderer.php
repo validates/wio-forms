@@ -44,7 +44,8 @@ abstract class AbstractContainerRenderer
 
     protected function standardErrorDisplay()
     {
-        if ($this->message !== false) {
+        if ($this->message != false) {
+            $this->html .= '<style>.wioForms_ErrorMessage{ color: red; font-weight: bold; }</style>';
             $this->html .= '<div class="wioForms_ErrorMessage">'.$this->message.'</div>'."\n";
         }
     }
