@@ -183,6 +183,7 @@ class FormSaverService
             } else {
                 if (!isset($saveField['notRequired'])) {
                     $this->wioForms->errorLog->errorLog('makeDatabaseSave: field '.$saveFieldName.' for '.$databaseSave['tableName'].' not get properly.');
+
                     return false;
                 }
             }
