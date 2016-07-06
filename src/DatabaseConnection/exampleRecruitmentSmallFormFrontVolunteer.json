@@ -8,8 +8,7 @@
         "stanowiska": {
             "type": "local",
             "data": {
-                "rada": "Członek rady",
-                "lider": "Lider"
+                "volunteer": "Wolontariusz"
             }
         },
         "akcje": {
@@ -645,124 +644,6 @@
                 }
             ]
         },
-        "MapWojSZP": {
-            "site": 1,
-            "container": "Site2",
-            "position": 3,
-            "displayType": "FullDisplay",
-            "title": "Wybierz województwo",
-            "validationPHP": [
-                {
-                    "type": "logic",
-                    "newState": 1,
-                    "newErrorState": -1,
-                    "logicEquation": {
-                        "type": "and",
-                        "data": [
-                            {
-                                "type": "equal",
-                                "data": [
-                                    {
-                                        "type": "fieldValue",
-                                        "field": "akcja"
-                                    },
-                                    {
-                                        "type": "const",
-                                        "const": "SZP"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "equal",
-                                "data": [
-                                    {
-                                        "type": "fieldValue",
-                                        "field": "stanowisko"
-                                    },
-                                    {
-                                        "type": "const",
-                                        "const": "rada"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ],
-            "stateActions": [
-                {
-                    "state": -1,
-                    "actions": [
-                        "hide"
-                    ]
-                },
-                {
-                    "state": 1,
-                    "actions": [
-                        "show"
-                    ]
-                }
-            ]
-        },
-        "MapWojAP": {
-            "site": 1,
-            "container": "Site2",
-            "position": 4,
-            "displayType": "FullDisplay",
-            "title": "Wybierz województwo",
-            "validationPHP": [
-                {
-                    "type": "logic",
-                    "newState": 1,
-                    "newErrorState": -1,
-                    "logicEquation": {
-                        "type": "and",
-                        "data": [
-                            {
-                                "type": "equal",
-                                "data": [
-                                    {
-                                        "type": "fieldValue",
-                                        "field": "akcja"
-                                    },
-                                    {
-                                        "type": "const",
-                                        "const": "AP"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "equal",
-                                "data": [
-                                    {
-                                        "type": "fieldValue",
-                                        "field": "stanowisko"
-                                    },
-                                    {
-                                        "type": "const",
-                                        "const": "rada"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ],
-            "stateActions": [
-                {
-                    "state": -1,
-                    "actions": [
-                        "hide"
-                    ]
-                },
-                {
-                    "state": 1,
-                    "actions": [
-                        "show"
-                    ]
-                }
-            ]
-        },
         "MapRejonSZP": {
             "site": 1,
             "container": "Site2",
@@ -799,7 +680,7 @@
                                     },
                                     {
                                         "type": "const",
-                                        "const": "lider"
+                                        "const": "volunteer"
                                     }
                                 ]
                             }
@@ -858,7 +739,7 @@
                                     },
                                     {
                                         "type": "const",
-                                        "const": "lider"
+                                        "const": "volunteer"
                                     }
                                 ]
                             }
