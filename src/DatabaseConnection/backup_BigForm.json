@@ -99,18 +99,7 @@
                 "11" : "z telewizji",
                 "12" : "z reklamy w internecie",
                 "13" : "z plakatu lub ulotki",
-                "-1" : "z innego źródła – jakiego?            
-                                44 => "MS SQL 2008 R2",
-                                45 => "Hyper-V",
-                                46 => "Sharepoint Enterprise",
-                                47 => "MS Exchange",
-                                46 => "MS IIS",
-                                47 => "Active Directory",
-                                48 => "Domena Microsoft",
-                                49 => "MySQL",
-                                50 => "Apache",
-                                ),
-"
+                "-1" : "z innego źródła – jakiego?"
             }
         }
     },

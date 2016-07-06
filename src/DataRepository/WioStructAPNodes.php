@@ -15,7 +15,8 @@ class WioStructAPNodes extends AbstractDataRepository
         $wioStruct = new WioStruct(new QueryBuilderHandler());
 
         $this->addNodesByType($wioStruct, 'województwo', 'province');
-        $this->addNodesByType($wioStruct, 'szkołą', 'school');
+        $this->addNodesByType($wioStruct, 'szkoła', 'school');
+
         $apCities = $wioStruct->structQuery(
             (new StructDefinition())
                 ->networkName('administrative')
@@ -42,7 +43,7 @@ class WioStructAPNodes extends AbstractDataRepository
     {
         $nodeList = $wioStruct->structQuery(
             (new StructDefinition())
-                ->networkName('AP')
+                ->networkName('Akademia Przyszłości')
                 ->nodeTypeName($nodeTypeName)
         )->get('Node');
 

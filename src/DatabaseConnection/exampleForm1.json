@@ -272,6 +272,15 @@
                 }
             ]
         },
+        "wioFlow":
+        {
+            "type": "Hidden",
+            "container": "LoginForm",
+            "position": 3,
+            "title": "wioFlowId",
+            "state": 0,
+            "id": 1
+        },
         "login_email":
         {
           "type": "TextInput",
