@@ -1,6 +1,5 @@
 {
     "field_invalid"                 : "Pole zostało uzupełnione niepoprawnie.",
-    "pesel_invalid"                 : "Podany PESEL jest nieprawidłowy.",
     "fill_all_fields"               : "Uzupełnij wszystkie pola.",
     "fill_all_fields_before_save"   : "Przed zatwierdzeniem formularza uzupełnij wszystkie pola",
     "date_invalid"                  : "Pole data jest niepoprawne.",

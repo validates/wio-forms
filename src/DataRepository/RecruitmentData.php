@@ -44,8 +44,8 @@ class RecruitmentData extends AbstractDataRepository
                 ->nodeId($nodeId)
         )
             ->get('Node');
-
         $area = reset($area);
+
         $this->data[$field] = $area->NodeName;
     }
 }
