@@ -28,7 +28,7 @@ class UploadFileToFolder extends AbstractFormSaver
 
         $filePath = '../uploads/'.$dir.'/wioFlowId_'.$wioFlowEntityId.'_hash_'.$hash.'.'.$fileType;
 
-        if (move_uploaded_file($fileData["tmp_name"], BASEPATH . $filePath)) {
+        if (move_uploaded_file($fileData['tmp_name'], BASEPATH.$filePath)) {
             // echo "The file ". basename( $fileData["name"]). " has been uploaded.";
 
             $query = [
@@ -38,7 +38,7 @@ class UploadFileToFolder extends AbstractFormSaver
                     'wio_flow_entity_id' => $wioFlowEntityId,
                     'file_real_name' => $fileName,
                     'file_path' => $filePath,
-                    'deleted' => 'not_deleted'
+                    'deleted' => 'not_deleted',
                 ],
             ];
             $insertedId = $databaseConnection->insert($query);
@@ -50,7 +50,6 @@ class UploadFileToFolder extends AbstractFormSaver
             // Ugh! Thats soooo not nice.
             $this->wioForms->validatorService->validateFields();
             $this->wioForms->validatorService->validateContainers();
-
         } else {
             // echo "Sorry, there was an error uploading your file.";
         }
@@ -64,7 +63,5 @@ class UploadFileToFolder extends AbstractFormSaver
 `deleted` VARCHAR(16) NOT NULL ,
 `date_created`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
 */
-
-
     }
 }
