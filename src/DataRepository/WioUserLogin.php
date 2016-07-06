@@ -2,9 +2,6 @@
 
 namespace WioForms\DataRepository;
 
-use WioStruct\Core\StructDefinition;
-use WioStruct\WioStruct;
-
 class WioUserLogin extends AbstractDataRepository
 {
     public function getData($requiredFields)
@@ -20,7 +17,7 @@ class WioUserLogin extends AbstractDataRepository
                 'wio_users.id' => 'wioUserId',
                 'wio_flow_entities.id' => 'wioFlowEntityId',
                 'recrutation_roles.role_short_name' => 'userRole',
-                'recrutation_roles.program_short_name' => 'userProgram'
+                'recrutation_roles.program_short_name' => 'userProgram',
             ])
             ->first();
 

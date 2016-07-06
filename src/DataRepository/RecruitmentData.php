@@ -28,8 +28,10 @@ class RecruitmentData extends AbstractDataRepository
         $this->data['assigned_area_id'] = $this->data['wio_struct_given_node_id'];
 
         $this->setRepositoryFlags();
+
         return $this->data;
     }
+
     /**
      * @param $wioStruct
      * @param $area

@@ -90,7 +90,7 @@ class WioStructAvailableSzPRegions extends AbstractDataRepository
     private function getRegionsWithLider()
     {
         global $queryBuilder;
-        $declinedStatusArray = [60,70];
+        $declinedStatusArray = [60, 70];
         $nodeFlagTypeName = 'is_built';
 
         $query = $queryBuilder->table('wio_struct_nodes')
@@ -98,9 +98,9 @@ class WioStructAvailableSzPRegions extends AbstractDataRepository
             ->leftJoin('wio_flow_entities', 'wio_flow_entities.id', '=', 'recrutation_areas.wio_flow_entity_id')
             ->leftJoin('wio_struct_flags', 'wio_struct_flags.node_id', '=', 'wio_struct_nodes.id')
             ->leftJoin('wio_struct_flag_types', 'wio_struct_flag_types.id', '=', 'wio_struct_flags.flag_type_id')
-            ->where('wio_struct_flag_types.name',$nodeFlagTypeName)
-            ->where('wio_flow_entities.active_status','active')
-            ->where('recrutation_areas.status','active')
+            ->where('wio_struct_flag_types.name', $nodeFlagTypeName)
+            ->where('wio_flow_entities.active_status', 'active')
+            ->where('recrutation_areas.status', 'active')
             ->whereIn('wio_flow_entities.flow_status', $declinedStatusArray)
             ->select('wio_struct_nodes.id', 'wio_struct_nodes.name');
 
@@ -122,6 +122,7 @@ class WioStructAvailableSzPRegions extends AbstractDataRepository
             ->select('recrutation_areas.wio_struct_given_node_id');
 
         $answer = $query->first();
+
         return $answer->wio_struct_given_node_id;
     }
 }
