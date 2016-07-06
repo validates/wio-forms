@@ -56,7 +56,7 @@ class DataRepositoryService
         $allValid = true;
         foreach ($repository['requiredFields'] as $requiredFieldName => $fieldName) {
             if ($this->formStruct['Fields'][$fieldName]['valid']) {
-                $requiredFields[$requiredFieldName] = !empty($this->formStruct['Fields'][$fieldName]['value']) ? $this->formStruct['Fields'][$fieldName]['value'] : $this->formStruct['DataRepositories'][$fieldName]['data'];
+                $requiredFields[$requiredFieldName] = isset($this->formStruct['Fields'][$fieldName]) ? $this->formStruct['Fields'][$fieldName]['value'] : $this->formStruct['DataRepositories'][$fieldName]['data'];
             } else {
                 $allValid = false;
                 break;
