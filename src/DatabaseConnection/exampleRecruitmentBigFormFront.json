@@ -95,20 +95,20 @@
         "infoSource": {
             "type": "local",
             "data": {
-                "1": "z portalu z ogłoszeniami o pracy",
-                "2": "ze spotkania z przedstawicielem SZLACHETNEJ PACZKI",
-                "3": "od znajomego, który wcześniej był w Paczce",
-                "4": "w firmie, w której pracuj",
-                "5": "z portalu facebook.pl",
-                "6": "z newslettera od Stowarzyszenia Wiosna",
-                "7": "z innego newslettera",
-                "8": "z artykułu w internecie",
-                "9": "z artykułu w prasie",
-                "10": "z radia",
-                "11": "z telewizji",
-                "12": "z reklamy w internecie",
-                "13": "z plakatu lub ulotki",
-                "-1": "z innego źródła – jakiego?"
+                "z portalu z ogłoszeniami o pracy": "select",
+                "ze spotkania z przedstawicielem SZLACHETNEJ PACZKI": "select",
+                "od znajomego, który wcześniej był w Paczce": "select",
+                "w firmie, w której pracuj": "select",
+                "z portalu facebook.pl": "select",
+                "z newslettera od Stowarzyszenia Wiosna": "select",
+                "z innego newslettera": "select",
+                "z artykułu w internecie": "select",
+                "z artykułu w prasie": "select",
+                "z radia": "select",
+                "z telewizji": "select",
+                "z reklamy w internecie": "select",
+                "z plakatu lub ulotki": "select",
+                "z innego źródła – jakiego?": "textfield"
             }
         },
         "loginUser": {
@@ -124,49 +124,162 @@
             "type": "local",
             "data":
             {
-                "Public Relations":
-                [
-                    "tworzenie strategii kapmani PR(marki, wizerunku)",
-                    "przeprowadzanie kampani PR",
-                    "obsługa mediów"
-                ],
-                "Marketing":
-                [
-                    "obsługa cms",
-                    "pozycjonowanie stron internetowych",
-                    "media planning"
-                ],
-                "Grafika":
-                [
-                    "umiejętność obsługi programów graficznych: Photoshop, indesign, Corel, Illustrator",
-                    "umiejętność tworzenia animacji Flash",
-                    "umiejętność przygotowania projektu do druku"
-                ],
-                "Finanse i księgowość":
-                [
-                    "analiza kosztów i przychodów",
-                    "tworzenie budżetów",
-                    "prowadzenie rozliczeń z ZUS i US"
-                ],
-                "Znajomość języków obcych":
-                [
-                    "język angielski",
-                    "język niemiecki",
-                    "język rosyjski",
-                    "język hiszpański",
-                    "język migowy",
-                    {
-                        "textfield": "inny_jezyk",
-                        "name": "inne języki"
+                "1":{
+                    "name": "Public Relations",
+                    "children": {
+                        "2": "tworzenie streategii kampani PR(marki, wizerunku)",
+                        "3": "przeprowadzanie kampanii PR",
+                        "4": "obsługa mediów",
+                        "5": "praca w mediach (radio, tv, internet, prasa)",
+                        "6": "umiejętność pisania tekstów",
+                        "7": "planowanie i organizacja eventów",
+                        "8": "obsługa social mediów"
                     }
-                ],
-                "Inne kompetencje":
-                [
-                    {
-                        "textfield": "inne",
-                        "name": ""
+                },
+                "9": {
+                    "name": "Marketing",
+                    "children": {
+                        "10": "znajomość Google AdWORDS oraz Google Analytics",
+                        "11": "obsługa cms",
+                        "12": "pozycjonowanie stron internetowych",
+                        "13": "przeprowadzanie badań marketingowych",
+                        "14": "media planning",
+                        "15": "obsługa systemów newsletterowych"
                     }
-                ]
+                },
+                "16": {
+                    "name": "Grafika",
+                    "children": {
+                        "17": "umiejętność obsługi programów graficznych: Photoshop, indesign, Corel, Illustrator",
+                        "18": "umiejętność tworzenia animacji Flash",
+                        "19": "umiejętność przygotowania projektu do druku",
+                        "20": "umiejętność projektowania serwisów WWW",
+                        "21": "szeroka wiedza z zakresu projektowania i usability"
+                    }
+                },
+                "22": {
+                    "name": "Obsługa klienta/Fundraising",
+                    "children": {
+                        "23": "prowadzenie negocjacji",
+                        "24": "konstruowanie ofert i prezentacji biznesowych",
+                        "25": "pozyskiwanie sponsorów",
+                        "26": "realizacja wskaźników sprzedażowych"
+                    }
+                },
+                "27": {
+                    "name": "Finanse i księgowość",
+                    "children": {
+                        "28": "analizowanie kosztów i przychodów",
+                        "29": "sporządzania sprawozdań finansowych",
+                        "30": "tworzenie budżetów",
+                        "31": "sporządzanie dokumentów kadrowych",
+                        "32": "prowadzenie rozliczeń z ZUS i US",
+                        "33": "tworzenie i obsługa systemu zatrudniania i wynagradzania",
+                        "34": "obsługa systemu księgowania",
+                        "35": "obsługa programu Enova"
+                    }
+                },
+                "36": {
+                    "name": "IT",
+                    "children": {
+                        "37": "programowanie w języku (C#/PHP/xHTML/Zapytań SQL)",
+                        "38": "budowanie stron przy użyciu stylów CSS",
+                        "39": "projektowanie kostek OLAP na platformie Microsoft",
+                        "40": "budowanie raportów i zapytań z wykorzystaniem Reporting Servieces",
+                        "41": "budowanie aplikacji na platformę Android",
+                        "42": "projektowanie witryn Sharepoint",
+                        "43": "administrowanie serwerami i usługami",
+                        "51": "znajomość pakietu MS Office na poziomie zaawansowanym wraz z tworzeniem aplikacji i makr automatyzujących",
+                        "52": "diagnozowanie problemów w systemach IT",
+                        "53": "znajomości sprzętu komputerowego i peryferyjnego"
+                    }
+                },
+                "54": {
+                    "name": "Pozyskiwanie funduszy z UE oraz grantów",
+                    "children": {
+                        "55": "monitoring konkursów grantowych",
+                        "56": "pisanie projektów/wniosków o dofinansowanie",
+                        "57": "tworzenie budżetu",
+                        "58": "umiejętność rozliczania grantów",
+                        "59": "wdrażanie i realizacja projektów"
+                    }
+                },
+                "60": {
+                    "name": "Human Resources",
+                    "children": {
+                        "61": "diagnozowanie kompetencji/potencjału",
+                        "62": "rekrutacja",
+                        "63": "oceny pracownicze",
+                        "64": "tworzenie systemów wynagrodzeń",
+                        "65": "komunikacja wewnętrzna",
+                        "66": "prawo pracy",
+                        "67": "employer branding",
+                        "68": "zarządzanie talentami"
+                    }
+                },
+                "69": {
+                    "name": "Szkolenia",
+                    "children": {
+                        "70": "identyfikacja i analiza potrzeb szkoleniowych",
+                        "71": "projektowanie szkoleń",
+                        "72": "prowadzenie szkoleń",
+                        "73": "ewaluacja procesu szkoleniowego",
+                        "74": "organizacja logistyczna szkoleń"
+                    }
+                },
+                "75": {
+                    "name": "Zarządzanie projektem",
+                    "children": {
+                        "76": "tworzenie i wdrażanie strategii",
+                        "77": "realizacja wskaźników ilościowych i jakościowych",
+                        "78": "zarządzanie zespołem",
+                        "79": "ewaluacja działań"
+                    }
+                },
+                "85": {
+                    "name": "Logistyka",
+                    "children": {
+                        "86": "organizacja logistyki szkoleń/eventów",
+                        "87": "organizacja magazynów",
+                        "88": "organizacja wysyłek",
+                        "89": "współpraca z firmami zewnętrznymi"
+                    }
+                },
+                "90": {
+                    "name": "Administracja",
+                    "children": {
+                        "91": "rozliczanie kosztów",
+                        "92": "zarządzanie obiegiem dokumentów",
+                        "93": "obsługa kanałów informacyjnych",
+                        "94": "redagowanie treści dokumentów"
+                    }
+                },
+                "81": {
+                    "name": "Praca socjalna",
+                    "children": {
+                        "82": "wiedza na temat psychologicznych mechanizmów biedy",
+                        "83": "wiedza na temat zasiłków, programów pomocowych dostępnych w Polsce",
+                        "84": "umiejętność przeprowadzania wywiadów kierowanych (zdobywanie informacji o sytuacji życiowej rodziny)"
+                    }
+                },
+                "100": {
+                    "name": "Znajomość języków obcych",
+                    "children": {
+                        "101": "język angielski",
+                        "102": "język niemiecki",
+                        "103": "język rosyjski",
+                        "104": "język hiszpański",
+                        "105": "język migowy",
+                        "106": {
+                            "textfield": "inny_jezyk",
+                            "name": "inne języki"
+                        }
+                    }
+                },
+                "80": {
+                    "textfield": "inne",
+                    "name": "Inne kompetencje"
+                }
             }
         }
     },
@@ -534,6 +647,9 @@
             "validationPHP":
             [
                 {
+                    "method": "Pesel"
+                },
+                {
                     "method": "NotEmpty"
                 }
             ]
@@ -626,7 +742,7 @@
             ]
         },
         "infoSource": {
-            "type": "Select",
+            "type": "SelectWithTextfield",
             "container": "bigFormFront4",
             "position": 8,
             "title": "Skąd dowiedziałeś się o procesie rekrutacji?",
@@ -758,7 +874,7 @@
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "Zadania",
+            "title": "Zadanie wraz z pytaniami pogłębiającymi",
             "validationPHP":
             [
                 {
@@ -1185,7 +1301,7 @@
             "container": "SiteBigForm3",
             "position": 1,
             "displayType": "SectionDisplay",
-            "title": "Doświadczenie"
+            "title": ""
         },
         "SubmitButton3": {
             "site": 3,
@@ -1199,7 +1315,7 @@
             "container": "SiteBigForm4",
             "position": 1,
             "displayType": "SectionDisplay",
-            "title": "Metryczka"
+            "title": ""
         },
         "SubmitButton4": {
             "site": 4,
@@ -1316,6 +1432,16 @@
                     }
                 }
             ],
+            "MethodSaves": [
+                {
+                    "method": "InsertUserSkills",
+                    "settings":
+                    {
+                        "userId": "userId",
+                        "field": "skille"
+                    }
+                }
+            ],
             "DatabaseSaves":
             [
                 {
@@ -1420,20 +1546,6 @@
                         "wiosna_volunteerings": {
                             "type": "field",
                             "field": "previousRoles"
-                        }
-                    }
-                },
-                {
-                    "type": "insert",
-                    "tableName": "user_skills",
-                    "fields": {
-                        "wio_user_id": {
-                            "type": "field",
-                            "field": "userId"
-                        },
-                        "skills": {
-                            "type": "field",
-                            "field": "skille"
                         }
                     }
                 }
