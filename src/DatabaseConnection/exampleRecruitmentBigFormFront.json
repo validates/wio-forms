@@ -1340,21 +1340,6 @@
                     }
                 },
                 {
-                    "type": "update",
-                    "tableName": "wio_hash",
-                    "where": {
-                        "wio_flow_entity_id": {
-                            "type": "field",
-                            "field": "wioFlowEntityId"
-                        }
-                    },
-                    "fields": {
-                        "used_on": {
-                            "type": "currentDate"
-                        }
-                    }
-                },
-                {
                     "type": "insert",
                     "tableName": "user_address_data",
                     "fields": {
