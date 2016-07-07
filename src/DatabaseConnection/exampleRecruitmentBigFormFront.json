@@ -5,14 +5,6 @@
     "VersionId": "2016.11",
     "FormId": "Form1.2016.11",
     "DataRepositories": {
-        "recruitment": {
-            "type": "foreign",
-            "class": "RecruitmentData",
-            "data": false,
-            "requiredFields": {
-                "userId": "userId"
-            }
-        },
         "editionCounter": {
             "type": "local",
             "data": {
@@ -119,6 +111,15 @@
                 "-1": "z innego źródła – jakiego?"
             }
         },
+        "loginUser": {
+            "type": "foreign",
+            "data": false,
+            "class": "WioUserLogin",
+            "requiredFields": {
+                "email": "login",
+                "password": "password"
+            }
+        },
         "skille": {
             "type": "local",
             "data":
@@ -175,6 +176,12 @@
     "FieldValidatorsPHP": {
         "NotEmpty": {
             "class": "NotEmpty"
+        },
+        "Email": {
+            "class": "Email"
+        },
+        "Pesel": {
+            "class": "Pesel"
         }
     },
     "ContainerValidatorsPHP": {
@@ -204,15 +211,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
     "Fields": {
         "userId": {
             "type": "Hidden",
@@ -220,7 +218,12 @@
             "position": 10,
             "title": "User Id",
             "state": 0,
-            "save": true
+            "save": true,
+            "defaultValue":
+            {
+                "repositoryName": "loginUser",
+                "subset": ["wioUserId"]
+            }
         },
         "wioFlowEntityId": {
             "type": "Hidden",
@@ -228,9 +231,64 @@
             "position": 11,
             "title": "Wio Flow Entity Id",
             "state": 0,
-            "save": true
+            "save": true,
+            "defaultValue":
+            {
+                "repositoryName": "loginUser",
+                "subset": ["wioFlowEntityId"]
+            }
         },
 
+
+
+
+        "login": {
+            "type": "TextInput",
+            "container": "SiteBigForm0",
+            "position": 1,
+            "title": "Adres e-mail",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "editionCounter"
+            },
+            "class": {
+                "wrapper": "edititem half-size",
+                "input": "veryLong wypisz"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "Email"
+                },
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+
+        },
+        "password": {
+            "type": "PasswordInput",
+            "container": "SiteBigForm0",
+            "position": 2,
+            "title": "Hasło",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "editionCounter"
+            },
+            "class": {
+                "wrapper": "edititem half-size",
+                "input": "veryLong wypisz"
+            },
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+
+        },
 
 
 
@@ -239,7 +297,7 @@
             "type": "Select",
             "container": "editionCounts",
             "position": 2,
-            "title": "W ilu edycjach SZLACHETNEJ PACZKI brałeś udział",
+            "title": "W ilu edycjach programu SZLACHETNA PACZKA brałeś/aś udział?",
             "state": 0,
             "save": true,
             "dataSet": {
@@ -260,7 +318,7 @@
             "type": "Select",
             "container": "editionCounts",
             "position": 3,
-            "title": "W ilu edycjach AKADEMII PRZYSZŁOŚCI brałeś udział",
+            "title": "W ilu edycjach programu AKADEMIA PRZYSZŁOŚCI brałeś/aś udział?",
             "state": 0,
             "save": true,
             "dataSet": {
@@ -282,7 +340,7 @@
             "container": "repeatableQuestion",
             "position": 1,
             "title": "",
-            "description": "Wskaż jakie role do tej pory pełniłeś/aś w naszych programach SZLECHETNA PACZKA i/lub AKADEMIA PRZYSZŁOŚCI. Używając znaku + możesz dodawać kolejne role.",
+            "description": "Wskaż jakie role do tej pory pełniłeś/pełniłaś w naszych programach: SZLECHETNA PACZKA i/lub AKADEMIA PRZYSZŁOŚCI. Używając znaku + możesz dodawać kolejne role.",
             "state": 0,
             "save": true,
             "dataSet": {
@@ -298,7 +356,7 @@
             "type": "RadioList",
             "container": "radaQuestion1",
             "position": 1,
-            "title": "Jakim członkiem rady chciałabyś/chciałbyś zostać?",
+            "title": "Rola, którą chcesz pełnić w Radzie Wojewódzkiej?",
             "state": 0,
             "save": true,
             "dataSet": {
@@ -314,20 +372,25 @@
 
 
 
-
-
-
-
-
-
-
-
-
+        "uploadFile1": {
+            "type": "FileUpload",
+            "container": "bigFormFront2before",
+            "position": 1,
+            "title": "Opisz najbardziej rozwojowe doświadczenie w Twoim życiu. Zastanów się, jak wpłynęło ono na Ciebie. Jakie wnioski wyciągasz dla siebie i dlaczego to właśnie to doświadczenie/wydarzenie jest dla Ciebie ważne? Załącz zadanie na ok. 1 stronę A4 w formacie PDF.",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
         "openWhyRada": {
             "type": "TextArea",
             "container": "radaQuestion2",
             "position": 1,
-            "title": "Dlaczego chcesz zostać członkiem Rady?",
+            "title": "Dlaczego chcesz zostać członkiem Rady Wojewódzkiej?",
             "state": 0,
             "save": true,
             "validationPHP":
@@ -365,13 +428,20 @@
                 }
             ]
         },
-
-
-
-
-
-
-
+        "openDreaming": {
+            "type": "TextArea",
+            "container": "bigFormFront2after",
+            "position": 2,
+            "title": "Wyobraź sobie siebie za 5 lat. Gdzie jesteś? Jakim jesteś człowiekiem? Czym zajmujesz się na co dzień? Z czego jesteś dumny/a?",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
 
 
 
@@ -379,7 +449,7 @@
             "type": "SelectWithTextfield",
             "container": "bigFormFront3",
             "position": 1,
-            "title": "Czym się zajmujesz",
+            "title": "Czym się zajmujesz?*",
             "state": 0,
             "save": true,
             "dataSet": {
@@ -400,7 +470,8 @@
             "type": "Select",
             "container": "bigFormFront3",
             "position": 2,
-            "title": "Wyształcenie",
+            "title": "Wyształcenie*",
+            "description": "(UWAGA: Jeśli jesteś uczniem/studentem kończącym ten etap swojego życia, zaznacz status, który określi to, czym będziesz się zajmować od października).",
             "state": 0,
             "save": true,
             "dataSet": {
@@ -416,6 +487,21 @@
                     "method": "NotEmpty"
                 }
             ]
+        },
+        "uploadFile2": {
+            "type": "FileUpload",
+            "container": "bigFormFront3",
+            "position": 3,
+            "title": "CV",
+            "state": 0,
+            "save": true,
+            "validationPHP":
+            [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+
         },
         "skille": {
             "type": "DropdownCheckboxes",
@@ -435,12 +521,6 @@
                 }
             ]
         },
-
-
-
-
-
-
 
 
 
@@ -574,11 +654,30 @@
 
 
 
-
-
     "Containers": {
         "SiteBigForm0": {
             "site": 0,
+            "container": "_site",
+            "position": 0,
+            "displayType": "FullDisplay",
+            "title": "Logowanie",
+            "validationPHP":
+            [
+                {
+                    "type": "logic",
+                    "newErrorState": -1,
+                    "newErrorMessage": "login_failed",
+                    "logicEquation":
+                    {
+                        "type": "isSuccessRepository",
+                        "repository": "loginUser"
+                    }
+                }
+            ]
+
+        },
+        "SiteBigForm1": {
+            "site": 1,
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
@@ -611,8 +710,8 @@
                                         [
                                             {
                                                 "type": "repositoryValue",
-                                                "repositoryName": "recruitment",
-                                                "subset": ["role_short_name"]
+                                                "repositoryName": "loginUser",
+                                                "subset": ["userRole"]
                                             },
                                             {
                                                 "type": "const",
@@ -628,11 +727,34 @@
                             }
                         ]
                     }
+                },
+                {
+                    "type": "logic",
+                    "newErrorState": -2,
+                    "logicEquation": {
+                        "type": "isSuccessRepository",
+                        "repository": "loginUser"
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -2,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": -1,
+                    "actions": ["show"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
                 }
             ]
         },
-        "SiteBigForm1": {
-            "site": 1,
+        "SiteBigForm2": {
+            "site": 2,
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
@@ -647,6 +769,14 @@
                         "type": "and",
                         "data":
                         [
+                            {
+                                "type": "runMethod",
+                                "method": "AllFieldsOk",
+                                "settings":
+                                {
+                                    "containerToCheck": "bigFormFront2before"
+                                }
+                            },
                             {
                                 "type": "runMethod",
                                 "method": "AllFieldsOk",
@@ -669,8 +799,8 @@
                                                 [
                                                     {
                                                         "type": "repositoryValue",
-                                                        "repositoryName": "recruitment",
-                                                        "subset": ["role_short_name"]
+                                                        "repositoryName": "loginUser",
+                                                        "subset": ["userRole"]
                                                     },
                                                     {
                                                         "type": "const",
@@ -699,8 +829,8 @@
                                                 [
                                                     {
                                                         "type": "repositoryValue",
-                                                        "repositoryName": "recruitment",
-                                                        "subset": ["role_short_name"]
+                                                        "repositoryName": "loginUser",
+                                                        "subset": ["userRole"]
                                                     },
                                                     {
                                                         "type": "const",
@@ -722,48 +852,6 @@
                                 ]
                             }
                         ]
-                    }
-                },
-                {
-                    "type": "logic",
-                    "newErrorState": -2,
-                    "logicEquation":
-                    {
-                        "type": "isValidContainer",
-                        "container": "SiteBigForm0"
-                    }
-                }
-            ],
-            "stateActions":
-            [
-                {
-                    "state": -2,
-                    "actions": ["hide"]
-                },
-                {
-                    "state": -1,
-                    "actions": ["show"]
-                },
-                {
-                    "state": 1,
-                    "actions": ["show"]
-                }
-            ]
-        },
-        "SiteBigForm2": {
-            "site": 2,
-            "container": "_site",
-            "position": 1,
-            "displayType": "FullDisplay",
-            "title": "Doświadczenie",
-            "validationPHP":
-            [
-                {
-                    "type": "method",
-                    "method": "AllFieldsOk",
-                    "settings":
-                    {
-                        "containerToCheck": "SiteBigForm2"
                     }
                 },
                 {
@@ -797,7 +885,7 @@
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "Metryczka",
+            "title": "Doświadczenie",
             "validationPHP":
             [
                 {
@@ -839,7 +927,49 @@
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "Dziękujemy za wypełnienie formularza",
+            "title": "Metryczka",
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "AllFieldsOk",
+                    "settings":
+                    {
+                        "containerToCheck": "SiteBigForm4"
+                    }
+                },
+                {
+                    "type": "logic",
+                    "newErrorState": -2,
+                    "logicEquation":
+                    {
+                        "type": "isValidContainer",
+                        "container": "SiteBigForm3"
+                    }
+                }
+            ],
+            "stateActions":
+            [
+                {
+                    "state": -2,
+                    "actions": ["hide"]
+                },
+                {
+                    "state": -1,
+                    "actions": ["show"]
+                },
+                {
+                    "state": 1,
+                    "actions": ["show"]
+                }
+            ]
+        },
+        "SiteBigForm5": {
+            "site": 5,
+            "container": "_site",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "<div style=\"margin: 60px auto 120px; font-size: 40px; color: red; font-weight: bold;\">Dziękujemy za wypełnienie formularza</div>",
             "validationPHP":
             [
                 {
@@ -864,22 +994,22 @@
             ]
         },
         "editionCounts": {
-            "site": 0,
-            "container": "SiteBigForm0",
+            "site": 1,
+            "container": "SiteBigForm1",
             "position": 1,
             "displayType": "SectionDisplay",
             "title": ""
         },
         "repeatableQuestion": {
-            "site": 0,
-            "container": "SiteBigForm0",
+            "site": 1,
+            "container": "SiteBigForm1",
             "position": 2,
             "displayType": "SectionDisplay",
             "title": ""
         },
         "radaQuestion1": {
-            "site": 0,
-            "container": "SiteBigForm0",
+            "site": 1,
+            "container": "SiteBigForm1",
             "position": 3,
             "displayType": "SectionDisplay",
             "title": "",
@@ -896,8 +1026,8 @@
                         [
                             {
                                 "type": "repositoryValue",
-                                "repositoryName": "recruitment",
-                                "subset": ["role_short_name"]
+                                "repositoryName": "loginUser",
+                                "subset": ["userRole"]
                             },
                             {
                                 "type": "const",
@@ -924,8 +1054,8 @@
             ]
         },
         "radaQuestion2": {
-            "site": 0,
-            "container": "SiteBigForm1",
+            "site": 1,
+            "container": "SiteBigForm2",
             "position": 2,
             "displayType": "SectionDisplay",
             "title": "",
@@ -942,8 +1072,8 @@
                         [
                             {
                                 "type": "repositoryValue",
-                                "repositoryName": "recruitment",
-                                "subset": ["role_short_name"]
+                                "repositoryName": "loginUser",
+                                "subset": ["userRole"]
                             },
                             {
                                 "type": "const",
@@ -970,8 +1100,8 @@
             ]
         },
         "liderQuestion2": {
-            "site": 0,
-            "container": "SiteBigForm1",
+            "site": 1,
+            "container": "SiteBigForm2",
             "position": 3,
             "displayType": "SectionDisplay",
             "title": "",
@@ -988,8 +1118,8 @@
                         [
                             {
                                 "type": "repositoryValue",
-                                "repositoryName": "recruitment",
-                                "subset": ["role_short_name"]
+                                "repositoryName": "loginUser",
+                                "subset": ["userRole"]
                             },
                             {
                                 "type": "const",
@@ -1015,51 +1145,65 @@
                 }
             ]
         },
-        "SubmitButton": {
+        "SubmitButton0": {
             "site": 0,
             "container": "SiteBigForm0",
             "position": 4,
             "displayType": "Button1",
             "title": "Dalej"
         },
-        "bigFormFront2after": {
+        "SubmitButton": {
             "site": 1,
             "container": "SiteBigForm1",
+            "position": 4,
+            "displayType": "Button1",
+            "title": "Dalej"
+        },
+        "bigFormFront2before": {
+            "site": 1,
+            "container": "SiteBigForm2",
+            "position": 1,
+            "displayType": "SectionDisplay",
+            "title": ""
+        },
+        "bigFormFront2after": {
+            "site": 2,
+            "container": "SiteBigForm2",
             "position": 4,
             "displayType": "SectionDisplay",
             "title": ""
         },
         "SubmitButton2": {
-            "site": 1,
-            "container": "SiteBigForm1",
+            "site": 2,
+            "container": "SiteBigForm2",
             "position": 5,
             "displayType": "Button1",
             "title": "Dalej"
         },
         "bigFormFront3": {
-            "site": 2,
-            "container": "SiteBigForm2",
+            "site": 3,
+            "container": "SiteBigForm3",
             "position": 1,
             "displayType": "SectionDisplay",
             "title": "Doświadczenie"
         },
         "SubmitButton3": {
-            "site": 2,
-            "container": "SiteBigForm2",
+            "site": 3,
+            "container": "SiteBigForm3",
             "position": 2,
             "displayType": "Button1",
             "title": "Dalej"
         },
         "bigFormFront4": {
-            "site": 3,
-            "container": "SiteBigForm3",
+            "site": 4,
+            "container": "SiteBigForm4",
             "position": 1,
             "displayType": "SectionDisplay",
             "title": "Metryczka"
         },
         "SubmitButton4": {
-            "site": 3,
-            "container": "SiteBigForm3",
+            "site": 4,
+            "container": "SiteBigForm4",
             "position": 2,
             "displayType": "Button1",
             "title": "Dalej"
@@ -1078,6 +1222,59 @@
 
 
     "FormSavers": {
+        "fileSave1": {
+            "clearTemporarySave": false,
+            "databaseConnection": "Main",
+            "saveAsEntry": false,
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "FileReadyToUpload",
+                    "settings":
+                    {
+                        "field": "uploadFile1"
+                    }
+                }
+            ],
+            "MethodSaves": [
+                {
+                    "method": "UploadFileToFolder",
+                    "settings":
+                    {
+                        "dir": "big_form_2016_open_question",
+                        "field": "uploadFile1"
+                    }
+                }
+            ]
+        },
+        "fileSave2": {
+            "clearTemporarySave": false,
+            "databaseConnection": "Main",
+            "saveAsEntry": false,
+            "validationPHP":
+            [
+                {
+                    "type": "method",
+                    "method": "FileReadyToUpload",
+                    "settings":
+                    {
+                        "field": "uploadFile2"
+                    }
+                }
+            ],
+            "MethodSaves": [
+                {
+                    "method": "UploadFileToFolder",
+                    "settings":
+                    {
+                        "dir": "big_form_2016_cv",
+                        "field": "uploadFile2"
+                    }
+                }
+            ]
+        },
+
         "finalSave":
         {
             "clearTemporarySave": true,
@@ -1093,11 +1290,11 @@
                         [
                             {
                                 "type": "isValidContainer",
-                                "container": "SiteBigForm1"
+                                "container": "SiteBigForm2"
                             },
                             {
                                 "type": "isValidContainer",
-                                "container": "SiteBigForm2"
+                                "container": "SiteBigForm3"
                             },
                             {
                                 "type": "runMethod",
