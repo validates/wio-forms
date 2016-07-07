@@ -60,10 +60,12 @@
         "otherRoles": {
             "type": "local",
             "data": {
+                "ZKW": "Zastępca Koordynatora Wojewódzkiego",
                 "KR": "Koordynator Regionalny",
                 "KdsL": "Koordynator ds. Logistyki",
                 "KdsW": "Koordynator ds. Wdrożeń",
-                "KdsP": "Koordynator ds. Promocji"
+                "KdsP": "Koordynator ds. Promocji",
+                "KdsWL": "Koordynator ds. Współpracy Lokalnej"
             }
         },
         "engagement": {
@@ -466,7 +468,7 @@
             "isGroup": true
         },
         "otherRoles": {
-            "type": "RadioList",
+            "type": "CheckboxList",
             "container": "radaQuestion1",
             "position": 1,
             "title": "Rola, którą chcesz pełnić w Radzie Wojewódzkiej?",
