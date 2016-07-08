@@ -136,6 +136,9 @@
             "dataSet": {
                 "repositoryName": "wioStruct"
             },
+            "infoBox": {
+                "url": "/ajax/map_volunteer_szp/"
+            },
             "rendererData": {
                 "mapColor": "#FF0000",
                 "secondLvl": "szp_regions",
