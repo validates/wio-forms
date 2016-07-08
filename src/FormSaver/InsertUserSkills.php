@@ -14,19 +14,19 @@ class InsertUserSkills extends AbstractFormSaver
         $wioUserId = $this->wioForms->formStruct['Fields'][$userIdFieldName]['value'];
         $skillsList = $this->wioForms->formStruct['Fields'][$fieldName]['value'];
 
-        $skillsTab = explode('|',$skillsList);
+        $skillsTab = explode('|', $skillsList);
 
         foreach ($skillsTab as $skill) {
             $skillParts = explode('-', $skill);
-            if(count($skillParts) == 3) {
+            if (count($skillParts) == 3) {
                 $query = [
                     'table' => 'user_skills',
                     'insert' => [
                         'wio_user_id' => $wioUserId,
                         'group_id' => $skillParts[0],
                         'skill_id' => $skillParts[1],
-                        'skill_name' => $skillParts[2]
-                    ]
+                        'skill_name' => $skillParts[2],
+                    ],
                 ];
             } else {
                 $query = [
@@ -35,8 +35,8 @@ class InsertUserSkills extends AbstractFormSaver
                         'wio_user_id' => $wioUserId,
                         'group_id' => 0,
                         'skill_id' => 0,
-                        'skill_name' => $skill
-                    ]
+                        'skill_name' => $skill,
+                    ],
                 ];
             }
             $insertedId = $databaseConnection->insert($query);
