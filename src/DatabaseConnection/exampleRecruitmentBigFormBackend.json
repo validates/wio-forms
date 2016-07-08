@@ -1156,5 +1156,11 @@
 
 
 
-    "FormSavers": {}
+    "FormSavers": {
+        "finalSave": {
+            "clearTemporarySave": true,
+            "clearTemporarySaveOnError": true,
+            "databaseConnection": "Main",
+        }
+    }
 }
