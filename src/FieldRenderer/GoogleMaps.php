@@ -77,7 +77,7 @@ class GoogleMaps extends AbstractFieldRenderer
         <script type="text/javascript">
 EOT;
         if (!empty($this->fieldInfo['infoBox'])) {
-            $return .= 'var ajaxUrl = ' . "'" . $this->fieldInfo['infoBox']['url'] . "'" . ';';
+            $return .= 'var ajaxUrl = '."'".$this->fieldInfo['infoBox']['url']."'".';';
         } else {
             $return .= 'var ajaxUrl = false;';
         }
