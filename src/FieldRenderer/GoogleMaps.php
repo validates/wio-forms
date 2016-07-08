@@ -24,7 +24,6 @@ class GoogleMaps extends AbstractFieldRenderer
         }
         $this->html .= '</select>';
 
-
         if (isset($this->fieldInfo['rendererData']['secondLvl'])) {
             $this->html .= '<div class="wioForms_InputTitleContainer">'.$this->fieldInfo['rendererData']['secondLvlTitle'].'</div>';
             $this->html .= '<select name="szp_regions">';
@@ -43,11 +42,15 @@ class GoogleMaps extends AbstractFieldRenderer
 
         $this->wioForms->headerCollectorService->addJS('assets/js/wojewodztwa16.js');
 
+
         $this->html .= '<div id="map" class="wioForms_Map"></div>';
         $this->html .= '<script src="https://maps.googleapis.com/maps/api/js?key='.$this->wioForms->settings['GoogleMapsApi']['Key'].'"></script>';
         $this->html .= '<script type="text/javascript" src="//rawgit.com/googlemaps/v3-utility-library/master/infobox/src/infobox.js"></script>';
         $this->html .= '<script type="text/javascript" src="//rawgit.com/googlemaps/js-map-label/gh-pages/src/maplabel-compiled.js"></script>';
 
+        if (!empty($this->fieldInfo['infoBox'])) {
+            $this->html .= '<div id="infoBox" class="box"></div>';
+        }
         $this->inputFieldContainerTail();
         $this->inputContainerTail();
 
@@ -70,8 +73,15 @@ class GoogleMaps extends AbstractFieldRenderer
 
     private function javascriptSelectManager()
     {
-        return <<<'EOT'
+        $return = <<<'EOT'
         <script type="text/javascript">
+EOT;
+        if (!empty($this->fieldInfo['infoBox'])) {
+            $return .= 'var ajaxUrl = ' . "'" . $this->fieldInfo['infoBox']['url'] . "'" . ';';
+        } else {
+            $return .= 'var ajaxUrl = false;';
+        }
+        $return .= <<<'EOT'
         $('select[name="country_state"]').change(function(){
             var node_id = $(this).val();
             stateNodeChanged(node_id);
@@ -91,6 +101,10 @@ class GoogleMaps extends AbstractFieldRenderer
             $('select[name="szp_regions"]').val('');
         }
         function regionNodeChanged(node_id){
+            
+            if (ajaxUrl) {
+                fillInfoBox(ajaxUrl, node_id);
+            }
             var state_node_id = $('select[name="szp_regions"] option[value="'+node_id+'"]').attr('class').split('_')[2];
 
             stateNodeChanged(state_node_id);
@@ -98,8 +112,22 @@ class GoogleMaps extends AbstractFieldRenderer
             $('select[name="szp_regions"]').val(node_id);
             $('input[name="node_id"]').val(node_id);
         }
+        
+        function fillInfoBox(ajaxUrl, node_id) {
+            $.ajax({
+               url: ajaxUrl+node_id,
+               success: function(data) {
+               console.log(data);
+                  $('#infoBox')
+                     .html(data)
+               },
+               type: 'GET'
+            });
+        }
         </script>
 EOT;
+
+        return $return;
     }
 
     public function javascriptMapManager()

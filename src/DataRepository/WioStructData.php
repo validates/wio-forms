@@ -29,6 +29,7 @@ class WioStructData extends AbstractDataRepository
                 'lng' => $w->NodeLng,
                 'szp_regions' => [],
                 'ap_cities' => [],
+                'ap_collegium' => []
             ];
         }
 
@@ -77,7 +78,24 @@ class WioStructData extends AbstractDataRepository
             ];
         }
 
-        // echo '<pre>'.print_r($wojewodztwa,true).'</pre>';
+        $apCollegiumList = $wioStruct->structQuery(
+            (new StructDefinition())
+                ->networkName('AP')
+                ->nodeTypeName('kolegium')
+                ->linkParent(
+                    (new StructDefinition())
+                        ->networkName('administrative')
+                        ->nodeTypeName('state')
+                )
+        )->get('Node');
+
+        foreach ($apCollegiumList as $apCollegium) {
+            $wojewodztwa[$apCollegium->ParentNodeName]['ap_collegium'][$apCollegium->NodeName] = [
+                'node_id' => $apCollegium->NodeId,
+                'lat' => $apCollegium->NodeLat,
+                'lng' => $apCollegium->NodeLng,
+            ];
+        }
 
         $this->data = $wojewodztwa;
 
