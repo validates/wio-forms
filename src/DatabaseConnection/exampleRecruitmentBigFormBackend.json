@@ -83,6 +83,7 @@
             "type": "local",
             "data": {
                 "podstawowe": "podstawowe",
+                "gimnazjalne": "gimnazjalne",
                 "zawodowe": "zawodowe",
                 "średnie techniczne": "średnie techniczne",
                 "średnie ogólnokształcące": "średnie ogólnokształcące",
@@ -102,6 +103,7 @@
                 "od znajomego, który wcześniej był w Paczce": "select",
                 "w firmie, w której pracuj": "select",
                 "z portalu facebook.pl": "select",
+                "jestem weteranem": "jestem weteranem",
                 "z newslettera od Stowarzyszenia Wiosna": "select",
                 "z innego newslettera": "select",
                 "z artykułu w internecie": "select",
@@ -958,36 +960,14 @@
             "container": "_site",
             "position": 3,
             "displayType": "FullDisplay",
-            "title": "Doświadczenie",
-            "validationPHP":
-            [
-                {
-                    "type": "method",
-                    "method": "AllFieldsOk",
-                    "settings":
-                    {
-                        "containerToCheck": "SiteBigForm3"
-                    }
-                }
-            ]
+            "title": "Doświadczenie"
         },
         "SiteBigForm4": {
             "site": 0,
             "container": "_site",
             "position": 4,
             "displayType": "FullDisplay",
-            "title": "Metryczka",
-            "validationPHP":
-            [
-                {
-                    "type": "method",
-                    "method": "AllFieldsOk",
-                    "settings":
-                    {
-                        "containerToCheck": "SiteBigForm4"
-                    }
-                }
-            ]
+            "title": "Metryczka"
         },
         "editionCounts": {
             "site": 0,
@@ -1176,241 +1156,5 @@
 
 
 
-
-
-
-
-
-
-    "FormSavers": {
-        "fileSave1": {
-            "clearTemporarySave": false,
-            "databaseConnection": "Main",
-            "saveAsEntry": false,
-            "validationPHP":
-            [
-                {
-                    "type": "method",
-                    "method": "FileReadyToUpload",
-                    "settings":
-                    {
-                        "field": "uploadFile1"
-                    }
-                }
-            ],
-            "MethodSaves": [
-                {
-                    "method": "UploadFileToFolder",
-                    "settings":
-                    {
-                        "dir": "big_form_2016_open_question",
-                        "field": "uploadFile1"
-                    }
-                }
-            ]
-        },
-        "fileSave2": {
-            "clearTemporarySave": false,
-            "databaseConnection": "Main",
-            "saveAsEntry": false,
-            "validationPHP":
-            [
-                {
-                    "type": "method",
-                    "method": "FileReadyToUpload",
-                    "settings":
-                    {
-                        "field": "uploadFile2"
-                    }
-                }
-            ],
-            "MethodSaves": [
-                {
-                    "method": "UploadFileToFolder",
-                    "settings":
-                    {
-                        "dir": "big_form_2016_cv",
-                        "field": "uploadFile2"
-                    }
-                }
-            ]
-        },
-
-        "finalSave":
-        {
-            "clearTemporarySave": true,
-            "databaseConnection": "Main",
-            "validationPHP":
-            [
-                {
-                    "type": "logic",
-                    "logicEquation":
-                    {
-                        "type": "and",
-                        "data":
-                        [
-                            {
-                                "type": "isValidContainer",
-                                "container": "SiteBigForm2"
-                            },
-                            {
-                                "type": "isValidContainer",
-                                "container": "SiteBigForm3"
-                            },
-                            {
-                                "type": "runMethod",
-                                "method": "AllFieldsOk",
-                                "settings":
-                                {
-                                    "containerToCheck": "bigFormFront3"
-                                }
-                            },
-                            {
-                                "type": "runMethod",
-                                "method": "AllFieldsOk",
-                                "settings":
-                                {
-                                    "containerToCheck": "bigFormFront4"
-                                }
-                            }
-                        ]
-                    }
-                }
-            ],
-            "MethodSaves": [
-                {
-                    "method": "InsertUserSkills",
-                    "settings":
-                    {
-                        "userId": "userId",
-                        "field": "skille"
-                    }
-                }
-            ],
-            "DatabaseSaves":
-            [
-                {
-                    "type": "update",
-                    "tableName": "user_basic_data",
-                    "where": {
-                        "wio_user_id": {
-                            "type": "field",
-                            "field": "userId"
-                        }
-                    },
-                    "fields": {
-                        "id_number": {
-                            "type": "field",
-                            "field": "pesel"
-                        },
-                        "birth_date": {
-                            "type": "field",
-                            "field": "birthDate",
-                            "converter": "DatePicker2DateTime"
-                        }
-                    }
-                },
-                {
-                    "type": "insert",
-                    "tableName": "user_address_data",
-                    "fields": {
-                        "wio_user_id": {
-                            "type": "field",
-                            "field": "userId"
-                        },
-                        "country": {
-                            "type": "const",
-                            "const": "Poland"
-                        },
-                        "province": {
-                            "type": "field",
-                            "field": "province"
-                        },
-                        "city": {
-                            "type": "field",
-                            "field": "city"
-                        },
-                        "postal_code": {
-                            "type": "field",
-                            "field": "zipCode"
-                        },
-                        "address_street": {
-                            "type": "field",
-                            "field": "street"
-                        },
-                        "address_number": {
-                            "type": "field",
-                            "field": "houseNumber"
-                        },
-                        "type": {
-                            "type": "const",
-                            "const": "adres z metryczki"
-                        }
-                    }
-                },
-                {
-                    "type": "insert",
-                    "tableName": "user_recrutation_answers",
-                    "fields": {
-                        "wio_user_id": {
-                            "type": "field",
-                            "field": "userId"
-                        },
-                        "szp_editions": {
-                            "type": "field",
-                            "field": "editionSzPCount"
-                        },
-                        "ap_editions": {
-                            "type": "field",
-                            "field": "editionAPCount"
-                        },
-                        "who_told_you": {
-                            "type": "field",
-                            "field": "infoSource"
-                        },
-                        "openWhyLider": {
-                            "type": "field",
-                            "field": "openWhyLider"
-                        },
-                        "openWhyRW": {
-                            "type": "field",
-                            "field": "openWhyRada"
-                        },
-                        "openExpectations": {
-                            "type": "field",
-                            "field": "openExpectations"
-                        },
-                        "openDreaming": {
-                            "type": "field",
-                            "field": "openDreaming"
-                        },
-                        "openFileId": {
-                            "type": "field",
-                            "field": "uploadFile1"
-                        },
-                        "cvFileId": {
-                            "type": "field",
-                            "field": "uploadFile2"
-                        },
-                        "occupation": {
-                            "type": "field",
-                            "field": "engagement"
-                        },
-                        "education": {
-                            "type": "field",
-                            "field": "education"
-                        },
-                        "wiosna_volunteerings": {
-                            "type": "field",
-                            "field": "previousRoles"
-                        },
-                        "otherRoles": {
-                            "type": "field",
-                            "field": "otherRoles"
-                        }
-                    }
-                }
-            ]
-        }
-    }
+    "FormSavers": {}
 }
