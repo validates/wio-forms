@@ -121,7 +121,7 @@ EOT;
         }
 
 
-        foreach ($valArray as $textinput=>$none) {
+        foreach ($valArray as $textinput => $none) {
             $keyA = each($this->textValuesArray);
             $key = $keyA['key'];
             $this->textValuesArray[$key] = $textinput;

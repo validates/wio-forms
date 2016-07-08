@@ -25,7 +25,6 @@ class UploadFileToFolder extends AbstractFormSaver
         $filePath = '../uploads/'.$dir.'/wioFlowId_'.$wioFlowEntityId.'_hash_'.$hash.'.'.$fileType;
 
         if (move_uploaded_file($fileData['tmp_name'], BASEPATH.$filePath)) {
-
             $query = [
                 'table' => 'uploaded_files',
                 'insert' => [
@@ -44,7 +43,6 @@ class UploadFileToFolder extends AbstractFormSaver
             $this->wioForms->validatorService->validateFields();
             $this->wioForms->validatorService->validateContainers();
         } else {
-
         }
 
 
