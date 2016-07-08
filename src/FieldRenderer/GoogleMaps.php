@@ -159,7 +159,7 @@ EOT;
         $return .= "selected: 'mazowieckie', ";
         $return .= 'secondLvl: '.((isset($this->fieldInfo['rendererData']['secondLvl'])) ? 'true' : 'false').',';
         $return .= "color: '".($this->fieldInfo['rendererData']['mapColor'] ? $this->fieldInfo['rendererData']['mapColor'] : '#FF0000')."',";
-        $return .= "declension: ". json_encode($this->declension)."};";
+        $return .= 'declension: '.json_encode($this->declension).'};';
         $return .= <<<'EOT'
 
         function findPolygonCenter(P){
