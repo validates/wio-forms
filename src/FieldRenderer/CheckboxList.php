@@ -41,7 +41,5 @@ class CheckboxList extends AbstractFieldRenderer
     {
         $valArray = array_flip(explode('|', $this->value));
         $this->valueArray = $valArray;
-
-        var_dump($this->valueArray);
     }
 }
