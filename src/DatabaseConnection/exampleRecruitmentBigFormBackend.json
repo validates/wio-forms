@@ -113,13 +113,12 @@
                 "z innego źródła – jakiego?": "textfield"
             }
         },
-        "loginUser": {
+        "bigFormBackendData": {
             "type": "foreign",
             "data": false,
-            "class": "WioUserLogin",
+            "class": "BigFormBackendData",
             "requiredFields": {
-                "email": "login",
-                "password": "password"
+                "userId": "userId"
             }
         },
         "skille": {
@@ -297,9 +296,6 @@
         },
         "Pesel": {
             "class": "Pesel"
-        },
-        "Date": {
-            "class": "Date"
         }
     },
     "ContainerValidatorsPHP": {
@@ -336,12 +332,7 @@
             "position": 10,
             "title": "User Id",
             "state": 0,
-            "save": true,
-            "defaultValue":
-            {
-                "repositoryName": "loginUser",
-                "subset": ["wioUserId"]
-            }
+            "save": true
         },
         "wioFlowEntityId": {
             "type": "Hidden",
@@ -350,65 +341,11 @@
             "title": "Wio Flow Entity Id",
             "state": 0,
             "save": true,
-            "defaultValue":
-            {
-                "repositoryName": "loginUser",
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
                 "subset": ["wioFlowEntityId"]
             }
         },
-
-
-
-
-        "login": {
-            "type": "TextInput",
-            "container": "SiteBigForm0",
-            "position": 1,
-            "title": "Adres e-mail",
-            "state": 0,
-            "save": true,
-            "dataSet": {
-                "repositoryName": "editionCounter"
-            },
-            "class": {
-                "wrapper": "edititem half-size",
-                "input": "veryLong wypisz"
-            },
-            "validationPHP":
-            [
-                {
-                    "method": "Email"
-                },
-                {
-                    "method": "NotEmpty"
-                }
-            ]
-
-        },
-        "password": {
-            "type": "PasswordInput",
-            "container": "SiteBigForm0",
-            "position": 2,
-            "title": "Hasło",
-            "state": 0,
-            "save": true,
-            "dataSet": {
-                "repositoryName": "editionCounter"
-            },
-            "class": {
-                "wrapper": "edititem half-size",
-                "input": "veryLong wypisz"
-            },
-            "validationPHP":
-            [
-                {
-                    "method": "NotEmpty"
-                }
-            ]
-
-        },
-
-
 
 
         "editionSzPCount": {
@@ -420,6 +357,10 @@
             "save": true,
             "dataSet": {
                 "repositoryName": "editionCounter"
+            },
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["szp_editions"]
             },
             "class": {
                 "wrapper": "edititem half-size",
@@ -446,6 +387,10 @@
                 "wrapper": "edititem half-size",
                 "input": "veryLong wypisz"
             },
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["ap_editions"]
+            },
             "validationPHP":
             [
                 {
@@ -468,6 +413,10 @@
                 "wrapper": "edititem",
                 "input": "veryLong wypisz"
             },
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["wiosna_volunteerings"]
+            },
             "isGroup": true
         },
         "otherRoles": {
@@ -480,6 +429,10 @@
             "dataSet": {
                 "repositoryName": "otherRoles"
             },
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["otherRoles"]
+            },
             "validationPHP":
             [
                 {
@@ -491,12 +444,16 @@
 
 
         "uploadFile1": {
-            "type": "FileUpload",
+            "type": "UploadedFileLink",
             "container": "bigFormFront2before",
             "position": 1,
             "title": "Opisz najbardziej rozwojowe doświadczenie w Twoim życiu. Zastanów się, jak wpłynęło ono na Ciebie. Jakie wnioski wyciągasz dla siebie i dlaczego to właśnie to doświadczenie/wydarzenie jest dla Ciebie ważne? Załącz zadanie na ok. 1 stronę A4 w formacie PDF.",
             "state": 0,
             "save": true,
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["openFileId"]
+            },
             "validationPHP":
             [
                 {
@@ -511,6 +468,10 @@
             "title": "Dlaczego chcesz zostać członkiem Rady Wojewódzkiej?",
             "state": 0,
             "save": true,
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["openWhyRW"]
+            },
             "validationPHP":
             [
                 {
@@ -525,6 +486,10 @@
             "title": "Dlaczego chcesz zostać Liderem?",
             "state": 0,
             "save": true,
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["openWhyLider"]
+            },
             "validationPHP":
             [
                 {
@@ -539,6 +504,10 @@
             "title": "Masz za sobą udział w Dużym Spotkaniu. Na podstawie tego, czego się na nim dowiedziałeś/aś, napisz o swoich oczekiwaniach względem Paczki/Akademii",
             "state": 0,
             "save": true,
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["openExpectations"]
+            },
             "validationPHP":
             [
                 {
@@ -553,6 +522,10 @@
             "title": "Wyobraź sobie siebie za 5 lat. Gdzie jesteś? Jakim jesteś człowiekiem? Czym zajmujesz się na co dzień? Z czego jesteś dumny/a?",
             "state": 0,
             "save": true,
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["openDreaming"]
+            },
             "validationPHP":
             [
                 {
@@ -577,6 +550,10 @@
                 "wrapper": "edititem",
                 "input": "veryLong wypisz"
             },
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["occupation"]
+            },
             "validationPHP":
             [
                 {
@@ -595,6 +572,10 @@
             "dataSet": {
                 "repositoryName": "education"
             },
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["education"]
+            },
             "class": {
                 "wrapper": "edititem",
                 "input": "veryLong wypisz"
@@ -607,12 +588,16 @@
             ]
         },
         "uploadFile2": {
-            "type": "FileUpload",
+            "type": "UploadedFileLink",
             "container": "bigFormFront3",
             "position": 3,
             "title": "CV",
             "state": 0,
             "save": true,
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["cvFileId"]
+            },
             "validationPHP":
             [
                 {
@@ -631,6 +616,10 @@
             {
                 "repositoryName": "skille"
             },
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["skille"]
+            },
             "validationPHP":
             [
                 {
@@ -648,6 +637,10 @@
             "title": "Pesel",
             "state": 0,
             "save": true,
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["id_number"]
+            },
             "validationPHP":
             [
                 {
@@ -665,11 +658,12 @@
             "title": "Data urodzenia",
             "state": 0,
             "save": true,
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["birth_date"]
+            },
             "validationPHP":
             [
-                {
-                    "method": "Date"
-                },
                 {
                     "method": "NotEmpty"
                 }
@@ -682,6 +676,10 @@
             "title": "Województwo",
             "state": 0,
             "save": true,
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["province"]
+            },
             "dataSet": {
                 "repositoryName":"wioStructProvince"
             },
@@ -699,6 +697,10 @@
             "title": "Kod pocztowy",
             "state": 0,
             "save": true,
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["postal_code"]
+            },
             "validationPHP":
             [
                 {
@@ -713,6 +715,10 @@
             "title": "Miejscowość",
             "state": 0,
             "save": true,
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["city"]
+            },
             "validationPHP":
             [
                 {
@@ -727,6 +733,10 @@
             "title": "Ulica",
             "state": 0,
             "save": true,
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["address_street"]
+            },
             "validationPHP":
             [
                 {
@@ -741,6 +751,10 @@
             "title": "Nr domu/mieszkania",
             "state": 0,
             "save": true,
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["address_number"]
+            },
             "validationPHP":
             [
                 {
@@ -755,6 +769,10 @@
             "title": "Skąd dowiedziałeś się o procesie rekrutacji?",
             "state": 0,
             "save": true,
+            "defaultValue": {
+                "repositoryName": "bigFormBackendData",
+                "subset": ["who_told_you"]
+            },
             "dataSet": {
                 "repositoryName":"infoSource"
             },
@@ -778,29 +796,8 @@
 
 
     "Containers": {
-        "SiteBigForm0": {
-            "site": 0,
-            "container": "_site",
-            "position": 0,
-            "displayType": "FullDisplay",
-            "title": "Logowanie",
-            "validationPHP":
-            [
-                {
-                    "type": "logic",
-                    "newErrorState": -1,
-                    "newErrorMessage": "login_failed",
-                    "logicEquation":
-                    {
-                        "type": "isSuccessRepository",
-                        "repository": "loginUser"
-                    }
-                }
-            ]
-
-        },
         "SiteBigForm1": {
-            "site": 1,
+            "site": 0,
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
@@ -833,7 +830,7 @@
                                         [
                                             {
                                                 "type": "repositoryValue",
-                                                "repositoryName": "loginUser",
+                                                "repositoryName": "bigFormBackendData",
                                                 "subset": ["userRole"]
                                             },
                                             {
@@ -850,36 +847,13 @@
                             }
                         ]
                     }
-                },
-                {
-                    "type": "logic",
-                    "newErrorState": -2,
-                    "logicEquation": {
-                        "type": "isSuccessRepository",
-                        "repository": "loginUser"
-                    }
-                }
-            ],
-            "stateActions":
-            [
-                {
-                    "state": -2,
-                    "actions": ["hide"]
-                },
-                {
-                    "state": -1,
-                    "actions": ["show"]
-                },
-                {
-                    "state": 1,
-                    "actions": ["show"]
                 }
             ]
         },
         "SiteBigForm2": {
-            "site": 2,
+            "site": 0,
             "container": "_site",
-            "position": 1,
+            "position": 2,
             "displayType": "FullDisplay",
             "title": "Zadanie wraz z pytaniami pogłębiającymi",
             "validationPHP":
@@ -922,7 +896,7 @@
                                                 [
                                                     {
                                                         "type": "repositoryValue",
-                                                        "repositoryName": "loginUser",
+                                                        "repositoryName": "bigFormBackendData",
                                                         "subset": ["userRole"]
                                                     },
                                                     {
@@ -952,7 +926,7 @@
                                                 [
                                                     {
                                                         "type": "repositoryValue",
-                                                        "repositoryName": "loginUser",
+                                                        "repositoryName": "bigFormBackendData",
                                                         "subset": ["userRole"]
                                                     },
                                                     {
@@ -976,37 +950,13 @@
                             }
                         ]
                     }
-                },
-                {
-                    "type": "logic",
-                    "newErrorState": -2,
-                    "logicEquation":
-                    {
-                        "type": "isValidContainer",
-                        "container": "SiteBigForm1"
-                    }
-                }
-            ],
-            "stateActions":
-            [
-                {
-                    "state": -2,
-                    "actions": ["hide"]
-                },
-                {
-                    "state": -1,
-                    "actions": ["show"]
-                },
-                {
-                    "state": 1,
-                    "actions": ["show"]
                 }
             ]
         },
         "SiteBigForm3": {
-            "site": 3,
+            "site": 0,
             "container": "_site",
-            "position": 1,
+            "position": 3,
             "displayType": "FullDisplay",
             "title": "Doświadczenie",
             "validationPHP":
@@ -1018,37 +968,13 @@
                     {
                         "containerToCheck": "SiteBigForm3"
                     }
-                },
-                {
-                    "type": "logic",
-                    "newErrorState": -2,
-                    "logicEquation":
-                    {
-                        "type": "isValidContainer",
-                        "container": "SiteBigForm2"
-                    }
-                }
-            ],
-            "stateActions":
-            [
-                {
-                    "state": -2,
-                    "actions": ["hide"]
-                },
-                {
-                    "state": -1,
-                    "actions": ["show"]
-                },
-                {
-                    "state": 1,
-                    "actions": ["show"]
                 }
             ]
         },
         "SiteBigForm4": {
-            "site": 4,
+            "site": 0,
             "container": "_site",
-            "position": 1,
+            "position": 4,
             "displayType": "FullDisplay",
             "title": "Metryczka",
             "validationPHP":
@@ -1060,78 +986,25 @@
                     {
                         "containerToCheck": "SiteBigForm4"
                     }
-                },
-                {
-                    "type": "logic",
-                    "newErrorState": -2,
-                    "logicEquation":
-                    {
-                        "type": "isValidContainer",
-                        "container": "SiteBigForm3"
-                    }
-                }
-            ],
-            "stateActions":
-            [
-                {
-                    "state": -2,
-                    "actions": ["hide"]
-                },
-                {
-                    "state": -1,
-                    "actions": ["show"]
-                },
-                {
-                    "state": 1,
-                    "actions": ["show"]
-                }
-            ]
-        },
-        "SiteBigForm5": {
-            "site": 5,
-            "container": "_site",
-            "position": 1,
-            "displayType": "FullDisplay",
-            "title": "<div style=\"margin: 60px auto 120px; font-size: 40px; color: red; font-weight: bold;\">Dziękujemy za wypełnienie formularza</div>",
-            "validationPHP":
-            [
-                {
-                    "type": "method",
-                    "method": "FormSaverOk",
-                    "settings":
-                    {
-                        "formSaverToCheck": "finalSave"
-                    }
-                }
-            ],
-            "stateActions":
-            [
-                {
-                    "state": -1,
-                    "actions": ["hide"]
-                },
-                {
-                    "state": 1,
-                    "actions": ["show"]
                 }
             ]
         },
         "editionCounts": {
-            "site": 1,
+            "site": 0,
             "container": "SiteBigForm1",
             "position": 1,
             "displayType": "SectionDisplay",
             "title": ""
         },
         "repeatableQuestion": {
-            "site": 1,
+            "site": 0,
             "container": "SiteBigForm1",
             "position": 2,
             "displayType": "SectionDisplay",
             "title": ""
         },
         "radaQuestion1": {
-            "site": 1,
+            "site": 0,
             "container": "SiteBigForm1",
             "position": 3,
             "displayType": "SectionDisplay",
@@ -1149,7 +1022,7 @@
                         [
                             {
                                 "type": "repositoryValue",
-                                "repositoryName": "loginUser",
+                                "repositoryName": "bigFormBackendData",
                                 "subset": ["userRole"]
                             },
                             {
@@ -1177,7 +1050,7 @@
             ]
         },
         "radaQuestion2": {
-            "site": 1,
+            "site": 0,
             "container": "SiteBigForm2",
             "position": 2,
             "displayType": "SectionDisplay",
@@ -1195,7 +1068,7 @@
                         [
                             {
                                 "type": "repositoryValue",
-                                "repositoryName": "loginUser",
+                                "repositoryName": "bigFormBackendData",
                                 "subset": ["userRole"]
                             },
                             {
@@ -1223,7 +1096,7 @@
             ]
         },
         "liderQuestion2": {
-            "site": 1,
+            "site": 0,
             "container": "SiteBigForm2",
             "position": 3,
             "displayType": "SectionDisplay",
@@ -1241,7 +1114,7 @@
                         [
                             {
                                 "type": "repositoryValue",
-                                "repositoryName": "loginUser",
+                                "repositoryName": "bigFormBackendData",
                                 "subset": ["userRole"]
                             },
                             {
@@ -1268,40 +1141,19 @@
                 }
             ]
         },
-        "SubmitButton0": {
-            "site": 0,
-            "container": "SiteBigForm0",
-            "position": 4,
-            "displayType": "Button1",
-            "title": "Dalej"
-        },
-        "SubmitButton": {
-            "site": 1,
-            "container": "SiteBigForm1",
-            "position": 4,
-            "displayType": "Button1",
-            "title": "Dalej"
-        },
         "bigFormFront2before": {
-            "site": 1,
+            "site": 0,
             "container": "SiteBigForm2",
             "position": 1,
             "displayType": "SectionDisplay",
             "title": ""
         },
         "bigFormFront2after": {
-            "site": 2,
+            "site": 0,
             "container": "SiteBigForm2",
             "position": 4,
             "displayType": "SectionDisplay",
             "title": ""
-        },
-        "SubmitButton2": {
-            "site": 2,
-            "container": "SiteBigForm2",
-            "position": 5,
-            "displayType": "Button1",
-            "title": "Dalej"
         },
         "bigFormFront3": {
             "site": 3,
@@ -1310,26 +1162,12 @@
             "displayType": "SectionDisplay",
             "title": ""
         },
-        "SubmitButton3": {
-            "site": 3,
-            "container": "SiteBigForm3",
-            "position": 2,
-            "displayType": "Button1",
-            "title": "Dalej"
-        },
         "bigFormFront4": {
             "site": 4,
             "container": "SiteBigForm4",
             "position": 1,
             "displayType": "SectionDisplay",
             "title": ""
-        },
-        "SubmitButton4": {
-            "site": 4,
-            "container": "SiteBigForm4",
-            "position": 2,
-            "displayType": "Button1",
-            "title": "Dalej"
         }
     },
 
