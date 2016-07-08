@@ -4,6 +4,8 @@ namespace WioForms\FieldRenderer;
 
 class GoogleMaps extends AbstractFieldRenderer
 {
+    protected $declension = [];
+
     public function showToEdit()
     {
         $this->html = '';
@@ -12,6 +14,18 @@ class GoogleMaps extends AbstractFieldRenderer
         $this->standardErrorDisplay();
         $this->inputTitleContainer();
         $this->inputFieldContainerHead();
+
+        if ($this->wioForms->entryData['akcja'] == 'AP') {
+            $this->declension = ['miasto', 'miasta', 'miast'];
+        }
+
+        if ($this->wioForms->entryData['akcja'] == 'SZP') {
+            $this->declension = ['rejon', 'rejony', 'rejonów'];
+        }
+
+        if (isset($this->fieldInfo['rendererData']['declension'])) {
+            $this->declension = $this->fieldInfo['rendererData']['declension'];
+        }
 
         if (!isset($this->wioForms->settings['GoogleMapsApi']['Key'])) {
             $this->wioForms->errorLog->errorLog('No GoogleMapsApi Key in settings');
@@ -116,7 +130,8 @@ EOT;
         $return .= 'zoomStage: 1, ';
         $return .= "selected: 'mazowieckie', ";
         $return .= 'secondLvl: '.((isset($this->fieldInfo['rendererData']['secondLvl'])) ? 'true' : 'false').',';
-        $return .= "color: '".($this->fieldInfo['rendererData']['mapColor'] ? $this->fieldInfo['rendererData']['mapColor'] : '#FF0000')."'};";
+        $return .= "color: '".($this->fieldInfo['rendererData']['mapColor'] ? $this->fieldInfo['rendererData']['mapColor'] : '#FF0000')."',";
+        $return .= "declension: ". json_encode($this->declension)."};";
         $return .= <<<'EOT'
 
         function findPolygonCenter(P){
@@ -366,21 +381,13 @@ EOT;
         }
 
         function declension(number) {
+
         	if (number !== 1 && (number % 10 <= 1 || number % 10 >= 5 || (number % 100 >= 11 && number % 100 <= 19))) {
-                if (program == 'AP') {
-                    return "miast";
-                }
-                return "rejonów";
+                return WOJoptions.declension[2];
             } else if (number == 1) {
-                if (program == 'AP') {
-                    return "miasto";
-                }
-                return "rejon";
+                return WOJoptions.declension[0];
             }
-            if (program == 'AP') {
-                return "miasta";
-            }
-            return "rejony";
+            return WOJoptions.declension[1];
         }
 
         $(function() {

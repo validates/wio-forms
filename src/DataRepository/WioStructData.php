@@ -29,6 +29,7 @@ class WioStructData extends AbstractDataRepository
                 'lng' => $w->NodeLng,
                 'szp_regions' => [],
                 'ap_cities' => [],
+                'ap_kolegia' => []
             ];
         }
 
@@ -77,7 +78,27 @@ class WioStructData extends AbstractDataRepository
             ];
         }
 
-        // echo '<pre>'.print_r($wojewodztwa,true).'</pre>';
+
+        $kolegia = $wioStruct->structQuery(
+            (new StructDefinition())
+                ->networkName('Akademia Przyszłości')
+                ->nodeTypeName('kolegium')
+                ->flagTypeName('mapa_wolontariuszy_2016')
+                ->linkParent(
+                    (new StructDefinition())
+                        ->networkName('administrative')
+                        ->nodeTypeName('state')
+                )
+            )
+            ->get('Node');
+        foreach ($kolegia as $kolegium) {
+            $wojewodztwa[$kolegium->ParentNodeName]['ap_kolegia'][$kolegium->NodeName] = [
+                'node_id' => $kolegium->NodeId,
+                'lat' => $kolegium->NodeLat,
+                'lng' => $kolegium->NodeLng,
+            ];
+        }
+
 
         $this->data = $wojewodztwa;
 
