@@ -29,7 +29,7 @@ class WioStructData extends AbstractDataRepository
                 'lng' => $w->NodeLng,
                 'szp_regions' => [],
                 'ap_cities' => [],
-                'ap_collegium' => []
+                'ap_collegium' => [],
             ];
         }
 
