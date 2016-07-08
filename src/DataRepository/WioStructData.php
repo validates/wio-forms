@@ -29,7 +29,7 @@ class WioStructData extends AbstractDataRepository
                 'lng' => $w->NodeLng,
                 'szp_regions' => [],
                 'ap_cities' => [],
-                'ap_kolegia' => []
+                'ap_collegium' => [],
             ];
         }
 
@@ -78,8 +78,7 @@ class WioStructData extends AbstractDataRepository
             ];
         }
 
-
-        $kolegia = $wioStruct->structQuery(
+        $apCollegiumList = $wioStruct->structQuery(
             (new StructDefinition())
                 ->networkName('Akademia Przyszłości')
                 ->nodeTypeName('kolegium')
@@ -91,14 +90,14 @@ class WioStructData extends AbstractDataRepository
                 )
             )
             ->get('Node');
-        foreach ($kolegia as $kolegium) {
-            $wojewodztwa[$kolegium->ParentNodeName]['ap_kolegia'][$kolegium->NodeName] = [
-                'node_id' => $kolegium->NodeId,
-                'lat' => $kolegium->NodeLat,
-                'lng' => $kolegium->NodeLng,
+
+        foreach ($apCollegiumList as $apCollegium) {
+            $wojewodztwa[$apCollegium->ParentNodeName]['ap_collegium'][$apCollegium->NodeName] = [
+                'node_id' => $apCollegium->NodeId,
+                'lat' => $apCollegium->NodeLat,
+                'lng' => $apCollegium->NodeLng,
             ];
         }
-
 
         $this->data = $wojewodztwa;
 

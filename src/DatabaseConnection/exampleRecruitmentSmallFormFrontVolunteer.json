@@ -126,34 +126,6 @@
                 }
             ]
         },
-        "map_wojewodztwoSZP": {
-            "type": "GoogleMaps",
-            "container": "MapWojSZP",
-            "position": 1,
-            "title": "Wybierz województwo",
-            "state": 0,
-            "save": true,
-            "dataSet": {
-                "repositoryName": "wioStruct"
-            },
-            "rendererData": {
-                "mapColor": "#FF0000"
-            }
-        },
-        "choose_wojewodztwoAP": {
-            "type": "GoogleMaps",
-            "container": "MapWojAP",
-            "position": 1,
-            "title": "Wybierz województwo",
-            "state": 0,
-            "save": true,
-            "dataSet": {
-                "repositoryName": "wioStruct"
-            },
-            "rendererData": {
-                "mapColor": "#0000FF"
-            }
-        },
         "choose_rejonSZP": {
             "type": "GoogleMaps",
             "container": "MapRejonSZP",
@@ -170,20 +142,23 @@
                 "secondLvlTitle": "Wybierz rejon"
             }
         },
-        "choose_miastoAP": {
+        "choose_collegiumAP": {
             "type": "GoogleMaps",
             "container": "MapCityAP",
             "position": 1,
             "title": "Wybierz województwo",
             "state": 0,
             "save": true,
+            "infoBox": {
+                "url": "/ajax/map_volunteer_ap/"
+            },
             "dataSet": {
                 "repositoryName": "wioStruct"
             },
             "rendererData": {
                 "mapColor": "#0000FF",
-                "secondLvl": "ap_kolegia",
-                "secondLvlTitle": "Wybierz kolegium",
+                "secondLvl": "ap_collegium",
+                "secondLvlTitle": "Wybierz miasto",
                 "declension": ["kolegium", "kolegia", "kolegiów"]
             }
         },
