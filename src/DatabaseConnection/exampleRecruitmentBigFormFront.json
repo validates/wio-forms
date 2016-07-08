@@ -82,11 +82,11 @@
         "education": {
             "type": "local",
             "data": {
-                "1": "podstawowe",
-                "2": "zawodowe",
-                "3": "średnie techniczne",
-                "4": "średnie ogólnokształcące",
-                "5": "wyższe"
+                "podstawowe": "podstawowe",
+                "zawodowe": "zawodowe",
+                "średnie techniczne": "średnie techniczne",
+                "średnie ogólnokształcące": "średnie ogólnokształcące",
+                "wyższe": "wyższe"
             }
         },
         "wioStructProvince": {
@@ -616,7 +616,6 @@
                     "method": "NotEmpty"
                 }
             ]
-
         },
         "skille": {
             "type": "DropdownCheckboxes",
@@ -1525,17 +1524,29 @@
                             "type": "field",
                             "field": "infoSource"
                         },
-                        "open_question_1": {
+                        "openWhyLider": {
                             "type": "field",
                             "field": "openWhyLider"
                         },
-                        "open_question_2": {
+                        "openWhyRW": {
                             "type": "field",
                             "field": "openWhyRada"
                         },
-                        "open_question_3": {
+                        "openExpectations": {
                             "type": "field",
                             "field": "openExpectations"
+                        },
+                        "openDreaming": {
+                            "type": "field",
+                            "field": "openDreaming"
+                        },
+                        "openFileId": {
+                            "type": "field",
+                            "field": "uploadFile1"
+                        },
+                        "cvFileId": {
+                            "type": "field",
+                            "field": "uploadFile2"
                         },
                         "occupation": {
                             "type": "field",
@@ -1548,6 +1559,10 @@
                         "wiosna_volunteerings": {
                             "type": "field",
                             "field": "previousRoles"
+                        },
+                        "otherRoles": {
+                            "type": "field",
+                            "field": "otherRoles"
                         }
                     }
                 }
