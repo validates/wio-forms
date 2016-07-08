@@ -38,7 +38,7 @@ class BigFormBackendData extends AbstractDataRepository
                 'user_address_data.address_street' => 'address_street',
                 'user_address_data.address_number' => 'address_number',
                 'user_basic_data.id_number' => 'id_number',
-                'user_basic_data.birth_date' => 'birth_date'
+                'user_basic_data.birth_date' => 'birth_date',
             ])
             ->first();
 
@@ -90,7 +90,7 @@ class BigFormBackendData extends AbstractDataRepository
         }
 
 
-        foreach (['cvFileId','openFileId'] as $fileName) {
+        foreach (['cvFileId', 'openFileId'] as $fileName) {
             if (isset($this->data[$fileName])) {
                 $result = $queryBuilder->table('uploaded_files')
                     ->where('id', $this->data[$fileName])
@@ -99,7 +99,7 @@ class BigFormBackendData extends AbstractDataRepository
                 if ($result) {
                     $this->data[$fileName] = [
                         'fileName' => $result->file_real_name,
-                        'fileLink' => $result->file_path
+                        'fileLink' => $result->file_path,
                     ];
                 }
             }
