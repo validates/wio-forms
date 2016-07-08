@@ -7,7 +7,6 @@ class BigFormBackendData extends AbstractDataRepository
     public function getData($requiredFields)
     {
         global $queryBuilder;
-        var_dump('ODPALA SIE');
 
         $result = $queryBuilder->table('wio_users')
             ->join('wio_flow_entities', 'wio_users.id', '=', 'wio_flow_entities.wio_user_id')

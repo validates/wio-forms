@@ -83,6 +83,7 @@
             "type": "local",
             "data": {
                 "podstawowe": "podstawowe",
+                "gimnazjalne": "gimnazjalne",
                 "zawodowe": "zawodowe",
                 "średnie techniczne": "średnie techniczne",
                 "średnie ogólnokształcące": "średnie ogólnokształcące",
@@ -102,6 +103,7 @@
                 "od znajomego, który wcześniej był w Paczce": "select",
                 "w firmie, w której pracuj": "select",
                 "z portalu facebook.pl": "select",
+                "jestem weteranem": "jestem weteranem",
                 "z newslettera od Stowarzyszenia Wiosna": "select",
                 "z innego newslettera": "select",
                 "z artykułu w internecie": "select",
