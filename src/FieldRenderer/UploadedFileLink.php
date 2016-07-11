@@ -12,10 +12,10 @@ class UploadedFileLink extends AbstractFieldRenderer
         $this->inputTitleContainer();
         $this->inputFieldContainerHead();
 
-        if (isset($this->value->fileLink) and isset($this->value->fileName)) {
-            $link = str_replace('../', '/', $this->value->fileLink);
+        if (isset($this->value['fileLink']) and isset($this->value['fileName'])) {
+            $link = str_replace('../', '/', $this->value['fileLink']);
 
-            $this->html .= '<a href="'.$link.'" style="color: blue; font-weight: bold; text-decoration: underline;" target="_blank">'.$this->value->fileName.'</a>';
+            $this->html .= '<a href="'.$link.'" style="color: blue; font-weight: bold; text-decoration: underline;" target="_blank">'.$this->value['fileName'].'</a>';
         } else {
             $this->html .= 'Brak pliku.';
         }
