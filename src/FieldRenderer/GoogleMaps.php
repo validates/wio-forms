@@ -4,6 +4,8 @@ namespace WioForms\FieldRenderer;
 
 class GoogleMaps extends AbstractFieldRenderer
 {
+    protected $declension = [];
+
     public function showToEdit()
     {
         $this->html = '';
@@ -12,6 +14,18 @@ class GoogleMaps extends AbstractFieldRenderer
         $this->standardErrorDisplay();
         $this->inputTitleContainer();
         $this->inputFieldContainerHead();
+
+        if ($this->wioForms->entryData['akcja'] == 'AP') {
+            $this->declension = ['miasto', 'miasta', 'miast'];
+        }
+
+        if ($this->wioForms->entryData['akcja'] == 'SZP') {
+            $this->declension = ['rejon', 'rejony', 'rejonów'];
+        }
+
+        if (isset($this->fieldInfo['rendererData']['declension'])) {
+            $this->declension = $this->fieldInfo['rendererData']['declension'];
+        }
 
         if (!isset($this->wioForms->settings['GoogleMapsApi']['Key'])) {
             $this->wioForms->errorLog->errorLog('No GoogleMapsApi Key in settings');
@@ -23,7 +37,6 @@ class GoogleMaps extends AbstractFieldRenderer
             $this->html .= '<option value="'.$wojewodztwo['node_id'].'">'.$wojewodztwoName.'</option>';
         }
         $this->html .= '</select>';
-
 
         if (isset($this->fieldInfo['rendererData']['secondLvl'])) {
             $this->html .= '<div class="wioForms_InputTitleContainer">'.$this->fieldInfo['rendererData']['secondLvlTitle'].'</div>';
@@ -43,11 +56,15 @@ class GoogleMaps extends AbstractFieldRenderer
 
         $this->wioForms->headerCollectorService->addJS('assets/js/wojewodztwa16.js');
 
+
         $this->html .= '<div id="map" class="wioForms_Map"></div>';
         $this->html .= '<script src="https://maps.googleapis.com/maps/api/js?key='.$this->wioForms->settings['GoogleMapsApi']['Key'].'"></script>';
         $this->html .= '<script type="text/javascript" src="//rawgit.com/googlemaps/v3-utility-library/master/infobox/src/infobox.js"></script>';
         $this->html .= '<script type="text/javascript" src="//rawgit.com/googlemaps/js-map-label/gh-pages/src/maplabel-compiled.js"></script>';
 
+        if (!empty($this->fieldInfo['infoBox'])) {
+            $this->html .= '<div id="infoBox" class="box"></div>';
+        }
         $this->inputFieldContainerTail();
         $this->inputContainerTail();
 
@@ -70,8 +87,15 @@ class GoogleMaps extends AbstractFieldRenderer
 
     private function javascriptSelectManager()
     {
-        return <<<'EOT'
+        $return = <<<'EOT'
         <script type="text/javascript">
+EOT;
+        if (!empty($this->fieldInfo['infoBox'])) {
+            $return .= 'var ajaxUrl = '."'".$this->fieldInfo['infoBox']['url']."'".';';
+        } else {
+            $return .= 'var ajaxUrl = false;';
+        }
+        $return .= <<<'EOT'
         $('select[name="country_state"]').change(function(){
             var node_id = $(this).val();
             stateNodeChanged(node_id);
@@ -91,6 +115,10 @@ class GoogleMaps extends AbstractFieldRenderer
             $('select[name="szp_regions"]').val('');
         }
         function regionNodeChanged(node_id){
+            
+            if (ajaxUrl) {
+                fillInfoBox(ajaxUrl, node_id);
+            }
             var state_node_id = $('select[name="szp_regions"] option[value="'+node_id+'"]').attr('class').split('_')[2];
 
             stateNodeChanged(state_node_id);
@@ -98,8 +126,22 @@ class GoogleMaps extends AbstractFieldRenderer
             $('select[name="szp_regions"]').val(node_id);
             $('input[name="node_id"]').val(node_id);
         }
+        
+        function fillInfoBox(ajaxUrl, node_id) {
+            $.ajax({
+               url: ajaxUrl+node_id,
+               success: function(data) {
+               console.log(data);
+                  $('#infoBox')
+                     .html(data)
+               },
+               type: 'GET'
+            });
+        }
         </script>
 EOT;
+
+        return $return;
     }
 
     public function javascriptMapManager()
@@ -116,7 +158,8 @@ EOT;
         $return .= 'zoomStage: 1, ';
         $return .= "selected: 'mazowieckie', ";
         $return .= 'secondLvl: '.((isset($this->fieldInfo['rendererData']['secondLvl'])) ? 'true' : 'false').',';
-        $return .= "color: '".($this->fieldInfo['rendererData']['mapColor'] ? $this->fieldInfo['rendererData']['mapColor'] : '#FF0000')."'};";
+        $return .= "color: '".($this->fieldInfo['rendererData']['mapColor'] ? $this->fieldInfo['rendererData']['mapColor'] : '#FF0000')."',";
+        $return .= 'declension: '.json_encode($this->declension).'};';
         $return .= <<<'EOT'
 
         function findPolygonCenter(P){
@@ -366,21 +409,13 @@ EOT;
         }
 
         function declension(number) {
+
         	if (number !== 1 && (number % 10 <= 1 || number % 10 >= 5 || (number % 100 >= 11 && number % 100 <= 19))) {
-                if (program == 'AP') {
-                    return "miast";
-                }
-                return "rejonów";
+                return WOJoptions.declension[2];
             } else if (number == 1) {
-                if (program == 'AP') {
-                    return "miasto";
-                }
-                return "rejon";
+                return WOJoptions.declension[0];
             }
-            if (program == 'AP') {
-                return "miasta";
-            }
-            return "rejony";
+            return WOJoptions.declension[1];
         }
 
         $(function() {

@@ -14,36 +14,52 @@ class DropdownCheckboxes extends AbstractFieldRenderer
         $this->inputTitleContainer();
         $this->inputFieldContainerHead();
 
-        foreach ($this->dataSet as $groupName => $groupData) {
+        foreach ($this->dataSet as $groupNumber => $groupData) {
             $this->html .= '<div class="wioForms_DropdownCheckboxes_outerContainer">';
-            $this->html .= '<input type="checkbox" name="'.$this->fieldName.'[]" ';
-            if (isset($this->valueArray[$groupName])) {
-                $this->html .= 'checked="checked" ';
-            }
-            $this->html .= 'class="wioForms_DropdownCheckboxes_outerContainerCheckbox" value="'.$groupName.'" /> '.$groupName.'<br/>';
-
             $inner_html = '';
-            foreach ($groupData as $item) {
-                if (is_string($item)) {
-                    $inner_html .= '<input type="checkbox" name="'.$this->fieldName.'[]" value="'.$item.'"';
-                    if (isset($this->valueArray[$groupName]) and isset($this->valueArray[$item])) {
-                        $inner_html .= ' checked="checked"';
-                    }
-                    $inner_html .= '> '.$item.'<br/>';
-                } else {
-                    if ($item['name'] != '') {
-                        $inner_html .= $item['name'].': ';
-                    }
-                    $inner_html .= '<input type="text" name="'.$this->fieldName.'['.$item['textfield'].']" value="'.$this->textValuesArray[$item['textfield']].'">';
+
+            if (isset($groupData['children'])) {
+                $this->html .= '<input type="checkbox" name="'.$this->fieldName.'[]" ';
+
+                $groupValue = $groupNumber.'--'.$groupData['name'];
+                if (isset($this->valueArray[$groupValue])) {
+                    $this->html .= 'checked="checked" ';
                 }
+                $this->html .= 'class="wioForms_DropdownCheckboxes_outerContainerCheckbox" value="'.$groupValue.'" /> '.$groupData['name'].'<br/>';
+
+                foreach ($groupData['children'] as $itemNumber => $itemData) {
+                    if (is_string($itemData)) {
+                        $itemValue = $groupNumber.'-'.$itemNumber.'-'.$itemData;
+                        $inner_html .= '<input type="checkbox" name="'.$this->fieldName.'[]" value="'.$itemValue.'"';
+                        if (isset($this->valueArray[$groupValue]) and isset($this->valueArray[$itemValue])) {
+                            $inner_html .= ' checked="checked"';
+                        }
+                        $inner_html .= '> '.$itemData.'<br/>';
+                    } else {
+                        if ($itemData['name'] != '') {
+                            $inner_html .= $itemData['name'].': ';
+                        }
+                        $inner_html .= '<input type="text" name="'.$this->fieldName.'['.$groupNumber.'-'.$itemNumber.']" value="'.$this->textValuesArray[$itemData['textfield']].'">';
+                    }
+                }
+            }
+            if (isset($groupData['textfield'])) {
+                if ($groupData['name'] != '') {
+                    $inner_html .= $groupData['name'].': ';
+                }
+                $inner_html .= '<input type="text" name="'.$this->fieldName.'['.$groupNumber.'-]" value="'.$this->textValuesArray[$groupData['textfield']].'">';
             }
 
             if (count($inner_html) != 0) {
-                $this->html .= '<div class="wioForms_DropdownCheckboxes_innerContainer"';
-                if (!isset($this->valueArray[$groupName])) {
-                    $this->html .= ' style="display: none;"';
+                if (!isset($groupData['children'])) {
+                    $this->html .= '<div class="wioForms_DropdownCheckboxes_innerContainer">'.$inner_html.'</div>';
+                } else {
+                    $this->html .= '<div class="wioForms_DropdownCheckboxes_innerContainer"';
+                    if (!isset($this->valueArray[$groupValue])) {
+                        $this->html .= ' style="display: none;"';
+                    }
+                    $this->html .= '>'.$inner_html.'</div>';
                 }
-                $this->html .= '>'.$inner_html.'</div>';
             }
 
             $this->html .= '</div>';
@@ -86,18 +102,28 @@ EOT;
         $valArray = array_flip(explode('|', $this->value));
         $this->valueArray = $valArray;
 
-        $this->textValuesArray = [];
 
-        foreach ($this->dataSet as $groupName => $groupData) {
-            unset($valArray[$groupName]);
-            foreach ($groupData as $item) {
-                if (is_string($item)) {
-                    unset($valArray[$item]);
-                } else {
-                    $this->textValuesArray[$item['textfield']] = '';
+        $this->textValuesArray = [];
+        $textKeys = [];
+
+        foreach ($this->dataSet as $groupNumber => $groupData) {
+            $groupValue = $groupNumber.'--'.$groupData['name'];
+            if (isset($groupData['children'])) {
+                unset($valArray[$groupValue]);
+                foreach ($groupData['children'] as $itemNumber => $itemData) {
+                    if (is_string($itemData)) {
+                        $itemValue = $groupNumber.'-'.$itemNumber.'-'.$itemData;
+                        unset($valArray[$itemValue]);
+                    } else {
+                        $this->textValuesArray[$itemData['textfield']] = '';
+                    }
                 }
             }
+            if (isset($groupData['textfield'])) {
+                $this->textValuesArray[$groupData['textfield']] = '';
+            }
         }
+
 
         foreach ($valArray as $textinput => $none) {
             $keyA = each($this->textValuesArray);
