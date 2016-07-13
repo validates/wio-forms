@@ -79,7 +79,7 @@ class WioForms
         }
 
         // later on we should get that from config file or formStruct:
-        $temporarySaveClass = '\WioForms\TemporarySave\Cookie';
+        $temporarySaveClass = '\WioForms\TemporarySave\Session';
         $this->temporarySave = new $temporarySaveClass($this);
     }
 
