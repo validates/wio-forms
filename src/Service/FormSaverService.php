@@ -46,6 +46,10 @@ class FormSaverService
         foreach ($FormSavers as $FormSaverName => &$FormSaver) {
             if ($this->validateFormSaver($FormSaver)) {
                 $this->saveForm($FormSaver);
+            } else {
+                if (isset($FormSaver['clearTemporarySaveOnError'])) {
+                    $this->clearTemporarySave = $FormSaver['clearTemporarySaveOnError'];
+                }
             }
         }
     }
@@ -154,7 +158,7 @@ class FormSaverService
             $query = [
                 'table' => 'wio_forms_entries',
                 'where' => [
-                    'id' => '$wioFormsEntryId',
+                    'id' => $wioFormsEntryId,
                 ],
                 'update' => [
                     'database_entries' => json_encode($databaseEntries),
@@ -177,9 +181,11 @@ class FormSaverService
             if ($fieldValue !== false) {
                 $query[$databaseSave['type']][$saveFieldName] = $fieldValue;
             } else {
-                $this->wioForms->errorLog->errorLog('makeDatabaseSave: field '.$saveFieldName.' for '.$databaseSave['tableName'].' not get properly.');
+                if (!isset($saveField['notRequired'])) {
+                    $this->wioForms->errorLog->errorLog('makeDatabaseSave: field '.$saveFieldName.' for '.$databaseSave['tableName'].' not get properly.');
 
-                return false;
+                    return false;
+                }
             }
         }
         if ($databaseSave['type'] === 'update') {

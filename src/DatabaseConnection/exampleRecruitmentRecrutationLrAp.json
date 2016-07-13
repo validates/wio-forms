@@ -382,7 +382,7 @@
                 "repositoryName": "wioStructAPNodes",
                 "subset": ["city"]
             },
-            "defaultValue":{
+            "defaultValue": {
                 "repositoryName": "WioFlowUserNodes",
                 "subset": ["given_city"]
             },

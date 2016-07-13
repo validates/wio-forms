@@ -21,7 +21,7 @@ class ChangeLpSzPStatus extends AbstractFormSaver
 
     private function isFinalStatus($newStatus)
     {
-        return (int) $newStatus === 70;
+        return (int) $newStatus === 60;
     }
 
     private function handleNodeFlags($assignedArea)
