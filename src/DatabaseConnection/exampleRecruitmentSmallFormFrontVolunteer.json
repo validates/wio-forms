@@ -350,7 +350,7 @@
         "volunteer_level": {
             "type": "RadioList",
             "container": "RegisterData",
-            "position": 3,
+            "position": 1,
             "title": "Określ siebie jako kandydata nowego lub weterana w odniesieniu do nadchodzącej edycji Paczki/Akademii",
             "state": 0,
             "save": true,
@@ -366,7 +366,7 @@
         "register_name": {
             "type": "TextInput",
             "container": "RegisterData",
-            "position": 1,
+            "position": 2,
             "title": "Imię",
             "state": 0,
             "save": true,
@@ -385,7 +385,7 @@
         "register_surname": {
             "type": "TextInput",
             "container": "RegisterData",
-            "position": 2,
+            "position": 3,
             "title": "Nazwisko",
             "state": 0,
             "save": true,
@@ -404,7 +404,7 @@
         "register_phone_number": {
             "type": "TextInput",
             "container": "RegisterData",
-            "position": 3,
+            "position": 4,
             "title": "Telefon Kontaktowy",
             "state": 0,
             "save": true,
@@ -429,7 +429,7 @@
         "register_date": {
             "type": "DatePicker",
             "container": "RegisterData",
-            "position": 4,
+            "position": 5,
             "title": "Data urodzenia",
             "state": 0,
             "save": true,
@@ -452,7 +452,7 @@
         "register_gender": {
             "type": "Select",
             "container": "RegisterData",
-            "position": 5,
+            "position": 6,
             "title": "Płeć",
             "state": 0,
             "save": true,
@@ -475,7 +475,7 @@
         "agreement_1": {
             "type": "AgreementWithText",
             "container": "RegisterData",
-            "position": 6,
+            "position": 7,
             "title": "Zgoda na przetwarzanie danych",
             "state": 0,
             "save": true,
@@ -591,13 +591,79 @@
             "container": "_site",
             "position": 1,
             "displayType": "FullDisplay",
-            "title": "<div style=\"margin-top: 30px; text-align: center; box-shadow: 1px 2px 8px 0px rgba(39, 34, 26, 0.3); border-radius: 5px; padding: 20px 40px;\"><h2 style=\"text-align: center; font-family: Lato; color: #e95141; font-size: 24px;\">Dziękujemy za Twoje zgłoszenie!</h2> <p style=\"font-family: Lato; font-size: 20px;text-align: center; \">Sprawdź pocztę. Właśnie otrzymałeś od nas maila z potwierdzeniem rejestracji.</p><img style=\"margin-top: 10px;\" src=\"/assets/img/rekrutacja_lr_2016/decision.png\"></div>",
+            "title": "<div style=\"margin-top: 30px; text-align: center; box-shadow: 1px 2px 8px 0px rgba(39, 34, 26, 0.3); border-radius: 5px; padding: 20px 40px;\"><h2 style=\"text-align: center; font-family: Lato; color: #e95141; font-size: 24px;\">Dziękujemy za Twoje zgłoszenie!</h2> <p style=\"font-family: Lato; font-size: 20px;text-align: center; \">Sprawdź pocztę. Właśnie otrzymałeś od nas maila z potwierdzeniem rejestracji.</p><img style=\"margin-top: 10px;\" src=\"/assets/img/rekrutacja_w_2016/decision_veteran.png\"></div>",
             "validationPHP": [
                 {
                     "type": "method",
                     "method": "FormSaverOk",
                     "settings": {
                         "formSaverToCheck": "finalSave"
+                    }
+                },
+                {
+                    "type": "logic",
+                    "newState": 1,
+                    "newErrorState": -1,
+                    "logicEquation": {
+                        "type": "equal",
+                        "data": [
+                            {
+                                "type": "fieldValue",
+                                "field": "volunteer_level"
+                            },
+                            {
+                                "type": "const",
+                                "const": "volunteer_veteran"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "stateActions": [
+                {
+                    "state": -1,
+                    "actions": [
+                        "hide"
+                    ]
+                },
+                {
+                    "state": 1,
+                    "actions": [
+                        "show"
+                    ]
+                }
+            ]
+        },
+        "Site6": {
+            "site": 5,
+            "container": "_site",
+            "position": 1,
+            "displayType": "FullDisplay",
+            "title": "<div style=\"margin-top: 30px; text-align: center; box-shadow: 1px 2px 8px 0px rgba(39, 34, 26, 0.3); border-radius: 5px; padding: 20px 40px;\"><h2 style=\"text-align: center; font-family: Lato; color: #e95141; font-size: 24px;\">Dziękujemy za Twoje zgłoszenie!</h2> <p style=\"font-family: Lato; font-size: 20px;text-align: center; \">Sprawdź pocztę. Właśnie otrzymałeś od nas maila z potwierdzeniem rejestracji.</p><img style=\"margin-top: 10px;\" src=\"/assets/img/rekrutacja_w_2016/decision_new.png\"></div>",
+            "validationPHP": [
+                {
+                    "type": "method",
+                    "method": "FormSaverOk",
+                    "settings": {
+                        "formSaverToCheck": "finalSave"
+                    }
+                },
+                {
+                    "type": "logic",
+                    "newState": 1,
+                    "newErrorState": -1,
+                    "logicEquation": {
+                        "type": "equal",
+                        "data": [
+                            {
+                                "type": "fieldValue",
+                                "field": "volunteer_level"
+                            },
+                            {
+                                "type": "const",
+                                "const": "volunteer_new"
+                            }
+                        ]
                     }
                 }
             ],
