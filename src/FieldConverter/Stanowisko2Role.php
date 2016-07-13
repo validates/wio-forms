@@ -9,7 +9,7 @@ class Stanowisko2Role extends AbstractFieldConverter
         $map = [
             'rada' => 'RW',
             'lider' => 'LR',
-            'wolontariusz' => 'W'
+            'wolontariusz' => 'W',
             // LR_R - lider z propozycją rejonu
         ];
 
