@@ -17,7 +17,8 @@ class Link extends AbstractFieldRenderer
 
     public function showToEdit()
     {
-        $html = '<div>'.$this->fieldInfo['label'].' <a class="'.$this->fieldInfo['class'].'" href="'.$this->fieldInfo['url'].'">'.$this->title.'</a>'."\n".'</div>';
+        $label = isset($this->fieldInfo['label']) ? $this->fieldInfo['label'] : '';
+        $html = '<div>'.$label.' <a class="'.$this->fieldInfo['class'].'" href="'.$this->fieldInfo['url'].'">'.$this->title.'</a>'."\n".'</div>';
 
         return $html;
     }
@@ -31,6 +32,9 @@ class Link extends AbstractFieldRenderer
 
     private function prepareParamSet()
     {
+        if (!isset($this->fieldInfo['paramSet'])) {
+            return;
+        }
         foreach ($this->fieldInfo['paramSet'] as $paramKey => $paramRepository) {
             $paramSetName = $paramRepository['repositoryName'];
             if (!isset($this->formStruct['DataRepositories'][$paramSetName])) {
@@ -62,6 +66,9 @@ class Link extends AbstractFieldRenderer
 
     private function prepareTitleSet()
     {
+        if (!isset($this->fieldInfo['titleSet'])) {
+            return;
+        }
         if (is_array($this->fieldInfo['titleSet'])) {
             $titleRepository = $this->fieldInfo['titleSet'];
             $this->title = $this->formStruct['DataRepositories'][$titleRepository['repositoryName']]['data'][reset($titleRepository['subset'])];

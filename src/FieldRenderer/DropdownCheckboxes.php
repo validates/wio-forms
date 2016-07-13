@@ -51,11 +51,15 @@ class DropdownCheckboxes extends AbstractFieldRenderer
             }
 
             if (count($inner_html) != 0) {
-                $this->html .= '<div class="wioForms_DropdownCheckboxes_innerContainer"';
-                if (!isset($this->valueArray[$groupValue])) {
-                    $this->html .= ' style="display: none;"';
+                if (!isset($groupData['children'])) {
+                    $this->html .= '<div class="wioForms_DropdownCheckboxes_innerContainer">'.$inner_html.'</div>';
+                } else {
+                    $this->html .= '<div class="wioForms_DropdownCheckboxes_innerContainer"';
+                    if (!isset($this->valueArray[$groupValue])) {
+                        $this->html .= ' style="display: none;"';
+                    }
+                    $this->html .= '>'.$inner_html.'</div>';
                 }
-                $this->html .= '>'.$inner_html.'</div>';
             }
 
             $this->html .= '</div>';

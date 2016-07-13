@@ -45,6 +45,13 @@
             "type": "foreign",
             "data": false,
             "class": "WioStructData"
+        },
+        "volunteerLevel": {
+            "type": "local",
+            "data": {
+                "volunteer_veteran": "<b>WETERAN</b> – Brałem udział w Paczce/Akademii w roli wolontaryjnej w poprzedniej edycji programu (2015 rok)",
+                "volunteer_new": "<b>NOWY</b> – Po raz pierwszy biorę udział w rekrutacji do Paczki/Akademii/ lub uczestniczyłem w Paczce/Akademii, ale nie w ostatniej edycji (2015 rok)"
+            }
         }
     },
     "FieldValidatorsPHP": {
@@ -312,16 +319,48 @@
                 }
             ]
         },
+        "volunteer_level": {
+            "type": "RadioList",
+            "container": "RegisterForm",
+            "position": 3,
+            "title": "Określ siebie jako kandydata nowego lub weterana w odniesieniu do nadchodzącej edycji Paczki/Akademii",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "volunteerLevel"
+            },
+            "validationPHP": [
+                {
+                    "method": "NotEmpty"
+                }
+            ]
+        },
         "register_captcha": {
             "type": "GoogleReCaptcha",
             "container": "RegisterForm",
-            "position": 3,
+            "position": 4,
             "title": "Wypełnij Captche",
             "state": 0,
             "save": false,
             "validationPHP": [
                 {
                     "method": "ReCaptcha"
+                }
+            ]
+        },
+        "volunteer_level": {
+            "type": "RadioList",
+            "container": "RegisterData",
+            "position": 3,
+            "title": "Określ siebie jako kandydata nowego lub weterana w odniesieniu do nadchodzącej edycji Paczki/Akademii",
+            "state": 0,
+            "save": true,
+            "dataSet": {
+                "repositoryName": "volunteerLevel"
+            },
+            "validationPHP": [
+                {
+                    "method": "NotEmpty"
                 }
             ]
         },
@@ -441,52 +480,7 @@
             "title": "Zgoda na przetwarzanie danych",
             "state": 0,
             "save": true,
-            "longer_text": "Wyrażam zgodę na przetwarzanie danych osobowych na zasadach i w zakresie określonym w <a href=\"https://www.superw.pl/polityka_prywatnosci\">Polityce prywatności</a> serwisu <a href=\"https://www.superw.pl\">www.superw.pl</a> , stanowiącej załącznik nr 1 do jego regulaminu, w szczególności w celu rekrutacji do projektów Akademia Przyszłości lub Szlachetna Paczka.",
-            "validationPHP": [
-                {
-                    "method": "NotEmpty",
-                    "newErrorMessage": "agreement_reguired"
-                }
-            ]
-        },
-        "agreement_2": {
-            "type": "AgreementWithText",
-            "container": "RegisterData",
-            "position": 7,
-            "title": "Zgoda na założenie konta",
-            "state": 0,
-            "save": true,
-            "longer_text": "Oświadczam, że zapoznałem/am się z obowiązującym <a href=\"https://www.superw.pl/img/files/SuperW-Regulamin.pdf\">regulaminem</a> korzystania z serwisu <a href=\"https://www.superw.pl\">www.superw.pl</a> i akceptuję wszystkie jego postanowienia.",
-            "validationPHP": [
-                {
-                    "method": "NotEmpty",
-                    "newErrorMessage": "agreement_reguired"
-                }
-            ]
-        },
-        "agreement_3": {
-            "type": "AgreementWithText",
-            "container": "RegisterData",
-            "position": 8,
-            "title": "Zgoda na założenie konta w akademiaprzyszlosci.org.pl",
-            "state": 0,
-            "save": true,
-            "longer_text": "Wyrażam zgodę na założenie mi, po zakończonej rekrutacji do projektu Akademia Przyszłości, konta w serwisie <a href=\"https://akademiaprzyszlosci.org.pl\">akademiaprzyszlosci.org.pl</a> oraz oświadczam, że zapoznałem/am się z <a href=\"https://akademiaprzyszlosci.org.pl/regulamin.pdf\">obowiązującym regulaminem</a> korzystania z tego serwisu i akceptuje wszystkie jego postanowienia.",
-            "validationPHP": [
-                {
-                    "method": "NotEmpty",
-                    "newErrorMessage": "agreement_reguired"
-                }
-            ]
-        },
-        "agreement_4": {
-            "type": "AgreementWithText",
-            "container": "RegisterData",
-            "position": 9,
-            "title": "Zgoda na założenie konta w szlachetnapaczka.pl",
-            "state": 0,
-            "save": true,
-            "longer_text": "Wyrażam zgodę na założenie mi, po zakończonej rekrutacji do projektu Szlachetna Paczka, konta w serwisie <a href=\"http://www.szlachetnapaczka.pl\">www.szlachetnapaczka.pl</a> oraz oświadczam, że zapoznałem/am się z obowiązującym <a href=\"https://www.szlachetnapaczka.pl/regulamin\">regulaminem</a> korzystania z tego serwisu i akceptuje wszystkie jego postanowienia.",
+            "longer_text": "Tutaj treśc nowej zgody",
             "validationPHP": [
                 {
                     "method": "NotEmpty",
@@ -1277,6 +1271,70 @@
                         "wio_struct_node_id": {
                             "type": "field",
                             "field": "node_id"
+                        }
+                    }
+                },
+                {
+                    "type": "insert",
+                    "tableName": "wio_user_flags",
+                    "validationPHP": [
+                        {
+                            "type": "logic",
+                            "logicEquation": {
+                                "type": "equal",
+                                "data": [
+                                    {
+                                        "type": "fieldValue",
+                                        "field": "volunteer_level"
+                                    },
+                                    {
+                                        "type": "const",
+                                        "const": "volunteer_new"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "fields": {
+                        "wio_user_id": {
+                            "type": "insertedId",
+                            "table": "wio_users"
+                        },
+                        "flag_type_id": {
+                            "type": "const",
+                            "const": "1"
+                        }
+                    }
+                },
+                {
+                    "type": "insert",
+                    "tableName": "wio_user_flags",
+                    "validationPHP": [
+                        {
+                            "type": "logic",
+                            "logicEquation": {
+                                "type": "equal",
+                                "data": [
+                                    {
+                                        "type": "fieldValue",
+                                        "field": "volunteer_level"
+                                    },
+                                    {
+                                        "type": "const",
+                                        "const": "volunteer_veteran"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "fields": {
+                        "wio_user_id": {
+                            "type": "insertedId",
+                            "table": "wio_users"
+                        },
+                        "flag_type_id": {
+                            "type": "const",
+                            "const": "2"
                         }
                     }
                 }
