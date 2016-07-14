@@ -107,6 +107,9 @@ EOT;
         $('select[name="szp_regions"]').change(function(){
             var node_id = $(this).val();
             $('input[name="node_id"]').val(node_id);
+            if (ajaxUrl) {
+                fillInfoBox(ajaxUrl, node_id);
+            }
         });
         function stateNodeChanged(node_id){
             $('select[name="szp_regions"] option').hide();
@@ -115,7 +118,7 @@ EOT;
             $('select[name="szp_regions"]').val('');
         }
         function regionNodeChanged(node_id){
-            
+
             if (ajaxUrl) {
                 fillInfoBox(ajaxUrl, node_id);
             }
@@ -126,7 +129,7 @@ EOT;
             $('select[name="szp_regions"]').val(node_id);
             $('input[name="node_id"]').val(node_id);
         }
-        
+
         function fillInfoBox(ajaxUrl, node_id) {
             $.ajax({
                url: ajaxUrl+node_id,

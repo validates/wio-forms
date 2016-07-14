@@ -26,6 +26,8 @@ class Session extends AbstractTemporarySave
 
     public function clearFormData()
     {
-        unset($_SESSION['_wioFormsTemporaryData']);
+        if (isset($_SESSION['_wioFormsTemporaryData'])) {
+            unset($_SESSION['_wioFormsTemporaryData']);
+        }
     }
 }
