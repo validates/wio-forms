@@ -168,7 +168,7 @@
             "rendererData": {
                 "mapColor": "#0000FF",
                 "secondLvl": "ap_collegium",
-                "secondLvlTitle": "Wybierz miasto",
+                "secondLvlTitle": "Wybierz kolegium",
                 "declension": ["kolegium", "kolegia", "kolegiów"]
             }
         },
