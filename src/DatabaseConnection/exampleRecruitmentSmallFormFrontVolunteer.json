@@ -202,13 +202,12 @@
                 }
             ]
         },
-        "wioFlow": {
+        "wio_flow_id": {
             "type": "Hidden",
             "container": "LoginForm",
             "position": 3,
             "title": "wioFlowId",
-            "state": 0,
-            "id": 1
+            "state": 0
         },
         "login_email": {
             "type": "TextInput",
@@ -1221,8 +1220,8 @@
                             "table": "wio_users"
                         },
                         "wio_flow_id": {
-                            "type": "const",
-                            "const": "1"
+                            "type": "field",
+                            "field": "wio_flow_id"
                         },
                         "flow_status": {
                             "type": "const",
@@ -1243,8 +1242,8 @@
                             "table": "wio_users"
                         },
                         "verified_in_wio_flow_id": {
-                            "type": "const",
-                            "const": "1"
+                            "type": "field",
+                            "field": "wio_flow_id"
                         },
                         "name": {
                             "type": "field",
@@ -1274,8 +1273,8 @@
                             "table": "wio_users"
                         },
                         "verified_in_wio_flow_id": {
-                            "type": "const",
-                            "const": "1"
+                            "type": "field",
+                            "field": "wio_flow_id"
                         },
                         "type": {
                             "type": "const",
@@ -1296,8 +1295,8 @@
                             "table": "wio_flow_entities"
                         },
                         "wio_flow_id": {
-                            "type": "const",
-                            "const": "1"
+                            "type": "field",
+                            "field": "wio_flow_id"
                         },
                         "status": {
                             "type": "const",
@@ -1323,8 +1322,8 @@
                             "table": "wio_flow_entities"
                         },
                         "wio_flow_id": {
-                            "type": "const",
-                            "const": "1"
+                            "type": "field",
+                            "field": "wio_flow_id"
                         },
                         "recrutation_role_id": {
                             "type": "insertedId",
