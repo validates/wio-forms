@@ -80,14 +80,16 @@ class WioStructData extends AbstractDataRepository
 
         $apCollegiumList = $wioStruct->structQuery(
             (new StructDefinition())
-                ->networkName('AP')
+                ->networkName('Akademia Przyszłości')
                 ->nodeTypeName('kolegium')
+                ->flagTypeName('mapa_wolontariuszy_2016')
                 ->linkParent(
                     (new StructDefinition())
                         ->networkName('administrative')
                         ->nodeTypeName('state')
                 )
-        )->get('Node');
+            )
+            ->get('Node');
 
         foreach ($apCollegiumList as $apCollegium) {
             $wojewodztwa[$apCollegium->ParentNodeName]['ap_collegium'][$apCollegium->NodeName] = [

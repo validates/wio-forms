@@ -10,7 +10,7 @@
             "class": "WioFlowCurrentUserData",
             "data": false
         },
-        "wioFlowEnityId": {
+        "wioFlowEntityId": {
             "type": "foreign",
             "class": "WioFlowEntityData",
             "data": false,
@@ -124,7 +124,7 @@
                 "repositoryName": "userId"
             }
         },
-        "wioFlowEnityId": {
+        "wioFlowEntityId": {
             "type": "Hidden",
             "container": "recruitmentForm",
             "position": 100,
@@ -132,7 +132,7 @@
             "state": 0,
             "save": true,
             "defaultValue": {
-                "repositoryName": "wioFlowEnityId"
+                "repositoryName": "wioFlowEntityId"
             }
         },
         "status": {
@@ -352,7 +352,7 @@
         {
             "type": "Select",
             "container": "dataForm",
-            "position": 4,
+            "position": 5,
             "title": "Rola nadana",
             "state": 0,
             "save": true,
@@ -372,7 +372,7 @@
         {
             "type": "Select",
             "container": "dataForm",
-            "position": 5,
+            "position": 6,
             "title": "Województwo rady",
             "state": 0,
             "save": true,
@@ -393,7 +393,7 @@
         {
             "type": "Select",
             "container": "dataForm",
-            "position": 6,
+            "position": 7,
             "title": "Typ",
             "state": 0,
             "save": true,
@@ -467,7 +467,7 @@
                     "where" : {
                         "wio_flow_entity_id": {
                             "type": "field",
-                            "field": "wioFlowEnityId"
+                            "field": "wioFlowEntityId"
                         }
                     },
                     "fields": {
@@ -481,7 +481,8 @@
                         },
                         "role_given_short_name": {
                             "type": "field",
-                            "field": "role_given"
+                            "field": "role_given",
+                            "notRequired": true
                         }
                     }
                 },
@@ -491,7 +492,7 @@
                     "where" : {
                         "wio_flow_entity_id": {
                             "type": "field",
-                            "field": "wioFlowEnityId"
+                            "field": "wioFlowEntityId"
                         }
                     },
                     "fields": {

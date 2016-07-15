@@ -73,7 +73,14 @@ abstract class AbstractFieldRenderer
 
             return;
         }
+
         $this->dataSet = &$this->formStruct['DataRepositories'][$dataSetName]['data'];
+
+        if (isset($this->fieldInfo['dataSet']['actions'])) {
+            if ($this->fieldInfo['dataSet']['actions'] == 'alphabetic_sort') {
+                asort($this->dataSet);
+            }
+        }
     }
 
     protected function inputContainerHead($additional_class = '')

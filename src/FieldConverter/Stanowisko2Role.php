@@ -11,6 +11,7 @@ class Stanowisko2Role extends AbstractFieldConverter
             'lider' => 'LR',
             'wolontariusz' => 'W',
             // LR_R - lider z propozycją rejonu
+            'volunteer' => 'W',
         ];
 
         if (isset($map[$data])) {

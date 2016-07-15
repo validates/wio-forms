@@ -19,5 +19,5 @@
         "SecretKey": "CBA"
     },
     "SrcDir": "vendor/wiosna-dev/wio-forms/src",
-    "LangsFilePath": "/assets/langs.json"
+    "LangsFilePath": "vendor/wiosna-dev/wio-forms/src/assets/langs.json"
 }

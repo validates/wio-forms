@@ -168,7 +168,8 @@
             "rendererData": {
                 "mapColor": "#0000FF",
                 "secondLvl": "ap_collegium",
-                "secondLvlTitle": "Wybierz miasto"
+                "secondLvlTitle": "Wybierz kolegium",
+                "declension": ["kolegium", "kolegia", "kolegiów"]
             }
         },
         "login_switch": {
@@ -746,7 +747,7 @@
             "container": "Site2",
             "position": 6,
             "displayType": "FullDisplay",
-            "title": "Wybierz miasto",
+            "title": "Wybierz kolegium",
             "validationPHP": [
                 {
                     "type": "logic",

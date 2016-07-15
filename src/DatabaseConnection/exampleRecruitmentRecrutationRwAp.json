@@ -10,7 +10,7 @@
             "class": "WioFlowCurrentUserData",
             "data": false
         },
-        "wioFlowEnityId": {
+        "wioFlowEntityId": {
             "type": "foreign",
             "class": "WioFlowEntityData",
             "data": false,
@@ -124,7 +124,7 @@
                 "repositoryName": "userId"
             }
         },
-        "wioFlowEnityId": {
+        "wioFlowEntityId": {
             "type": "Hidden",
             "container": "recruitmentForm",
             "position": 100,
@@ -132,7 +132,7 @@
             "state": 0,
             "save": true,
             "defaultValue": {
-                "repositoryName": "wioFlowEnityId"
+                "repositoryName": "wioFlowEntityId"
             }
         },
         "status": {
@@ -447,13 +447,13 @@
             "DatabaseSaves": [
                 {
                     "type": "update",
+                    "tableName": "wio_flow_entities",
                     "where" : {
                         "wio_user_id": {
                             "type": "field",
                             "field": "userId"
                         }
                     },
-                    "tableName": "wio_flow_entities",
                     "fields": {
                         "flow_status": {
                             "type": "field",
@@ -463,13 +463,13 @@
                 },
                 {
                     "type": "update",
+                    "tableName": "recrutation_roles",
                     "where" : {
                         "wio_flow_entity_id": {
                             "type": "field",
-                            "field": "wioFlowEnityId"
+                            "field": "wioFlowEntityId"
                         }
                     },
-                    "tableName": "recrutation_roles",
                     "fields": {
                         "program_short_name": {
                             "type": "field",
@@ -481,7 +481,8 @@
                         },
                         "role_given_short_name": {
                             "type": "field",
-                            "field": "role_given"
+                            "field": "role_given",
+                            "notRequired": true
                         }
                     }
                 },
@@ -491,7 +492,7 @@
                     "where" : {
                         "wio_flow_entity_id": {
                             "type": "field",
-                            "field": "wioFlowEnityId"
+                            "field": "wioFlowEntityId"
                         }
                     },
                     "fields": {
