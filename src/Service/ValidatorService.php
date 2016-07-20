@@ -26,11 +26,24 @@ class ValidatorService
 
     public function validateFields()
     {
+        // these are containers which were sent in this POST request
+        $postContainers = (isset($_POST['_wioForms_containers']))
+            ? $_POST['_wioForms_containers']
+            : [];
+
         foreach ($this->formStruct['Fields'] as $fieldName => &$field) {
             if (!$field['waitForDefaultValue']
                 and !$field['validated']) {
                 $this->fieldValidationService->validate($fieldName);
                 $field['validated'] = true;
+            }
+
+            // if field is not included in the sent container hide the validation
+            // message. It solves the problem when user is presented the next
+            // site or part of the form without his or her action and gets
+            // the error messages without any interaction
+            if (!in_array($field['container'], $postContainers)) {
+                $field['message'] = false;
             }
         }
     }

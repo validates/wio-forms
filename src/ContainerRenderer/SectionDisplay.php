@@ -19,7 +19,8 @@ class SectionDisplay extends AbstractContainerRenderer
 
     public function showTail()
     {
-        $html = '</fieldset>'."\n";
+        $html = '<input type="hidden" name="_wioForms_containers[]" value="'.$this->containerName.'">'
+            .'</fieldset>'."\n";
 
         return $html;
     }
