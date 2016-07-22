@@ -19,7 +19,8 @@ class FullDisplay extends AbstractContainerRenderer
 
     public function showTail()
     {
-        $this->html = '</div>'."\n";
+        $this->html = '<input type="hidden" name="_wioForms_containers[]" value="'.$this->containerName.'">'
+            .'</div>'."\n";
 
         return $this->html;
     }

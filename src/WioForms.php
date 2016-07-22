@@ -101,17 +101,14 @@ class WioForms
 
         $this->entryCollectorService->collectEntries($partialEntryData);
 
-
         $this->validatorService->validateFields();
         $this->dataRepositoryService->getForeignDataRepositories();
         $this->entryCollectorService->getDefaultValuesFromDataRepositories();
         $this->validatorService->validateFields();
 
-
         $this->validatorService->validateContainers();
         $this->formSaverService->tryFormSavers();
         $this->validatorService->validateContainers();
-
 
         if ($this->formSaverService->getClearTemporarySave()) {
             $this->temporarySave->clearFormData();
