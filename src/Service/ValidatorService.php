@@ -59,22 +59,22 @@ class ValidatorService
     {
     }
 
-    public function getAvaliableSitesArray()
+    public function getAvailableSitesArray()
     {
-        $avaliableSites = [];
+        $availableSites = [];
 
         foreach ($this->formStruct['Containers'] as $container) {
             if ($container['container'] == '_site'
               and !(isset($container['hidden']) and $container['hidden'])) {
-                $avaliableSites[] = $container['site'];
+                $availableSites[] = $container['site'];
             }
         }
-        sort($avaliableSites);
+        sort($availableSites);
 
-        return $avaliableSites;
+        return $availableSites;
     }
 
-    public function getAvaliableSiteNumber()
+    public function getAvailableSiteNumber()
     {
         $maxSite = 0;
 

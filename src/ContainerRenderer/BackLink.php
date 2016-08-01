@@ -2,7 +2,7 @@
 
 namespace WioForms\ContainerRenderer;
 
-class BackLink1 extends AbstractContainerRenderer
+class BackLink extends AbstractContainerRenderer
 {
     public function showHead()
     {

@@ -15,15 +15,15 @@ class SubsiteChooserService
 
     public function getSiteNumber()
     {
-        $siteNumber = $maxSiteNumber = $this->wioForms->validatorService->getAvaliableSiteNumber();
+        $siteNumber = $maxSiteNumber = $this->wioForms->validatorService->getAvailableSiteNumber();
 
         if (isset($_POST['_wioFormsGoBackOneSite'])) {
-            $avaliableSites = $this->wioForms->validatorService->getAvaliableSitesArray();
+            $availableSites = $this->wioForms->validatorService->getAvailableSitesArray();
             $currentSite = $_POST['_wioFormsSite'];
 
-            for ($i = 0; $i < count($avaliableSites); ++$i) {
-                if ($avaliableSites[$i + 1] == $currentSite) {
-                    $siteNumber = $avaliableSites[$i];
+            for ($i = 0; $i < count($availableSites); ++$i) {
+                if ($availableSites[$i + 1] == $currentSite) {
+                    $siteNumber = $availableSites[$i];
                     break;
                 }
             }
