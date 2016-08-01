@@ -4,7 +4,6 @@ namespace WioForms\TemporarySave;
 
 class Session extends AbstractTemporarySave
 {
-
     /**
      * This method creates uid for a form entry.
      * Since in wio-forms there could be a form with same name presented
@@ -30,7 +29,6 @@ class Session extends AbstractTemporarySave
     {
         if (!isset($_SESSION['_wioFormsTemporaryData'])
             || !is_array($_SESSION['_wioFormsTemporaryData'])) {
-
             $_SESSION['_wioFormsTemporaryData'] = [];
         }
 

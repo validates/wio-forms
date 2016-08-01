@@ -31,5 +31,4 @@ class SubsiteChooserService
 
         return $siteNumber;
     }
-
 }
