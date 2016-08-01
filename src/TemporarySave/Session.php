@@ -14,7 +14,7 @@ class Session extends AbstractTemporarySave
      */
     protected function getUid()
     {
-        return base64_encode($this->formStruct['FormId'] . $_SERVER['REQUEST_URI']);
+        return base64_encode($this->formStruct['FormId'].$_SERVER['REQUEST_URI']);
     }
 
     public function saveFormData()

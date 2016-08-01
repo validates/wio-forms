@@ -11,7 +11,7 @@ class BackLink1 extends AbstractContainerRenderer
             $title = $this->title;
         }
 
-        $html ='<button class="small-back-button" name="_wioFormsGoBackOneSite" value="true">'.$title.'</button>';
+        $html = '<button class="small-back-button" name="_wioFormsGoBackOneSite" value="true">'.$title.'</button>';
 
         return $html;
     }

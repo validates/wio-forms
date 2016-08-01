@@ -13,8 +13,6 @@ class SubsiteChooserService
         $this->formStruct = &$this->wioForms->formStruct;
     }
 
-
-
     public function getSiteNumber()
     {
         $siteNumber = $maxSiteNumber = $this->wioForms->validatorService->getAvaliableSiteNumber();
@@ -24,8 +22,8 @@ class SubsiteChooserService
             $currentSite = $_POST['_wioFormsSite'];
 
             for ($i = 0; $i < count($avaliableSites); ++$i) {
-                if ($avaliableSites[ $i + 1 ] == $currentSite) {
-                    $siteNumber = $avaliableSites[ $i ];
+                if ($avaliableSites[$i + 1] == $currentSite) {
+                    $siteNumber = $avaliableSites[$i];
                     break;
                 }
             }

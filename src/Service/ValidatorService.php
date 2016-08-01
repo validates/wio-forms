@@ -59,7 +59,6 @@ class ValidatorService
     {
     }
 
-
     public function getAvaliableSitesArray()
     {
         $avaliableSites = [];
