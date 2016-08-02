@@ -53,7 +53,7 @@ class SubsiteChooserService
          * If _wioFormsGoBackOneSite is set, (and it can be so, for example by container BackLink), we search for available site previous to site we currently been on.
          */
         if (isset($_POST['_wioFormsGoBackOneSite'])) {
-            $currentSite = (Int) $_POST['_wioFormsSite'];
+            $currentSite = (int) $_POST['_wioFormsSite'];
 
             for ($i = 0; $i < count($availableSites); ++$i) {
                 if ($availableSites[$i + 1] == $currentSite) {
