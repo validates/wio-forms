@@ -21,7 +21,7 @@ class SubsiteChooserService
         $this->formStruct = &$this->wioForms->formStruct;
     }
 
-    /**
+    /*
      * This method searches throu all the containers in form and searching for not-hidden containers that are directly under site containers.
      * Numbers of sites with these containers are writen into return array.
      */
@@ -44,16 +44,16 @@ class SubsiteChooserService
     {
         $availableSites = $this->getAvailableSites();
 
-        /**
+        /*
          * Here we getting highest available site number with any visible container.
          */
         $siteNumber = max($availableSites);
 
-        /**
+        /*
          * If _wioFormsGoBackOneSite is set, (and it can be so, for example by container BackLink), we search for available site previous to site we currently been on.
          */
         if (isset($_POST['_wioFormsGoBackOneSite'])) {
-            $currentSite = (Int)$_POST['_wioFormsSite'];
+            $currentSite = (Int) $_POST['_wioFormsSite'];
 
             for ($i = 0; $i < count($availableSites); ++$i) {
                 if ($availableSites[$i + 1] == $currentSite) {
