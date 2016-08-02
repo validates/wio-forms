@@ -55,25 +55,6 @@ class ValidatorService
         }
     }
 
-    private function checkIfDataInRepository($fieldName)
-    {
-    }
-
-    public function getAvaliableSiteNumber()
-    {
-        $maxSite = 0;
-
-        foreach ($this->formStruct['Containers'] as $container) {
-            if ($container['container'] == '_site'
-              and !(isset($container['hidden']) and $container['hidden'])
-              and $container['site'] > $maxSite) {
-                $maxSite = $container['site'];
-            }
-        }
-
-        return $maxSite;
-    }
-
     public function getLastEditedSite()
     {
         if (isset($this->wioForms->entryData['_wioFormsSite'])) {

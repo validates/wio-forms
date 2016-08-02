@@ -13,6 +13,7 @@ use WioForms\Service\LangService;
 use WioForms\Service\RendererService;
 use WioForms\Service\StyleManagementService;
 use WioForms\Service\ValidatorService;
+use WioForms\Service\SubsiteChooserService;
 
 class WioForms
 {
@@ -46,10 +47,10 @@ class WioForms
     public $entryCollectorService;
     public $formSaverService;
     public $langService;
+    public $subsiteChooserService;
 
     public function __construct($localSettings = false)
     {
-
         // Gets ErrorLog
         $this->errorLog = new ErrorLog();
 
@@ -72,6 +73,7 @@ class WioForms
         $this->entryCollectorService = new EntryCollectorService($this);
         $this->formSaverService = new FormSaverService($this);
         $this->langService = new LangService($this);
+        $this->subsiteChooserService = new SubsiteChooserService($this);
 
         if ($this->databaseService->setConnections() === false) {
             $this->errorLog->errorLog('Problem with: setDatabaseConnections();');
@@ -119,7 +121,8 @@ class WioForms
         $lastEditedSite = $this->validatorService->getLastEditedSite();
         $this->styleManagementService->dontShowErrorsOnSite($lastEditedSite);
 
-        $siteNumber = $this->validatorService->getAvaliableSiteNumber();
+        $siteNumber = $this->subsiteChooserService->getSiteNumber();
+
         $formHtml = $this->rendererService->renderFormSite($siteNumber);
 
         return $formHtml;
