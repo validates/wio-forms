@@ -66,15 +66,11 @@ class Link extends AbstractFieldRenderer
 
     private function prepareTitleSet()
     {
-        if (!isset($this->fieldInfo['titleSet'])) {
-            return;
-        }
-        if (is_array($this->fieldInfo['titleSet'])) {
+        $this->title = $this->fieldInfo['title'];
+
+        if (isset($this->fieldInfo['titleSet']) && is_array($this->fieldInfo['titleSet'])) {
             $titleRepository = $this->fieldInfo['titleSet'];
             $this->title = $this->formStruct['DataRepositories'][$titleRepository['repositoryName']]['data'][reset($titleRepository['subset'])];
-
-            return;
         }
-        $this->title = $this->fieldInfo['titleSet'];
     }
 }
