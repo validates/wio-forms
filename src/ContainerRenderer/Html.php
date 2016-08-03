@@ -7,8 +7,8 @@ class Html extends AbstractContainerRenderer
     public function showHead()
     {
         $html = '';
-        if ($this->Html) {
-            $html = $this->Html;
+        if ($this->containerInfo['Html']) {
+            $html = $this->containerInfo['Html'];
         }
 
         return $html;
