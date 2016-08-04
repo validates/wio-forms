@@ -71,17 +71,19 @@ class SwitcherCheckbox extends AbstractFieldRenderer
         $(document).ready(function(){
             $('.WioForms_SwitcherCheckBox').change(function(){
                 var fieldName = $(this).attr('name');
-                var value = 'off';
+                var option = 'off';
                 if($(this).attr('checked'))
-                    value = 'on';
+                    option = 'on';
 
-                WioForms_SwitcherCheckBoxSwitch(fieldName,value);
+                WioForms_SwitcherCheckBoxSwitch(fieldName,option);
             });
         });
 
 EOT;
 
-        $return .= '$(document).ready(function(){ WioForms_SwitcherCheckBoxSwitch("'.$this->fieldName.'","'.$this->value.'"); });';
+        $option = 'off';
+        if($this->value) $option = $this->value;
+        $return .= '$(document).ready(function(){ WioForms_SwitcherCheckBoxSwitch("'.$this->fieldName.'","'.$option.'"); });';
         $return .= '</script>';
 
 
