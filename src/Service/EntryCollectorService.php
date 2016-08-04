@@ -64,12 +64,12 @@ class EntryCollectorService
     public function getDefaultValue($defaultValue)
     {
         $repositoryName = $defaultValue['repositoryName'];
-        if (isset($this->formStruct['DataRepositories'][$repositoryName]['success']) 
+        if (isset($this->formStruct['DataRepositories'][$repositoryName]['success'])
             and !$this->formStruct['DataRepositories'][$repositoryName]['success']) {
-                $this->wioForms->errorLog->errorLog('getDefaultValue: Repository "'.$repositoryName.'" not ended with success.');
+            $this->wioForms->errorLog->errorLog('getDefaultValue: Repository "'.$repositoryName.'" not ended with success.');
 
-                return false;
-            }
+            return false;
+        }
 
         $value = $this->formStruct['DataRepositories'][$repositoryName]['data'];
 

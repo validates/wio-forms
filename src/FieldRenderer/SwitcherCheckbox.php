@@ -37,14 +37,13 @@ class SwitcherCheckbox extends AbstractFieldRenderer
 
     private function javascriptFieldsSwitcher()
     {
-
-        $conditions = $this->fieldInfo["switcherInputs"];
+        $conditions = $this->fieldInfo['switcherInputs'];
 
         $return = '<script type="text/javascript">'."\n";
         $return .= 'WioForms_SwitcherCheckBox={'."\n";
         $return .= '"'.$this->fieldName.'": {'."\n";
-        $return .= 'on: ["'.implode($conditions['on'],'","').'"],'."\n";
-        $return .= 'off: ["'.implode($conditions['off'],'","').'"],'."\n";
+        $return .= 'on: ["'.implode($conditions['on'], '","').'"],'."\n";
+        $return .= 'off: ["'.implode($conditions['off'], '","').'"],'."\n";
         $return .= '}};';
 
         $return .= <<<'EOT'
@@ -82,13 +81,13 @@ class SwitcherCheckbox extends AbstractFieldRenderer
 EOT;
 
         $option = 'off';
-        if($this->value) $option = $this->value;
+        if ($this->value) {
+            $option = $this->value;
+        }
         $return .= '$(document).ready(function(){ WioForms_SwitcherCheckBoxSwitch("'.$this->fieldName.'","'.$option.'"); });';
         $return .= '</script>';
 
 
         return $return;
-
     }
-
 }

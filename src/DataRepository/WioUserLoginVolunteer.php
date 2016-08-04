@@ -30,6 +30,7 @@ class WioUserLoginVolunteer extends AbstractDataRepository
         }
 
         $this->setRepositoryFlags();
+
         return $this->data;
     }
 }
