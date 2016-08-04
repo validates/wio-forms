@@ -438,11 +438,6 @@ EOT;
             if (isNaN(node_id)) return 1;
 
             regionNodeChanged(node_id);
-
-            // this actions should be run after map is inited
-            // var state_node_id = $('select[name="szp_regions"] option[value="'+node_id+'"]').attr('class').split('_')[2];
-            // var state_name = $('select[name="country_state"]').children('option[value="'+state_node_id+'"]').text();
-            // centerOnWojewodztwo(state_name,state_node_id);
         }
         getDefaultNodeIdValue();
         </script>
