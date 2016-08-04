@@ -53,6 +53,7 @@ class GoogleMaps extends AbstractFieldRenderer
 
         $this->html .= $this->javascriptMapManager();
         $this->html .= $this->javascriptSelectManager();
+        $this->html .= $this->javascriptDefaultDataSetter();
 
         $this->wioForms->headerCollectorService->addJS('assets/js/wojewodztwa16.js');
 
@@ -96,6 +97,7 @@ EOT;
             $return .= 'var ajaxUrl = false;';
         }
         $return .= <<<'EOT'
+
         $('select[name="country_state"]').change(function(){
             var node_id = $(this).val();
             stateNodeChanged(node_id);
@@ -132,13 +134,12 @@ EOT;
 
         function fillInfoBox(ajaxUrl, node_id) {
             $.ajax({
-               url: ajaxUrl+node_id,
-               success: function(data) {
-               console.log(data);
-                  $('#infoBox')
-                     .html(data)
-               },
-               type: 'GET'
+                url: ajaxUrl+node_id,
+                success: function(data) {
+                    $('#infoBox')
+                        .html(data)
+                },
+                type: 'GET'
             });
         }
         </script>
@@ -221,7 +222,6 @@ EOT;
             var u = map.getCenter();
             for(var i in WOJ){
                 if(google.maps.geometry.poly.containsLocation(u, WOJ[i].GMO)){
-                    console.log('mapDrag('+i+')');
                     if(i != WOJoptions.selected){
                         selectWojewodztwo(i);
                     }
@@ -294,7 +294,6 @@ EOT;
                     }
                 break;
             }
-            console.log(WOJoptions.zoomStage);
         }
 
         function createWojewodztwa(){
@@ -372,7 +371,6 @@ EOT;
         }
 
         function showMarkers(wojName){
-            console.log('showMarkers('+wojName+')');
             for(var R in SecondLvlMarkers[wojName]){
                 SecondLvlMarkers[wojName][R].GMO.setMap(map);
             }
@@ -424,6 +422,24 @@ EOT;
         $(function() {
             initMap();
         });
+        </script>
+EOT;
+
+        return $return;
+    }
+
+    private function javascriptDefaultDataSetter()
+    {
+        $return = <<<'EOT'
+        <script type="text/javascript">
+
+        function getDefaultNodeIdValue(){
+            var node_id = parseInt($('input[name="node_id"]').val());
+            if (isNaN(node_id)) return 1;
+
+            regionNodeChanged(node_id);
+        }
+        getDefaultNodeIdValue();
         </script>
 EOT;
 
