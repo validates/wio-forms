@@ -35,14 +35,14 @@ WOJEWODZTWA = {
 
 WOJEWODZTWA_CENTRUM = {
 'zachodniopomorskie': {lng: 14.91119385, lat: 53.87520206},
-'lubuskie': {lng: 22.42858887, lat: 51.76104049},
+'lubuskie': {lng: 14.71618652, lat: 52.50284766},
 'wielkopolskie': {lng: 16.73492432, lat: 52.46270363},
 'pomorskie': {lng: 17.70721436, lat: 54.47642158},
 'kujawsko-pomorskie': {lng: 17.86651611, lat: 53.33415334},
 'warmińsko-mazurskie': {lng: 20.48675537, lat: 54.13669646},
 'podlaskie': {lng: 22.54119873, lat: 53.5305132},
 'mazowieckie': {lng: 20.71746826, lat: 52.68637272},
-'lubelskie': {lng: 14.71618652, lat: 52.50284766},
+'lubelskie': {lng: 22.42858887, lat: 51.76104049},
 'łódzkie': {lng: 18.91296387, lat: 51.97134581},
 'dolnośląskie': {lng: 15.77087402, lat: 51.50874246},
 'opolskie': {lng: 17.40783691, lat: 51.09662295},
