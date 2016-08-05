@@ -192,3 +192,13 @@ form.wioForms_Form fieldset{
 .wioForms_Form ul.wioForms_RadioList input[type=radio] {
     width: 40px;
 }
+
+
+.wioForms_Form button.small-back-button{
+    border: none;
+    border-radius: 0px;
+    background: transparent;
+    color: black;
+    text-decoration: underline;
+    margin: 15px;
+}
