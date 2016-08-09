@@ -8,7 +8,7 @@ class PostalCode extends AbstractFieldValidator
     {
         $this->invalidMessage = 'postal_code_invalid';
 
-        if (preg_match("/^([0-9]{2})(-[0-9]{3})?$/i", $value)) {
+        if (preg_match('/^([0-9]{2})(-[0-9]{3})?$/i', $value)) {
             $this->valid = true;
         }
 
