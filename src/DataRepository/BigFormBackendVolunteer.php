@@ -22,7 +22,7 @@ class BigFormBackendVolunteer extends AbstractDataRepository
                 'wio_flow_entities.id' => 'wioFlowEntityId',
                 'wio_user_flags.flag_type_id' => 'volunteerFlagId',
                 'user_recrutation_answers_volunteer2016.szp_editions' => 'editionSzPCount',
-                'user_recrutation_answers_volunteer2016.ap_editions' => 'editionApCount',
+                'user_recrutation_answers_volunteer2016.ap_editions' => 'editionAPCount',
                 'user_recrutation_answers_volunteer2016.who_told_you' => 'infoSource',
                 'user_recrutation_answers_volunteer2016.openQuestion1' => 'openQuestion1',
                 'user_recrutation_answers_volunteer2016.openQuestion2' => 'openQuestion2',
@@ -47,7 +47,7 @@ class BigFormBackendVolunteer extends AbstractDataRepository
             $this->data['wioFlowEntityId'] = $result->wioFlowEntityId;
             $this->data['volunteerFlagId'] = $result->volunteerFlagId;
             $this->data['editionSzPCount'] = $result->editionSzPCount;
-            $this->data['editionApCount'] = $result->editionApCount;
+            $this->data['editionAPCount'] = $result->editionAPCount;
             $this->data['infoSource'] = $result->infoSource;
             $this->data['openQuestion1'] = $result->openQuestion1;
             $this->data['openQuestion2'] = $result->openQuestion2;
