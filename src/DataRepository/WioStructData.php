@@ -62,7 +62,7 @@ class WioStructData extends AbstractDataRepository
 
         $szp_regions_grey_array = [];
         foreach ($szp_regions_grey as $key => $value) {
-            $szp_regions_grey_array[$value->NodeId]=1;
+            $szp_regions_grey_array[$value->NodeId] = 1;
         }
 
         usort($szp_regions, function ($a, $b) {
@@ -73,7 +73,7 @@ class WioStructData extends AbstractDataRepository
                 'node_id' => $region->NodeId,
                 'lat' => $region->NodeLat,
                 'lng' => $region->NodeLng,
-                'grey' =>(isset($szp_regions_grey_array[$region->NodeId]))
+                'grey' => (isset($szp_regions_grey_array[$region->NodeId]))
                     ? 'true'
                     : 'false',
             ];
@@ -92,7 +92,7 @@ class WioStructData extends AbstractDataRepository
             )
             ->get('Node');
 
-            $ap_cities_grey = $wioStruct->structQuery(
+        $ap_cities_grey = $wioStruct->structQuery(
                 (new StructDefinition())
                     ->networkName('administrative')
                     ->nodeTypeName('city')
@@ -105,17 +105,17 @@ class WioStructData extends AbstractDataRepository
                     )
                 )
                 ->get('Node');
-            $ap_cities_grey_array = [];
-            foreach ($ap_cities_grey as $key => $value) {
-                $ap_cities_grey_array[$value->NodeId] = 1;
-            }
+        $ap_cities_grey_array = [];
+        foreach ($ap_cities_grey as $key => $value) {
+            $ap_cities_grey_array[$value->NodeId] = 1;
+        }
 
         foreach ($ap_cities as $city) {
             $wojewodztwa[$city->ParentNodeName]['ap_cities'][$city->NodeName] = [
                 'node_id' => $city->NodeId,
                 'lat' => $city->NodeLat,
                 'lng' => $city->NodeLng,
-                'grey' =>(isset($city->NodeId, $ap_cities_grey_array) !== NULL)
+                'grey' => (isset($city->NodeId, $ap_cities_grey_array) !== null)
                     ? 'true'
                     : 'false',
             ];
