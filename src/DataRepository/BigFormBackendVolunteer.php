@@ -8,9 +8,6 @@ class BigFormBackendVolunteer extends AbstractDataRepository
     {
         global $queryBuilder;
 
-
-        var_dump($requiredFields);
-
         $result = $queryBuilder->table('wio_users')
             ->join('wio_flow_entities', 'wio_users.id', '=', 'wio_flow_entities.wio_user_id')
             ->join('wio_user_flags', 'wio_users.id', '=', 'wio_user_flags.wio_user_id')
@@ -42,7 +39,7 @@ class BigFormBackendVolunteer extends AbstractDataRepository
                 'user_address_data.address_street' => 'street',
                 'user_address_data.address_number' => 'houseNumber',
                 'user_basic_data.id_number' => 'pesel',
-                'user_basic_data.birth_date' => 'birth_date'
+                'user_basic_data.birth_date' => 'birthDate'
             ])
             ->first();
 
@@ -67,9 +64,45 @@ class BigFormBackendVolunteer extends AbstractDataRepository
             $this->data['street'] = $result->street;
             $this->data['houseNumber'] = $result->houseNumber;
             $this->data['pesel'] = $result->pesel;
-            $this->data['birth_date'] = $result->birth_date;
+            $this->data['birthDate'] = $result->birthDate;
+            $this->data['skille'] = '';
         }
 
+
+
+        $result = $queryBuilder->table('user_skills')
+            ->where('wio_user_id', $requiredFields['userId'])
+            ->orderBy('id')
+            ->get();
+
+
+        if (!empty($result)) {
+            $skille = '';
+            foreach ($result as $res) {
+                if ($res->group_id != 0) {
+                    $skille .= $res->group_id.'-';
+                    if ($res->skill_id != 0) {
+                        $skille .= $res->skill_id;
+                    }
+                    $skille .= '-';
+                }
+                $skille .= $res->skill_name.'|';
+            }
+            $this->data['skille'] = $skille;
+        }
+
+        if (isset($this->data['uploadFile2'])) {
+            $result = $queryBuilder->table('uploaded_files')
+                ->where('id', $this->data['uploadFile2'])
+                ->first();
+
+            if ($result) {
+                $this->data['uploadFile2'] = [
+                    'fileName' => $result->file_real_name,
+                    'fileLink' => $result->file_path,
+                ];
+            }
+        }
 
         $this->setRepositoryFlags();
 
