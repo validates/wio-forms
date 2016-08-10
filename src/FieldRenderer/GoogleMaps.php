@@ -78,7 +78,7 @@ class GoogleMaps extends AbstractFieldRenderer
         foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo) {
             $js .= '"'.$wojewodztwoName.'":{';
             foreach ($wojewodztwo[$this->fieldInfo['rendererData']['secondLvl']] as $regionName => $region) {
-                $js .= $region['node_id'].':{name:"'.$regionName.'",lat:'.$region['lat'].',lng:'.$region['lng'].'},';
+                $js .= $region['node_id'].':{name:"'.$regionName.'",lat:'.$region['lat'].',lng:'.$region['lng'].',grey:'.$region['grey'].'},';
             }
             $js .= '},';
         }
@@ -359,10 +359,14 @@ EOT;
 
             for(var Vv in SecondLvlMarkers){
                 for(var R in SecondLvlMarkers[Vv]){
-                    SecondLvlMarkers[Vv][R].GMO = new google.maps.Marker({
+                    var obj = {
                         position: {lat:SecondLvlMarkers[Vv][R].lat, lng:SecondLvlMarkers[Vv][R].lng},
                         rejonId: R
-                    });
+                    };
+                    if (SecondLvlMarkers[Vv][R].grey === true) {
+                        obj.icon = 'https://www.google.com/mapfiles/marker_grey.png';
+                    }
+                    SecondLvlMarkers[Vv][R].GMO = new google.maps.Marker(obj);
                     SecondLvlMarkers[Vv][R].GMO.addListener('click',function(){
                         regionNodeChanged(this.rejonId);
                     });
