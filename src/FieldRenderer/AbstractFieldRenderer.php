@@ -86,7 +86,7 @@ abstract class AbstractFieldRenderer
     protected function inputContainerHead($additional_class = '')
     {
         $additional_class .= $this->getAdditionalWrapperClasses();
-        $this->html .= '<div class="wioForms_InputContainer '.$additional_class.'">'."\n";
+        $this->html .= '<div class="wioForms_InputContainer '.$additional_class.' wioForms_InputContainer_'.$this->fieldName.'">'."\n";
     }
 
     protected function inputContainerTail()
