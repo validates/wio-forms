@@ -44,7 +44,9 @@ class GoogleMaps extends AbstractFieldRenderer
             $this->html .= '<option class="region_state_none" value="">wybierz</option>';
             foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo) {
                 foreach ($wojewodztwo[$this->fieldInfo['rendererData']['secondLvl']] as $regionName => $region) {
-                    $this->html .= '<option class="region_state_'.$wojewodztwo['node_id'].'" value="'.$region['node_id'].'">'.$regionName.'</option>';
+                    if ($region['grey'] === 'false') {
+                        $this->html .= '<option class="region_state_'.$wojewodztwo['node_id'].'" value="'.$region['node_id'].'">'.$regionName.'</option>';
+                    }
                 }
             }
             $this->html .= '</select>';
@@ -78,7 +80,7 @@ class GoogleMaps extends AbstractFieldRenderer
         foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo) {
             $js .= '"'.$wojewodztwoName.'":{';
             foreach ($wojewodztwo[$this->fieldInfo['rendererData']['secondLvl']] as $regionName => $region) {
-                $js .= $region['node_id'].':{name:"'.$regionName.'",lat:'.$region['lat'].',lng:'.$region['lng'].'},';
+                $js .= $region['node_id'].':{name:"'.$regionName.'",lat:'.$region['lat'].',lng:'.$region['lng'].',grey:'.$region['grey'].'},';
             }
             $js .= '},';
         }
@@ -124,7 +126,15 @@ EOT;
             if (ajaxUrl) {
                 fillInfoBox(ajaxUrl, node_id);
             }
-            var state_node_id = $('select[name="szp_regions"] option[value="'+node_id+'"]').attr('class').split('_')[2];
+            var selectedOption = $('select[name="szp_regions"] option[value="'+node_id+'"]');
+
+            if (selectedOption.length) {
+                var state_node_id = selectedOption.attr('class').split('_')[2];
+            } else {
+                $('select[name="szp_regions"]').val('');
+                $('input[name="node_id"]').val('');
+                return false;
+            }
 
             stateNodeChanged(state_node_id);
             $('select[name="country_state"]').val(state_node_id);
@@ -359,10 +369,14 @@ EOT;
 
             for(var Vv in SecondLvlMarkers){
                 for(var R in SecondLvlMarkers[Vv]){
-                    SecondLvlMarkers[Vv][R].GMO = new google.maps.Marker({
+                    var obj = {
                         position: {lat:SecondLvlMarkers[Vv][R].lat, lng:SecondLvlMarkers[Vv][R].lng},
                         rejonId: R
-                    });
+                    };
+                    if (SecondLvlMarkers[Vv][R].grey === true) {
+                        obj.icon = 'https://www.google.com/mapfiles/marker_grey.png';
+                    }
+                    SecondLvlMarkers[Vv][R].GMO = new google.maps.Marker(obj);
                     SecondLvlMarkers[Vv][R].GMO.addListener('click',function(){
                         regionNodeChanged(this.rejonId);
                     });
