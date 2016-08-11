@@ -39,7 +39,7 @@ class BigFormBackendVolunteer extends AbstractDataRepository
                 'user_address_data.address_street' => 'street',
                 'user_address_data.address_number' => 'houseNumber',
                 'user_basic_data.id_number' => 'pesel',
-                'user_basic_data.birth_date' => 'birthDate'
+                'user_basic_data.birth_date' => 'birthDate',
             ])
             ->first();
 
