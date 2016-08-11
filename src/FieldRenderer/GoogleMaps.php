@@ -44,9 +44,10 @@ class GoogleMaps extends AbstractFieldRenderer
             $this->html .= '<option class="region_state_none" value="">wybierz</option>';
             foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo) {
                 foreach ($wojewodztwo[$this->fieldInfo['rendererData']['secondLvl']] as $regionName => $region) {
-                    if ($region['grey'] === 'false') {
-                        $this->html .= '<option class="region_state_'.$wojewodztwo['node_id'].'" value="'.$region['node_id'].'">'.$regionName.'</option>';
+                    if (isset($region['grey']) && $region['grey'] !== 'false') {
+                        continue;
                     }
+                    $this->html .= '<option class="region_state_'.$wojewodztwo['node_id'].'" value="'.$region['node_id'].'">'.$regionName.'</option>';
                 }
             }
             $this->html .= '</select>';
