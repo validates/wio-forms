@@ -202,3 +202,7 @@ form.wioForms_Form fieldset{
     text-decoration: underline;
     margin: 15px;
 }
+.wioForms_Form .wioForms_TextArea {
+    width: 100%;
+    height: 150px;
+}
