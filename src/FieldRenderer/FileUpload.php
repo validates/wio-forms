@@ -26,6 +26,10 @@ class FileUpload extends AbstractFieldRenderer
             $this->html .= '</div></div>';
         }
 
+        if (isset($this->fieldInfo['description']) && strlen($this->fieldInfo['description']) > 0) {
+            $this->html .= '<div class="wioForms_FieldDescription">'.$this->fieldInfo['description'].'</div>';
+        }
+
         $this->html .= $this->javascriptAction();
 
         $this->inputFieldContainerTail();

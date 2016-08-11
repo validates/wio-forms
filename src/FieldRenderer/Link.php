@@ -7,16 +7,12 @@ class Link extends AbstractFieldRenderer
     protected $paramSet = [];
     protected $title;
 
-    public function __construct($fieldName, $wioFormsObject)
+    public function showToEdit()
     {
-        parent::__construct($fieldName, $wioFormsObject);
         $this->prepareParamSet();
         $this->swapPlaceholdersWithData();
         $this->prepareTitleSet();
-    }
 
-    public function showToEdit()
-    {
         $label = isset($this->fieldInfo['label']) ? $this->fieldInfo['label'] : '';
         $html = '<div>'.$label.' <a class="'.$this->fieldInfo['class'].'" href="'.$this->fieldInfo['url'].'">'.$this->title.'</a>'."\n".'</div>';
 
@@ -66,7 +62,10 @@ class Link extends AbstractFieldRenderer
 
     private function prepareTitleSet()
     {
-        $this->title = $this->fieldInfo['title'];
+        $this->title = 'LINK';
+        if (isset($this->fieldInfo['title'])) {
+            $this->title = $this->fieldInfo['title'];
+        }
 
         if (isset($this->fieldInfo['titleSet']) && is_array($this->fieldInfo['titleSet'])) {
             $titleRepository = $this->fieldInfo['titleSet'];
