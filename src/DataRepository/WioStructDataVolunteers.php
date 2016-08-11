@@ -38,7 +38,7 @@ class WioStructDataVolunteers extends AbstractDataRepository
             (new StructDefinition())
                 ->networkName('Szlachetna Paczka')
                 ->nodeTypeName('rejon')
-                ->flagTypeName('mapa_liderow_2016_rejon_szp')
+                ->flagTypeName('mapa_wolontariuszy_2016_rejon_szp')
                 ->linkParent(
                     (new StructDefinition())
                         ->networkName('administrative')
