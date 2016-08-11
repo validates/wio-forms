@@ -24,6 +24,10 @@ class Select extends AbstractFieldRenderer
         }
         $this->html .= '</select>';
 
+        if (isset($this->fieldInfo['description']) && strlen($this->fieldInfo['description']) > 0) {
+            $this->html .= '<div class="wioForms_FieldDescription">'.$this->fieldInfo['description'].'</div>';
+        }
+
         $this->inputFieldContainerTail();
         $this->inputContainerTail();
 

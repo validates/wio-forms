@@ -15,5 +15,6 @@
     "passwords_not_equal"           : "Podane hasła nie są identyczne.",
     "email_already_used"            : "Dokonano już zgłoszenia na ten adres e-mail.",
     "region_not_avaliable"          : "Zmiany nie zostały zapisane. Wybrany rejon nie jest dostępny.",
-    "login_failed"                  : "Logowanie nie powiodło się."
+    "login_failed"                  : "Logowanie nie powiodło się.",
+    "postal_code_invalid"           : "Nieprawidłowy format kodu pocztowego."
 }

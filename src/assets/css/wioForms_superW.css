@@ -192,3 +192,8 @@ form.wioForms_Form fieldset{
 .wioForms_Form ul.wioForms_RadioList input[type=radio] {
     width: 40px;
 }
+
+.wioForms_Form .wioForms_TextArea {
+    width: 100%;
+    height: 150px;
+}
