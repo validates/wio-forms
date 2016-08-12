@@ -115,7 +115,7 @@ class WioStructData extends AbstractDataRepository
                 'node_id' => $city->NodeId,
                 'lat' => $city->NodeLat,
                 'lng' => $city->NodeLng,
-                'grey' => (isset($city->NodeId, $ap_cities_grey_array) !== null)
+                'grey' => (isset($ap_cities_grey_array[$region->NodeId]))
                     ? 'true'
                     : 'false',
             ];
