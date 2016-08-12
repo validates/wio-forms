@@ -189,10 +189,10 @@ class FormSaverService
             }
         }
         if ($databaseSave['type'] === 'update') {
-            $updateOn = reset(array_keys($databaseSave['where']));
-            $query['where'] = [
-                $updateOn => $this->fieldSaver->get($databaseSave['where'][$updateOn]),
-            ];
+            $query['where'] = [];
+            foreach ($databaseSave['where'] as $rowName => $rowData) {
+                $query['where'][$rowName] = $this->fieldSaver->get($rowData);
+            }
         }
 
         $insertedId = $this->databaseConnection->$databaseSave['type']($query);
