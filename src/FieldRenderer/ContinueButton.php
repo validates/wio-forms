@@ -10,7 +10,7 @@ class ContinueButton extends AbstractFieldRenderer
         $this->inputContainerHead();
         $this->inputFieldContainerHead();
 
-        $this->html = '<button class="button-big-red" name="'.$this->fieldName.'" value="true">'.$this->fieldInfo['title'].'</button>';
+        $this->html .= '<button class="button-big-red" name="'.$this->fieldName.'" value="true">'.$this->fieldInfo['title'].'</button>';
 
         $this->inputFieldContainerTail();
         $this->inputContainerTail();
