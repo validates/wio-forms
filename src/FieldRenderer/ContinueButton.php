@@ -2,17 +2,15 @@
 
 namespace WioForms\FieldRenderer;
 
-class TextArea extends AbstractFieldRenderer
+class ContinueButton extends AbstractFieldRenderer
 {
     public function showToEdit()
     {
         $this->html = '';
         $this->inputContainerHead();
-        $this->standardErrorDisplay();
-        $this->inputTitleContainer();
         $this->inputFieldContainerHead();
 
-        $this->html .= '<textarea name="'.$this->fieldName.'" value="'.$this->value.'" class ="wioForms_TextArea '.$this->getAdditionalInputClasses().'" >'.$this->value.'</textarea>';
+        $this->html .= '<button class="button-big-red" name="'.$this->fieldName.'" value="true">'.$this->fieldInfo['title'].'</button>';
 
         $this->inputFieldContainerTail();
         $this->inputContainerTail();
@@ -22,5 +20,8 @@ class TextArea extends AbstractFieldRenderer
 
     public function showToView()
     {
+        $html = 'PasswordInput: '.'********'.'<br/>'."\n";
+
+        return $html;
     }
 }
