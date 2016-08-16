@@ -56,8 +56,8 @@ class WioStructDataVolunteers extends AbstractDataRepository
                 'lat' => $region->NodeLat,
                 'lng' => $region->NodeLng,
                 'grey' => (isset($szp_regions_grey_array[$region->NodeId]))
-                            ? 'true'
-                            : 'false',
+                    ? 'true'
+                    : 'false',
             ];
         }
 
@@ -79,9 +79,8 @@ class WioStructDataVolunteers extends AbstractDataRepository
                 'lat' => $city->NodeLat,
                 'lng' => $city->NodeLng,
                 'grey' => (isset($szp_regions_grey_array[$region->NodeId]))
-                            ? 'true'
-                            : 'false',
-
+                    ? 'true'
+                    : 'false',
             ];
         }
 
@@ -104,9 +103,8 @@ class WioStructDataVolunteers extends AbstractDataRepository
                 'lat' => $apCollegium->NodeLat,
                 'lng' => $apCollegium->NodeLng,
                 'grey' => (isset($szp_regions_grey_array[$region->NodeId]))
-                            ? 'true'
-                            : 'false',
-
+                    ? 'true'
+                    : 'false',
             ];
         }
 
