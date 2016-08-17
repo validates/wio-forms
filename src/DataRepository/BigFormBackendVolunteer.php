@@ -18,6 +18,7 @@ class BigFormBackendVolunteer extends AbstractDataRepository
             ->where('wio_users.id', $requiredFields['userId'])
             ->where('wio_user_flags.flag_type_id', '<', 3)
             ->where('recrutation_roles.program_short_name', $requiredFields['program'])
+            ->where('user_recrutation_answers_volunteer2016.wio_flow_id', $requiredFields['wioFlowId'])
             ->select([
                 'wio_flow_entities.id' => 'wioFlowEntityId',
                 'wio_user_flags.flag_type_id' => 'volunteerFlagId',
