@@ -2,6 +2,7 @@
 
 namespace WioForms\DataRepository;
 
+use Exception;
 use Pixie\QueryBuilder\QueryBuilderHandler;
 use WioStruct\Core\StructDefinition;
 use WioStruct\WioStruct;
@@ -10,16 +11,20 @@ class WioFlowUserNodes extends AbstractDataRepository
 {
     public function getData($requiredFields)
     {
+        if (is_null($this->wioForms->formStruct['Fields']['wioFlowEntityId']['value'])) {
+            throw new Exception("WioFlowEntityId property is null");
+        }
         $this->data = [];
-        $userId = $this->getUserId();
+        $wioFlowEntityId = $this->wioForms->formStruct['Fields']['wioFlowEntityId']['value'];
+
         $wioStruct = new WioStruct(new QueryBuilderHandler());
 
         global $queryBuilder;
         $queryResult = $queryBuilder->table('wio_flow_entities')
+            ->select($queryBuilder->raw('recrutation_areas.*'))
             ->setFetchMode(\PDO::FETCH_ASSOC)
             ->join('recrutation_areas', 'recrutation_areas.wio_flow_entity_id', '=', 'wio_flow_entities.id')
-            ->join('wio_users', 'wio_users.id', '=', 'wio_flow_entities.wio_user_id')
-            ->where('wio_users.id', '=', $userId)
+            ->where('wio_flow_entities.id', '=', $wioFlowEntityId)
             ->first();
 
         $primaryNode = $queryResult['wio_struct_node_id'];
@@ -36,6 +41,7 @@ class WioFlowUserNodes extends AbstractDataRepository
             'city' => 0,
             'given_province' => 0,
             'given_city' => 0,
+            'given_school' => $givenNode
         ];
 
         if ($primaryNode > 0) {
@@ -58,32 +64,22 @@ class WioFlowUserNodes extends AbstractDataRepository
             }
         }
 
-        if ($givenNode > 0) {
-            $nodeU = $wioStruct->structQuery((new StructDefinition())->nodeId($givenNode)->nodeTypeId($wojType))->get('Node');
-            if ($nodeU != null) {
-                $data['given_province'] = $givenNode;
-            } else {
-                $nodeU = $wioStruct->structQuery((new StructDefinition())->nodeId($givenNode)->nodeTypeId($miastoType))->get('Node');
+        if ($givenNode) {
 
-                if ($nodeU != null) {
-                    $data['given_city'] = $givenNode;
-                    $nodeU = $wioStruct->structQuery((new StructDefinition())->nodeTypeId($wojType)
-                        ->linkChildren((new StructDefinition())->nodeId($givenNode))
-                    )->get('Node');
+            $givenCity = $wioStruct->structQuery((new StructDefinition())
+                ->linkChildren((new StructDefinition())->nodeId($givenNode))
+                ->nodeTypeName('city'))->get('Node');
+            $data['given_city'] = isset($givenCity[0]->NodeId)
+                ? $givenCity[0]->NodeId
+                : 0;
 
-                    if ($nodeU != null) {
-                        $data['given_province'] = $nodeU[0]->NodeId;
-                    }
-                }
-            }
-        }
-
-        if ($data['given_city'] < 1) {
-            $data['given_city'] = $data['city'];
-        }
-
-        if ($data['given_province'] < 1) {
-            $data['given_province'] = $data['province'];
+            $givenProvince = $wioStruct->structQuery((new StructDefinition())
+                ->linkChildren((new StructDefinition())->nodeId($givenNode))
+                ->networkName('administrative')
+                ->nodeTypeName('state'))->get('Node');
+            $data['given_province'] = isset($givenProvince[0]->NodeId)
+                ? $givenProvince[0]->NodeId
+                : 0;
         }
 
         $this->data = $data;
@@ -91,13 +87,5 @@ class WioFlowUserNodes extends AbstractDataRepository
         $this->setRepositoryFlags();
 
         return $this->data;
-    }
-
-    private function getUserId()
-    {
-        $requestUri = $_SERVER['REQUEST_URI'];
-        $requestUriArray = explode('/', $requestUri);
-
-        return end($requestUriArray);
     }
 }
