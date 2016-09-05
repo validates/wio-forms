@@ -81,7 +81,7 @@ class GoogleMaps extends AbstractFieldRenderer
         foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo) {
             $js .= '"'.$wojewodztwoName.'":{';
             foreach ($wojewodztwo[$this->fieldInfo['rendererData']['secondLvl']] as $regionName => $region) {
-                $js .= $region['node_id'].':{name:"'.$regionName.'",lat:'.$region['lat'].',lng:'.$region['lng'].',grey:'.$region['grey'].'},';
+                $js .= $region['node_id'].':{name:"'.str_replace('"','&quot;',$regionName).'",lat:'.$region['lat'].',lng:'.$region['lng'].',grey:'.$region['grey'].'},';
             }
             $js .= '},';
         }
