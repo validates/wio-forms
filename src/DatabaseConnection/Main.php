@@ -34,6 +34,30 @@ class Main extends AbstractDatabaseConnection
         return $query->update($queryData['update']);
     }
 
+    public function upsert($queryData)
+    {
+        $query = $this->QB->table($queryData['table']);
+        foreach ($queryData['matchers'] as $column => $value) {
+            $query->where($column, $value);
+        }
+
+        $result = $query->first();
+
+        if ($result !== null) {
+            $query = $this->QB->table($queryData['table']);
+            foreach ($queryData['matchers'] as $column => $value) {
+                $query->where($column, $value);
+            }
+            return $query->update($queryData['upsert']);
+        } else {
+            foreach ($queryData['matchers'] as $column => $value) {
+                $queryData['upsert'][$column] = $value;
+            }
+            $query = $this->QB->table($queryData['table']);
+            return $query->insert($queryData['upsert']);
+        }
+    }
+
     public function select($queryData)
     {
     }
