@@ -13,7 +13,12 @@ class ClassFinderService
 
     public function checkName($folderName, $className)
     {
-        $pathName = 'WioForms\\'.$folderName.'\\'.$className;
+
+        if (substr($className,0,1) === '\\') {
+            $pathName = $className;
+        } else {
+            $pathName = 'WioForms\\'.$folderName.'\\'.$className;            
+        }
 
         if (class_exists($pathName)) {
             return $pathName;
