@@ -194,6 +194,12 @@ class FormSaverService
                 $query['where'][$rowName] = $this->fieldSaver->get($rowData);
             }
         }
+        if ($databaseSave['type'] === 'upsert') {
+            $query['matchers'] = [];
+            foreach ($databaseSave['matchers'] as $rowName => $rowData) {
+                $query['matchers'][$rowName] = $this->fieldSaver->get($rowData);
+            }
+        }
 
         $insertedId = $this->databaseConnection->$databaseSave['type']($query);
 
