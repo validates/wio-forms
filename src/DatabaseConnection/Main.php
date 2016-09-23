@@ -20,7 +20,6 @@ class Main extends AbstractDatabaseConnection
     public function insert($queryData)
     {
         $query = $this->QB->table($queryData['table']);
-
         return $query->insert($queryData['insert']);
     }
 
@@ -48,7 +47,9 @@ class Main extends AbstractDatabaseConnection
             foreach ($queryData['matchers'] as $column => $value) {
                 $query->where($column, $value);
             }
-            return $query->update($queryData['upsert']);
+            $res = $query->update($queryData['upsert']);
+
+            return isset($result->id) ? $result->id : null;
         } else {
             foreach ($queryData['matchers'] as $column => $value) {
                 $queryData['upsert'][$column] = $value;
