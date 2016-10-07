@@ -13,8 +13,10 @@ class ChangeLpSzPStatus extends AbstractFormSaver
             return;
         }
         $newStatus = $this->wioForms->entryData['status'];
-        if ($this->isFinalStatus($newStatus)) {
+        if ($this->isFinalStatus($newStatus) && !empty($this->wioForms->entryData['assigned_area'])) {
             $this->handleNodeFlags($this->wioForms->entryData['assigned_area']);
+            $this->setUpRecrutationAreas($this->wioForms->entryData['userId']);
+        } elseif (!$this->isFinalStatus($newStatus)) {
             $this->setUpRecrutationAreas($this->wioForms->entryData['userId']);
         }
     }
