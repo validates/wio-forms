@@ -20,7 +20,7 @@ class RecruitmentData extends AbstractDataRepository
             ->join('wio_users', 'wio_users.id', '=', 'wio_flow_entities.wio_user_id')
             ->join('user_basic_data', 'user_basic_data.wio_user_id', '=', 'wio_users.id')
             ->join('user_phone_data', 'user_phone_data.wio_user_id', '=', 'wio_users.id')
-            ->where('wio_users.id', '=', $requiredFields['userId'])
+            ->where('wio_flow_entities.id', '=', $requiredFields['wioFlowEntityId'])
             ->first();
         $this->data['type'] = rand(1, 3);
         $this->data['wanted_area_id'] = $this->data['wio_struct_node_id'];
