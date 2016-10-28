@@ -14,6 +14,7 @@ use WioForms\Service\RendererService;
 use WioForms\Service\StyleManagementService;
 use WioForms\Service\ValidatorService;
 use WioForms\Service\SubsiteChooserService;
+use WioForms\Service\FieldFilterService;
 
 class WioForms
 {
@@ -48,6 +49,7 @@ class WioForms
     public $formSaverService;
     public $langService;
     public $subsiteChooserService;
+    private $fieldFilterService;
 
     public function __construct($localSettings = false)
     {
@@ -74,6 +76,7 @@ class WioForms
         $this->formSaverService = new FormSaverService($this);
         $this->langService = new LangService($this);
         $this->subsiteChooserService = new SubsiteChooserService($this);
+        $this->fieldFilterService = new FieldFilterService($this);
 
         if ($this->databaseService->setConnections() === false) {
             $this->errorLog->errorLog('Problem with: setDatabaseConnections();');
@@ -103,10 +106,14 @@ class WioForms
 
         $this->entryCollectorService->collectEntries($partialEntryData);
 
+        $this->fieldFilterService->filterFields();
+
         $this->validatorService->validateFields();
         $this->dataRepositoryService->getForeignDataRepositories();
         $this->entryCollectorService->getDefaultValuesFromDataRepositories();
         $this->validatorService->validateFields();
+
+        $this->fieldFilterService->filterFields();
 
         $this->validatorService->validateContainers();
         $this->formSaverService->tryFormSavers();
