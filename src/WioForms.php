@@ -107,13 +107,13 @@ class WioForms
         $this->entryCollectorService->collectEntries($partialEntryData);
 
         $this->fieldFilterService->filterFields();
-
         $this->validatorService->validateFields();
+
         $this->dataRepositoryService->getForeignDataRepositories();
         $this->entryCollectorService->getDefaultValuesFromDataRepositories();
-        $this->validatorService->validateFields();
 
         $this->fieldFilterService->filterFields();
+        $this->validatorService->validateFields();
 
         $this->validatorService->validateContainers();
         $this->formSaverService->tryFormSavers();
