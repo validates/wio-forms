@@ -76,4 +76,17 @@ class Main extends AbstractDatabaseConnection
             return ['dataStruct' => $example_file];
         }
     }
+
+    /**
+     * TODO
+     * trzeba zrobic analogiczny mechanizm jak w przypadku metody upsert(),
+     * czyli dodać matchery po których najpierw będzie wyciągany rekord w celu 
+     * zwrócenia ID rekordu (update/onDuplicateKeyUpdate zwraca nulla)
+     */
+    public function onDuplicateKeyUpdate($queryData)
+    {
+        $this->QB->table($queryData['table'])
+            ->onDuplicateKeyUpdate($queryData['updateData'])
+            ->insert($queryData['insertData']);
+    }
 }
