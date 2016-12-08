@@ -33,7 +33,6 @@ class WioStructDataVolunteers extends AbstractDataRepository
             ];
         }
 
-
         $szp_regions = $wioStruct->structQuery(
             (new StructDefinition())
                 ->networkName('Szlachetna Paczka')
@@ -83,6 +82,23 @@ class WioStructDataVolunteers extends AbstractDataRepository
                     : 'false',
             ];
         }
+        $ap_regions_grey = $wioStruct->structQuery(
+            (new StructDefinition())
+                ->networkName('Akademia Przyszłości')
+                ->nodeTypeName('kolegium')
+                ->flagTypeName('is_grey')
+                ->linkParent(
+                    (new StructDefinition())
+                        ->networkName('administrative')
+                        ->nodeTypeName('state')
+                )
+            )
+            ->get('Node');
+
+        $ap_regions_grey_array = [];
+        foreach ($ap_regions_grey as $key => $value) {
+            $ap_regions_grey_array[$value->NodeId] = 1;
+        }
 
         $apCollegiumList = $wioStruct->structQuery(
             (new StructDefinition())
@@ -102,14 +118,13 @@ class WioStructDataVolunteers extends AbstractDataRepository
                 'node_id' => $apCollegium->NodeId,
                 'lat' => $apCollegium->NodeLat,
                 'lng' => $apCollegium->NodeLng,
-                'grey' => (isset($szp_regions_grey_array[$region->NodeId]))
+                'grey' => (isset($ap_regions_grey_array[$apCollegium->NodeId]))
                     ? 'true'
                     : 'false',
             ];
         }
 
         $this->data = $wojewodztwa;
-
 
         if (empty($this->data)) {
             $this->repositoryDefinition['success'] = false;

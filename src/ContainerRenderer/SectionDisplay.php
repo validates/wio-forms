@@ -13,7 +13,6 @@ class SectionDisplay extends AbstractContainerRenderer
 
         $this->standardErrorDisplay();
 
-
         return $this->html;
     }
 

@@ -13,14 +13,12 @@ class NodeSelect extends AbstractFieldRenderer
         $this->inputTitleContainer();
         $this->inputFieldContainerHead();
 
-
         $this->html .= '<select name="country_state">';
         $this->html .= '<option value="">wybierz</option>';
         foreach ($this->dataSet as $wojewodztwoName => $wojewodztwo) {
             $this->html .= '<option value="'.$wojewodztwo['node_id'].'">'.$wojewodztwoName.'</option>';
         }
         $this->html .= '</select>';
-
 
         $this->html .= '<div class="wioForms_InputTitleContainer '.$this->getAdditionalWrapperClasses().'">Wybierz Region:</div>';
         $this->html .= '<select name="szp_regions">';

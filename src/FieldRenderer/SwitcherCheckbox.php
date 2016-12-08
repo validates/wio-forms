@@ -87,7 +87,6 @@ EOT;
         $return .= '$(document).ready(function(){ WioForms_SwitcherCheckBoxSwitch("'.$this->fieldName.'","'.$option.'"); });';
         $return .= '</script>';
 
-
         return $return;
     }
 }

@@ -8,13 +8,11 @@ $GoogleReCaptchaSecretKey = 'CBA';
 
 include '../googleApi.keys';
 
-
 $localSettings = [];
 
 $wioForms = new WioForms([]);
 $wioFormHtml = $wioForms->showForm('Example2');
 $wioHeaders = $wioForms->getHeaders();
-
 
 ?>
 <!doctype HTML>

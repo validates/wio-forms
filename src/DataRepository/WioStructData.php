@@ -144,7 +144,6 @@ class WioStructData extends AbstractDataRepository
 
         $this->data = $wojewodztwa;
 
-
         if (empty($this->data)) {
             $this->repositoryDefinition['success'] = false;
             $this->repositoryDefinition['message'] = 'no_map_data';

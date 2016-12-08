@@ -42,7 +42,6 @@ class InsertUserSkills extends AbstractFormSaver
             $insertedId = $databaseConnection->insert($query);
         }
 
-
 /*
 CREATE TABLE `user_skills`(
     `id` INT(11) NOT NULL AUTO_INCREMENT ,
