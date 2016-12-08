@@ -33,7 +33,6 @@ class WioStructDataVolunteers extends AbstractDataRepository
             ];
         }
 
-
         $szp_regions = $wioStruct->structQuery(
             (new StructDefinition())
                 ->networkName('Szlachetna Paczka')
@@ -126,7 +125,6 @@ class WioStructDataVolunteers extends AbstractDataRepository
         }
 
         $this->data = $wojewodztwa;
-
 
         if (empty($this->data)) {
             $this->repositoryDefinition['success'] = false;

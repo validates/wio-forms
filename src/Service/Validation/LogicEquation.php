@@ -214,7 +214,6 @@ class LogicEquation
         }
         $className = $this->formStruct['ContainerValidatorsPHP'][$sentence['method']]['class'];
 
-
         if (!($validatorClass = $this->wioForms->classFinderService->checkName('ContainerValidator', $className))) {
             return false;
         }

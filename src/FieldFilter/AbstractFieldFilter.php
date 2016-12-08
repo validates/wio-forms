@@ -8,7 +8,8 @@ abstract class AbstractFieldFilter
      * Filters data.
      *
      * @param   mixed
-     * @return  mixed
+     *
+     * @return mixed
      */
     abstract public function filter($data);
 }

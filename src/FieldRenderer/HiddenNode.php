@@ -11,7 +11,6 @@ class HiddenNode extends AbstractFieldRenderer
         $this->standardErrorDisplay();
         $this->inputFieldContainerHead();
 
-
         $this->html .= '<input type="hidden" name="'.$this->fieldName.'" value="'.$this->value.'" />';
 
         $this->inputFieldContainerTail();

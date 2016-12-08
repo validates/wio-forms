@@ -11,9 +11,6 @@ class FieldFilterService
         $this->wioForms = &$wioFormsObject;
     }
 
-    /**
-     * @return  void
-     */
     public function filterFields()
     {
         foreach ($this->wioForms->formStruct['Fields'] as &$field) {
