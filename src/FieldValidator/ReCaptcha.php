@@ -24,7 +24,6 @@ class ReCaptcha extends AbstractFieldValidator
             $isValid = $responseJSON->success;
         }
 
-
         if ($isValid) {
             $this->valid = true;
         }

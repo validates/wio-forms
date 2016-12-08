@@ -69,13 +69,10 @@ class BigFormBackendVolunteer extends AbstractDataRepository
             $this->data['skille'] = '';
         }
 
-
-
         $result = $queryBuilder->table('user_skills')
             ->where('wio_user_id', $requiredFields['userId'])
             ->orderBy('id')
             ->get();
-
 
         if (!empty($result)) {
             $skille = '';

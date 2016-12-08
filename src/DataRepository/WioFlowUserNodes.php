@@ -12,7 +12,7 @@ class WioFlowUserNodes extends AbstractDataRepository
     public function getData($requiredFields)
     {
         if (is_null($this->wioForms->formStruct['Fields']['wioFlowEntityId']['value'])) {
-            throw new Exception("WioFlowEntityId property is null");
+            throw new Exception('WioFlowEntityId property is null');
         }
         $this->data = [];
         $wioFlowEntityId = $this->wioForms->formStruct['Fields']['wioFlowEntityId']['value'];
@@ -41,7 +41,7 @@ class WioFlowUserNodes extends AbstractDataRepository
             'city' => 0,
             'given_province' => 0,
             'given_city' => 0,
-            'given_school' => $givenNode
+            'given_school' => $givenNode,
         ];
 
         if ($primaryNode > 0) {
@@ -65,7 +65,6 @@ class WioFlowUserNodes extends AbstractDataRepository
         }
 
         if ($givenNode) {
-
             $givenCity = $wioStruct->structQuery((new StructDefinition())
                 ->linkChildren((new StructDefinition())->nodeId($givenNode))
                 ->nodeTypeName('city'))->get('Node');

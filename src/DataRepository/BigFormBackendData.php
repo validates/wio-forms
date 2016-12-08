@@ -89,7 +89,6 @@ class BigFormBackendData extends AbstractDataRepository
             $this->data['skille'] = $skille;
         }
 
-
         foreach (['cvFileId', 'openFileId'] as $fileName) {
             if (isset($this->data[$fileName])) {
                 $result = $queryBuilder->table('uploaded_files')

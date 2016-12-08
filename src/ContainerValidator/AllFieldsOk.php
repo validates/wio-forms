@@ -13,7 +13,6 @@ class AllFieldsOk extends AbstractContainerValidator
             $containersToCheck = [];
             array_push($containersToCheck, $settings['containerToCheck']);
 
-
             $contContains = $this->wioForms->containersContains;
             while ($containerName = array_pop($containersToCheck)) {
                 if (isset($contContains[$containerName])) {

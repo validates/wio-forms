@@ -36,7 +36,6 @@ class WioForms
     // Holds entryData
     public $entryData;
 
-
     // WioForms Service Objects
     public $rendererService;
     public $dataRepositoryService;

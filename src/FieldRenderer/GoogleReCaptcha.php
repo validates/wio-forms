@@ -22,7 +22,6 @@ class GoogleReCaptcha extends AbstractFieldRenderer
         $this->inputFieldContainerTail();
         $this->inputContainerTail();
 
-
         return $this->html;
     }
 
