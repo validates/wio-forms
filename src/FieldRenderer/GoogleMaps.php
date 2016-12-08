@@ -60,7 +60,6 @@ class GoogleMaps extends AbstractFieldRenderer
 
         $this->wioForms->headerCollectorService->addJS('assets/js/wojewodztwa16.js');
 
-
         $this->html .= '<div id="map" class="wioForms_Map"></div>';
         $this->html .= '<script src="https://maps.googleapis.com/maps/api/js?key='.$this->wioForms->settings['GoogleMapsApi']['Key'].'"></script>';
         $this->html .= '<script type="text/javascript" src="//rawgit.com/googlemaps/v3-utility-library/master/infobox/src/infobox.js"></script>';

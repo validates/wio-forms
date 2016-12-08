@@ -8,7 +8,6 @@ class Pesel extends AbstractFieldValidator
     {
         $this->invalidMessage = 'pesel_invalid';
 
-
         $weightTable = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
 
         if (!is_numeric($value)) {

@@ -20,6 +20,7 @@ class Main extends AbstractDatabaseConnection
     public function insert($queryData)
     {
         $query = $this->QB->table($queryData['table']);
+
         return $query->insert($queryData['insert']);
     }
 
@@ -55,6 +56,7 @@ class Main extends AbstractDatabaseConnection
                 $queryData['upsert'][$column] = $value;
             }
             $query = $this->QB->table($queryData['table']);
+
             return $query->insert($queryData['upsert']);
         }
     }
@@ -80,8 +82,8 @@ class Main extends AbstractDatabaseConnection
     /**
      * TODO
      * trzeba zrobic analogiczny mechanizm jak w przypadku metody upsert(),
-     * czyli dodać matchery po których najpierw będzie wyciągany rekord w celu 
-     * zwrócenia ID rekordu (update/onDuplicateKeyUpdate zwraca nulla)
+     * czyli dodać matchery po których najpierw będzie wyciągany rekord w celu
+     * zwrócenia ID rekordu (update/onDuplicateKeyUpdate zwraca nulla).
      */
     public function onDuplicateKeyUpdate($queryData)
     {

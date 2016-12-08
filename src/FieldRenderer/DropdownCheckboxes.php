@@ -102,7 +102,6 @@ EOT;
         $valArray = array_flip(explode('|', $this->value));
         $this->valueArray = $valArray;
 
-
         $this->textValuesArray = [];
         $textKeys = [];
 
@@ -123,7 +122,6 @@ EOT;
                 $this->textValuesArray[$groupData['textfield']] = '';
             }
         }
-
 
         foreach ($valArray as $textinput => $none) {
             $keyA = each($this->textValuesArray);
