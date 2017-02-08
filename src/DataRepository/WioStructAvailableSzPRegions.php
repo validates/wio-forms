@@ -12,7 +12,6 @@ class WioStructAvailableSzPRegions extends AbstractDataRepository
         $this->data = [];
         $dontUnsetRegion = $this->getUserRegion($requiredFields['userId']);
 
-
         $regionsWithDeclined = $this->getRegionsWithDeclinedLider();
         $unbuildRegions = $this->getUnbuildRegions();
         $regionsWithLider = $this->getRegionsWithLider();
@@ -27,7 +26,6 @@ class WioStructAvailableSzPRegions extends AbstractDataRepository
             }
         }
         $this->setRepositoryFlags();
-
 
         return $this->data;
     }
@@ -106,7 +104,6 @@ class WioStructAvailableSzPRegions extends AbstractDataRepository
             ->where('recrutation_roles.role_short_name', 'LR')
             ->whereIn('wio_flow_entities.flow_status', $declinedStatusArray)
             ->select('wio_struct_nodes.id', 'wio_struct_nodes.name');
-
 
         $queryObj = $query->getQuery();
         $sql = $queryObj->getRawSql();

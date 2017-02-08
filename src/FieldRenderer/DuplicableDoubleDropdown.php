@@ -14,7 +14,6 @@ class DuplicableDoubleDropdown extends AbstractFieldRenderer
         $this->inputDescriptionContainer();
         $this->inputFieldContainerHead();
 
-
         $this->duplicateCounter = 0;
 
         $valueTab = explode('|', $this->value);

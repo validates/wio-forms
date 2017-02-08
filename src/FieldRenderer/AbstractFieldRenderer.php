@@ -46,7 +46,6 @@ abstract class AbstractFieldRenderer
             $this->message = $this->fieldInfo['message'];
         }
 
-
         if (isset($this->styleOptions['dont_display_errors'])
             and $this->styleOptions['dont_display_errors']) {
             $this->message = false;

@@ -31,7 +31,6 @@ class LrSzPRegionAvaliable extends AbstractContainerValidator
         global $queryBuilder;
         $declinedStatusArray = [60, 70];
 
-
         $query = $queryBuilder->table('wio_struct_nodes')
             ->leftJoin('recrutation_areas', 'wio_struct_nodes.id', '=', 'recrutation_areas.wio_struct_given_node_id')
             ->leftJoin('wio_flow_entities', 'wio_flow_entities.id', '=', 'recrutation_areas.wio_flow_entity_id')

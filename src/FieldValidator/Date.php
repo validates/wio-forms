@@ -8,7 +8,6 @@ class Date extends AbstractFieldValidator
     {
         $this->invalidMessage = 'date_invalid';
 
-
         if (preg_match("/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/", $value)) {
             $dateParts = explode('-', $value);
             if (checkdate($dateParts[1], $dateParts[2], $dateParts[0])) {
